@@ -1,30 +1,19 @@
 package com.qiuxiang;
 
 import android.content.Context;
-import android.location.Location;
 
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.MapView;
+import com.amap.api.maps.UiSettings;
 
 public class AMapView extends MapView {
-    private final AMap amap;
+    public final AMap map;
+    public final UiSettings ui;
 
     public AMapView(Context context) {
         super(context);
         super.onCreate(null);
-        amap = this.getMap();
-    }
-
-    public AMap getMap() {
-        return amap;
-    }
-
-//    public Location getMyLocation() {
-//        Location location = amap.getMyLocation();
-//        return location;
-//    }
-
-    public void setMyLocationEnabled(boolean enabled) {
-        amap.setMyLocationEnabled(enabled);
+        map = this.getMap();
+        ui = map.getUiSettings();
     }
 }
