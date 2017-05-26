@@ -2,6 +2,7 @@ package com.qiuxiang;
 
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdateFactory;
+import com.amap.api.maps.model.MyLocationStyle;
 import com.facebook.react.common.MapBuilder;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
@@ -14,8 +15,7 @@ class AMapViewManager extends SimpleViewManager<AMapView> {
             "standard", AMap.MAP_TYPE_NORMAL,
             "satellite", AMap.MAP_TYPE_SATELLITE,
             "navigation", AMap.MAP_TYPE_NAVI,
-            "night", AMap.MAP_TYPE_NIGHT,
-            "bus", AMap.MAP_TYPE_BUS
+            "night", AMap.MAP_TYPE_NIGHT
     );
 
     @Override
@@ -30,12 +30,20 @@ class AMapViewManager extends SimpleViewManager<AMapView> {
 
     @ReactProp(name = "showsUserLocation")
     public void setMyLocationEnabled(AMapView view, boolean enabled) {
+        MyLocationStyle locationStyle = new MyLocationStyle();
+        locationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_SHOW);
+        view.map.setMyLocationStyle(locationStyle);
         view.map.setMyLocationEnabled(enabled);
     }
 
     @ReactProp(name = "showsIndoorMap")
     public void showIndoorMap(AMapView view, boolean show) {
         view.map.showIndoorMap(show);
+    }
+
+    @ReactProp(name = "showsIndoorSwitch")
+    public void setIndoorSwitchEnabled(AMapView view, boolean show) {
+        view.ui.setIndoorSwitchEnabled(show);
     }
 
     @ReactProp(name = "showsBuildings")
@@ -53,12 +61,12 @@ class AMapViewManager extends SimpleViewManager<AMapView> {
         view.ui.setCompassEnabled(show);
     }
 
-    @ReactProp(name = "showZoomControls")
+    @ReactProp(name = "showsZoomControls")
     public void setZoomControlsEnabled(AMapView view, boolean enabled) {
         view.ui.setZoomControlsEnabled(enabled);
     }
 
-    @ReactProp(name = "showScale")
+    @ReactProp(name = "showsScale")
     public void setScaleControlsEnabled(AMapView view, boolean enabled) {
         view.ui.setScaleControlsEnabled(enabled);
     }
@@ -111,5 +119,10 @@ class AMapViewManager extends SimpleViewManager<AMapView> {
     @ReactProp(name = "rotateEnabled")
     public void setRotateGesturesEnabled(AMapView view, boolean enabled) {
         view.ui.setRotateGesturesEnabled(enabled);
+    }
+
+    @ReactProp(name = "tiltEnabled")
+    public void setTiltGesturesEnabled(AMapView view, boolean enabled) {
+        view.ui.setTiltGesturesEnabled(enabled);
     }
 }
