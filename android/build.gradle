@@ -28,5 +28,6 @@ repositories {
 
 dependencies {
     compile 'com.facebook.react:react-native:+'
+    compile 'com.amap.api:3dmap:latest.integration'
 }
   
