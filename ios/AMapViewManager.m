@@ -1,4 +1,4 @@
-#import <MapKit/MapKit.h>
+#import <MAMapKit/MAMapKit.h>
 #import <React/RCTViewManager.h>
 
 @interface AMapViewManager : RCTViewManager
@@ -10,7 +10,7 @@ RCT_EXPORT_MODULE()
 
 - (UIView *)view
 {
-    return [[MKMapView alloc] init];
+    return [[MAMapView alloc] init];
 }
 
 @end
