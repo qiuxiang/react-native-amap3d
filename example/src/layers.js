@@ -8,7 +8,7 @@ export default class Layers extends Component {
   }
 
   state = {
-    showsMapText: true,
+    showsLabels: true,
     showsTraffic: false,
     showsBuildings: false,
   }
@@ -29,15 +29,15 @@ export default class Layers extends Component {
             value={this.state.showsTraffic}/>
         </View>
         <View style={styles.control}>
-          <Text>文本</Text>
+          <Text>标签</Text>
           <Switch
-            onValueChange={showsMapText => this.setState({showsMapText})}
-            value={this.state.showsMapText}/>
+            onValueChange={showsLabels => this.setState({showsLabels})}
+            value={this.state.showsLabels}/>
         </View>
       </View>
       <MapView
         zoomLevel={17}
-        showsMapText={this.state.showsMapText}
+        showsLabels={this.state.showsLabels}
         showsTraffic={this.state.showsTraffic}
         showsBuildings={this.state.showsBuildings}
         style={styles.map}/>

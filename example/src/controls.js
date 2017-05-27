@@ -11,7 +11,7 @@ export default class Controls extends Component {
     showsCompass: false,
     showsScale: false,
     showsZoomControls: true,
-    showsMyLocationButton: false,
+    showsLocationButton: false,
   }
 
   render() {
@@ -32,8 +32,8 @@ export default class Controls extends Component {
         <View style={styles.control}>
           <Text>定位</Text>
           <Switch
-            onValueChange={showsMyLocationButton => this.setState({showsMyLocationButton})}
-            value={this.state.showsMyLocationButton}/>
+            onValueChange={showsLocationButton => this.setState({showsLocationButton})}
+            value={this.state.showsLocationButton}/>
         </View>
         <View style={styles.control}>
           <Text>缩放</Text>
@@ -43,10 +43,10 @@ export default class Controls extends Component {
         </View>
       </View>
       <MapView
-        showsUserLocation={true}
+        locationEnabled={true}
         showsCompass={this.state.showsCompass}
         showsScale={this.state.showsScale}
-        showsMyLocationButton={this.state.showsMyLocationButton}
+        showsLocationButton={this.state.showsLocationButton}
         showsZoomControls={this.state.showsZoomControls}
         style={styles.map}/>
     </View>
