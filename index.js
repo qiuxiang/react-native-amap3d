@@ -4,24 +4,100 @@ import {requireNativeComponent, View} from 'react-native'
 class MapView extends Component {
   static propTypes = {
     ...View.propTypes,
+
+    /**
+     * 设置地图类型
+     *
+     * - standard: 标准地图
+     * - satellite: 卫星地图
+     * - navigation: 导航地图
+     * - night: 夜间地图
+     */
+    mapType: PropTypes.oneOf(['standard', 'satellite', 'navigation', 'night']),
+
+    /**
+     * 是否启用定位
+     */
     showsUserLocation: PropTypes.bool,
+
+    /**
+     * 是否显示室内地图
+     */
     showsIndoorMap: PropTypes.bool,
+
+    /**
+     * 是否显示室内地图楼层切换控件
+     */
     showsIndoorSwitch: PropTypes.bool,
+
+    /**
+     * 是否显示3D建筑
+     */
     showsBuildings: PropTypes.bool,
+
+    /**
+     * 是否显示地图文本
+     */
     showsMapText: PropTypes.bool,
+
+    /**
+     * 是否显示指南针
+     */
     showsCompass: PropTypes.bool,
+
+    /**
+     * 是否显示放大缩小按钮
+     */
     showsZoomControls: PropTypes.bool,
+
+    /**
+     * 是否显示比例尺
+     */
     showsScale: PropTypes.bool,
+
+    /**
+     * 是否显示定位按钮
+     */
     showsMyLocationButton: PropTypes.bool,
+
+    /**
+     * 是否显示路况
+     */
     showsTraffic: PropTypes.bool,
-    mapTextZIndex: PropTypes.number,
+
+    /**
+     * 设置最大缩放级别
+     */
     maxZoomLevel: PropTypes.number,
+
+    /**
+     * 设置最小缩放级别
+     */
     minZoomLevel: PropTypes.number,
+
+    /**
+     * 设置当前缩放级别
+     */
     zoomLevel: PropTypes.number,
-    mapType: PropTypes.string,
+
+    /**
+     * 是否启用缩放手势，用于放大缩小
+     */
     zoomEnabled: PropTypes.bool,
+
+    /**
+     * 是否启用滑动手势，用于平移
+     */
     scrollEnabled: PropTypes.bool,
+
+    /**
+     * 是否启用旋转手势，用于调整方向
+     */
     rotateEnabled: PropTypes.bool,
+
+    /**
+     * 是否启用倾斜手势，用于改变视角
+     */
     tiltEnabled: PropTypes.bool,
   }
 
