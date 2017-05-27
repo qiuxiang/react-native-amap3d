@@ -18,7 +18,7 @@ class MapView extends Component {
     /**
      * 是否启用定位
      */
-    showsUserLocation: PropTypes.bool,
+    locationEnabled: PropTypes.bool,
 
     /**
      * 是否显示室内地图
@@ -36,9 +36,9 @@ class MapView extends Component {
     showsBuildings: PropTypes.bool,
 
     /**
-     * 是否显示地图文本
+     * 是否显示文本标签
      */
-    showsMapText: PropTypes.bool,
+    showsLabels: PropTypes.bool,
 
     /**
      * 是否显示指南针
@@ -58,7 +58,7 @@ class MapView extends Component {
     /**
      * 是否显示定位按钮
      */
-    showsMyLocationButton: PropTypes.bool,
+    showsLocationButton: PropTypes.bool,
 
     /**
      * 是否显示路况

@@ -28,7 +28,7 @@ class AMapViewManager extends SimpleViewManager<AMapView> {
         return new AMapView(reactContext);
     }
 
-    @ReactProp(name = "showsUserLocation")
+    @ReactProp(name = "locationEnabled")
     public void setMyLocationEnabled(AMapView view, boolean enabled) {
         MyLocationStyle locationStyle = new MyLocationStyle();
         locationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_SHOW);
@@ -51,7 +51,7 @@ class AMapViewManager extends SimpleViewManager<AMapView> {
         view.map.showBuildings(show);
     }
 
-    @ReactProp(name = "showsMapText")
+    @ReactProp(name = "showsLabels")
     public void showMapText(AMapView view, boolean show) {
         view.map.showMapText(show);
     }
@@ -71,14 +71,9 @@ class AMapViewManager extends SimpleViewManager<AMapView> {
         view.ui.setScaleControlsEnabled(enabled);
     }
 
-    @ReactProp(name = "showsMyLocationButton")
+    @ReactProp(name = "showsLocationButton")
     public void setMyLocationButtonEnabled(AMapView view, boolean enabled) {
         view.ui.setMyLocationButtonEnabled(enabled);
-    }
-
-    @ReactProp(name = "mapTextZIndex")
-    public void setMapTextZIndex(AMapView view, int zIndex) {
-        view.map.setMapTextZIndex(zIndex);
     }
 
     @ReactProp(name = "showsTraffic")
