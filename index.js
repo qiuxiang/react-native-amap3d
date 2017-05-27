@@ -1,9 +1,8 @@
-import {PropTypes} from 'react'
+import React, {PropTypes, Component} from 'react'
 import {requireNativeComponent, View} from 'react-native'
 
-export default requireNativeComponent('AMapView', {
-  name: 'AMapView',
-  propTypes: {
+class MapView extends Component {
+  static propTypes = {
     ...View.propTypes,
     showsUserLocation: PropTypes.bool,
     showsIndoorMap: PropTypes.bool,
@@ -24,6 +23,14 @@ export default requireNativeComponent('AMapView', {
     scrollEnabled: PropTypes.bool,
     rotateEnabled: PropTypes.bool,
     tiltEnabled: PropTypes.bool,
-  },
-})
+  }
 
+  render() {
+    return <AMapView {...this.props}/>
+  }
+}
+
+AMapView = requireNativeComponent('AMapView', MapView)
+
+export default MapView
+export {MapView}

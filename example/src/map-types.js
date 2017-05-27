@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {StyleSheet, Picker} from 'react-native'
-import AMapView from 'react-native-amap3d'
+import MapView from 'react-native-amap3d'
 
 export default class MapTypes extends Component {
   static navigationOptions = ({navigation}) => {
@@ -21,7 +21,7 @@ export default class MapTypes extends Component {
   }
 
   render() {
-    return <AMapView
+    return <MapView
       mapType={this.props.navigation.state.params.mapType}
       style={StyleSheet.absoluteFill}/>
   }

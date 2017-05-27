@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {StyleSheet, View, Text, Switch} from 'react-native'
-import AMapView from 'react-native-amap3d'
+import MapView from 'react-native-amap3d'
 
 export default class Layers extends Component {
   static navigationOptions = {
@@ -35,7 +35,7 @@ export default class Layers extends Component {
             value={this.state.showsMapText}/>
         </View>
       </View>
-      <AMapView
+      <MapView
         zoomLevel={17}
         showsMapText={this.state.showsMapText}
         showsTraffic={this.state.showsTraffic}

@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {StyleSheet, View, Text, Switch} from 'react-native'
-import AMapView from 'react-native-amap3d'
+import MapView from 'react-native-amap3d'
 
 export default class Gestures extends Component {
   static navigationOptions = {
@@ -42,7 +42,7 @@ export default class Gestures extends Component {
             value={this.state.tiltEnabled}/>
         </View>
       </View>
-      <AMapView
+      <MapView
         zoomEnabled={this.state.zoomEnabled}
         scrollEnabled={this.state.scrollEnabled}
         rotateEnabled={this.state.rotateEnabled}

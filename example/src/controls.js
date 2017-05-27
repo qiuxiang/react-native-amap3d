@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {StyleSheet, View, Text, Switch} from 'react-native'
-import AMapView from 'react-native-amap3d'
+import MapView from 'react-native-amap3d'
 
 export default class Controls extends Component {
   static navigationOptions = {
@@ -42,7 +42,7 @@ export default class Controls extends Component {
             value={this.state.showsZoomControls}/>
         </View>
       </View>
-      <AMapView
+      <MapView
         showsUserLocation={true}
         showsCompass={this.state.showsCompass}
         showsScale={this.state.showsScale}
