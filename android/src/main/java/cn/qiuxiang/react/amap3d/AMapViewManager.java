@@ -1,4 +1,4 @@
-package com.qiuxiang;
+package cn.qiuxiang.react.amap3d;
 
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdateFactory;

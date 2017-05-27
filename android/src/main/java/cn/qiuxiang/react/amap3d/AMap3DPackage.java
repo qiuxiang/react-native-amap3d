@@ -1,4 +1,4 @@
-package com.qiuxiang;
+package cn.qiuxiang.react.amap3d;
 
 import java.util.Arrays;
 import java.util.Collections;
