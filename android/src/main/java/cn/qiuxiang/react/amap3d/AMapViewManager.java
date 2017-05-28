@@ -30,9 +30,6 @@ class AMapViewManager extends SimpleViewManager<AMapView> {
 
     @ReactProp(name = "locationEnabled")
     public void setMyLocationEnabled(AMapView view, boolean enabled) {
-        MyLocationStyle locationStyle = new MyLocationStyle();
-        locationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_SHOW);
-        view.map.setMyLocationStyle(locationStyle);
         view.map.setMyLocationEnabled(enabled);
     }
 
