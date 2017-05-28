@@ -1,6 +1,11 @@
 import React, {PropTypes, Component} from 'react'
 import {requireNativeComponent, View} from 'react-native'
 
+const CoordinateProType = PropTypes.shape({
+  latitude: PropTypes.number.isRequired,
+  longitude: PropTypes.number.isRequired,
+})
+
 class MapView extends Component {
   static propTypes = {
     ...View.propTypes,
@@ -76,9 +81,19 @@ class MapView extends Component {
     minZoomLevel: PropTypes.number,
 
     /**
-     * 设置当前缩放级别
+     * 设置当前缩放级别，取值范围 [3, 20]
      */
     zoomLevel: PropTypes.number,
+
+    /**
+     * 设置中心坐标
+     */
+    coordinate: CoordinateProType,
+
+    /**
+     * 设置倾斜角度，取值范围 [0, 60]
+     */
+    tilt: PropTypes.number,
 
     /**
      * 是否启用缩放手势，用于放大缩小
@@ -110,3 +125,4 @@ AMapView = requireNativeComponent('AMapView', MapView)
 
 export default MapView
 export {MapView}
+

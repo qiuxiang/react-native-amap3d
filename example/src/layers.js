@@ -37,6 +37,7 @@ export default class Layers extends Component {
       </View>
       <MapView
         zoomLevel={17}
+        tilt={60}
         showsLabels={this.state.showsLabels}
         showsTraffic={this.state.showsTraffic}
         showsBuildings={this.state.showsBuildings}

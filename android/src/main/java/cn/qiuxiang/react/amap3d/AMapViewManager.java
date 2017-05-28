@@ -2,8 +2,10 @@ package cn.qiuxiang.react.amap3d;
 
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdateFactory;
-import com.amap.api.maps.model.MyLocationStyle;
+import com.amap.api.maps.model.LatLng;
+import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.common.MapBuilder;
+import com.facebook.react.module.annotations.ReactModule;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.annotations.ReactProp;
@@ -90,7 +92,7 @@ class AMapViewManager extends SimpleViewManager<AMapView> {
 
     @ReactProp(name = "zoomLevel")
     public void setZoomLevel(AMapView view, float zoomLevel) {
-        view.map.animateCamera(CameraUpdateFactory.zoomTo(zoomLevel));
+        view.map.moveCamera(CameraUpdateFactory.zoomTo(zoomLevel));
     }
 
     @ReactProp(name = "mapType")
@@ -117,4 +119,18 @@ class AMapViewManager extends SimpleViewManager<AMapView> {
     public void setTiltGesturesEnabled(AMapView view, boolean enabled) {
         view.ui.setTiltGesturesEnabled(enabled);
     }
+
+    @ReactProp(name = "coordinate")
+    public void moveToCoordinate(AMapView view, ReadableMap coordinate) {
+        view.map.moveCamera(CameraUpdateFactory.changeLatLng(new LatLng(
+                coordinate.getDouble("latitude"),
+                coordinate.getDouble("longitude"))));
+    }
+
+    @ReactProp(name = "tilt")
+    public void changeTilt(AMapView view, float tilt) {
+        view.map.moveCamera(CameraUpdateFactory.changeTilt(tilt));
+    }
+
+    // todo: 自定义 locationStyle
 }
