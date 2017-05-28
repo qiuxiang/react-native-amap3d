@@ -8,7 +8,7 @@ react-native 高德地图组件，使用最新 3D SDK，支持 Android 和 iOS�
 
 ## 特性（目标）
 
-- 使用 gradle 和 cocoapods 管理和安装地图 SDK
+- 使用 gradle 和 cocoapods 管理和安装地图 SDK，避免繁琐且容易出错的手动配置
 - 涵盖 SDK 提供的大部分功能
 - 提供不限于高德地图的其他地图 SDK 封装和兼容
 
