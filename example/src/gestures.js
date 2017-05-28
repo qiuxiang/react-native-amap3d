@@ -20,24 +20,28 @@ export default class Gestures extends Component {
         <View style={styles.control}>
           <Text>旋转</Text>
           <Switch
+            style={styles.switch}
             onValueChange={rotateEnabled => this.setState({rotateEnabled})}
             value={this.state.rotateEnabled}/>
         </View>
         <View style={styles.control}>
           <Text>滑动</Text>
           <Switch
+            style={styles.switch}
             onValueChange={scrollEnabled => this.setState({scrollEnabled})}
             value={this.state.scrollEnabled}/>
         </View>
         <View style={styles.control}>
           <Text>缩放</Text>
           <Switch
+            style={styles.switch}
             onValueChange={zoomEnabled => this.setState({zoomEnabled})}
             value={this.state.zoomEnabled}/>
         </View>
         <View style={styles.control}>
           <Text>倾斜</Text>
           <Switch
+            style={styles.switch}
             onValueChange={tiltEnabled => this.setState({tiltEnabled})}
             value={this.state.tiltEnabled}/>
         </View>
@@ -57,7 +61,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   controls: {
-    height: 54,
+    height: 72,
     backgroundColor: '#fff',
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -66,7 +70,11 @@ const styles = StyleSheet.create({
     paddingRight: 20,
   },
   control: {
-    flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center',
+  },
+  switch: {
+    marginTop: 5,
   },
 })
+
