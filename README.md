@@ -5,6 +5,14 @@ react-native 高德地图组件，使用最新 3D SDK，支持 Android 和 iOS�
 该项目很大一定程度是参考 [react-native-maps](https://github.com/airbnb/react-native-maps)，
 如果不是考虑到国内 Android 手机无法使用 Google Map，实在没理由再造这个轮子。
 
+
+## 特性（目标）
+
+- 使用 gradle 和 cocoapods 管理和安装地图 SDK
+- 涵盖 SDK 提供的大部分功能
+- 提供不限于高德地图的其他地图 SDK 封装和兼容
+
+
 ## 计划与进度
 
 - [ ] 添加示例 README
