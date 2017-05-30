@@ -21,17 +21,27 @@ export default class Examples extends Component {
   }
 
   render() {
-    return <ScrollView>
-      {this._renderItem('地图模式', 'MapTypes')}
-      {this._renderItem('图层功能', 'Layers')}
-      {this._renderItem('室内地图', 'Indoor')}
-      {this._renderItem('地图控件', 'Controls')}
-      {this._renderItem('手势交互', 'Gestures')}
+    return <ScrollView contentContainerStyle={styles.scrollView}>
+      <View style={styles.group}>
+        {this._renderItem('地图模式', 'MapTypes')}
+        {this._renderItem('图层功能', 'Layers')}
+        {this._renderItem('室内地图', 'Indoor')}
+        {this._renderItem('地图控件', 'Controls')}
+        {this._renderItem('手势交互', 'Gestures')}
+      </View>
+      <View style={styles.group}>
+        {this._renderItem('添加标记', 'Marker')}
+      </View>
     </ScrollView>
   }
 }
 
 const styles = StyleSheet.create({
+  group: {
+    marginTop: 15,
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderTopColor: '#ddd',
+  },
   item: {
     padding: 15,
     backgroundColor: '#fff',

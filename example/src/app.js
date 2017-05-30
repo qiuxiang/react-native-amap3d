@@ -5,6 +5,7 @@ import Layers from './layers'
 import Indoor from './indoor'
 import Controls from './controls'
 import Gestures from './gestures'
+import Marker from './marker'
 
 export default StackNavigator({
   Examples: {screen: Examples},
@@ -13,4 +14,5 @@ export default StackNavigator({
   Indoor: {screen: Indoor},
   Controls: {screen: Controls},
   Gestures: {screen: Gestures},
+  Marker: {screen: Marker},
 })

@@ -23,6 +23,8 @@ public class AMap3DPackage implements ReactPackage {
 
     @Override
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
-        return Arrays.<ViewManager>asList(new AMapViewManager());
+        return Arrays.<ViewManager>asList(
+                new AMapViewManager(),
+                new AMapMarkerManager());
     }
 }

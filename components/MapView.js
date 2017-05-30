@@ -1,7 +1,8 @@
 import React, {PropTypes, Component} from 'react'
 import {requireNativeComponent, View} from 'react-native'
+import Marker from './Marker'
 
-const CoordinateProType = PropTypes.shape({
+const CoordinatePropType = PropTypes.shape({
   latitude: PropTypes.number.isRequired,
   longitude: PropTypes.number.isRequired,
 })
@@ -88,7 +89,7 @@ class MapView extends Component {
     /**
      * 设置中心坐标
      */
-    coordinate: CoordinateProType,
+    coordinate: CoordinatePropType,
 
     /**
      * 设置倾斜角度，取值范围 [0, 60]
@@ -119,10 +120,11 @@ class MapView extends Component {
   render() {
     return <AMapView {...this.props}/>
   }
+
+  static Marker = Marker
 }
 
 AMapView = requireNativeComponent('AMapView', MapView)
 
 export default MapView
-export {MapView}
-
+export {MapView, Marker}

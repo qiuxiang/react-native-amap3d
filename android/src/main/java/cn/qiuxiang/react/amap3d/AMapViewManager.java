@@ -1,18 +1,19 @@
 package cn.qiuxiang.react.amap3d;
 
+import android.view.View;
+
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.model.LatLng;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.common.MapBuilder;
-import com.facebook.react.module.annotations.ReactModule;
-import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
+import com.facebook.react.uimanager.ViewGroupManager;
 import com.facebook.react.uimanager.annotations.ReactProp;
 
 import java.util.Map;
 
-class AMapViewManager extends SimpleViewManager<AMapView> {
+class AMapViewManager extends ViewGroupManager<AMapView> {
     private final Map<String, Integer> MAP_TYPES = MapBuilder.of(
             "standard", AMap.MAP_TYPE_NORMAL,
             "satellite", AMap.MAP_TYPE_SATELLITE,
@@ -23,6 +24,14 @@ class AMapViewManager extends SimpleViewManager<AMapView> {
     @Override
     public String getName() {
         return "AMapView";
+    }
+
+    @Override
+    public void addView(AMapView mapView, View child, int index) {
+        if (child instanceof AMapMarker) {
+            AMapMarker marker = (AMapMarker) child;
+            marker.addToMap(mapView.map);
+        }
     }
 
     @Override
