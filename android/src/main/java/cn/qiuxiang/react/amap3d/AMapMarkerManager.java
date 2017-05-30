@@ -1,20 +1,18 @@
 package cn.qiuxiang.react.amap3d;
 
-import android.view.View;
-
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.annotations.ReactProp;
 
-class AMapMarkerManager extends SimpleViewManager<View> {
+class AMapMarkerManager extends SimpleViewManager<AMapMarker> {
     @Override
     public String getName() {
         return "AMapMarker";
     }
 
     @Override
-    protected View createViewInstance(ThemedReactContext reactContext) {
+    protected AMapMarker createViewInstance(ThemedReactContext reactContext) {
         return new AMapMarker(reactContext);
     }
 
