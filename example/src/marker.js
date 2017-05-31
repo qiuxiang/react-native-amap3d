@@ -13,6 +13,10 @@ export default class MarkerComponent extends Component {
         latitude: 39.806901,
         longitude: 116.397972,
       }}/>
+      <Marker image='HUE_RED' title='其他颜色' coordinate={{
+        latitude: 39.806901,
+        longitude: 116.297972,
+      }}/>
       <Marker image={require('../images/marker.png')} title='自定义图标' coordinate={{
         latitude: 39.906901,
         longitude: 116.397972,

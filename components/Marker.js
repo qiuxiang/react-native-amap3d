@@ -25,6 +25,7 @@ class Marker extends Component {
 
     /**
      * 自定义图片
+     * 可以是 uri 或者 require 引用的资源图片
      */
     image: PropTypes.oneOfType([
       PropTypes.number,
@@ -54,8 +55,11 @@ class Marker extends Component {
 
   render() {
     if (this.props.image) {
-      const source = resolveAssetSource(this.props.image)
-      return <AMapMarker {...this.props} image={source.uri}/>
+      let image = this.props.image
+      if (typeof this.props.image === 'number') {
+        image = resolveAssetSource(this.props.image).uri
+      }
+      return <AMapMarker {...this.props} image={image}/>
     } else {
       return <AMapMarker {...this.props}/>
     }

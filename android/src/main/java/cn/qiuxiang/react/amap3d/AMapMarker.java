@@ -20,7 +20,26 @@ import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.views.view.ReactViewGroup;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class AMapMarker extends ReactViewGroup {
+    private static final Map<String, Float> COLORS;
+
+    static {
+        COLORS = new HashMap<String, Float>();
+        COLORS.put("HUE_AZURE", BitmapDescriptorFactory.HUE_AZURE);
+        COLORS.put("HUE_BLUE", BitmapDescriptorFactory.HUE_BLUE);
+        COLORS.put("HUE_CYAN", BitmapDescriptorFactory.HUE_CYAN);
+        COLORS.put("HUE_GREEN", BitmapDescriptorFactory.HUE_GREEN);
+        COLORS.put("HUE_MAGENTA", BitmapDescriptorFactory.HUE_MAGENTA);
+        COLORS.put("HUE_ORANGE", BitmapDescriptorFactory.HUE_ORANGE);
+        COLORS.put("HUE_RED", BitmapDescriptorFactory.HUE_RED);
+        COLORS.put("HUE_ROSE", BitmapDescriptorFactory.HUE_ROSE);
+        COLORS.put("HUE_VIOLET", BitmapDescriptorFactory.HUE_VIOLET);
+        COLORS.put("HUE_YELLOW", BitmapDescriptorFactory.HUE_YELLOW);
+    }
+
     private Marker marker;
     private LatLng position;
     private String title = "";
@@ -28,7 +47,7 @@ public class AMapMarker extends ReactViewGroup {
     private boolean flat = false;
     private float opacity = 1;
     private boolean draggable = false;
-    private BitmapDescriptor iconBitmapDescriptor;
+    private BitmapDescriptor bitmapDescriptor;
     private DataSubscriber<CloseableReference<CloseableImage>> dataSubscriber =
             new BaseDataSubscriber<CloseableReference<CloseableImage>>() {
                 @Override
@@ -36,10 +55,10 @@ public class AMapMarker extends ReactViewGroup {
                     CloseableReference<CloseableImage> ref = dataSource.getResult();
                     if (ref != null) {
                         try {
-                            iconBitmapDescriptor = BitmapDescriptorFactory.fromBitmap(
+                            bitmapDescriptor = BitmapDescriptorFactory.fromBitmap(
                                     ((CloseableStaticBitmap) ref.get()).getUnderlyingBitmap());
                             if (marker != null) {
-                                marker.setIcon(iconBitmapDescriptor);
+                                marker.setIcon(bitmapDescriptor);
                             }
                         } finally {
                             CloseableReference.closeSafely(ref);
@@ -63,7 +82,7 @@ public class AMapMarker extends ReactViewGroup {
     private MarkerOptions getMarkerOptions() {
         return new MarkerOptions()
                 .setFlat(flat)
-                .icon(iconBitmapDescriptor)
+                .icon(bitmapDescriptor)
                 .alpha(opacity)
                 .draggable(draggable)
                 .position(position)
@@ -113,9 +132,16 @@ public class AMapMarker extends ReactViewGroup {
         }
     }
 
-    public void setImage(String uri) {
-        DataSource<CloseableReference<CloseableImage>> dataSource = Fresco
-                .getImagePipeline().fetchDecodedImage(ImageRequest.fromUri(uri), this);
-        dataSource.subscribe(dataSubscriber, CallerThreadExecutor.getInstance());
+    public void setImage(String image) {
+        if (image.startsWith("HUE_")) {
+            bitmapDescriptor = BitmapDescriptorFactory.defaultMarker(COLORS.get(image));
+            if (marker != null) {
+                marker.setIcon(bitmapDescriptor);
+            }
+        } else {
+            DataSource<CloseableReference<CloseableImage>> dataSource = Fresco
+                    .getImagePipeline().fetchDecodedImage(ImageRequest.fromUri(image), this);
+            dataSource.subscribe(dataSubscriber, CallerThreadExecutor.getInstance());
+        }
     }
 }
