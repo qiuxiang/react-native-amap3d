@@ -51,7 +51,9 @@ public class AMapMarker extends ReactViewGroup {
     private boolean flat = false;
     private float opacity = 1;
     private boolean draggable = false;
+    private boolean selected;
     private BitmapDescriptor bitmapDescriptor;
+    private RCTEventEmitter eventEmitter;
     private DataSubscriber<CloseableReference<CloseableImage>> dataSubscriber =
             new BaseDataSubscriber<CloseableReference<CloseableImage>>() {
                 @Override
@@ -75,8 +77,6 @@ public class AMapMarker extends ReactViewGroup {
                 }
             };
 
-    private RCTEventEmitter eventEmitter;
-
     public AMapMarker(ThemedReactContext context) {
         super(context);
         eventEmitter = context.getJSModule(RCTEventEmitter.class);
@@ -84,6 +84,11 @@ public class AMapMarker extends ReactViewGroup {
 
     public void addToMap(AMap map) {
         marker = map.addMarker(getMarkerOptions());
+        if (selected) {
+            marker.showInfoWindow();
+        } else {
+            marker.hideInfoWindow();
+        }
     }
 
     public String getMarkerId() {
@@ -158,5 +163,16 @@ public class AMapMarker extends ReactViewGroup {
 
     public void sendEvent(String name, WritableMap data) {
         eventEmitter.receiveEvent(getId(), name, data);
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+        if (marker != null) {
+            if (selected) {
+                marker.showInfoWindow();
+            } else {
+                marker.hideInfoWindow();
+            }
+        }
     }
 }

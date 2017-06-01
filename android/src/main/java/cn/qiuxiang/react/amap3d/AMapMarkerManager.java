@@ -60,6 +60,11 @@ class AMapMarkerManager extends SimpleViewManager<AMapMarker> {
         marker.setDraggable(draggable);
     }
 
+    @ReactProp(name = "selected")
+    public void setSelected(AMapMarker marker, boolean selected) {
+        marker.setSelected(selected);
+    }
+
     @ReactProp(name = "image")
     public void setImage(AMapMarker marker, String image) {
         marker.setImage(image);

@@ -12,6 +12,7 @@ export default class MarkerComponent extends Component {
       <Marker
         title='一个可拖拽的 Marker'
         draggable
+        selected
         onDragEnd={({nativeEvent}) => console.log(nativeEvent)}
         coordinate={{
           latitude: 39.806901,

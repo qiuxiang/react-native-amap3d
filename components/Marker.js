@@ -51,6 +51,11 @@ class Marker extends Component {
      */
     zIndex: PropTypes.number,
 
+    /**
+     * 是否选中
+     */
+    selected: PropTypes.bool,
+
     onPress: React.PropTypes.func,
     onDragStart: React.PropTypes.func,
     onDrag: React.PropTypes.func,
