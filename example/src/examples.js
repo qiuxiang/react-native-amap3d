@@ -37,19 +37,23 @@ export default class Examples extends Component {
 }
 
 const styles = StyleSheet.create({
+  scrollView: {
+    flex: 1,
+    backgroundColor: '#f5f5f5',
+  },
   group: {
     marginTop: 15,
     borderTopWidth: StyleSheet.hairlineWidth,
-    borderTopColor: '#ddd',
+    borderTopColor: '#e0e0e0',
   },
   item: {
     padding: 15,
     backgroundColor: '#fff',
     borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: '#ddd',
+    borderBottomColor: '#e0e0e0',
   },
   itemText: {
     fontSize: 16,
-    color: '#000',
+    color: '#424242',
   },
 })
