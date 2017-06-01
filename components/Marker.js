@@ -60,6 +60,7 @@ class Marker extends Component {
     onDragStart: React.PropTypes.func,
     onDrag: React.PropTypes.func,
     onDragEnd: React.PropTypes.func,
+    onCalloutPress: React.PropTypes.func,
   }
 
   _eventHandler(name) {

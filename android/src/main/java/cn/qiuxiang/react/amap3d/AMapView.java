@@ -102,6 +102,13 @@ public class AMapView extends MapView {
                 markers.get(marker.getId()).sendEvent("onMarkerDragEnd", data);
             }
         });
+
+        map.setOnInfoWindowClickListener(new AMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                markers.get(marker.getId()).sendEvent("onInfoWindowClick", Arguments.createMap());
+            }
+        });
     }
 
     public void addMarker(AMapMarker marker) {

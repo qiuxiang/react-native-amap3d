@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {StyleSheet} from 'react-native'
+import {StyleSheet, Alert} from 'react-native'
 import {MapView, Marker} from 'react-native-amap3d'
 
 export default class MarkerComponent extends Component {
@@ -13,7 +13,9 @@ export default class MarkerComponent extends Component {
         title='一个可拖拽的 Marker'
         draggable
         selected
-        onDragEnd={({nativeEvent}) => console.log(nativeEvent)}
+        onDragEnd={({nativeEvent}) =>
+          Alert.alert(`新坐标：${nativeEvent.latitude}, ${nativeEvent.longitude}`)}
+        onCalloutPress={() => Alert.alert('Callout Press')}
         coordinate={{
           latitude: 39.806901,
           longitude: 116.397972,

@@ -27,6 +27,7 @@ class AMapMarkerManager extends SimpleViewManager<AMapMarker> {
         map.put("onMarkerDragStart", MapBuilder.of("registrationName", "onMarkerDragStart"));
         map.put("onMarkerDrag", MapBuilder.of("registrationName", "onMarkerDrag"));
         map.put("onMarkerDragEnd", MapBuilder.of("registrationName", "onMarkerDragEnd"));
+        map.put("onInfoWindowClick", MapBuilder.of("registrationName", "onCalloutPress"));
         return map;
     }
 
