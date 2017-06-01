@@ -81,6 +81,27 @@ public class AMapView extends MapView {
                 return false;
             }
         });
+
+        map.setOnMarkerDragListener(new AMap.OnMarkerDragListener() {
+            @Override
+            public void onMarkerDragStart(Marker marker) {
+                markers.get(marker.getId()).sendEvent("onMarkerDragStart", Arguments.createMap());
+            }
+
+            @Override
+            public void onMarkerDrag(Marker marker) {
+                markers.get(marker.getId()).sendEvent("onMarkerDrag", Arguments.createMap());
+            }
+
+            @Override
+            public void onMarkerDragEnd(Marker marker) {
+                LatLng position = marker.getPosition();
+                WritableMap data = Arguments.createMap();
+                data.putDouble("latitude", position.latitude);
+                data.putDouble("longitude", position.longitude);
+                markers.get(marker.getId()).sendEvent("onMarkerDragEnd", data);
+            }
+        });
     }
 
     public void addMarker(AMapMarker marker) {

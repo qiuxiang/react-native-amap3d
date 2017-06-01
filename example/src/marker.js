@@ -9,18 +9,31 @@ export default class MarkerComponent extends Component {
 
   render() {
     return <MapView style={StyleSheet.absoluteFill}>
-      <Marker draggable title='这是一个可拖拽的 Marker' coordinate={{
-        latitude: 39.806901,
-        longitude: 116.397972,
-      }}/>
-      <Marker image='HUE_RED' title='其他颜色' coordinate={{
-        latitude: 39.806901,
-        longitude: 116.297972,
-      }}/>
-      <Marker image={require('../images/marker.png')} title='自定义图标' coordinate={{
-        latitude: 39.906901,
-        longitude: 116.397972,
-      }}/>
+      <Marker
+        title='一个可拖拽的 Marker'
+        draggable
+        onDragEnd={({nativeEvent}) => console.log(nativeEvent)}
+        coordinate={{
+          latitude: 39.806901,
+          longitude: 116.397972,
+        }}
+      />
+      <Marker
+        image='HUE_RED'
+        title='一个红色的 Marker'
+        coordinate={{
+          latitude: 39.806901,
+          longitude: 116.297972,
+        }}
+      />
+      <Marker
+        image={require('../images/marker.png')}
+        title='自定义图片'
+        coordinate={{
+          latitude: 39.906901,
+          longitude: 116.397972,
+        }}
+      />
     </MapView>
   }
 }

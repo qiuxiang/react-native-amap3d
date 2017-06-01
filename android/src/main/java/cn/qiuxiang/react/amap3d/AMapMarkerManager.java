@@ -24,6 +24,9 @@ class AMapMarkerManager extends SimpleViewManager<AMapMarker> {
     public Map<String, Object> getExportedCustomDirectEventTypeConstants() {
         HashMap<String, Object> map = new HashMap<>();
         map.put("onMarkerClick", MapBuilder.of("registrationName", "onMarkerClick"));
+        map.put("onMarkerDragStart", MapBuilder.of("registrationName", "onMarkerDragStart"));
+        map.put("onMarkerDrag", MapBuilder.of("registrationName", "onMarkerDrag"));
+        map.put("onMarkerDragEnd", MapBuilder.of("registrationName", "onMarkerDragEnd"));
         return map;
     }
 

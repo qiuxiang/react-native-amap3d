@@ -52,6 +52,9 @@ class Marker extends Component {
     zIndex: PropTypes.number,
 
     onPress: React.PropTypes.func,
+    onDragStart: React.PropTypes.func,
+    onDrag: React.PropTypes.func,
+    onDragEnd: React.PropTypes.func,
   }
 
   _eventHandler(name) {
@@ -66,6 +69,9 @@ class Marker extends Component {
     const props = {
       ...this.props,
       onMarkerClick: this._eventHandler('onPress'),
+      onMarkerDragStart: this._eventHandler('onDragStart'),
+      onMarkerDrag: this._eventHandler('onDrag'),
+      onMarkerDragEnd: this._eventHandler('onDragEnd'),
     }
     if (typeof props.image === 'number') {
       props.image = resolveAssetSource(this.props.image).uri
