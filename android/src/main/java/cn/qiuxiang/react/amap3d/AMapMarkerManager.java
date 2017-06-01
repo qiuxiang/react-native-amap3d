@@ -1,9 +1,13 @@
 package cn.qiuxiang.react.amap3d;
 
 import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.common.MapBuilder;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.annotations.ReactProp;
+
+import java.util.HashMap;
+import java.util.Map;
 
 class AMapMarkerManager extends SimpleViewManager<AMapMarker> {
     @Override
@@ -14,6 +18,13 @@ class AMapMarkerManager extends SimpleViewManager<AMapMarker> {
     @Override
     protected AMapMarker createViewInstance(ThemedReactContext reactContext) {
         return new AMapMarker(reactContext);
+    }
+
+    @Override
+    public Map<String, Object> getExportedCustomDirectEventTypeConstants() {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("onMarkerClick", MapBuilder.of("registrationName", "onMarkerClick"));
+        return map;
     }
 
     @ReactProp(name = "title")

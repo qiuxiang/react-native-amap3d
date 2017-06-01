@@ -11,6 +11,7 @@ import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.ViewGroupManager;
 import com.facebook.react.uimanager.annotations.ReactProp;
 
+import java.util.HashMap;
 import java.util.Map;
 
 class AMapViewManager extends ViewGroupManager<AMapView> {
@@ -29,14 +30,23 @@ class AMapViewManager extends ViewGroupManager<AMapView> {
     @Override
     public void addView(AMapView mapView, View child, int index) {
         if (child instanceof AMapMarker) {
-            AMapMarker marker = (AMapMarker) child;
-            marker.addToMap(mapView.map);
+            mapView.addMarker((AMapMarker) child);
         }
     }
 
     @Override
     protected AMapView createViewInstance(ThemedReactContext reactContext) {
         return new AMapView(reactContext);
+    }
+
+    @Override
+    public Map<String, Object> getExportedCustomDirectEventTypeConstants() {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("onMapLoaded", MapBuilder.of("registrationName", "onReady"));
+        map.put("onMapClick", MapBuilder.of("registrationName", "onPress"));
+        map.put("onMapLongClick", MapBuilder.of("registrationName", "onLongPress"));
+        map.put("onLocationChange", MapBuilder.of("registrationName", "onLocation"));
+        return map;
     }
 
     @ReactProp(name = "locationEnabled")

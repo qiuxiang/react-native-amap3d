@@ -1,6 +1,6 @@
 package cn.qiuxiang.react.amap3d;
 
-import android.content.Context;
+import android.annotation.SuppressLint;
 
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.model.BitmapDescriptor;
@@ -18,11 +18,15 @@ import com.facebook.imagepipeline.image.CloseableImage;
 import com.facebook.imagepipeline.image.CloseableStaticBitmap;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.uimanager.ThemedReactContext;
+import com.facebook.react.uimanager.events.RCTEventEmitter;
 import com.facebook.react.views.view.ReactViewGroup;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@SuppressLint("ViewConstructor")
 public class AMapMarker extends ReactViewGroup {
     private static final Map<String, Float> COLORS;
 
@@ -71,12 +75,19 @@ public class AMapMarker extends ReactViewGroup {
                 }
             };
 
-    public AMapMarker(Context context) {
+    private RCTEventEmitter eventEmitter;
+
+    public AMapMarker(ThemedReactContext context) {
         super(context);
+        eventEmitter = context.getJSModule(RCTEventEmitter.class);
     }
 
     public void addToMap(AMap map) {
         marker = map.addMarker(getMarkerOptions());
+    }
+
+    public String getMarkerId() {
+        return marker.getId();
     }
 
     private MarkerOptions getMarkerOptions() {
@@ -143,5 +154,9 @@ public class AMapMarker extends ReactViewGroup {
                     .getImagePipeline().fetchDecodedImage(ImageRequest.fromUri(image), this);
             dataSource.subscribe(dataSubscriber, CallerThreadExecutor.getInstance());
         }
+    }
+
+    public void sendEvent(String name, WritableMap data) {
+        eventEmitter.receiveEvent(getId(), name, data);
     }
 }

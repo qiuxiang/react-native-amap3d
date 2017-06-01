@@ -1,7 +1,6 @@
 import React, {PropTypes, Component} from 'react'
 import {requireNativeComponent, View} from 'react-native'
 import resolveAssetSource from 'react-native/Libraries/Image/resolveAssetSource'
-import merge from 'merge'
 import {CoordinatePropType} from './PropTypes'
 
 class Marker extends Component {
@@ -51,18 +50,27 @@ class Marker extends Component {
      * 层级
      */
     zIndex: PropTypes.number,
+
+    onPress: React.PropTypes.func,
+  }
+
+  _eventHandler(name) {
+    return event => {
+      if (this.props[name]) {
+        this.props[name](event)
+      }
+    }
   }
 
   render() {
-    if (this.props.image) {
-      let image = this.props.image
-      if (typeof this.props.image === 'number') {
-        image = resolveAssetSource(this.props.image).uri
-      }
-      return <AMapMarker {...this.props} image={image}/>
-    } else {
-      return <AMapMarker {...this.props}/>
+    const props = {
+      ...this.props,
+      onMarkerClick: this._eventHandler('onPress'),
     }
+    if (typeof props.image === 'number') {
+      props.image = resolveAssetSource(this.props.image).uri
+    }
+    return <AMapMarker {...props}/>
   }
 }
 

@@ -115,6 +115,26 @@ class MapView extends Component {
      * 是否启用倾斜手势，用于改变视角
      */
     tiltEnabled: PropTypes.bool,
+
+    /**
+     * 地图加载完毕事件
+     */
+    onReady: React.PropTypes.func,
+
+    /**
+     * 点击事件
+     */
+    onPress: React.PropTypes.func,
+
+    /**
+     * 长按事件
+     */
+    onLongPress: React.PropTypes.func,
+
+    /**
+     * 定位事件
+     */
+    onLocation: React.PropTypes.func,
   }
 
   render() {
