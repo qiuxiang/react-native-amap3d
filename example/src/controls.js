@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
   },
   controls: {
     height: 72,
-    backgroundColor: '#fff',
+    backgroundColor: '#f5f5f5',
     flexDirection: 'row',
     justifyContent: 'space-between',
     elevation: 4,
