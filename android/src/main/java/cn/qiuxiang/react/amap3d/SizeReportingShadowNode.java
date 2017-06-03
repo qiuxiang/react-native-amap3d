@@ -8,8 +8,6 @@
 
 package cn.qiuxiang.react.amap3d;
 
-import android.util.Log;
-
 import com.facebook.react.uimanager.LayoutShadowNode;
 import com.facebook.react.uimanager.UIViewOperationQueue;
 

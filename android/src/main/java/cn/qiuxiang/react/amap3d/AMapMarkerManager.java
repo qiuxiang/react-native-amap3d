@@ -27,8 +27,8 @@ class AMapMarkerManager extends ViewGroupManager<AMapMarker> {
     public void addView(AMapMarker marker, View view, int index) {
         if (view instanceof AMapInfoWindow) {
             marker.setInfoWindow((ReactViewGroup) view);
-        } else {
-            super.addView(marker, view, index);
+        } else if (view instanceof AMapOverlay) {
+            marker.setIconView((AMapOverlay) view);
         }
     }
 

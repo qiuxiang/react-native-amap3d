@@ -94,8 +94,8 @@ class Marker extends Component {
     }
 
     if (typeof props.icon === 'function') {
-      delete props.icon
       customMarker = props.icon()
+      delete props.icon
     }
 
     return <AMapMarker {...props}>

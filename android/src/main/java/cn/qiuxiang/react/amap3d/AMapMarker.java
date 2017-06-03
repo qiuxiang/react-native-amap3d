@@ -1,6 +1,9 @@
 package cn.qiuxiang.react.amap3d;
 
 import android.annotation.SuppressLint;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.view.View;
 
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.model.BitmapDescriptor;
@@ -53,6 +56,7 @@ public class AMapMarker extends ReactViewGroup {
     private float opacity = 1;
     private boolean draggable = false;
     private boolean selected;
+    private boolean showsInfoWindow = false;
     private BitmapDescriptor bitmapDescriptor;
     private RCTEventEmitter eventEmitter;
     private DataSubscriber<CloseableReference<CloseableImage>> dataSubscriber =
@@ -104,6 +108,7 @@ public class AMapMarker extends ReactViewGroup {
                 .draggable(draggable)
                 .position(position)
                 .title(title)
+                .infoWindowEnable(showsInfoWindow)
                 .snippet(snippet);
     }
 
@@ -185,7 +190,31 @@ public class AMapMarker extends ReactViewGroup {
         infoWindow = view;
     }
 
-    public void setInfoWindowLayout(int width, int height) {
-        infoWindow.setLayoutParams(new ReactViewGroup.LayoutParams(width, height));
+    public void setIconView(final AMapOverlay overlay) {
+        overlay.addOnLayoutChangeListener(new OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(View view, int i, int i1, int i2, int i3, int i4, int i5, int i6, int i7) {
+                updateIcon(overlay);
+            }
+        });
+        overlay.setOnUpdateListener(new AMapOverlay.OnUpdateListener() {
+            @Override
+            public void onUpdate() {
+                updateIcon(overlay);
+            }
+        });
+    }
+
+    private void updateIcon(AMapOverlay overlay) {
+        Bitmap bitmap = Bitmap.createBitmap(
+                overlay.getWidth(),
+                overlay.getHeight(),
+                Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        overlay.draw(canvas);
+        bitmapDescriptor = BitmapDescriptorFactory.fromBitmap(bitmap);
+        if (marker != null) {
+            marker.setIcon(bitmapDescriptor);
+        }
     }
 }

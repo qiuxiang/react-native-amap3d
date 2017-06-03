@@ -1,10 +1,27 @@
 import React, {Component} from 'react'
 import {StyleSheet, Alert, Text, View} from 'react-native'
-import {MapView, Marker, InfoWindow} from 'react-native-amap3d'
+import {MapView, Marker, InfoWindow, Overlay} from 'react-native-amap3d'
 
 export default class MarkerComponent extends Component {
   static navigationOptions = {
     title: '添加标记',
+  }
+
+  state = {
+    time: new Date(),
+  }
+
+  componentDidMount() {
+    this.mounted = true
+    setInterval(() => {
+      if (this.mounted) {
+        this.setState({time: new Date()})
+      }
+    }, 1000)
+  }
+
+  componentWillUnmount() {
+    this.mounted = false
   }
 
   render() {
@@ -30,7 +47,7 @@ export default class MarkerComponent extends Component {
           longitude: 116.297972,
         }}>
         <InfoWindow style={styles.customInfoWindow}>
-          <Text>一个自定义的信息窗口</Text>
+          <Text>一个自定义 View 的信息窗口</Text>
         </InfoWindow>
       </Marker>
       <Marker
@@ -42,7 +59,10 @@ export default class MarkerComponent extends Component {
         }}
       />
       <Marker
-        title='自定义 View 图标'
+        title='自定义 View Marker'
+        icon={() => <Overlay style={styles.customMarker}>
+          <Text style={styles.markerText}>{this.state.time.toLocaleTimeString()}</Text>
+        </Overlay>}
         coordinate={{
           latitude: 39.706901,
           longitude: 116.397972,
@@ -54,12 +74,18 @@ export default class MarkerComponent extends Component {
 
 const styles = StyleSheet.create({
   customInfoWindow: {
-    alignItems: 'center',
-    justifyContent: 'center',
     backgroundColor: '#fff',
-    width: 100,
+    width: 128,
     padding: 10,
-    borderRadius: 10,
     elevation: 4,
+  },
+  customMarker: {
+    width: 70,
+    backgroundColor: '#009688',
+    alignItems: 'center',
+    padding: 5,
+  },
+  markerText: {
+    color: '#fff',
   },
 })
