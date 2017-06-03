@@ -23,7 +23,7 @@ export default class Layers extends Component {
             value={this.state.showsBuildings}/>
         </View>
         <View style={styles.control}>
-          <Text>交通</Text>
+          <Text>路况</Text>
           <Switch
             onValueChange={showsTraffic => this.setState({showsTraffic})}
             value={this.state.showsTraffic}/>

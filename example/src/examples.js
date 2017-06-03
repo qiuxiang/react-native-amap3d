@@ -5,7 +5,15 @@ import {
   ScrollView,
   StyleSheet,
   TouchableHighlight,
+  TouchableNativeFeedback,
+  Platform,
+  StatusBar,
 } from 'react-native'
+
+let Touchable = TouchableHighlight
+if (Platform.OS === 'android') {
+  Touchable = TouchableNativeFeedback
+}
 
 export default class Examples extends Component {
   static navigationOptions = {
@@ -13,20 +21,25 @@ export default class Examples extends Component {
   }
 
   _renderItem(title, route) {
-    return <TouchableHighlight onPress={() => this.props.navigation.navigate(route)}>
+    return <Touchable onPress={() => this.props.navigation.navigate(route)}>
       <View style={styles.item}>
         <Text style={styles.itemText}>{title}</Text>
       </View>
-    </TouchableHighlight>
+    </Touchable>
   }
 
   render() {
     return <ScrollView contentContainerStyle={styles.scrollView}>
+      <StatusBar barStyle='dark-content' backgroundColor='#e0e0e0'/>
       <View style={styles.group}>
         {this._renderItem('地图模式', 'MapTypes')}
+        <View style={styles.separator}/>
         {this._renderItem('图层功能', 'Layers')}
+        <View style={styles.separator}/>
         {this._renderItem('室内地图', 'Indoor')}
+        <View style={styles.separator}/>
         {this._renderItem('地图控件', 'Controls')}
+        <View style={styles.separator}/>
         {this._renderItem('手势交互', 'Gestures')}
       </View>
       <View style={styles.group}>
@@ -43,14 +56,14 @@ const styles = StyleSheet.create({
   },
   group: {
     marginTop: 15,
-    borderTopWidth: StyleSheet.hairlineWidth,
-    borderTopColor: '#e0e0e0',
   },
   item: {
     padding: 15,
     backgroundColor: '#fff',
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: '#e0e0e0',
+  },
+  separator: {
+    height: StyleSheet.hairlineWidth,
+    backgroundColor: '#e0e0e0',
   },
   itemText: {
     fontSize: 16,

@@ -1,4 +1,3 @@
-import {StatusBar} from 'react-native'
 import {StackNavigator} from 'react-navigation'
 import Examples from './examples'
 import MapTypes from './map-types'
@@ -7,9 +6,6 @@ import Indoor from './indoor'
 import Controls from './controls'
 import Gestures from './gestures'
 import Marker from './marker'
-
-StatusBar.setBackgroundColor('#e0e0e0')
-StatusBar.setBarStyle('dark-content')
 
 export default StackNavigator({
   Examples: {screen: Examples},
