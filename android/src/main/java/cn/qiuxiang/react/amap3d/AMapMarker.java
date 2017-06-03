@@ -149,15 +149,15 @@ public class AMapMarker extends ReactViewGroup {
         }
     }
 
-    public void setImage(String image) {
-        if (image.startsWith("HUE_")) {
-            bitmapDescriptor = BitmapDescriptorFactory.defaultMarker(COLORS.get(image));
+    public void setIcon(String icon) {
+        if (icon.startsWith("HUE_")) {
+            bitmapDescriptor = BitmapDescriptorFactory.defaultMarker(COLORS.get(icon));
             if (marker != null) {
                 marker.setIcon(bitmapDescriptor);
             }
         } else {
             DataSource<CloseableReference<CloseableImage>> dataSource = Fresco
-                    .getImagePipeline().fetchDecodedImage(ImageRequest.fromUri(image), this);
+                    .getImagePipeline().fetchDecodedImage(ImageRequest.fromUri(icon), this);
             dataSource.subscribe(dataSubscriber, CallerThreadExecutor.getInstance());
         }
     }

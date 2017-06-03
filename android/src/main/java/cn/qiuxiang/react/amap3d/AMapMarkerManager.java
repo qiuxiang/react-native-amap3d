@@ -74,9 +74,9 @@ class AMapMarkerManager extends ViewGroupManager<AMapMarker> {
         marker.setSelected(selected);
     }
 
-    @ReactProp(name = "image")
-    public void setImage(AMapMarker marker, String image) {
-        marker.setImage(image);
+    @ReactProp(name = "icon")
+    public void setIcon(AMapMarker marker, String icon) {
+        marker.setIcon(icon);
     }
 
     // 对于 infoWindow，必须手动设置 layoutParams 才能正确显示，

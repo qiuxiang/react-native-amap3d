@@ -23,12 +23,13 @@ class Marker extends Component {
     description: PropTypes.string,
 
     /**
-     * 自定义图片
+     * 自定义图标
      * 可以是 uri 或者 require 引用的资源图片
      */
-    image: PropTypes.oneOfType([
+    icon: PropTypes.oneOfType([
       PropTypes.number,
       PropTypes.string,
+      PropTypes.func,
     ]),
 
     /**
@@ -90,8 +91,8 @@ class Marker extends Component {
       onMarkerDragEnd: this._handle('onDragEnd'),
     }
 
-    if (typeof props.image === 'number') {
-      props.image = resolveAssetSource(this.props.image).uri
+    if (typeof props.icon === 'number') {
+      props.icon = resolveAssetSource(this.props.icon).uri
     }
 
     if (props.children) {

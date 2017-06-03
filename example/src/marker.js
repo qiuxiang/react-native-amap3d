@@ -22,7 +22,7 @@ export default class MarkerComponent extends Component {
       />
       <Marker
         selected
-        image='HUE_RED'
+        icon='HUE_RED'
         title='一个红色的 Marker'
         infoWindowWidth={100}
         coordinate={{
@@ -34,7 +34,7 @@ export default class MarkerComponent extends Component {
         </View>
       </Marker>
       <Marker
-        image={require('../images/marker.png')}
+        icon={require('../images/marker.png')}
         title='自定义图片'
         coordinate={{
           latitude: 39.906901,
