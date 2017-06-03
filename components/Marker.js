@@ -2,6 +2,7 @@ import React, {PropTypes, Component} from 'react'
 import {requireNativeComponent, View, PixelRatio} from 'react-native'
 import resolveAssetSource from 'react-native/Libraries/Image/resolveAssetSource'
 import {CoordinatePropType} from './PropTypes'
+import InfoWindow from './InfoWindow'
 
 class Marker extends Component {
   static propTypes = {
@@ -64,8 +65,6 @@ class Marker extends Component {
     onInfoWindowPress: React.PropTypes.func,
   }
 
-  state = {}
-
   _handle(name) {
     return event => {
       if (this.props[name]) {
@@ -74,17 +73,9 @@ class Marker extends Component {
     }
   }
 
-  _handleLayout(calloutLayout) {
-    this.setState({infoWindowLayout: {
-      width: PixelRatio.getPixelSizeForLayoutSize(calloutLayout.width),
-      height: PixelRatio.getPixelSizeForLayoutSize(calloutLayout.height),
-    }})
-  }
-
   render() {
     const props = {
       ...this.props,
-      infoWindowLayout: this.state.infoWindowLayout,
       onMarkerClick: this._handle('onPress'),
       onMarkerDragStart: this._handle('onDragStart'),
       onMarkerDrag: this._handle('onDrag'),
@@ -95,21 +86,25 @@ class Marker extends Component {
       props.icon = resolveAssetSource(this.props.icon).uri
     }
 
+    let customInfoWindow = null
+    let customMarker = null
+
     if (props.children) {
-      props.children = <View
-        {...props.children.props}
-        onLayout={event => this._handleLayout(event.nativeEvent.layout)}
-        collapsable={false}/>
+      customInfoWindow = props.children
     }
 
-    return <AMapMarker {...props}/>
+    if (typeof props.icon === 'function') {
+      delete props.icon
+      customMarker = props.icon()
+    }
+
+    return <AMapMarker {...props}>
+      {customMarker}
+      {customInfoWindow}
+    </AMapMarker>
   }
 }
 
-AMapMarker = requireNativeComponent('AMapMarker', Marker, {
-  nativeOnly: {
-    infoWindowLayout: true,
-  },
-})
+AMapMarker = requireNativeComponent('AMapMarker', Marker)
 
 export default Marker

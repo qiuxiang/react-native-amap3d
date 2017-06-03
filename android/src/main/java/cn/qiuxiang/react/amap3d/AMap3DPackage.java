@@ -25,6 +25,7 @@ public class AMap3DPackage implements ReactPackage {
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
         return Arrays.<ViewManager>asList(
                 new AMapViewManager(),
-                new AMapMarkerManager());
+                new AMapMarkerManager(),
+                new AMapInfoWindowManager());
     }
 }

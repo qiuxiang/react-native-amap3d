@@ -25,7 +25,11 @@ class AMapMarkerManager extends ViewGroupManager<AMapMarker> {
 
     @Override
     public void addView(AMapMarker marker, View view, int index) {
-        marker.setInfoWindow((ReactViewGroup) view);
+        if (view instanceof AMapInfoWindow) {
+            marker.setInfoWindow((ReactViewGroup) view);
+        } else {
+            super.addView(marker, view, index);
+        }
     }
 
     @Override
@@ -77,18 +81,5 @@ class AMapMarkerManager extends ViewGroupManager<AMapMarker> {
     @ReactProp(name = "icon")
     public void setIcon(AMapMarker marker, String icon) {
         marker.setIcon(icon);
-    }
-
-    // 对于 infoWindow，必须手动设置 layoutParams 才能正确显示，
-    // 但我在 Android 端没有找到监听 infoWindow onLayout 的方法，
-    // 我的解决办法是在 js 端监听 onLayout，并反馈到这里。
-    //
-    // PS.
-    // react-native-maps 的解决方法是 LayoutShadowNode，详见：
-    // https://github.com/airbnb/react-native-maps/blob/master/lib/android/src/main/java/com/airbnb/android/react/maps/SizeReportingShadowNode.java
-    // 这里暂做保留。
-    @ReactProp(name = "infoWindowLayout")
-    public void setInfoWindowLayout(AMapMarker marker, ReadableMap layout) {
-        marker.setInfoWindowLayout(layout.getInt("width"), layout.getInt("height"));
     }
 }

@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {StyleSheet, Alert, Text, View} from 'react-native'
-import {MapView, Marker} from 'react-native-amap3d'
+import {MapView, Marker, InfoWindow} from 'react-native-amap3d'
 
 export default class MarkerComponent extends Component {
   static navigationOptions = {
@@ -29,15 +29,22 @@ export default class MarkerComponent extends Component {
           latitude: 39.806901,
           longitude: 116.297972,
         }}>
-        <View style={styles.customInfoWindow}>
+        <InfoWindow style={styles.customInfoWindow}>
           <Text>一个自定义的信息窗口</Text>
-        </View>
+        </InfoWindow>
       </Marker>
       <Marker
         icon={require('../images/marker.png')}
         title='自定义图片'
         coordinate={{
           latitude: 39.906901,
+          longitude: 116.397972,
+        }}
+      />
+      <Marker
+        title='自定义 View 图标'
+        coordinate={{
+          latitude: 39.706901,
           longitude: 116.397972,
         }}
       />
