@@ -82,4 +82,9 @@ class AMapMarkerManager extends ViewGroupManager<AMapMarker> {
     public void setIcon(AMapMarker marker, String icon) {
         marker.setIcon(icon);
     }
+
+    @ReactProp(name = "showsInfoWindow")
+    public void setEnabledInfoWindow(AMapMarker marker, boolean enabled) {
+        marker.setEnabledInfoWindow(enabled);
+    }
 }

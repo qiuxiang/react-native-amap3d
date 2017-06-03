@@ -56,7 +56,7 @@ public class AMapMarker extends ReactViewGroup {
     private float opacity = 1;
     private boolean draggable = false;
     private boolean selected;
-    private boolean showsInfoWindow = false;
+    private boolean infoWindowEnabled = false;
     private BitmapDescriptor bitmapDescriptor;
     private RCTEventEmitter eventEmitter;
     private DataSubscriber<CloseableReference<CloseableImage>> dataSubscriber =
@@ -108,7 +108,7 @@ public class AMapMarker extends ReactViewGroup {
                 .draggable(draggable)
                 .position(position)
                 .title(title)
-                .infoWindowEnable(showsInfoWindow)
+                .infoWindowEnable(infoWindowEnabled)
                 .snippet(snippet);
     }
 
@@ -216,5 +216,9 @@ public class AMapMarker extends ReactViewGroup {
         if (marker != null) {
             marker.setIcon(bitmapDescriptor);
         }
+    }
+
+    public void setEnabledInfoWindow(boolean enabled) {
+        infoWindowEnabled = enabled;
     }
 }

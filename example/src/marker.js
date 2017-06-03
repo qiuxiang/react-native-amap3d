@@ -27,8 +27,9 @@ export default class MarkerComponent extends Component {
   render() {
     return <MapView style={StyleSheet.absoluteFill}>
       <Marker
-        title='一个可拖拽的 Marker'
         draggable
+        showsInfoWindow
+        title='一个可拖拽的 Marker'
         onDragEnd={({nativeEvent}) =>
           Alert.alert(`新坐标：${nativeEvent.latitude}, ${nativeEvent.longitude}`)}
         onInfoWindowPress={() => Alert.alert('信息窗口点击事件')}
@@ -39,6 +40,7 @@ export default class MarkerComponent extends Component {
       />
       <Marker
         selected
+        showsInfoWindow
         icon='HUE_RED'
         title='一个红色的 Marker'
         infoWindowWidth={100}
@@ -51,6 +53,7 @@ export default class MarkerComponent extends Component {
         </InfoWindow>
       </Marker>
       <Marker
+        showsInfoWindow
         icon={require('../images/marker.png')}
         title='自定义图片'
         coordinate={{
@@ -59,6 +62,7 @@ export default class MarkerComponent extends Component {
         }}
       />
       <Marker
+        showsInfoWindow
         title='自定义 View Marker'
         icon={() => <Overlay style={styles.customMarker}>
           <Text style={styles.markerText}>{this.state.time.toLocaleTimeString()}</Text>
