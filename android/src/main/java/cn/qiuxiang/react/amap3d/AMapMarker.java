@@ -34,7 +34,7 @@ public class AMapMarker extends ReactViewGroup {
     private static final Map<String, Float> COLORS;
 
     static {
-        COLORS = new HashMap<String, Float>();
+        COLORS = new HashMap<>();
         COLORS.put("HUE_AZURE", BitmapDescriptorFactory.HUE_AZURE);
         COLORS.put("HUE_BLUE", BitmapDescriptorFactory.HUE_BLUE);
         COLORS.put("HUE_CYAN", BitmapDescriptorFactory.HUE_CYAN);
@@ -56,7 +56,7 @@ public class AMapMarker extends ReactViewGroup {
     private float opacity = 1;
     private boolean draggable = false;
     private boolean selected;
-    private boolean infoWindowEnabled = false;
+    private boolean infoWindowEnabled = true;
     private BitmapDescriptor bitmapDescriptor;
     private RCTEventEmitter eventEmitter;
     private DataSubscriber<CloseableReference<CloseableImage>> dataSubscriber =

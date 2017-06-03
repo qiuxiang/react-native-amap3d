@@ -28,7 +28,6 @@ export default class MarkerComponent extends Component {
     return <MapView style={StyleSheet.absoluteFill}>
       <Marker
         draggable
-        showsInfoWindow
         title='一个可拖拽的 Marker'
         onDragEnd={({nativeEvent}) =>
           Alert.alert(`新坐标：${nativeEvent.latitude}, ${nativeEvent.longitude}`)}
@@ -40,7 +39,6 @@ export default class MarkerComponent extends Component {
       />
       <Marker
         selected
-        showsInfoWindow
         icon='HUE_RED'
         title='一个红色的 Marker'
         infoWindowWidth={100}
@@ -49,21 +47,20 @@ export default class MarkerComponent extends Component {
           longitude: 116.297972,
         }}>
         <InfoWindow style={styles.customInfoWindow}>
-          <Text>一个自定义 View 的信息窗口</Text>
+          <Text>Custom View InfoWindow</Text>
         </InfoWindow>
       </Marker>
       <Marker
-        showsInfoWindow
         icon={require('../images/marker.png')}
         title='自定义图片'
+        description="Note the use of nativeOnly above. Sometimes you'll have some special properties that you need to expose for the native component, but don't actually want them as part of the API for the associated React component."
         coordinate={{
           latitude: 39.906901,
           longitude: 116.397972,
         }}
       />
       <Marker
-        showsInfoWindow
-        title='自定义 View Marker'
+        title='Custom View Marker'
         icon={() => <Overlay style={styles.customMarker}>
           <Text style={styles.markerText}>{this.state.time.toLocaleTimeString()}</Text>
         </Overlay>}
@@ -79,12 +76,12 @@ export default class MarkerComponent extends Component {
 const styles = StyleSheet.create({
   customInfoWindow: {
     backgroundColor: '#fff',
-    width: 128,
+    position: 'absolute',
     padding: 10,
     elevation: 4,
   },
   customMarker: {
-    width: 70,
+    position: 'absolute',
     backgroundColor: '#009688',
     alignItems: 'center',
     padding: 5,

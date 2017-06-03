@@ -1,8 +1,12 @@
 package cn.qiuxiang.react.amap3d;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.graphics.Color;
 import android.location.Location;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.MapView;
@@ -119,7 +123,25 @@ public class AMapView extends MapView {
 
             @Override
             public View getInfoContents(Marker marker) {
-                return null;
+                LinearLayout layout = new LinearLayout(context);
+                layout.setOrientation(LinearLayout.VERTICAL);
+                TextView titleView = new TextView(context);
+                titleView.setText(marker.getTitle());
+                titleView.setTextColor(Color.parseColor("#212121"));
+                layout.addView(titleView);
+
+                String snippet = marker.getSnippet();
+                if (!snippet.isEmpty()) {
+                    TextView snippetView = new TextView(context);
+                    snippetView.setText(snippet);
+                    snippetView.setSingleLine(false);
+                    snippetView.setMaxEms(12);
+                    snippetView.setPadding(0, (int) pxFromDp(context, 5), 0, 0);
+                    snippetView.setTextColor(Color.parseColor("#757575"));
+                    layout.addView(snippetView);
+                }
+
+                return layout;
             }
         });
     }
@@ -131,5 +153,9 @@ public class AMapView extends MapView {
 
     public void sendEvent(String name, WritableMap data) {
         eventEmitter.receiveEvent(getId(), name, data);
+    }
+
+    private static float pxFromDp(Context context, float dp) {
+        return dp * context.getResources().getDisplayMetrics().density;
     }
 }
