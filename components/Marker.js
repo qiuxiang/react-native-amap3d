@@ -58,10 +58,34 @@ class Marker extends Component {
      */
     selected: PropTypes.bool,
 
+    /**
+     * 是否显示信息窗体
+     */
+    showsInfoWindow: PropTypes.bool,
+
+    /**
+     * 点击事件
+     */
     onPress: React.PropTypes.func,
+
+    /**
+     * 拖放开始事件
+     */
     onDragStart: React.PropTypes.func,
+
+    /**
+     * 拖放进行事件，类似于 mousemove，在结束之前会不断调用
+     */
     onDrag: React.PropTypes.func,
+
+    /**
+     * 拖放结束事件，最终坐标将传入参数
+     */
     onDragEnd: React.PropTypes.func,
+
+    /**
+     * 信息窗体点击事件
+     */
     onInfoWindowPress: React.PropTypes.func,
   }
 
