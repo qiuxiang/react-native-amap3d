@@ -1,5 +1,5 @@
 import React, {PropTypes, Component} from 'react'
-import {requireNativeComponent, View} from 'react-native'
+import {requireNativeComponent, View, PixelRatio} from 'react-native'
 import resolveAssetSource from 'react-native/Libraries/Image/resolveAssetSource'
 import {CoordinatePropType} from './PropTypes'
 
@@ -60,10 +60,12 @@ class Marker extends Component {
     onDragStart: React.PropTypes.func,
     onDrag: React.PropTypes.func,
     onDragEnd: React.PropTypes.func,
-    onCalloutPress: React.PropTypes.func,
+    onInfoWindowPress: React.PropTypes.func,
   }
 
-  _eventHandler(name) {
+  state = {}
+
+  _handle(name) {
     return event => {
       if (this.props[name]) {
         this.props[name](event)
@@ -71,21 +73,42 @@ class Marker extends Component {
     }
   }
 
+  _handleLayout(calloutLayout) {
+    this.setState({infoWindowLayout: {
+      width: PixelRatio.getPixelSizeForLayoutSize(calloutLayout.width),
+      height: PixelRatio.getPixelSizeForLayoutSize(calloutLayout.height),
+    }})
+  }
+
   render() {
     const props = {
       ...this.props,
-      onMarkerClick: this._eventHandler('onPress'),
-      onMarkerDragStart: this._eventHandler('onDragStart'),
-      onMarkerDrag: this._eventHandler('onDrag'),
-      onMarkerDragEnd: this._eventHandler('onDragEnd'),
+      infoWindowLayout: this.state.infoWindowLayout,
+      onMarkerClick: this._handle('onPress'),
+      onMarkerDragStart: this._handle('onDragStart'),
+      onMarkerDrag: this._handle('onDrag'),
+      onMarkerDragEnd: this._handle('onDragEnd'),
     }
+
     if (typeof props.image === 'number') {
       props.image = resolveAssetSource(this.props.image).uri
     }
+
+    if (props.children) {
+      props.children = <View
+        {...props.children.props}
+        onLayout={event => this._handleLayout(event.nativeEvent.layout)}
+        collapsable={false}/>
+    }
+
     return <AMapMarker {...props}/>
   }
 }
 
-AMapMarker = requireNativeComponent('AMapMarker', Marker)
+AMapMarker = requireNativeComponent('AMapMarker', Marker, {
+  nativeOnly: {
+    infoWindowLayout: true,
+  },
+})
 
 export default Marker

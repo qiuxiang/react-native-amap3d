@@ -1,15 +1,18 @@
 package cn.qiuxiang.react.amap3d;
 
+import android.view.View;
+
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.common.MapBuilder;
-import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
+import com.facebook.react.uimanager.ViewGroupManager;
 import com.facebook.react.uimanager.annotations.ReactProp;
+import com.facebook.react.views.view.ReactViewGroup;
 
 import java.util.HashMap;
 import java.util.Map;
 
-class AMapMarkerManager extends SimpleViewManager<AMapMarker> {
+class AMapMarkerManager extends ViewGroupManager<AMapMarker> {
     @Override
     public String getName() {
         return "AMapMarker";
@@ -18,6 +21,11 @@ class AMapMarkerManager extends SimpleViewManager<AMapMarker> {
     @Override
     protected AMapMarker createViewInstance(ThemedReactContext reactContext) {
         return new AMapMarker(reactContext);
+    }
+
+    @Override
+    public void addView(AMapMarker marker, View view, int index) {
+        marker.setInfoWindow((ReactViewGroup) view);
     }
 
     @Override
@@ -69,5 +77,18 @@ class AMapMarkerManager extends SimpleViewManager<AMapMarker> {
     @ReactProp(name = "image")
     public void setImage(AMapMarker marker, String image) {
         marker.setImage(image);
+    }
+
+    // 对于 infoWindow，必须手动设置 layoutParams 才能正确显示，
+    // 但我在 Android 端没有找到监听 infoWindow onLayout 的方法，
+    // 我的解决办法是在 js 端监听 onLayout，并反馈到这里。
+    //
+    // PS.
+    // react-native-maps 的解决方法是 LayoutShadowNode，详见：
+    // https://github.com/airbnb/react-native-maps/blob/master/lib/android/src/main/java/com/airbnb/android/react/maps/SizeReportingShadowNode.java
+    // 这里暂做保留。
+    @ReactProp(name = "infoWindowLayout")
+    public void setInfoWindowLayout(AMapMarker marker, ReadableMap layout) {
+        marker.setInfoWindowLayout(layout.getInt("width"), layout.getInt("height"));
     }
 }

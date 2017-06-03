@@ -2,6 +2,7 @@ package cn.qiuxiang.react.amap3d;
 
 import android.annotation.SuppressLint;
 import android.location.Location;
+import android.view.View;
 
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.MapView;
@@ -107,6 +108,18 @@ public class AMapView extends MapView {
             @Override
             public void onInfoWindowClick(Marker marker) {
                 markers.get(marker.getId()).sendEvent("onInfoWindowClick", Arguments.createMap());
+            }
+        });
+
+        map.setInfoWindowAdapter(new AMap.InfoWindowAdapter() {
+            @Override
+            public View getInfoWindow(Marker marker) {
+                return markers.get(marker.getId()).getInfoWindow();
+            }
+
+            @Override
+            public View getInfoContents(Marker marker) {
+                return null;
             }
         });
     }

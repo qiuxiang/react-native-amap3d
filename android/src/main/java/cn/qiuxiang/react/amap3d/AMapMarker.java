@@ -44,6 +44,7 @@ public class AMapMarker extends ReactViewGroup {
         COLORS.put("HUE_YELLOW", BitmapDescriptorFactory.HUE_YELLOW);
     }
 
+    private ReactViewGroup infoWindow;
     private Marker marker;
     private LatLng position;
     private String title = "";
@@ -174,5 +175,17 @@ public class AMapMarker extends ReactViewGroup {
                 marker.hideInfoWindow();
             }
         }
+    }
+
+    public ReactViewGroup getInfoWindow() {
+        return infoWindow;
+    }
+
+    public void setInfoWindow(ReactViewGroup view) {
+        infoWindow = view;
+    }
+
+    public void setInfoWindowLayout(int width, int height) {
+        infoWindow.setLayoutParams(new ReactViewGroup.LayoutParams(width, height));
     }
 }

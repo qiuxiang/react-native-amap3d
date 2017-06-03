@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {StyleSheet, Alert} from 'react-native'
+import {StyleSheet, Alert, Text, View} from 'react-native'
 import {MapView, Marker} from 'react-native-amap3d'
 
 export default class MarkerComponent extends Component {
@@ -12,23 +12,27 @@ export default class MarkerComponent extends Component {
       <Marker
         title='一个可拖拽的 Marker'
         draggable
-        selected
         onDragEnd={({nativeEvent}) =>
           Alert.alert(`新坐标：${nativeEvent.latitude}, ${nativeEvent.longitude}`)}
-        onCalloutPress={() => Alert.alert('Callout Press')}
+        onInfoWindowPress={() => Alert.alert('信息窗口点击事件')}
         coordinate={{
           latitude: 39.806901,
           longitude: 116.397972,
         }}
       />
       <Marker
+        selected
         image='HUE_RED'
         title='一个红色的 Marker'
+        infoWindowWidth={100}
         coordinate={{
           latitude: 39.806901,
           longitude: 116.297972,
-        }}
-      />
+        }}>
+        <View style={styles.customInfoWindow}>
+          <Text>一个自定义的信息窗口</Text>
+        </View>
+      </Marker>
       <Marker
         image={require('../images/marker.png')}
         title='自定义图片'
@@ -40,3 +44,15 @@ export default class MarkerComponent extends Component {
     </MapView>
   }
 }
+
+const styles = StyleSheet.create({
+  customInfoWindow: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#fff',
+    width: 100,
+    padding: 10,
+    borderRadius: 10,
+    elevation: 4,
+  },
+})
