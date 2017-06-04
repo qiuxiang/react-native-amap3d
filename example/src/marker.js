@@ -51,8 +51,8 @@ export default class MarkerExample extends Component {
       </Marker>
       <Marker
         icon={() =>
-          <Overlay style={{width: 40, height: 40}}>
-            <Image style={{width: 40, height: 40}} source={require('../images/marker.png')}/>
+          <Overlay style={styles.customIcon}>
+            <Image style={styles.customIcon} source={require('../images/marker.png')}/>
           </Overlay>
         }
         title='自定义图片'
@@ -79,6 +79,10 @@ export default class MarkerExample extends Component {
 }
 
 const styles = StyleSheet.create({
+  customIcon: {
+    width: 40,
+    height: 40,
+  },
   customInfoWindow: {
     backgroundColor: '#fff',
     position: 'absolute',
