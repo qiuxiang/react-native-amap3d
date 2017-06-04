@@ -1,9 +1,5 @@
 package cn.qiuxiang.react.amap3d
 
-import android.graphics.Color
-import android.view.View
-import android.widget.LinearLayout
-import android.widget.TextView
 import com.amap.api.maps.AMap
 import com.amap.api.maps.MapView
 import com.amap.api.maps.model.Marker
@@ -79,39 +75,11 @@ class AMapView(context: ThemedReactContext) : MapView(context) {
             markers[marker.id]?.sendEvent("onInfoWindowClick", Arguments.createMap())
         }
 
-        map.setInfoWindowAdapter(object : AMap.InfoWindowAdapter {
-            val paddingTop = context.resources.displayMetrics.density
-
-            override fun getInfoWindow(marker: Marker): View? {
-                return markers[marker.id]?.infoWindow
-            }
-
-            override fun getInfoContents(marker: Marker): View? {
-                val layout = LinearLayout(context)
-                layout.orientation = LinearLayout.VERTICAL
-                val titleView = TextView(context)
-                titleView.text = marker.title
-                titleView.setTextColor(Color.parseColor("#212121"))
-                layout.addView(titleView)
-
-                val snippet = marker.snippet
-                if (!snippet.isEmpty()) {
-                    val snippetView = TextView(context)
-                    snippetView.text = snippet
-                    snippetView.setSingleLine(false)
-                    snippetView.maxEms = 12
-                    snippetView.setPadding(0, paddingTop.toInt(), 0, 0)
-                    snippetView.setTextColor(Color.parseColor("#757575"))
-                    layout.addView(snippetView)
-                }
-
-                return layout
-            }
-        })
-
         map.setOnPolylineClickListener { polyline ->
             polylines[polyline.id]?.sendEvent("onPolylineClick", Arguments.createMap())
         }
+
+        map.setInfoWindowAdapter(AMapInfoWindowAdapter(context, markers))
     }
 
     fun addMarker(marker: AMapMarker) {
