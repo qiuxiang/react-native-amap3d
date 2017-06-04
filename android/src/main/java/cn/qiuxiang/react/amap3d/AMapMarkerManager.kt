@@ -19,7 +19,7 @@ internal class AMapMarkerManager : ViewGroupManager<AMapMarker>() {
 
     override fun addView(marker: AMapMarker, view: View, index: Int) {
         when (view) {
-            is AMapInfoWindow -> marker.infoWindow = view as ReactViewGroup
+            is AMapInfoWindow -> marker.infoWindow = view
             is AMapOverlay -> marker.setIconView(view)
         }
     }

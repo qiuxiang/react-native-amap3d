@@ -80,13 +80,13 @@ class AMapView(context: ThemedReactContext) : MapView(context) {
         }
 
         map.setInfoWindowAdapter(object : AMap.InfoWindowAdapter {
-            private val paddingTop = context.resources.displayMetrics.density
+            val paddingTop = context.resources.displayMetrics.density
 
-            override fun getInfoWindow(marker: Marker): View {
-                return markers[marker.id]?.infoWindow as View
+            override fun getInfoWindow(marker: Marker): View? {
+                return markers[marker.id]?.infoWindow
             }
 
-            override fun getInfoContents(marker: Marker): View {
+            override fun getInfoContents(marker: Marker): View? {
                 val layout = LinearLayout(context)
                 layout.orientation = LinearLayout.VERTICAL
                 val titleView = TextView(context)
