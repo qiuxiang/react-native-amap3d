@@ -89,11 +89,6 @@ class Marker extends Component {
     onInfoWindowPress: React.PropTypes.func,
   }
 
-  static defaultProps = {
-    opacity: 1,
-    showsInfoWindow: true,
-  }
-
   _handle(name) {
     return event => {
       if (this.props[name]) {

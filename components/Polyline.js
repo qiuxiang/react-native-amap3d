@@ -42,10 +42,7 @@ class Polyline extends Component {
   }
 
   static defaultProps = {
-    width: 1,
-    color: '#000',
     colors: [],
-    opacity: 1,
   }
 
   _handle(name) {

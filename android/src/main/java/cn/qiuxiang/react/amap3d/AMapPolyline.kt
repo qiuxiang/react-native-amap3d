@@ -1,5 +1,6 @@
 package cn.qiuxiang.react.amap3d
 
+import android.graphics.Color
 import com.amap.api.maps.AMap
 import com.amap.api.maps.model.LatLng
 import com.amap.api.maps.model.Polyline
@@ -13,8 +14,8 @@ import com.facebook.react.views.view.ReactViewGroup
 class AMapPolyline(context: ThemedReactContext) : ReactViewGroup(context) {
     private var polyline: Polyline? = null
     private var coordinates: ArrayList<LatLng> = ArrayList()
-    private var width: Float = 0f
-    private var color: Int = 0
+    private var width: Float = 1f
+    private var color: Int = Color.BLACK
     private var colors: ArrayList<Int> = ArrayList()
     private var opacity: Float = 1f
     private var zIndex: Float = 0f
