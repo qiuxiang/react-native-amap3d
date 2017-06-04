@@ -78,10 +78,10 @@ class AMapMarker(context: ThemedReactContext) : ReactViewGroup(context) {
     }
 
     fun setIcon(icon: String) {
-        if (icon.startsWith("HUE_")) {
-            bitmapDescriptor = COLORS[icon]?.let { BitmapDescriptorFactory.defaultMarker(it) }
-            marker?.setIcon(bitmapDescriptor)
+        bitmapDescriptor = COLORS[icon.toUpperCase()]?.let {
+            BitmapDescriptorFactory.defaultMarker(it)
         }
+        marker?.setIcon(bitmapDescriptor)
     }
 
     fun sendEvent(name: String, data: WritableMap) {
@@ -120,16 +120,16 @@ class AMapMarker(context: ThemedReactContext) : ReactViewGroup(context) {
 
     companion object {
         private val COLORS = mapOf(
-                "HUE_AZURE" to BitmapDescriptorFactory.HUE_AZURE,
-                "HUE_BLUE" to BitmapDescriptorFactory.HUE_BLUE,
-                "HUE_CYAN" to BitmapDescriptorFactory.HUE_CYAN,
-                "HUE_GREEN" to BitmapDescriptorFactory.HUE_GREEN,
-                "HUE_MAGENTA" to BitmapDescriptorFactory.HUE_MAGENTA,
-                "HUE_ORANGE" to BitmapDescriptorFactory.HUE_ORANGE,
-                "HUE_RED" to BitmapDescriptorFactory.HUE_RED,
-                "HUE_ROSE" to BitmapDescriptorFactory.HUE_ROSE,
-                "HUE_VIOLET" to BitmapDescriptorFactory.HUE_VIOLET,
-                "HUE_YELLOW" to BitmapDescriptorFactory.HUE_YELLOW
+                "AZURE" to BitmapDescriptorFactory.HUE_AZURE,
+                "BLUE" to BitmapDescriptorFactory.HUE_BLUE,
+                "CYAN" to BitmapDescriptorFactory.HUE_CYAN,
+                "GREEN" to BitmapDescriptorFactory.HUE_GREEN,
+                "MAGENTA" to BitmapDescriptorFactory.HUE_MAGENTA,
+                "ORANGE" to BitmapDescriptorFactory.HUE_ORANGE,
+                "RED" to BitmapDescriptorFactory.HUE_RED,
+                "ROSE" to BitmapDescriptorFactory.HUE_ROSE,
+                "VIOLET" to BitmapDescriptorFactory.HUE_VIOLET,
+                "YELLOW" to BitmapDescriptorFactory.HUE_YELLOW
         )
     }
 }
