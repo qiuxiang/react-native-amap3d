@@ -1,6 +1,5 @@
 import React, {PropTypes, Component} from 'react'
 import {requireNativeComponent, View, PixelRatio} from 'react-native'
-import resolveAssetSource from 'react-native/Libraries/Image/resolveAssetSource'
 import {CoordinatePropType} from './PropTypes'
 import InfoWindow from './InfoWindow'
 
@@ -25,10 +24,11 @@ class Marker extends Component {
 
     /**
      * 自定义图标
-     * 可以是 uri 或者 require 引用的资源图片
+     *
+     * 可以是回调函数返回的自定义 View，需要注意的是，
+     * Root View 必须是 Overlay，且需设置 style width
      */
     icon: PropTypes.oneOfType([
-      PropTypes.number,
       PropTypes.string,
       PropTypes.func,
     ]),
@@ -104,10 +104,7 @@ class Marker extends Component {
       onMarkerDragStart: this._handle('onDragStart'),
       onMarkerDrag: this._handle('onDrag'),
       onMarkerDragEnd: this._handle('onDragEnd'),
-    }
-
-    if (typeof props.icon === 'number') {
-      props.icon = resolveAssetSource(this.props.icon).uri
+      onInfoWindowClick: this._handle('onInfoWindowPress'),
     }
 
     let customInfoWindow = null

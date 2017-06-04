@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {StyleSheet, Alert, Text} from 'react-native'
+import {StyleSheet, Alert, Text, Image} from 'react-native'
 import {MapView, Marker, InfoWindow, Overlay} from 'react-native-amap3d'
 
 export default class MarkerExample extends Component {
@@ -50,7 +50,11 @@ export default class MarkerExample extends Component {
         </InfoWindow>
       </Marker>
       <Marker
-        icon={require('../images/marker.png')}
+        icon={() =>
+          <Overlay style={{width: 40, height: 40}}>
+            <Image style={{width: 40, height: 40}} source={require('../images/marker.png')}/>
+          </Overlay>
+        }
         title='自定义图片'
         description="Note the use of nativeOnly above. Sometimes you'll have some special properties that you need to expose for the native component, but don't actually want them as part of the API for the associated React component."
         coordinate={{
@@ -60,9 +64,11 @@ export default class MarkerExample extends Component {
       />
       <Marker
         title='Custom View Marker'
-        icon={() => <Overlay style={styles.customMarker}>
-          <Text style={styles.markerText}>{this.state.time.toLocaleTimeString()}</Text>
-        </Overlay>}
+        icon={() =>
+          <Overlay style={styles.customMarker}>
+            <Text style={styles.markerText}>{this.state.time.toLocaleTimeString()}</Text>
+          </Overlay>
+        }
         coordinate={{
           latitude: 39.706901,
           longitude: 116.397972,

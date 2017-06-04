@@ -59,28 +59,6 @@ public class AMapMarker extends ReactViewGroup {
     private boolean infoWindowEnabled = true;
     private BitmapDescriptor bitmapDescriptor;
     private RCTEventEmitter eventEmitter;
-    private DataSubscriber<CloseableReference<CloseableImage>> dataSubscriber =
-            new BaseDataSubscriber<CloseableReference<CloseableImage>>() {
-                @Override
-                protected void onNewResultImpl(DataSource<CloseableReference<CloseableImage>> dataSource) {
-                    CloseableReference<CloseableImage> ref = dataSource.getResult();
-                    if (ref != null) {
-                        try {
-                            bitmapDescriptor = BitmapDescriptorFactory.fromBitmap(
-                                    ((CloseableStaticBitmap) ref.get()).getUnderlyingBitmap());
-                            if (marker != null) {
-                                marker.setIcon(bitmapDescriptor);
-                            }
-                        } finally {
-                            CloseableReference.closeSafely(ref);
-                        }
-                    }
-                }
-
-                @Override
-                protected void onFailureImpl(DataSource<CloseableReference<CloseableImage>> dataSource) {
-                }
-            };
 
     public AMapMarker(ThemedReactContext context) {
         super(context);
@@ -160,10 +138,6 @@ public class AMapMarker extends ReactViewGroup {
             if (marker != null) {
                 marker.setIcon(bitmapDescriptor);
             }
-        } else {
-            DataSource<CloseableReference<CloseableImage>> dataSource = Fresco
-                    .getImagePipeline().fetchDecodedImage(ImageRequest.fromUri(icon), this);
-            dataSource.subscribe(dataSubscriber, CallerThreadExecutor.getInstance());
         }
     }
 
