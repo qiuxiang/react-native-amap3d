@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {StyleSheet} from 'react-native'
+import {StyleSheet, Alert} from 'react-native'
 import {MapView, Polyline} from 'react-native-amap3d'
 
 export default class PolylineExample extends Component {
@@ -52,6 +52,7 @@ export default class PolylineExample extends Component {
         width={5}
         color='blue'
         colors={['#f44336', '#2196f3', '#4caf50']}
+        onPress={() => Alert.alert('onPress')}
         coordinates={[
           {
             latitude: 39.906901,

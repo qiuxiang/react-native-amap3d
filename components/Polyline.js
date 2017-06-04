@@ -34,6 +34,11 @@ class Polyline extends Component {
      * 是否绘制虚线
      */
     dottedLine: PropTypes.bool,
+
+    /**
+     * 点击事件
+     */
+    onPress: PropTypes.func,
   }
 
   static defaultProps = {
@@ -43,11 +48,20 @@ class Polyline extends Component {
     opacity: 1,
   }
 
+  _handle(name) {
+    return event => {
+      if (this.props[name]) {
+        this.props[name](event)
+      }
+    }
+  }
+
   render() {
     const props = {
       ...this.props,
       width: PixelRatio.getPixelSizeForLayoutSize(this.props.width),
       colors: this.props.colors.map(processColor),
+      onPolylineClick: this._handle('onPress'),
     }
     return <AMapPolyline {...props}/>
   }

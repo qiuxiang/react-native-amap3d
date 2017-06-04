@@ -1,6 +1,6 @@
 package cn.qiuxiang.react.amap3d;
 
-import android.content.Context;
+import android.annotation.SuppressLint;
 
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.model.LatLng;
@@ -8,10 +8,14 @@ import com.amap.api.maps.model.Polyline;
 import com.amap.api.maps.model.PolylineOptions;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.uimanager.ThemedReactContext;
+import com.facebook.react.uimanager.events.RCTEventEmitter;
 import com.facebook.react.views.view.ReactViewGroup;
 
 import java.util.ArrayList;
 
+@SuppressLint("ViewConstructor")
 public class AMapPolyline extends ReactViewGroup {
     private ArrayList<LatLng> coordinates;
     private Polyline polyline;
@@ -23,9 +27,11 @@ public class AMapPolyline extends ReactViewGroup {
     private float opacity;
     private ArrayList<Integer> colors;
     private boolean gradient;
+    private RCTEventEmitter eventEmitter;
 
-    public AMapPolyline(Context context) {
+    public AMapPolyline(ThemedReactContext context) {
         super(context);
+        eventEmitter = context.getJSModule(RCTEventEmitter.class);
     }
 
     public void setCoordinates(ReadableArray coordinates) {
@@ -109,5 +115,9 @@ public class AMapPolyline extends ReactViewGroup {
 
     public String getPolylineId() {
         return polyline.getId();
+    }
+
+    public void sendEvent(String name, WritableMap data) {
+        eventEmitter.receiveEvent(getId(), name, data);
     }
 }

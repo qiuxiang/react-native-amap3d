@@ -1,9 +1,13 @@
 package cn.qiuxiang.react.amap3d;
 
 import com.facebook.react.bridge.ReadableArray;
+import com.facebook.react.common.MapBuilder;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.ViewGroupManager;
 import com.facebook.react.uimanager.annotations.ReactProp;
+
+import java.util.HashMap;
+import java.util.Map;
 
 class AMapPolylineManager extends ViewGroupManager<AMapPolyline> {
     @Override
@@ -14,6 +18,13 @@ class AMapPolylineManager extends ViewGroupManager<AMapPolyline> {
     @Override
     protected AMapPolyline createViewInstance(ThemedReactContext reactContext) {
         return new AMapPolyline(reactContext);
+    }
+
+    @Override
+    public Map<String, Object> getExportedCustomDirectEventTypeConstants() {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("onPolylineClick", MapBuilder.of("registrationName", "onPolylineClick"));
+        return map;
     }
 
     @ReactProp(name = "coordinates")

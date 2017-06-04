@@ -14,6 +14,7 @@ import com.amap.api.maps.UiSettings;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MyLocationStyle;
+import com.amap.api.maps.model.Polyline;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.uimanager.ThemedReactContext;
@@ -143,6 +144,13 @@ public class AMapView extends MapView {
                 }
 
                 return layout;
+            }
+        });
+
+        map.setOnPolylineClickListener(new AMap.OnPolylineClickListener() {
+            @Override
+            public void onPolylineClick(Polyline polyline) {
+                polylines.get(polyline.getId()).sendEvent("onPolylineClick", Arguments.createMap());
             }
         });
     }
