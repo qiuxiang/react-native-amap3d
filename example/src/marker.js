@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
-import {StyleSheet, Alert, Text, View} from 'react-native'
+import {StyleSheet, Alert, Text} from 'react-native'
 import {MapView, Marker, InfoWindow, Overlay} from 'react-native-amap3d'
 
-export default class MarkerComponent extends Component {
+export default class MarkerExample extends Component {
   static navigationOptions = {
     title: '添加标记',
   }
@@ -40,7 +40,6 @@ export default class MarkerComponent extends Component {
       <Marker
         selected
         icon='HUE_RED'
-        title='一个红色的 Marker'
         infoWindowWidth={100}
         coordinate={{
           latitude: 39.806901,

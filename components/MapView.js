@@ -3,6 +3,7 @@ import {requireNativeComponent, View} from 'react-native'
 import Marker from './Marker'
 import InfoWindow from './InfoWindow'
 import Overlay from './Overlay'
+import Polyline from './Polyline'
 
 const CoordinatePropType = PropTypes.shape({
   latitude: PropTypes.number.isRequired,
@@ -146,9 +147,10 @@ class MapView extends Component {
   static Marker = Marker
   static Overlay = Overlay
   static InfoWindow = InfoWindow
+  static Polyline = Polyline
 }
 
 AMapView = requireNativeComponent('AMapView', MapView)
 
 export default MapView
-export {MapView, Marker, InfoWindow, Overlay}
+export {MapView, Marker, InfoWindow, Overlay, Polyline}

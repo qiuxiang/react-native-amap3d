@@ -44,6 +44,8 @@ export default class Examples extends Component {
       </View>
       <View style={styles.group}>
         {this._renderItem('添加标记', 'Marker')}
+        <View style={styles.separator}/>
+        {this._renderItem('绘制折线', 'Polyline')}
       </View>
     </ScrollView>
   }

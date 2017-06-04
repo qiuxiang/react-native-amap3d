@@ -31,6 +31,8 @@ class AMapViewManager extends ViewGroupManager<AMapView> {
     public void addView(AMapView mapView, View child, int index) {
         if (child instanceof AMapMarker) {
             mapView.addMarker((AMapMarker) child);
+        } else if (child instanceof AMapPolyline) {
+            mapView.addPolyline((AMapPolyline) child);
         }
     }
 

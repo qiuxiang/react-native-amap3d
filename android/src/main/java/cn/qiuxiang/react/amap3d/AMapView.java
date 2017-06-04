@@ -28,6 +28,7 @@ public class AMapView extends MapView {
     public final UiSettings ui;
     private final RCTEventEmitter eventEmitter;
     private Map<String, AMapMarker> markers = new HashMap<>();
+    private Map<String, AMapPolyline> polylines = new HashMap<>();
 
     public AMapView(final ThemedReactContext context) {
         super(context);
@@ -146,6 +147,10 @@ public class AMapView extends MapView {
         });
     }
 
+    private static float pxFromDp(Context context, float dp) {
+        return dp * context.getResources().getDisplayMetrics().density;
+    }
+
     public void addMarker(AMapMarker marker) {
         marker.addToMap(map);
         markers.put(marker.getMarkerId(), marker);
@@ -155,7 +160,8 @@ public class AMapView extends MapView {
         eventEmitter.receiveEvent(getId(), name, data);
     }
 
-    private static float pxFromDp(Context context, float dp) {
-        return dp * context.getResources().getDisplayMetrics().density;
+    public void addPolyline(AMapPolyline polyline) {
+        polyline.addToMap(map);
+        polylines.put(polyline.getPolylineId(), polyline);
     }
 }

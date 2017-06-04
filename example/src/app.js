@@ -6,6 +6,7 @@ import Indoor from './indoor'
 import Controls from './controls'
 import Gestures from './gestures'
 import Marker from './marker'
+import Polyline from './polyline'
 
 export default StackNavigator({
   Examples: {screen: Examples},
@@ -15,6 +16,7 @@ export default StackNavigator({
   Controls: {screen: Controls},
   Gestures: {screen: Gestures},
   Marker: {screen: Marker},
+  Polyline: {screen: Polyline},
 }, {
   navigationOptions: {
     headerTintColor: '#212121',

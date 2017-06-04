@@ -27,6 +27,7 @@ public class AMap3DPackage implements ReactPackage {
                 new AMapViewManager(),
                 new AMapMarkerManager(),
                 new AMapOverlayManager(),
-                new AMapInfoWindowManager());
+                new AMapInfoWindowManager(),
+                new AMapPolylineManager());
     }
 }
