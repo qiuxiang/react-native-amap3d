@@ -6,9 +6,7 @@ import com.amap.api.maps.model.LatLng
 import com.amap.api.maps.model.Polyline
 import com.amap.api.maps.model.PolylineOptions
 import com.facebook.react.bridge.ReadableArray
-import com.facebook.react.bridge.WritableMap
 import com.facebook.react.uimanager.ThemedReactContext
-import com.facebook.react.uimanager.events.RCTEventEmitter
 import com.facebook.react.views.view.ReactViewGroup
 
 class AMapPolyline(context: ThemedReactContext) : ReactViewGroup(context) {
@@ -55,7 +53,6 @@ class AMapPolyline(context: ThemedReactContext) : ReactViewGroup(context) {
 
     private var coordinates: ArrayList<LatLng> = ArrayList()
     private var colors: ArrayList<Int> = ArrayList()
-    private val eventEmitter: RCTEventEmitter = context.getJSModule(RCTEventEmitter::class.java)
 
     fun setCoordinates(coordinates: ReadableArray) {
         this.coordinates = ArrayList((0..coordinates.size() - 1)
@@ -80,9 +77,5 @@ class AMapPolyline(context: ThemedReactContext) : ReactViewGroup(context) {
                 .setDottedLine(dottedLine)
                 .transparency(opacity)
                 .zIndex(zIndex))
-    }
-
-    fun sendEvent(name: String, data: WritableMap) {
-        eventEmitter.receiveEvent(id, name, data)
     }
 }

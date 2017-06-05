@@ -23,21 +23,21 @@ class AMapView(context: ThemedReactContext) : MapView(context) {
         map.myLocationStyle = locationStyle
 
         map.setOnMapLoadedListener {
-            sendEvent("onMapLoaded", Arguments.createMap())
+            emit(id, "onMapLoaded")
         }
 
         map.setOnMapClickListener { latLng ->
             val event = Arguments.createMap()
             event.putDouble("latitude", latLng.latitude)
             event.putDouble("longitude", latLng.longitude)
-            sendEvent("onMapClick", event)
+            emit(id, "onMapClick")
         }
 
         map.setOnMapLongClickListener { latLng ->
             val event = Arguments.createMap()
             event.putDouble("latitude", latLng.latitude)
             event.putDouble("longitude", latLng.longitude)
-            sendEvent("onMapLongClick", event)
+            emit(id, "onMapLongClick", event)
         }
 
         map.setOnMyLocationChangeListener { location ->
@@ -45,21 +45,21 @@ class AMapView(context: ThemedReactContext) : MapView(context) {
             event.putDouble("latitude", location.latitude)
             event.putDouble("longitude", location.longitude)
             event.putDouble("accuracy", location.accuracy.toDouble())
-            sendEvent("onLocationChange", event)
+            emit(id, "onLocationChange")
         }
 
         map.setOnMarkerClickListener { marker ->
-            markers[marker.id]?.sendEvent("onMarkerClick", Arguments.createMap())
+            emit(markers[marker.id]?.id, "onMarkerClick")
             false
         }
 
         map.setOnMarkerDragListener(object : AMap.OnMarkerDragListener {
             override fun onMarkerDragStart(marker: Marker) {
-                markers[marker.id]?.sendEvent("onMarkerDragStart", Arguments.createMap())
+                emit(markers[marker.id]?.id, "onMarkerDragStart")
             }
 
             override fun onMarkerDrag(marker: Marker) {
-                markers[marker.id]?.sendEvent("onMarkerDrag", Arguments.createMap())
+                emit(markers[marker.id]?.id, "onMarkerDrag")
             }
 
             override fun onMarkerDragEnd(marker: Marker) {
@@ -67,16 +67,16 @@ class AMapView(context: ThemedReactContext) : MapView(context) {
                 val data = Arguments.createMap()
                 data.putDouble("latitude", position.latitude)
                 data.putDouble("longitude", position.longitude)
-                markers[marker.id]?.sendEvent("onMarkerDragEnd", data)
+                emit(markers[marker.id]?.id, "onMarkerDragEnd", data)
             }
         })
 
         map.setOnInfoWindowClickListener { marker ->
-            markers[marker.id]?.sendEvent("onInfoWindowClick", Arguments.createMap())
+            emit(markers[marker.id]?.id, "onInfoWindowClick")
         }
 
         map.setOnPolylineClickListener { polyline ->
-            polylines[polyline.id]?.sendEvent("onPolylineClick", Arguments.createMap())
+            emit(polylines[polyline.id]?.id, "onPolylineClick")
         }
 
         map.setInfoWindowAdapter(AMapInfoWindowAdapter(context, markers))
@@ -92,7 +92,7 @@ class AMapView(context: ThemedReactContext) : MapView(context) {
         polylines.put(polyline.polyline?.id!!, polyline)
     }
 
-    fun sendEvent(name: String, data: WritableMap) {
-        eventEmitter.receiveEvent(id, name, data)
+    fun emit(id: Int?, name: String, data: WritableMap = Arguments.createMap()) {
+        id?.let { eventEmitter.receiveEvent(it, name, data) }
     }
 }

@@ -4,9 +4,7 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import com.amap.api.maps.AMap
 import com.amap.api.maps.model.*
-import com.facebook.react.bridge.WritableMap
 import com.facebook.react.uimanager.ThemedReactContext
-import com.facebook.react.uimanager.events.RCTEventEmitter
 import com.facebook.react.views.view.ReactViewGroup
 
 class AMapMarker(context: ThemedReactContext) : ReactViewGroup(context) {
@@ -78,7 +76,6 @@ class AMapMarker(context: ThemedReactContext) : ReactViewGroup(context) {
         }
 
     private var bitmapDescriptor: BitmapDescriptor? = null
-    private val eventEmitter: RCTEventEmitter = context.getJSModule(RCTEventEmitter::class.java)
 
     fun addToMap(map: AMap) {
         marker = map.addMarker(MarkerOptions()
@@ -118,9 +115,5 @@ class AMapMarker(context: ThemedReactContext) : ReactViewGroup(context) {
         overlay.draw(Canvas(bitmap))
         bitmapDescriptor = BitmapDescriptorFactory.fromBitmap(bitmap)
         marker?.setIcon(bitmapDescriptor)
-    }
-
-    fun sendEvent(name: String, data: WritableMap) {
-        eventEmitter.receiveEvent(id, name, data)
     }
 }

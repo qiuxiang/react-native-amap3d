@@ -11,5 +11,5 @@ class LayoutNode : LayoutShadowNode() {
                 layoutHeight.toInt()))
     }
 
-    class Layout(var width: Int, var height: Int)
+    data class Layout(var width: Int, var height: Int)
 }
