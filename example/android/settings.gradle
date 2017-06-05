@@ -1,7 +1,4 @@
-rootProject.name = 'Example'
-include ':react-native-amap3d'
-project(':react-native-amap3d').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-amap3d/android')
+rootProject.name = 'Examples'
 include ':react-native-amap3d'
 project(':react-native-amap3d').projectDir = new File(rootProject.projectDir, '../../android')
-
 include ':app'

@@ -17,7 +17,7 @@ if (Platform.OS === 'android') {
 
 export default class Examples extends Component {
   static navigationOptions = {
-    title: 'AMap3D Examples',
+    title: 'Examples',
   }
 
   _renderItem(title, route) {
