@@ -3,7 +3,7 @@
 react-native 高德地图组件，使用最新 3D SDK（目前只支持 Android）。
 
 该项目很大一定程度是参考 [react-native-maps](https://github.com/airbnb/react-native-maps)，
-如果不是考虑到国内 Android 手机无法使用 Google Map，实在没理由再造这个轮子。
+如果不是考虑到国内 Android 手机无法使用 Google Maps，实在没理由再造这个轮子。
 
 
 ## 特性（目标）
@@ -24,9 +24,9 @@ react-native 高德地图组件，使用最新 3D SDK（目前只支持 Android�
 - [x] 中心坐标、缩放界别、倾斜度的控制
 - [x] 地图事件（onPress、onLongPress、onLocation）
 - [x] Marker 的基本显示及事件传递
-- [x] 自定义 Marker 的信息窗体
-- [x] 自定义 Marker 图标，包括来自图片，View
-- [ ] Polyline 画线
+- [x] 自定义 Marker 信息窗体
+- [x] 自定义 Marker 图标
+- [x] Polyline 折线绘制
 - [ ] Polygon 多边形绘制
 - [ ] 热力图
 - [ ] 完善项目 README，添加接口文档
