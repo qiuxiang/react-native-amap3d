@@ -38,7 +38,7 @@ export default class MarkerExample extends Component {
         }}
       />
       <Marker
-        selected
+        active
         icon='red'
         infoWindowWidth={100}
         coordinate={{

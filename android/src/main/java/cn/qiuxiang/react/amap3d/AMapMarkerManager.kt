@@ -64,7 +64,7 @@ internal class AMapMarkerManager : ViewGroupManager<AMapMarker>() {
         marker.draggable = draggable
     }
 
-    @ReactProp(name = "selected")
+    @ReactProp(name = "active")
     fun setSelected(marker: AMapMarker, active: Boolean) {
         marker.active = active
     }
@@ -74,7 +74,7 @@ internal class AMapMarkerManager : ViewGroupManager<AMapMarker>() {
         marker.setIcon(icon)
     }
 
-    @ReactProp(name = "showsInfoWindow")
+    @ReactProp(name = "infoWindowEnabled")
     fun setEnabledInfoWindow(marker: AMapMarker, enabled: Boolean) {
         marker.infoWindowEnabled = enabled
     }

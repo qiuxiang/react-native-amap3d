@@ -34,7 +34,7 @@ class Marker extends Component {
     ]),
 
     /**
-     * 透明度
+     * 透明度 [0, 1]
      */
     opacity: PropTypes.number,
 
@@ -54,14 +54,14 @@ class Marker extends Component {
     zIndex: PropTypes.number,
 
     /**
-     * 是否选中
+     * 是否选中，选中时将显示信息窗体，一个地图只能有一个正在选中的 marker
      */
-    selected: PropTypes.bool,
+    active: PropTypes.bool,
 
     /**
-     * 是否显示信息窗体
+     * 是否启用信息窗体，该属性只能开始时设置一次
      */
-    showsInfoWindow: PropTypes.bool,
+    infoWindowEnabled: PropTypes.bool,
 
     /**
      * 点击事件
