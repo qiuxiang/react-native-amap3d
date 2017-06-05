@@ -13,11 +13,11 @@ export default class PolylineExample extends Component {
         width={5}
         coordinates={[
           {
-            latitude: 40.206901,
+            latitude: 40.106901,
             longitude: 116.097972,
           },
           {
-            latitude: 40.206901,
+            latitude: 40.106901,
             longitude: 116.597972,
           },
         ]}/>
@@ -26,11 +26,11 @@ export default class PolylineExample extends Component {
         color='red'
         coordinates={[
           {
-            latitude: 40.106901,
+            latitude: 40.006901,
             longitude: 116.097972,
           },
           {
-            latitude: 40.106901,
+            latitude: 40.006901,
             longitude: 116.597972,
           },
         ]}/>
@@ -39,11 +39,11 @@ export default class PolylineExample extends Component {
         width={5}
         coordinates={[
           {
-            latitude: 40.006901,
+            latitude: 39.906901,
             longitude: 116.097972,
           },
           {
-            latitude: 40.006901,
+            latitude: 39.906901,
             longitude: 116.597972,
           },
         ]}/>
@@ -55,19 +55,19 @@ export default class PolylineExample extends Component {
         onPress={() => Alert.alert('onPress')}
         coordinates={[
           {
-            latitude: 39.906901,
+            latitude: 39.806901,
             longitude: 116.097972,
           },
           {
-            latitude: 39.906901,
+            latitude: 39.806901,
             longitude: 116.257972,
           },
           {
-            latitude: 39.906901,
+            latitude: 39.806901,
             longitude: 116.457972,
           },
           {
-            latitude: 39.906901,
+            latitude: 39.806901,
             longitude: 116.597972,
           },
         ]}/>
