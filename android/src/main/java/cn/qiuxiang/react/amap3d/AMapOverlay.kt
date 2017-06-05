@@ -4,17 +4,13 @@ import android.content.Context
 import com.facebook.react.views.view.ReactViewGroup
 
 class AMapOverlay(context: Context) : ReactViewGroup(context) {
-    private var onUpdateListener: OnUpdateListener? = null
+    private var updateHandler: (() -> Unit)? = null
 
-    fun setOnUpdateListener(listener: OnUpdateListener) {
-        onUpdateListener = listener
+    fun onUpdate(handler: () -> Unit) {
+        updateHandler = handler
     }
 
     fun update() {
-        onUpdateListener?.onUpdate()
-    }
-
-    interface OnUpdateListener {
-        fun onUpdate()
+        updateHandler?.invoke()
     }
 }

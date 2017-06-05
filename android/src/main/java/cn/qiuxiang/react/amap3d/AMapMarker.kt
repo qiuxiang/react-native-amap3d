@@ -107,11 +107,9 @@ class AMapMarker(context: ThemedReactContext) : ReactViewGroup(context) {
 
     fun setIconView(overlay: AMapOverlay) {
         overlay.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ -> updateIconView(overlay) }
-        overlay.setOnUpdateListener(object : AMapOverlay.OnUpdateListener {
-            override fun onUpdate() {
-                updateIconView(overlay)
-            }
-        })
+        overlay.onUpdate {
+            updateIconView(overlay)
+        }
     }
 
     private fun updateIconView(overlay: AMapOverlay) {
