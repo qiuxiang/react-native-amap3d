@@ -4,23 +4,79 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import com.amap.api.maps.AMap
 import com.amap.api.maps.model.*
-import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.bridge.WritableMap
 import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.events.RCTEventEmitter
 import com.facebook.react.views.view.ReactViewGroup
 
 class AMapMarker(context: ThemedReactContext) : ReactViewGroup(context) {
+    companion object {
+        private val COLORS = mapOf(
+                "AZURE" to BitmapDescriptorFactory.HUE_AZURE,
+                "BLUE" to BitmapDescriptorFactory.HUE_BLUE,
+                "CYAN" to BitmapDescriptorFactory.HUE_CYAN,
+                "GREEN" to BitmapDescriptorFactory.HUE_GREEN,
+                "MAGENTA" to BitmapDescriptorFactory.HUE_MAGENTA,
+                "ORANGE" to BitmapDescriptorFactory.HUE_ORANGE,
+                "RED" to BitmapDescriptorFactory.HUE_RED,
+                "ROSE" to BitmapDescriptorFactory.HUE_ROSE,
+                "VIOLET" to BitmapDescriptorFactory.HUE_VIOLET,
+                "YELLOW" to BitmapDescriptorFactory.HUE_YELLOW
+        )
+    }
+
     var infoWindow: ReactViewGroup? = null
-    private var marker: Marker? = null
-    private var position: LatLng? = null
-    private var title = ""
-    private var snippet = ""
-    private var flat: Boolean = false
-    private var opacity: Float = 1f
-    private var draggable: Boolean = false
-    private var active: Boolean = false
-    private var infoWindowEnabled: Boolean = true
+    var infoWindowEnabled: Boolean = true
+
+    var marker: Marker? = null
+        private set
+
+    var position: LatLng? = null
+        set(value) {
+            field = value
+            marker?.position = value
+        }
+
+    var title = ""
+        set(value) {
+            field = value
+            marker?.title = value
+        }
+
+    var snippet = ""
+        set(value) {
+            field = value
+            marker?.snippet = value
+        }
+
+    var flat: Boolean = false
+        set(value) {
+            field = value
+            marker?.isFlat = value
+        }
+
+    var opacity: Float = 1f
+        set(value) {
+            field = value
+            marker?.alpha = value
+        }
+
+    var draggable: Boolean = false
+        set(value) {
+            field = value
+            marker?.isDraggable = value
+        }
+
+    var active: Boolean = false
+        set(value) {
+            field = value
+            if (value) {
+                marker?.showInfoWindow()
+            } else {
+                marker?.hideInfoWindow()
+            }
+        }
+
     private var bitmapDescriptor: BitmapDescriptor? = null
     private val eventEmitter: RCTEventEmitter = context.getJSModule(RCTEventEmitter::class.java)
 
@@ -47,36 +103,6 @@ class AMapMarker(context: ThemedReactContext) : ReactViewGroup(context) {
                 .infoWindowEnable(infoWindowEnabled)
                 .snippet(snippet)
 
-    fun setTitle(title: String) {
-        this.title = title
-        marker?.title = title
-    }
-
-    fun setSnippet(snippet: String) {
-        this.snippet = snippet
-        marker?.snippet = snippet
-    }
-
-    fun setCoordinate(coordinate: ReadableMap) {
-        position = LatLng(coordinate.getDouble("latitude"), coordinate.getDouble("longitude"))
-        marker?.position = position
-    }
-
-    fun setFlat(flat: Boolean) {
-        this.flat = flat
-        marker?.isFlat = flat
-    }
-
-    fun setOpacity(opacity: Float) {
-        this.opacity = opacity
-        marker?.alpha = opacity
-    }
-
-    fun setDraggable(draggable: Boolean) {
-        this.draggable = draggable
-        marker?.isDraggable = draggable
-    }
-
     fun setIcon(icon: String) {
         bitmapDescriptor = COLORS[icon.toUpperCase()]?.let {
             BitmapDescriptorFactory.defaultMarker(it)
@@ -84,29 +110,16 @@ class AMapMarker(context: ThemedReactContext) : ReactViewGroup(context) {
         marker?.setIcon(bitmapDescriptor)
     }
 
-    fun sendEvent(name: String, data: WritableMap) {
-        eventEmitter.receiveEvent(id, name, data)
-    }
-
-    fun setActive(selected: Boolean) {
-        this.active = selected
-        if (selected) {
-            marker?.showInfoWindow()
-        } else {
-            marker?.hideInfoWindow()
-        }
-    }
-
     fun setIconView(overlay: AMapOverlay) {
-        overlay.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ -> updateIcon(overlay) }
+        overlay.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ -> updateIconView(overlay) }
         overlay.setOnUpdateListener(object : AMapOverlay.OnUpdateListener {
             override fun onUpdate() {
-                updateIcon(overlay)
+                updateIconView(overlay)
             }
         })
     }
 
-    private fun updateIcon(overlay: AMapOverlay) {
+    private fun updateIconView(overlay: AMapOverlay) {
         val bitmap = Bitmap.createBitmap(
                 overlay.width, overlay.height, Bitmap.Config.ARGB_8888)
         overlay.draw(Canvas(bitmap))
@@ -114,22 +127,7 @@ class AMapMarker(context: ThemedReactContext) : ReactViewGroup(context) {
         marker?.setIcon(bitmapDescriptor)
     }
 
-    fun setEnabledInfoWindow(enabled: Boolean) {
-        infoWindowEnabled = enabled
-    }
-
-    companion object {
-        private val COLORS = mapOf(
-                "AZURE" to BitmapDescriptorFactory.HUE_AZURE,
-                "BLUE" to BitmapDescriptorFactory.HUE_BLUE,
-                "CYAN" to BitmapDescriptorFactory.HUE_CYAN,
-                "GREEN" to BitmapDescriptorFactory.HUE_GREEN,
-                "MAGENTA" to BitmapDescriptorFactory.HUE_MAGENTA,
-                "ORANGE" to BitmapDescriptorFactory.HUE_ORANGE,
-                "RED" to BitmapDescriptorFactory.HUE_RED,
-                "ROSE" to BitmapDescriptorFactory.HUE_ROSE,
-                "VIOLET" to BitmapDescriptorFactory.HUE_VIOLET,
-                "YELLOW" to BitmapDescriptorFactory.HUE_YELLOW
-        )
+    fun sendEvent(name: String, data: WritableMap) {
+        eventEmitter.receiveEvent(id, name, data)
     }
 }

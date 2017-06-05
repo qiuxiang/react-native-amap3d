@@ -12,20 +12,50 @@ import com.facebook.react.uimanager.events.RCTEventEmitter
 import com.facebook.react.views.view.ReactViewGroup
 
 class AMapPolyline(context: ThemedReactContext) : ReactViewGroup(context) {
-    private var polyline: Polyline? = null
-    private var coordinates: ArrayList<LatLng> = ArrayList()
-    private var width: Float = 1f
-    private var color: Int = Color.BLACK
-    private var colors: ArrayList<Int> = ArrayList()
-    private var opacity: Float = 1f
-    private var zIndex: Float = 0f
-    private var geodesic: Boolean = false
-    private var dottedLine: Boolean = false
-    private var gradient: Boolean = false
-    private val eventEmitter: RCTEventEmitter = context.getJSModule(RCTEventEmitter::class.java)
+    var polyline: Polyline? = null
+        private set
 
-    val polylineId: String?
-        get() = polyline?.id
+    var width: Float = 1f
+        set(value) {
+            field = value
+            polyline?.width = value
+        }
+
+    var color: Int = Color.BLACK
+        set(value) {
+            field = value
+            polyline?.color = value
+        }
+
+    var opacity: Float = 1f
+        set(value) {
+            field = value
+            polyline?.setTransparency(value)
+        }
+
+    var zIndex: Float = 0f
+        set(value) {
+            field = value
+            polyline?.zIndex = value
+        }
+
+    var geodesic: Boolean = false
+        set(value) {
+            field = value
+            polyline?.isGeodesic = value
+        }
+
+    var dottedLine: Boolean = false
+        set(value) {
+            field = value
+            polyline?.isDottedLine = value
+        }
+
+    var gradient: Boolean = false
+
+    private var coordinates: ArrayList<LatLng> = ArrayList()
+    private var colors: ArrayList<Int> = ArrayList()
+    private val eventEmitter: RCTEventEmitter = context.getJSModule(RCTEventEmitter::class.java)
 
     fun setCoordinates(coordinates: ReadableArray) {
         this.coordinates = ArrayList((0..coordinates.size() - 1)
@@ -33,40 +63,6 @@ class AMapPolyline(context: ThemedReactContext) : ReactViewGroup(context) {
                 .map { LatLng(it.getDouble("latitude"), it.getDouble("longitude")) })
 
         polyline?.points = this.coordinates
-    }
-
-    fun setColor(color: Int) {
-        this.color = color
-        polyline?.color = color
-    }
-
-    fun setWidth(width: Float) {
-        this.width = width
-        polyline?.width = width
-    }
-
-    fun setZIndex(zIndex: Float) {
-        this.zIndex = zIndex
-        polyline?.zIndex = zIndex
-    }
-
-    fun setGeodesic(geodesic: Boolean) {
-        this.geodesic = geodesic
-        polyline?.isGeodesic = geodesic
-    }
-
-    fun setDottedLine(dottedLine: Boolean) {
-        this.dottedLine = dottedLine
-        polyline?.isDottedLine = dottedLine
-    }
-
-    fun setGradient(gradient: Boolean) {
-        this.gradient = gradient
-    }
-
-    fun setOpacity(opacity: Float) {
-        this.opacity = opacity
-        polyline?.setTransparency(opacity)
     }
 
     fun setColors(colors: ReadableArray) {

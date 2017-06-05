@@ -31,36 +31,36 @@ internal class AMapPolylineManager : ViewGroupManager<AMapPolyline>() {
 
     @ReactProp(name = "color", customType = "Color")
     fun setColor(polyline: AMapPolyline, color: Int) {
-        polyline.setColor(color)
+        polyline.color = color
     }
 
     @ReactProp(name = "width")
-    fun setWidth(polyline: AMapPolyline, width: Int) {
-        polyline.setWidth(width.toFloat())
+    fun setWidth(polyline: AMapPolyline, width: Float) {
+        polyline.width = width
     }
 
     @ReactProp(name = "zIndex")
-    fun setZIndex(polyline: AMapPolyline, zIndex: Int) {
-        polyline.setZIndex(zIndex.toFloat())
+    fun setZIndex_(polyline: AMapPolyline, zIndex: Float) {
+        polyline.zIndex = zIndex
     }
 
     @ReactProp(name = "opacity")
     override fun setOpacity(polyline: AMapPolyline, opacity: Float) {
-        polyline.setOpacity(opacity)
+        polyline.opacity = opacity
     }
 
     @ReactProp(name = "geodesic")
     fun setGeodesic(polyline: AMapPolyline, geodesic: Boolean) {
-        polyline.setGeodesic(geodesic)
+        polyline.geodesic = geodesic
     }
 
     @ReactProp(name = "dottedLine")
     fun setDottedLine(polyline: AMapPolyline, dottedLine: Boolean) {
-        polyline.setDottedLine(dottedLine)
+        polyline.dottedLine = dottedLine
     }
 
     @ReactProp(name = "gradient")
     fun setGradient(polyline: AMapPolyline, gradient: Boolean) {
-        polyline.setGradient(gradient)
+        polyline.gradient = gradient
     }
 }

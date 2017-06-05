@@ -1,12 +1,11 @@
 package cn.qiuxiang.react.amap3d
 
 import android.view.View
+import com.amap.api.maps.model.LatLng
 import com.facebook.react.bridge.ReadableMap
-import com.facebook.react.common.MapBuilder
 import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.ViewGroupManager
 import com.facebook.react.uimanager.annotations.ReactProp
-import com.facebook.react.views.view.ReactViewGroup
 
 internal class AMapMarkerManager : ViewGroupManager<AMapMarker>() {
     override fun getName(): String {
@@ -25,48 +24,49 @@ internal class AMapMarkerManager : ViewGroupManager<AMapMarker>() {
     }
 
     override fun getExportedCustomDirectEventTypeConstants(): Map<String, Any>? {
-        val map = HashMap<String, Any>()
-        map.put("onMarkerClick", MapBuilder.of("registrationName", "onMarkerClick"))
-        map.put("onMarkerDragStart", MapBuilder.of("registrationName", "onMarkerDragStart"))
-        map.put("onMarkerDrag", MapBuilder.of("registrationName", "onMarkerDrag"))
-        map.put("onMarkerDragEnd", MapBuilder.of("registrationName", "onMarkerDragEnd"))
-        map.put("onInfoWindowClick", MapBuilder.of("registrationName", "onInfoWindowClick"))
-        return map
+        return mapOf(
+                "onMarkerClick" to mapOf("registrationName" to "onMarkerClick"),
+                "onMarkerDragStart" to mapOf("registrationName" to "onMarkerDragStart"),
+                "onMarkerDrag" to mapOf("registrationName" to "onMarkerDrag"),
+                "onMarkerDragEnd" to mapOf("registrationName" to "onMarkerDragEnd"),
+                "onInfoWindowClick" to mapOf("registrationName" to "onInfoWindowClick"))
     }
 
     @ReactProp(name = "title")
     fun setTitle(marker: AMapMarker, title: String) {
-        marker.setTitle(title)
+        marker.title = title
     }
 
     @ReactProp(name = "description")
     fun setSnippet(marker: AMapMarker, description: String) {
-        marker.setSnippet(description)
+        marker.snippet = description
     }
 
     @ReactProp(name = "coordinate")
     fun setCoordinate(view: AMapMarker, coordinate: ReadableMap) {
-        view.setCoordinate(coordinate)
+        view.position = LatLng(
+                coordinate.getDouble("latitude"),
+                coordinate.getDouble("longitude"))
     }
 
     @ReactProp(name = "flat")
     fun setFlat(marker: AMapMarker, flat: Boolean) {
-        marker.setFlat(flat)
+        marker.flat = flat
     }
 
     @ReactProp(name = "opacity")
     override fun setOpacity(marker: AMapMarker, opacity: Float) {
-        marker.setOpacity(opacity)
+        marker.opacity = opacity
     }
 
     @ReactProp(name = "draggable")
     fun setDraggable(marker: AMapMarker, draggable: Boolean) {
-        marker.setDraggable(draggable)
+        marker.draggable = draggable
     }
 
     @ReactProp(name = "selected")
-    fun setSelected(marker: AMapMarker, selected: Boolean) {
-        marker.setActive(selected)
+    fun setSelected(marker: AMapMarker, active: Boolean) {
+        marker.active = active
     }
 
     @ReactProp(name = "icon")
@@ -76,6 +76,6 @@ internal class AMapMarkerManager : ViewGroupManager<AMapMarker>() {
 
     @ReactProp(name = "showsInfoWindow")
     fun setEnabledInfoWindow(marker: AMapMarker, enabled: Boolean) {
-        marker.setEnabledInfoWindow(enabled)
+        marker.infoWindowEnabled = enabled
     }
 }

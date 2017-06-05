@@ -89,7 +89,7 @@ class AMapView(context: ThemedReactContext) : MapView(context) {
 
     fun addPolyline(polyline: AMapPolyline) {
         polyline.addToMap(map)
-        polylines.put(polyline.polylineId!!, polyline)
+        polylines.put(polyline.polyline?.id!!, polyline)
     }
 
     fun sendEvent(name: String, data: WritableMap) {
