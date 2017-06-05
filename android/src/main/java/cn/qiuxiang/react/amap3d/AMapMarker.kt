@@ -81,19 +81,7 @@ class AMapMarker(context: ThemedReactContext) : ReactViewGroup(context) {
     private val eventEmitter: RCTEventEmitter = context.getJSModule(RCTEventEmitter::class.java)
 
     fun addToMap(map: AMap) {
-        marker = map.addMarker(markerOptions)
-        if (active) {
-            marker?.showInfoWindow()
-        } else {
-            marker?.hideInfoWindow()
-        }
-    }
-
-    val markerId: String?
-        get() = marker?.id
-
-    private val markerOptions: MarkerOptions
-        get() = MarkerOptions()
+        marker = map.addMarker(MarkerOptions()
                 .setFlat(flat)
                 .icon(bitmapDescriptor)
                 .alpha(opacity)
@@ -101,7 +89,14 @@ class AMapMarker(context: ThemedReactContext) : ReactViewGroup(context) {
                 .position(position)
                 .title(title)
                 .infoWindowEnable(infoWindowEnabled)
-                .snippet(snippet)
+                .snippet(snippet))
+
+        if (active) {
+            marker?.showInfoWindow()
+        } else {
+            marker?.hideInfoWindow()
+        }
+    }
 
     fun setIcon(icon: String) {
         bitmapDescriptor = COLORS[icon.toUpperCase()]?.let {

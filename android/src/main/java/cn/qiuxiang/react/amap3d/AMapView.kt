@@ -84,7 +84,7 @@ class AMapView(context: ThemedReactContext) : MapView(context) {
 
     fun addMarker(marker: AMapMarker) {
         marker.addToMap(map)
-        markers.put(marker.markerId!!, marker)
+        markers.put(marker.marker?.id!!, marker)
     }
 
     fun addPolyline(polyline: AMapPolyline) {
