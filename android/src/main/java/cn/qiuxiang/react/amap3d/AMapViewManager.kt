@@ -105,6 +105,7 @@ internal class AMapViewManager : ViewGroupManager<AMapView>() {
             "satellite" -> view.map.mapType = AMap.MAP_TYPE_SATELLITE
             "navigation" -> view.map.mapType = AMap.MAP_TYPE_NAVI
             "night" -> view.map.mapType = AMap.MAP_TYPE_NIGHT
+            "bus" -> view.map.mapType = AMap.MAP_TYPE_BUS
         }
     }
 

@@ -16,6 +16,7 @@ export default class MapTypes extends Component {
         <Picker.Item label='卫星' value='satellite'/>
         <Picker.Item label='导航' value='navigation'/>
         <Picker.Item label='夜间' value='night'/>
+        <Picker.Item label='公交' value='bus'/>
       </Picker>,
     }
   }

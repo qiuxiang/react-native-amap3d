@@ -21,8 +21,9 @@ class MapView extends Component {
      * - satellite: 卫星地图
      * - navigation: 导航地图
      * - night: 夜间地图
+     * - bus: 公交地图
      */
-    mapType: PropTypes.oneOf(['standard', 'satellite', 'navigation', 'night']),
+    mapType: PropTypes.oneOf(['standard', 'satellite', 'navigation', 'night', 'bus']),
 
     /**
      * 是否启用定位
