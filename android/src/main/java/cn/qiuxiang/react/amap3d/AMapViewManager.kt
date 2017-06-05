@@ -14,15 +14,21 @@ internal class AMapViewManager : ViewGroupManager<AMapView>() {
         return "AMapView"
     }
 
+    override fun createViewInstance(reactContext: ThemedReactContext): AMapView {
+        return AMapView(reactContext)
+    }
+
     override fun addView(mapView: AMapView, child: View, index: Int) {
+        super.addView(mapView, child, index)
         when (child) {
             is AMapMarker -> mapView.addMarker(child)
             is AMapPolyline -> mapView.addPolyline(child)
         }
     }
 
-    override fun createViewInstance(reactContext: ThemedReactContext): AMapView {
-        return AMapView(reactContext)
+    override fun removeViewAt(parent: AMapView, index: Int) {
+        parent.remove(parent.getChildAt(index))
+        super.removeViewAt(parent, index)
     }
 
     override fun getExportedCustomDirectEventTypeConstants(): Map<String, Any> {

@@ -1,5 +1,6 @@
 package cn.qiuxiang.react.amap3d
 
+import android.view.View
 import com.amap.api.maps.AMap
 import com.amap.api.maps.MapView
 import com.amap.api.maps.model.Marker
@@ -8,6 +9,7 @@ import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.WritableMap
 import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.events.RCTEventEmitter
+import com.facebook.react.views.view.ReactViewGroup
 
 class AMapView(context: ThemedReactContext) : MapView(context) {
     private val eventEmitter: RCTEventEmitter = context.getJSModule(RCTEventEmitter::class.java)
@@ -94,5 +96,18 @@ class AMapView(context: ThemedReactContext) : MapView(context) {
 
     fun emit(id: Int?, name: String, data: WritableMap = Arguments.createMap()) {
         id?.let { eventEmitter.receiveEvent(it, name, data) }
+    }
+
+    fun remove(child: View) {
+        when (child) {
+            is AMapMarker -> {
+                markers.remove(child.marker?.id)
+                child.marker?.destroy()
+            }
+            is AMapPolyline -> {
+                polylines.remove(child.polyline?.id)
+                child.polyline?.remove()
+            }
+        }
     }
 }
