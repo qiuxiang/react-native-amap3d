@@ -1,10 +1,10 @@
 {
   "private": true,
   "scripts": {
+    "init": "rm -r node_modules/react-native-amap3d; cp -r ../{components,package.json} node_modules/react-native-amap3d",
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "run-android": "node node_modules/react-native/local-cli/cli.js run-android",
-    "run-ios": "node node_modules/react-native/local-cli/cli.js run-ios --device",
-    "test": "jest"
+    "android": "node node_modules/react-native/local-cli/cli.js run-android",
+    "ios": "node node_modules/react-native/local-cli/cli.js run-ios --device"
   },
   "dependencies": {
     "react": "16.0.0-alpha.6",
@@ -13,12 +13,9 @@
     "react-navigation": "^1.0.0-beta.11"
   },
   "devDependencies": {
-    "babel-jest": "20.0.3",
-    "babel-preset-react-native": "1.9.2",
-    "jest": "20.0.4",
-    "react-test-renderer": "16.0.0-alpha.6"
+    "babel-preset-react-native": "1.9.2"
   },
-  "jest": {
-    "preset": "react-native"
-  }
+  "presets": [
+    "react-native"
+  ]
 }

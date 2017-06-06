@@ -1,20 +1,21 @@
 {
   "name": "react-native-amap3d",
   "version": "0.0.1",
-  "description": "AMap3D component for react-native",
+  "description": "react-native 高德地图组件",
   "main": "components/MapView.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "author": "Qiu Xiang <i@7c00.cc>",
+  "license": "MIT",
   "keywords": [
     "react-native",
     "amap",
     "maps"
   ],
-  "author": "Qiu Xiang <i@7c00.cc>",
-  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/qiuxiang/react-native-amap3d"
+  },
   "peerDependencies": {
-    "react": ">=15.4.0",
-    "react-native": ">=0.40"
+    "react": "*",
+    "react-native": "*"
   }
 }
