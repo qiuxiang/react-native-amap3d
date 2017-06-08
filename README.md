@@ -23,14 +23,14 @@ $ npm i https://github.com/qiuxiang/react-native-amap3d/tarball/develop --save
 ```
 
 ### 项目配置
-这里推荐使用 `react-native link`
+推荐使用 `react-native link`
 ```
 $ react-native link react-native-amap3d
 ```
 
 ### 添加高德 Key
 #### Android
-获取高德 Key：http://lbs.amap.com/api/android-sdk/guide/create-project/get-key
+[获取高德 Key](http://lbs.amap.com/api/android-sdk/guide/create-project/get-key)。
 
 编辑 Android 项目的 `AndroidManifest.xml`（一般在 `android\app\src\main\AndroidManifest.xml`），
 添加如下代码：
@@ -56,6 +56,7 @@ $ react-native link react-native-amap3d
 
 
 ## 用法
+更多示例请参考[示例项目](https://github.com/qiuxiang/react-native-amap3d/tree/develop/example)。
 
 ### 导入地图模块
 ```jsx
