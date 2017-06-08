@@ -7,6 +7,47 @@ react-native 高德地图组件，使用最新 3D SDK（目前只支持 Android�
 所以，该项目的首要重点是对 Android 的支持，如果需要 iOS 支持，目前建议使用 react-native-maps。
 
 
+## 安装
+
+### npm install
+目前还没有正式发布到 npm，于是需要直接使用 github 地址
+```
+$ npm i https://github.com/qiuxiang/react-native-amap3d/tarball/develop --save
+```
+
+### 项目配置
+这里推荐使用 `react-native link`
+```
+$ react-native link react-native-amap3d
+```
+
+### 添加高德 Key
+#### Android
+获取高德 Key：http://lbs.amap.com/api/android-sdk/guide/create-project/get-key
+
+编辑 Android 项目的 `AndroidManifest.xml`（一般在 `android\app\src\main\AndroidManifest.xml`），
+添加如下代码：
+```xml
+<application>
+    <!-- 确保 meta-data 是直属 application 的子标签 -->
+    <meta-data
+      android:name="com.amap.api.v2.apikey"
+      android:value="你的高德 Key"/>
+</application>
+```
+
+同时，配置必要的权限：
+```xml
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+<uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+```
+
+
 ## 特性（目标）
 
 - 使用 gradle 和 cocoapods 管理和安装地图 SDK，避免繁琐且容易出错的手动配置
