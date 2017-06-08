@@ -7,9 +7,16 @@ react-native 高德地图组件，使用最新 3D SDK（目前只支持 Android�
 所以，该项目的首要重点是对 Android 的支持，如果需要 iOS 支持，目前建议使用 react-native-maps。
 
 
+## 特性（目标）
+
+- 使用 gradle 和 cocoapods 管理和安装地图 SDK，避免繁琐且容易出错的手动配置
+- 涵盖 SDK 提供的大部分功能，并提供适合 react-native 调用的接口
+- 提供不限于高德地图的其他地图 SDK 封装（可能是另一个项目了）
+
+
 ## 安装
 
-### npm install
+### 安装依赖
 目前还没有正式发布到 npm，于是需要直接使用 github 地址
 ```
 $ npm i https://github.com/qiuxiang/react-native-amap3d/tarball/develop --save
@@ -48,11 +55,73 @@ $ react-native link react-native-amap3d
 ```
 
 
-## 特性（目标）
+## 用法
 
-- 使用 gradle 和 cocoapods 管理和安装地图 SDK，避免繁琐且容易出错的手动配置
-- 涵盖 SDK 提供的大部分功能，并提供适合 react-native 调用的接口
-- 提供不限于高德地图的其他地图 SDK 封装（可能是另一个项目了）
+### 导入地图模块
+```jsx
+import {MapView, Marker, Polyline} from 'react-native-amap3d'
+<MapView>
+  <Marker .../>
+<MapView/>
+```
+或者
+```jsx
+import MapView from 'react-native-amap3d'
+<MapView>
+  <MapView.Marker .../>
+</MapView>
+```
+
+### 基本用法
+```jsx
+<MapView coordinate={{
+  latitude: 39.91095,
+  longitude: 116.37296,
+}}/>
+```
+
+### 启用定位并监听定位事件
+```jsx
+<MapView
+  locationEnabled
+  onLocationChange={({nativeEvent}) =>
+    console.log(`${nativeEvent.latitude}, ${nativeEvent.longitude}`)}
+/>
+```
+
+### 添加可拖拽的地图标记
+```jsx
+<MapView>
+  <Marker
+    draggable
+    title='这是一个可拖拽的标记'
+    onDragEnd={({nativeEvent}) =>
+      console.log(`${nativeEvent.latitude}, ${nativeEvent.longitude}`)}
+    coordinate={{
+      latitude: 39.91095,
+      longitude: 116.37296,
+    }}/>
+</MapView>
+```
+
+### 自定义地图标记及信息窗体
+```jsx
+<Marker
+  icon={() =>
+    <Overlay style={styles.customMarker}>
+      <Image style={styles.customIcon} source={require('marker.png')}/>
+    </Overlay>
+  }
+  coordinate={{
+    latitude: 39.706901,
+    longitude: 116.397972,
+  }}
+>
+  <InfoWindow style={styles.customInfoWindow}>
+    <Text>自定义信息窗体</Text>
+  </InfoWindow>
+</Marker>
+```
 
 
 ## 进度
