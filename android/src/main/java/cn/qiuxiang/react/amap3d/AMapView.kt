@@ -15,6 +15,7 @@ class AMapView(context: ThemedReactContext) : MapView(context) {
     private val eventEmitter: RCTEventEmitter = context.getJSModule(RCTEventEmitter::class.java)
     private val markers = HashMap<String, AMapMarker>()
     private val polylines = HashMap<String, AMapPolyline>()
+    private val polygons = HashMap<String, AMapPolygon>()
 
     init {
         super.onCreate(null)
@@ -94,6 +95,11 @@ class AMapView(context: ThemedReactContext) : MapView(context) {
         polylines.put(polyline.polyline?.id!!, polyline)
     }
 
+    fun  addPolygon(polygon: AMapPolygon) {
+        polygon.addToMap(map)
+        polygons.put(polygon.polygon?.id!!, polygon)
+    }
+
     fun emit(id: Int?, name: String, data: WritableMap = Arguments.createMap()) {
         id?.let { eventEmitter.receiveEvent(it, name, data) }
     }
@@ -107,6 +113,10 @@ class AMapView(context: ThemedReactContext) : MapView(context) {
             is AMapPolyline -> {
                 polylines.remove(child.polyline?.id)
                 child.polyline?.remove()
+            }
+            is AMapPolygon -> {
+                polygons.remove(child.polygon?.id)
+                child.polygon?.remove()
             }
         }
     }

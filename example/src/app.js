@@ -7,6 +7,7 @@ import Controls from './controls'
 import Gestures from './gestures'
 import Marker from './marker'
 import Polyline from './polyline'
+import Polygon from './polygon'
 
 export default StackNavigator({
   Examples: {screen: Examples},
@@ -17,6 +18,7 @@ export default StackNavigator({
   Gestures: {screen: Gestures},
   Marker: {screen: Marker},
   Polyline: {screen: Polyline},
+  Polygon: {screen: Polygon},
 }, {
   navigationOptions: {
     headerTintColor: '#212121',

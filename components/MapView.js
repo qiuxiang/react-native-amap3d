@@ -4,6 +4,7 @@ import Marker from './Marker'
 import InfoWindow from './InfoWindow'
 import Overlay from './Overlay'
 import Polyline from './Polyline'
+import Polygon from './Polygon'
 
 const CoordinatePropType = PropTypes.shape({
   latitude: PropTypes.number.isRequired,
@@ -149,9 +150,10 @@ class MapView extends Component {
   static Overlay = Overlay
   static InfoWindow = InfoWindow
   static Polyline = Polyline
+  static Polygon = Polygon
 }
 
 AMapView = requireNativeComponent('AMapView', MapView)
 
 export default MapView
-export {MapView, Marker, InfoWindow, Overlay, Polyline}
+export {MapView, Marker, InfoWindow, Overlay, Polyline, Polygon}

@@ -23,6 +23,7 @@ internal class AMapViewManager : ViewGroupManager<AMapView>() {
         when (child) {
             is AMapMarker -> mapView.addMarker(child)
             is AMapPolyline -> mapView.addPolyline(child)
+            is AMapPolygon -> mapView.addPolygon(child)
         }
     }
 
