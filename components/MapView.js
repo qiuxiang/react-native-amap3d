@@ -145,6 +145,16 @@ class MapView extends Component {
      * 定位事件
      */
     onLocation: React.PropTypes.func,
+
+    /**
+     * 动画完成事件
+     */
+    onAnimateFinish: React.PropTypes.func,
+
+    /**
+     * 动画取消事件
+     */
+    onAnimateCancel: React.PropTypes.func,
   }
 
   animateToCoordinate(coordinate, duration = 1000) {

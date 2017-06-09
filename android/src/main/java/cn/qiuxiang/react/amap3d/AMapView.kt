@@ -125,11 +125,11 @@ class AMapView(context: ThemedReactContext) : MapView(context) {
 
     val animateCallback = object: AMap.CancelableCallback {
         override fun onCancel() {
-            TODO("not implemented")
+            emit(id, "onAnimateCancel")
         }
 
         override fun onFinish() {
-            TODO("not implemented")
+            emit(id, "onAnimateFinish")
         }
     }
 

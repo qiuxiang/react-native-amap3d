@@ -10,6 +10,7 @@ import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.ViewGroupManager
 import com.facebook.react.uimanager.annotations.ReactProp
 
+@Suppress("unused")
 internal class AMapViewManager : ViewGroupManager<AMapView>() {
     companion object {
         val ANIMATE_TO_COORDINATE = 1
@@ -56,6 +57,8 @@ internal class AMapViewManager : ViewGroupManager<AMapView>() {
                 "onMapLoaded" to mapOf("registrationName" to "onReady"),
                 "onMapClick" to mapOf("registrationName" to "onPress"),
                 "onMapLongClick" to mapOf("registrationName" to "onLongPress"),
+                "onAnimateCancel" to mapOf("registrationName" to "onAnimateCancel"),
+                "onAnimateFinish" to mapOf("registrationName" to "onAnimateFinish"),
                 "onLocationChange" to mapOf("registrationName" to "onLocation"))
     }
 
