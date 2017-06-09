@@ -140,8 +140,8 @@ import MapView from 'react-native-amap3d'
   - [x] 自定义信息窗体
   - [x] 自定义图标
 - [x] 折线绘制（Polyline）
-- [ ] 多边形绘制（Polygon）🚀
-- [ ] 热力图
+- [x] 多边形绘制（Polygon）
+- [ ] 热力图🚀
 - [ ] 完善项目 README，添加接口文档
 
 ### iOS
