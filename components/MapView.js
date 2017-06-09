@@ -1,5 +1,10 @@
 import React, {PropTypes, Component} from 'react'
-import {requireNativeComponent, View} from 'react-native'
+import {
+  requireNativeComponent,
+  findNodeHandle,
+  View,
+  UIManager,
+} from 'react-native'
 import Marker from './Marker'
 import InfoWindow from './InfoWindow'
 import Overlay from './Overlay'
@@ -140,6 +145,22 @@ class MapView extends Component {
      * 定位事件
      */
     onLocation: React.PropTypes.func,
+  }
+
+  animateToCoordinate(coordinate, duration = 1000) {
+    this._sendCommand('animateToCoordinate', [coordinate, duration])
+  }
+
+  animateToZoomLevel(zoomLevel, duration = 1000) {
+    this._sendCommand('animateToZoomLevel', [zoomLevel, duration])
+  }
+
+  _sendCommand(command, params = null) {
+    UIManager.dispatchViewManagerCommand(
+      findNodeHandle(this),
+      UIManager.AMapView.Commands[command],
+      params,
+    )
   }
 
   render() {

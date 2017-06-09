@@ -4,18 +4,37 @@ import android.view.View
 import com.amap.api.maps.AMap
 import com.amap.api.maps.CameraUpdateFactory
 import com.amap.api.maps.model.LatLng
+import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.ViewGroupManager
 import com.facebook.react.uimanager.annotations.ReactProp
 
 internal class AMapViewManager : ViewGroupManager<AMapView>() {
+    companion object {
+        val ANIMATE_TO_COORDINATE = 1
+        val ANIMATE_TO_ZOOM_LEVEL = 2
+    }
+
     override fun getName(): String {
         return "AMapView"
     }
 
     override fun createViewInstance(reactContext: ThemedReactContext): AMapView {
         return AMapView(reactContext)
+    }
+
+    override fun getCommandsMap(): Map<String, Int> {
+        return mapOf(
+                "animateToCoordinate" to ANIMATE_TO_COORDINATE,
+                "animateToZoomLevel" to ANIMATE_TO_ZOOM_LEVEL)
+    }
+
+    override fun receiveCommand(overlay: AMapView, commandId: Int, args: ReadableArray?) {
+        when (commandId) {
+            ANIMATE_TO_COORDINATE -> overlay.animateToCoordinate(args)
+            ANIMATE_TO_ZOOM_LEVEL -> overlay.animateToZoomLevel(args)
+        }
     }
 
     override fun addView(mapView: AMapView, child: View, index: Int) {

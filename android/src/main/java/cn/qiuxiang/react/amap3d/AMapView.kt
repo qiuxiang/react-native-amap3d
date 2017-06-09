@@ -2,14 +2,16 @@ package cn.qiuxiang.react.amap3d
 
 import android.view.View
 import com.amap.api.maps.AMap
+import com.amap.api.maps.CameraUpdateFactory
 import com.amap.api.maps.MapView
+import com.amap.api.maps.model.LatLng
 import com.amap.api.maps.model.Marker
 import com.amap.api.maps.model.MyLocationStyle
 import com.facebook.react.bridge.Arguments
+import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.WritableMap
 import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.events.RCTEventEmitter
-import com.facebook.react.views.view.ReactViewGroup
 
 class AMapView(context: ThemedReactContext) : MapView(context) {
     private val eventEmitter: RCTEventEmitter = context.getJSModule(RCTEventEmitter::class.java)
@@ -119,5 +121,29 @@ class AMapView(context: ThemedReactContext) : MapView(context) {
                 child.polygon?.remove()
             }
         }
+    }
+
+    val animateCallback = object: AMap.CancelableCallback {
+        override fun onCancel() {
+            TODO("not implemented")
+        }
+
+        override fun onFinish() {
+            TODO("not implemented")
+        }
+    }
+
+    fun animateToCoordinate(args: ReadableArray?) {
+        val coordinate = args?.getMap(0)!!
+        val duration = args.getInt(1)
+        val cameraUpdate = CameraUpdateFactory.newLatLng(LatLng(
+                coordinate.getDouble("latitude"), coordinate.getDouble("longitude")))
+        map.animateCamera(cameraUpdate, duration.toLong(), animateCallback)
+    }
+
+    fun animateToZoomLevel(args: ReadableArray?) {
+        val zoomLevel = args?.getDouble(0)!!
+        val duration = args.getInt(1)
+        map.animateCamera(CameraUpdateFactory.zoomTo(zoomLevel.toFloat()), duration.toLong(), animateCallback)
     }
 }
