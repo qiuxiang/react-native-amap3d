@@ -7,6 +7,7 @@ import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.ViewGroupManager
 import com.facebook.react.uimanager.annotations.ReactProp
 
+@Suppress("unused")
 internal class AMapMarkerManager : ViewGroupManager<AMapMarker>() {
     override fun getName(): String {
         return "AMapMarker"

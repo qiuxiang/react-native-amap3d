@@ -22,6 +22,7 @@ class AMap3DPackage : ReactPackage {
                 AMapOverlayManager(),
                 AMapInfoWindowManager(),
                 AMapPolylineManager(),
-                AMapPolygonManager())
+                AMapPolygonManager(),
+                AMapCircleManager())
     }
 }

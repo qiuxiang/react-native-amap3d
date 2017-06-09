@@ -9,6 +9,7 @@ export default class MapTypes extends Component {
     return {
       title: '地图模式',
       headerRight: <Picker
+        mode='dropdown'
         style={{width: 100}}
         selectedValue={state.params.mapType}
         onValueChange={mapType => setParams({mapType})}>

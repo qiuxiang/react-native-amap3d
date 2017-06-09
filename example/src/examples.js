@@ -48,6 +48,8 @@ export default class Examples extends Component {
         {this._renderItem('绘制折线', 'Polyline')}
         <View style={styles.separator}/>
         {this._renderItem('绘制多边形', 'Polygon')}
+        <View style={styles.separator}/>
+        {this._renderItem('绘制圆形', 'Circle')}
       </View>
     </ScrollView>
   }

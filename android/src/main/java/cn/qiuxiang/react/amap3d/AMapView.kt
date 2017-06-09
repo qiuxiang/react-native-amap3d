@@ -18,6 +18,7 @@ class AMapView(context: ThemedReactContext) : MapView(context) {
     private val markers = HashMap<String, AMapMarker>()
     private val polylines = HashMap<String, AMapPolyline>()
     private val polygons = HashMap<String, AMapPolygon>()
+    private val circles = HashMap<String, AMapCircle>()
 
     init {
         super.onCreate(null)
@@ -102,6 +103,11 @@ class AMapView(context: ThemedReactContext) : MapView(context) {
         polygons.put(polygon.polygon?.id!!, polygon)
     }
 
+    fun addCircle(circle: AMapCircle) {
+        circle.addToMap(map)
+        circles.put(circle.circle?.id!!, circle)
+    }
+
     fun emit(id: Int?, name: String, data: WritableMap = Arguments.createMap()) {
         id?.let { eventEmitter.receiveEvent(it, name, data) }
     }
@@ -119,6 +125,10 @@ class AMapView(context: ThemedReactContext) : MapView(context) {
             is AMapPolygon -> {
                 polygons.remove(child.polygon?.id)
                 child.polygon?.remove()
+            }
+            is AMapCircle -> {
+                polygons.remove(child.circle?.id)
+                child.circle?.remove()
             }
         }
     }

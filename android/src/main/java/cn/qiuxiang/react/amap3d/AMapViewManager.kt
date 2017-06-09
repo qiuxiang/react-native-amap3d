@@ -44,6 +44,7 @@ internal class AMapViewManager : ViewGroupManager<AMapView>() {
             is AMapMarker -> mapView.addMarker(child)
             is AMapPolyline -> mapView.addPolyline(child)
             is AMapPolygon -> mapView.addPolygon(child)
+            is AMapCircle -> mapView.addCircle(child)
         }
     }
 

@@ -1,0 +1,23 @@
+import React, {Component} from 'react'
+import {StyleSheet} from 'react-native'
+import {MapView, Circle} from 'react-native-amap3d'
+
+export default class CircleExample extends Component {
+  static navigationOptions = {
+    title: '绘制圆形',
+  }
+
+  render() {
+    return <MapView style={StyleSheet.absoluteFill}>
+      <Circle
+        strokeWidth={5}
+        strokeColor='blue'
+        fillColor='red'
+        radius={10000}
+        center={{
+          latitude: 39.906901,
+          longitude: 116.397972,
+        }}/>
+    </MapView>
+  }
+}
