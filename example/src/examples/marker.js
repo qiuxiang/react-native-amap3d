@@ -52,7 +52,7 @@ export default class MarkerExample extends Component {
       <Marker
         icon={() =>
           <Overlay style={styles.customIcon}>
-            <Image style={styles.customIcon} source={require('../images/marker.png')}/>
+            <Image style={styles.customIcon} source={require('../../images/marker.png')}/>
           </Overlay>
         }
         title='自定义图片'

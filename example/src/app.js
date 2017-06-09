@@ -1,13 +1,13 @@
 import {StackNavigator} from 'react-navigation'
 import Examples from './examples'
-import MapTypes from './map-types'
-import Layers from './layers'
-import Indoor from './indoor'
-import Controls from './controls'
-import Gestures from './gestures'
-import Marker from './marker'
-import Polyline from './polyline'
-import Polygon from './polygon'
+import MapTypes from './examples/map-types'
+import Layers from './examples/layers'
+import Indoor from './examples/indoor'
+import Controls from './examples/controls'
+import Gestures from './examples/gestures'
+import Marker from './examples/marker'
+import Polyline from './examples/polyline'
+import Polygon from './examples/polygon'
 
 export default StackNavigator({
   Examples: {screen: Examples},
