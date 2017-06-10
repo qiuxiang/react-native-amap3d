@@ -1,4 +1,4 @@
-# react-native-amap3d
+# react-native-amap3d [![npm version](https://img.shields.io/npm/v/react-native-amap3d.svg)](https://www.npmjs.com/package/react-native-amap3d)
 
 react-native 高德地图组件，使用最新 3D SDK（目前只支持 Android）。
 
