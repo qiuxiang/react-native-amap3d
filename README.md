@@ -17,9 +17,8 @@ react-native 高德地图组件，使用最新 3D SDK（目前只支持 Android�
 ## 安装
 
 ### 安装依赖
-目前还没有正式发布到 npm，于是需要直接使用 github 地址
 ```
-$ npm i https://github.com/qiuxiang/react-native-amap3d/tarball/develop --save
+$ npm i react-native-amap3d --save
 ```
 
 ### 项目配置
