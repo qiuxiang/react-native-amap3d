@@ -1,6 +1,6 @@
 import React, {PropTypes, Component} from 'react'
 import {requireNativeComponent, View, PixelRatio} from 'react-native'
-import {CoordinatePropType} from './PropTypes'
+import {LatLng} from './PropTypes'
 import InfoWindow from './InfoWindow'
 
 class Marker extends Component {
@@ -10,7 +10,7 @@ class Marker extends Component {
     /**
      * 坐标
      */
-    coordinate: CoordinatePropType.isRequired,
+    coordinate: LatLng.isRequired,
 
     /**
      * 标题

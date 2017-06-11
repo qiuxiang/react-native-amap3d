@@ -1,6 +1,6 @@
 import React, {PropTypes, Component} from 'react'
 import {requireNativeComponent, View, PixelRatio} from 'react-native'
-import {CoordinatePropType} from './PropTypes'
+import {LatLng} from './PropTypes'
 
 class Circle extends Component {
   static propTypes = {
@@ -9,12 +9,12 @@ class Circle extends Component {
     /**
      * 圆点
      */
-    center: CoordinatePropType,
+    center: LatLng.isRequired,
 
     /**
      * 半径（米）
      */
-    radius: PropTypes.number,
+    radius: PropTypes.number.isRequired,
 
     strokeWidth: PropTypes.number,
     strokeColor: PropTypes.string,

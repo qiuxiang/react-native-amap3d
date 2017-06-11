@@ -5,17 +5,13 @@ import {
   View,
   UIManager,
 } from 'react-native'
+import {LatLng} from './PropTypes'
 import Marker from './Marker'
 import InfoWindow from './InfoWindow'
 import Overlay from './Overlay'
 import Polyline from './Polyline'
 import Polygon from './Polygon'
 import Circle from './Circle'
-
-const CoordinatePropType = PropTypes.shape({
-  latitude: PropTypes.number.isRequired,
-  longitude: PropTypes.number.isRequired,
-})
 
 class MapView extends Component {
   static propTypes = {
@@ -100,7 +96,7 @@ class MapView extends Component {
     /**
      * 设置中心坐标
      */
-    coordinate: CoordinatePropType,
+    coordinate: LatLng,
 
     /**
      * 设置倾斜角度，取值范围 [0, 60]

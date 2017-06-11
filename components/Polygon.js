@@ -1,12 +1,12 @@
 import React, {PropTypes, Component} from 'react'
 import {requireNativeComponent, View, PixelRatio} from 'react-native'
-import {CoordinatePropType} from './PropTypes'
+import {LatLng} from './PropTypes'
 
 class Polygon extends Component {
   static propTypes = {
     ...View.propTypes,
 
-    coordinates: PropTypes.arrayOf(CoordinatePropType).isRequired,
+    coordinates: PropTypes.arrayOf(LatLng).isRequired,
     strokeWidth: PropTypes.number,
     strokeColor: PropTypes.string,
     fillColor: PropTypes.string,

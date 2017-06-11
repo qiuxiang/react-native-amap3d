@@ -1,12 +1,12 @@
 import React, {PropTypes, Component} from 'react'
 import {processColor, requireNativeComponent, View, PixelRatio} from 'react-native'
-import {CoordinatePropType} from './PropTypes'
+import {LatLng} from './PropTypes'
 
 class Polyline extends Component {
   static propTypes = {
     ...View.propTypes,
 
-    coordinates: PropTypes.arrayOf(CoordinatePropType).isRequired,
+    coordinates: PropTypes.arrayOf(LatLng).isRequired,
     width: PropTypes.number,
     color: PropTypes.string,
     zIndex: PropTypes.number,
