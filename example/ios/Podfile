@@ -1,7 +1,7 @@
 platform :ios, '8.0'
 
 target 'Example' do
-  pod 'Yoga', path: '../../node_modules/react-native/ReactCommon/yoga/'
-  pod 'React', path: '../../node_modules/react-native/'
+  pod 'Yoga', path: '../node_modules/react-native/ReactCommon/yoga/'
+  pod 'React', path: '../node_modules/react-native/'
   pod 'react-native-amap3d', path: '../../'
 end
