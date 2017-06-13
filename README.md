@@ -29,29 +29,28 @@ $ react-native link react-native-amap3d
 
 ### 添加高德 Key
 #### Android
-[获取高德 Key](http://lbs.amap.com/api/android-sdk/guide/create-project/get-key)。
+1. [获取高德 Key](http://lbs.amap.com/api/android-sdk/guide/create-project/get-key)。
 
-编辑 Android 项目的 `AndroidManifest.xml`（一般在 `android\app\src\main\AndroidManifest.xml`），
-添加如下代码：
-```xml
-<application>
-    <!-- 确保 meta-data 是直属 application 的子标签 -->
-    <meta-data
-      android:name="com.amap.api.v2.apikey"
-      android:value="你的高德 Key"/>
-</application>
-```
+2. 编辑 Android 项目的 `AndroidManifest.xml`（一般在 `android\app\src\main\AndroidManifest.xml`），添加如下代码：
+   ```xml
+   <application>
+       <!-- 确保 meta-data 是直属 application 的子标签 -->
+       <meta-data
+         android:name="com.amap.api.v2.apikey"
+         android:value="你的高德 Key"/>
+   </application>
+   ```
 
-同时，配置必要的权限：
-```xml
-<uses-permission android:name="android.permission.INTERNET" />
-<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-<uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-<uses-permission android:name="android.permission.READ_PHONE_STATE" />
-<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-```
+3. 同时，配置必要的权限：
+   ```xml
+   <uses-permission android:name="android.permission.INTERNET" />
+   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+   <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+   <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+   <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+   <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+   ```
 
 
 ## 用法
@@ -132,7 +131,7 @@ import MapView from 'react-native-amap3d'
 - [x] 室内地图
 - [x] 内置地图控件（指南针、比例尺、定位按钮、缩放按钮）
 - [x] 手势交互（平移、缩放、旋转、倾斜）
-- [x] 中心坐标、缩放界别、倾斜度的设置
+- [x] 中心坐标、缩放级别、倾斜度
 - [x] 地图事件（onPress、onLongPress、onLocation）
 - [x] 地图标记（Marker）
   - [x] 基本属性及事件
