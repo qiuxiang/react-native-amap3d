@@ -11,4 +11,8 @@
     [super setRotateCameraEnabled:enabled];
 }
 
+- (void)setCoordinate:(CLLocationCoordinate2D)json {
+    super.centerCoordinate = json;
+}
+
 @end

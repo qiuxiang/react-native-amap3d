@@ -2,17 +2,8 @@
 #import <React/RCTViewManager.h>
 #import "AMapView.h"
 
+#pragma ide diagnostic ignored "OCUnusedClassInspection"
 @interface AMapViewManager : RCTViewManager
-@end
-
-@implementation RCTConvert (AMapView)
-RCT_ENUM_CONVERTER(MAMapType, (@{
-        @"standard": @(MAMapTypeStandard),
-        @"satellite": @(MAMapTypeSatellite),
-        @"navigation": @(MAMapTypeNavi),
-        @"night": @(MAMapTypeStandardNight),
-        @"bus": @(MAMapTypeBus),
-}), MAMapTypeStandard, integerValue)
 @end
 
 @implementation AMapViewManager {
@@ -55,5 +46,7 @@ RCT_EXPORT_VIEW_PROPERTY(rotateEnabled, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(tiltEnabled, BOOL)
 
 RCT_EXPORT_VIEW_PROPERTY(mapType, MAMapType)
+
+RCT_EXPORT_VIEW_PROPERTY(coordinate, CLLocationCoordinate2D)
 
 @end
