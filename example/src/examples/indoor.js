@@ -10,11 +10,12 @@ export default class Indoor extends Component {
   render() {
     return <MapView
       coordinate={{
-        latitude: 39.91095,
+        latitude: 39.90980,
         longitude: 116.37296,
       }}
       zoomLevel={18}
       showsIndoorMap={true}
+      tilt={45}
       style={StyleSheet.absoluteFill}/>
   }
 }

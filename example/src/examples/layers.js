@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
-import {StyleSheet, View, Text, Switch} from 'react-native'
+import {StyleSheet, View, Text, Switch, Platform} from 'react-native'
 import MapView from 'react-native-amap3d'
+import commonStyles from '../styles'
 
 export default class Layers extends Component {
   static navigationOptions = {
@@ -17,19 +18,19 @@ export default class Layers extends Component {
     return <View style={StyleSheet.absoluteFill}>
       <View style={styles.controls}>
         <View style={styles.control}>
-          <Text>建筑</Text>
+          <Text style={styles.label}>建筑</Text>
           <Switch
             onValueChange={showsBuildings => this.setState({showsBuildings})}
             value={this.state.showsBuildings}/>
         </View>
         <View style={styles.control}>
-          <Text>路况</Text>
+          <Text style={styles.label}>路况</Text>
           <Switch
             onValueChange={showsTraffic => this.setState({showsTraffic})}
             value={this.state.showsTraffic}/>
         </View>
         <View style={styles.control}>
-          <Text>标签</Text>
+          <Text style={styles.label}>标签</Text>
           <Switch
             onValueChange={showsLabels => this.setState({showsLabels})}
             value={this.state.showsLabels}/>
@@ -46,21 +47,22 @@ export default class Layers extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  map: {
-    flex: 1,
-  },
-  controls: {
+const styles = {
+  ...commonStyles,
+  map: [commonStyles.map, {
+    ...Platform.select({
+      ios: {
+        marginBottom: 54,
+      },
+    }),
+  }],
+  controls: [commonStyles.controls, {
     height: 54,
-    backgroundColor: '#f5f5f5',
+  }],
+  control: [commonStyles.control, {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    elevation: 4,
-    paddingLeft: 20,
-    paddingRight: 20,
+  }],
+  label: {
+    marginRight: 5,
   },
-  control: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-})
+}

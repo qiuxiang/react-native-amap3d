@@ -58,7 +58,11 @@ export default class Examples extends Component {
 const styles = StyleSheet.create({
   scrollView: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+    ...Platform.select({
+      android: {
+        backgroundColor: '#f5f5f5',
+      },
+    })
   },
   group: {
     marginTop: 15,
@@ -69,7 +73,6 @@ const styles = StyleSheet.create({
   },
   separator: {
     height: StyleSheet.hairlineWidth,
-    backgroundColor: '#e0e0e0',
   },
   itemText: {
     fontSize: 16,

@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
-import {StyleSheet, View, Text, Switch} from 'react-native'
+import {StyleSheet, View, Text, Switch, Platform} from 'react-native'
 import MapView from 'react-native-amap3d'
+import styles from '../styles'
 
 export default class Controls extends Component {
   static navigationOptions = {
@@ -9,7 +10,7 @@ export default class Controls extends Component {
 
   state = {
     showsCompass: false,
-    showsScale: false,
+    showsScale: true,
     showsZoomControls: true,
     showsLocationButton: false,
   }
@@ -56,25 +57,3 @@ export default class Controls extends Component {
     </View>
   }
 }
-
-const styles = StyleSheet.create({
-  map: {
-    flex: 1,
-  },
-  controls: {
-    height: 72,
-    backgroundColor: '#f5f5f5',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    elevation: 4,
-    paddingLeft: 20,
-    paddingRight: 20,
-  },
-  control: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  switch: {
-    marginTop: 5,
-  },
-})

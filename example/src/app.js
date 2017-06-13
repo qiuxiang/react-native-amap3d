@@ -1,3 +1,4 @@
+import {Platform} from 'react-native'
 import {StackNavigator} from 'react-navigation'
 import Examples from './examples'
 import MapTypes from './examples/map-types'
@@ -25,7 +26,14 @@ export default StackNavigator({
   navigationOptions: {
     headerTintColor: '#212121',
     headerStyle: {
-      backgroundColor: '#f5f5f5',
+      ...Platform.select({
+        ios: {
+          backgroundColor: '#fff',
+        },
+        android: {
+          backgroundColor: '#f5f5f5',
+        },
+      })
     },
   },
 })
