@@ -83,7 +83,7 @@ import MapView from 'react-native-amap3d'
 ```jsx
 <MapView
   locationEnabled
-  onLocationChange={({nativeEvent}) =>
+  onLocation={({nativeEvent}) =>
     console.log(`${nativeEvent.latitude}, ${nativeEvent.longitude}`)}
 />
 ```
