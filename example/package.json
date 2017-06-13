@@ -4,7 +4,7 @@
     "init": "rm -r node_modules/react-native-amap3d; mkdir node_modules/react-native-amap3d; cp -r ../{components,package.json} node_modules/react-native-amap3d",
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "android": "node node_modules/react-native/local-cli/cli.js run-android",
-    "ios": "node node_modules/react-native/local-cli/cli.js run-ios --device"
+    "ios": "node node_modules/react-native/local-cli/cli.js run-ios"
   },
   "dependencies": {
     "react": "16.0.0-alpha.6",

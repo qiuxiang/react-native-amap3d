@@ -1,16 +1,27 @@
-## Android
+## 初始化
 
-强烈推荐使用 npm@5+ 进行安装
+强烈推荐使用 npm@5+ 安装依赖
 
 ```
 $ npm i
 $ npm run init
+```
+
+
+## Android
+
+```
 $ npm run android
 ```
 
+
 ## iOS
 
-暂不支持
+```
+$ cd ios && pod install && cd ..
+$ npm run ios
+```
+
 
 ## 截图
 

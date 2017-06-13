@@ -1,10 +1,8 @@
 # react-native-amap3d [![npm version](https://img.shields.io/npm/v/react-native-amap3d.svg)](https://www.npmjs.com/package/react-native-amap3d)
 
-react-native 高德地图组件，使用最新 3D SDK（目前只支持 Android）。
+react-native 高德地图组件，使用最新 3D SDK，支持 Android + iOS。
 
-该项目很大一定程度是参考 [react-native-maps](https://github.com/airbnb/react-native-maps)，
-如果不是考虑到国内的 Android 手机无法使用 Google Maps，实在没理由再造这个轮子。
-所以，该项目的首要重点是对 Android 的支持，如果需要 iOS 支持，目前建议使用 react-native-maps。
+该项目很大一定程度参考了 [react-native-maps](https://github.com/airbnb/react-native-maps)。
 
 
 ## 特性（目标）
@@ -22,10 +20,14 @@ $ npm i react-native-amap3d --save
 ```
 
 ### 项目配置
+#### Android
 推荐使用 `react-native link`
 ```
 $ react-native link react-native-amap3d
 ```
+
+#### iOS
+TODO: 待完善
 
 ### 添加高德 Key
 #### Android
@@ -51,6 +53,9 @@ $ react-native link react-native-amap3d
    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
    ```
+
+#### iOS
+TODO: 待完善
 
 
 ## 用法
