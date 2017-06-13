@@ -15,4 +15,8 @@
     super.centerCoordinate = json;
 }
 
+- (void)setTilt:(CGFloat)degree {
+    super.cameraDegree = degree;
+}
+
 @end

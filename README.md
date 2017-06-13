@@ -149,7 +149,7 @@ import MapView from 'react-native-amap3d'
 - [x] 室内地图
 - [ ] 内置地图控件（指南针和比例尺通过内置接口提供支持，定位按钮、缩放按钮需要自行实现）
 - [x] 手势交互（平移、缩放、旋转、倾斜）
-- [ ] 中心坐标、缩放级别、倾斜度 🚀
+- [x] 中心坐标、缩放级别、倾斜度 🚀
 - [ ] 地图事件（onPress、onLongPress、onLocation）
 - [ ] 地图标记（Marker）
   - [ ] 基本属性及事件

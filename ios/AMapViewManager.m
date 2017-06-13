@@ -49,4 +49,6 @@ RCT_EXPORT_VIEW_PROPERTY(mapType, MAMapType)
 
 RCT_EXPORT_VIEW_PROPERTY(coordinate, CLLocationCoordinate2D)
 
+RCT_EXPORT_VIEW_PROPERTY(tilt, CGFloat)
+
 @end
