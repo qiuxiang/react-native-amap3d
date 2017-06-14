@@ -26,4 +26,10 @@ RCT_EXPORT_VIEW_PROPERTY(draggable, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(infoWindowEnabled, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(zIndex, NSInteger)
 
+RCT_EXPORT_VIEW_PROPERTY(onPress, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onInfoWindowPress, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onDragStart, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onDrag, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onDragEnd, RCTBubblingEventBlock)
+
 @end

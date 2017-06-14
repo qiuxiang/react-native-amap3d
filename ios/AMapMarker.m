@@ -1,6 +1,8 @@
 #import "AMapMarker.h"
 #import "AMapView.h"
 
+#pragma ide diagnostic ignored "OCUnusedMethodInspection"
+
 @implementation AMapMarker {
     MAAnnotationView *_pinView;
 }

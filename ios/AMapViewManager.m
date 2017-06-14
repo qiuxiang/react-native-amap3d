@@ -23,85 +23,62 @@ RCT_EXPORT_MODULE()
 }
 
 RCT_EXPORT_VIEW_PROPERTY(locationEnabled, BOOL)
-
 RCT_EXPORT_VIEW_PROPERTY(showsCompass, BOOL)
-
 RCT_EXPORT_VIEW_PROPERTY(showsScale, BOOL)
-
 RCT_EXPORT_VIEW_PROPERTY(showsIndoorMap, BOOL)
-
 RCT_EXPORT_VIEW_PROPERTY(showsLabels, BOOL)
-
 RCT_EXPORT_VIEW_PROPERTY(showsTraffic, BOOL)
-
 RCT_EXPORT_VIEW_PROPERTY(showsBuildings, BOOL)
-
 RCT_EXPORT_VIEW_PROPERTY(zoomLevel, CGFloat)
-
 RCT_EXPORT_VIEW_PROPERTY(maxZoomLevel, CGFloat)
-
 RCT_EXPORT_VIEW_PROPERTY(minZoomLevel, CGFloat)
-
 RCT_EXPORT_VIEW_PROPERTY(zoomEnabled, BOOL)
-
 RCT_EXPORT_VIEW_PROPERTY(scrollEnabled, BOOL)
-
 RCT_EXPORT_VIEW_PROPERTY(rotateEnabled, BOOL)
-
 RCT_EXPORT_VIEW_PROPERTY(tiltEnabled, BOOL)
-
 RCT_EXPORT_VIEW_PROPERTY(mapType, MAMapType)
-
 RCT_EXPORT_VIEW_PROPERTY(coordinate, CLLocationCoordinate2D)
-
 RCT_EXPORT_VIEW_PROPERTY(tilt, CGFloat)
 
 RCT_EXPORT_VIEW_PROPERTY(onReady, RCTBubblingEventBlock)
-
 RCT_EXPORT_VIEW_PROPERTY(onPress, RCTBubblingEventBlock)
-
 RCT_EXPORT_VIEW_PROPERTY(onLongPress, RCTBubblingEventBlock)
-
 RCT_EXPORT_VIEW_PROPERTY(onLocation, RCTBubblingEventBlock)
 
 #pragma mark MAMapViewDelegate
 
 - (void)mapInitComplete:(AMapView *)mapView {
-    if (!mapView.onReady) {
-        return;
+    if (mapView.onReady) {
+        mapView.onReady(@{});
     }
-    mapView.onReady(@{});
 }
 
 - (void)mapView:(AMapView *)mapView didSingleTappedAtCoordinate:(CLLocationCoordinate2D)coordinate {
-    if (!mapView.onPress) {
-        return;
+    if (mapView.onPress) {
+        mapView.onPress(@{
+                @"latitude": @(coordinate.latitude),
+                @"longitude": @(coordinate.longitude),
+        });
     }
-    mapView.onPress(@{
-            @"latitude": @(coordinate.latitude),
-            @"longitude": @(coordinate.longitude),
-    });
 }
 
 - (void)mapView:(AMapView *)mapView didLongPressedAtCoordinate:(CLLocationCoordinate2D)coordinate {
-    if (!mapView.onLongPress) {
-        return;
+    if (mapView.onLongPress) {
+        mapView.onLongPress(@{
+                @"latitude": @(coordinate.latitude),
+                @"longitude": @(coordinate.longitude),
+        });
     }
-    mapView.onLongPress(@{
-            @"latitude": @(coordinate.latitude),
-            @"longitude": @(coordinate.longitude),
-    });
 }
 
 - (void)mapView:(AMapView *)mapView didUpdateUserLocation:(MAUserLocation *)userLocation updatingLocation:(BOOL)updatingLocation {
-    if (!mapView.onLocation) {
-        return;
+    if (mapView.onLocation) {
+        mapView.onLocation(@{
+                @"latitude": @(userLocation.coordinate.latitude),
+                @"longitude": @(userLocation.coordinate.longitude),
+                @"accuracy": @((userLocation.location.horizontalAccuracy + userLocation.location.verticalAccuracy) / 2),
+        });
     }
-    mapView.onLocation(@{
-            @"latitude": @(userLocation.coordinate.latitude),
-            @"longitude": @(userLocation.coordinate.longitude),
-            @"accuracy": @((userLocation.location.horizontalAccuracy + userLocation.location.verticalAccuracy) / 2),
-    });
 }
 
 - (MAAnnotationView *)mapView:(MAMapView *)mapView viewForAnnotation:(AMapMarker *)marker {
@@ -109,6 +86,37 @@ RCT_EXPORT_VIEW_PROPERTY(onLocation, RCTBubblingEventBlock)
         [mapView selectAnnotation:marker animated:YES];
     }
     return [marker getAnnotationView];
+}
+
+- (void)mapView:(MAMapView *)mapView didSelectAnnotationView:(MAAnnotationView *)view {
+    AMapMarker *marker = (AMapMarker *) view.annotation;
+    if (marker.onPress) {
+        marker.onPress(@{});
+    }
+}
+
+- (void)mapView:(MAMapView *)mapView didAnnotationViewCalloutTapped:(MAAnnotationView *)view {
+    AMapMarker *marker = (AMapMarker *) view.annotation;
+    if (marker.onInfoWindowPress) {
+        marker.onInfoWindowPress(@{});
+    }
+}
+
+- (void)mapView:(MAMapView *)mapView annotationView:(MAAnnotationView *)view didChangeDragState:(MAAnnotationViewDragState)newState
+   fromOldState:(MAAnnotationViewDragState)oldState {
+    AMapMarker *marker = (AMapMarker *) view.annotation;
+    if (newState == MAAnnotationViewDragStateStarting && marker.onDragStart) {
+        marker.onDragStart(@{});
+    }
+    if (newState == MAAnnotationViewDragStateDragging && marker.onDrag) {
+        marker.onDrag(@{});
+    }
+    if (newState == MAAnnotationViewDragStateEnding && marker.onDragEnd) {
+        marker.onDragEnd(@{
+                @"latitude": @(marker.coordinate.latitude),
+                @"longitude": @(marker.coordinate.longitude),
+        });
+    }
 }
 
 @end
