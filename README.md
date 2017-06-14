@@ -156,9 +156,9 @@ import MapView from 'react-native-amap3d'
 - [x] 手势交互（平移、缩放、旋转、倾斜）
 - [x] 中心坐标、缩放级别、倾斜度
 - [x] 地图事件（onPress、onLongPress、onLocation）
-- [ ] 地图标记（Marker）🚀
-  - [ ] 基本属性及事件
-  - [ ] 自定义信息窗体
+- [ ] 地图标记（Marker）
+  - [x] 基本属性及事件
+  - [ ] 自定义信息窗体 🚀
   - [ ] 自定义图标
 - [ ] 折线绘制（Polyline）
 - [ ] 多边形绘制（Polygon）
