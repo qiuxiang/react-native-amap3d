@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 #import <MAMapKit/MAMapKit.h>
-#import <RCTComponent.h>
+#import <React/RCTComponent.h>
 
 @interface AMapView : MAMapView
 @property (nonatomic, copy) RCTBubblingEventBlock onReady;

@@ -3,6 +3,7 @@
 #import "AMapView.h"
 
 #pragma ide diagnostic ignored "OCUnusedClassInspection"
+#pragma ide diagnostic ignored "-Woverriding-method-mismatch"
 
 @interface AMapViewManager : RCTViewManager <MAMapViewDelegate>
 @end

@@ -1,4 +1,5 @@
-#import "RCTConvert+AMapView.h"
+#import <MAMapKit/MAMapView.h>
+#import <React/RCTConvert.h>
 
 @implementation RCTConvert (AMapView)
 
@@ -9,15 +10,5 @@ RCT_ENUM_CONVERTER(MAMapType, (@{
         @"night": @(MAMapTypeStandardNight),
         @"bus": @(MAMapTypeBus),
 }), MAMapTypeStandard, integerValue)
-
-RCT_CONVERTER(CLLocationDegrees, CLLocationDegrees, doubleValue);
-
-RCT_CONVERTER(CLLocationDistance, CLLocationDistance, doubleValue);
-
-+ (CLLocationCoordinate2D)CLLocationCoordinate2D:(id)json {
-    return CLLocationCoordinate2DMake(
-            [self CLLocationDegrees:json[@"latitude"]],
-            [self CLLocationDegrees:json[@"longitude"]]);
-}
 
 @end
