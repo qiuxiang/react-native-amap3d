@@ -1,4 +1,5 @@
 #import "AMapView.h"
+#import "AMapMarker.h"
 
 #pragma ide diagnostic ignored "OCUnusedMethodInspection"
 
@@ -23,6 +24,19 @@
 
 - (void)setTilt:(CGFloat)degree {
     super.cameraDegree = degree;
+}
+
+- (void)insertReactSubview:(id<RCTComponent>)subview atIndex:(NSInteger)atIndex {
+    if ([subview isKindOfClass:[AMapMarker class]]) {
+        ((AMapMarker *) subview).mapView = self;
+        [self addAnnotation:(id <MAAnnotation>) subview];
+    }
+}
+
+- (void)removeReactSubview:(id<RCTComponent>)subview {
+    if ([subview isKindOfClass:[AMapMarker class]]) {
+        [self removeAnnotation:(id <MAAnnotation>) subview];
+    }
 }
 
 @end

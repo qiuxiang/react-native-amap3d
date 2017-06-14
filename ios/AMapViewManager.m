@@ -1,6 +1,7 @@
 #import <MAMapKit/MAMapKit.h>
 #import <React/RCTViewManager.h>
 #import "AMapView.h"
+#import "AMapMarker.h"
 
 #pragma ide diagnostic ignored "OCUnusedClassInspection"
 #pragma ide diagnostic ignored "-Woverriding-method-mismatch"
@@ -9,17 +10,16 @@
 @end
 
 @implementation AMapViewManager {
-    AMapView *_mapView;
 }
 
 RCT_EXPORT_MODULE()
 
 - (UIView *)view {
-    _mapView = [[AMapView alloc] init];
-    _mapView.centerCoordinate = CLLocationCoordinate2DMake(39.9042, 116.4074);
-    _mapView.zoomLevel = 10;
-    _mapView.delegate = self;
-    return _mapView;
+    AMapView *mapView = [AMapView new];
+    mapView.centerCoordinate = CLLocationCoordinate2DMake(39.9042, 116.4074);
+    mapView.zoomLevel = 10;
+    mapView.delegate = self;
+    return mapView;
 }
 
 RCT_EXPORT_VIEW_PROPERTY(locationEnabled, BOOL)
@@ -94,7 +94,6 @@ RCT_EXPORT_VIEW_PROPERTY(onLocation, RCTBubblingEventBlock)
 }
 
 - (void)mapView:(AMapView *)mapView didUpdateUserLocation:(MAUserLocation *)userLocation updatingLocation:(BOOL)updatingLocation {
-    NSLog(@"location");
     if (!mapView.onLocation) {
         return;
     }
@@ -103,6 +102,13 @@ RCT_EXPORT_VIEW_PROPERTY(onLocation, RCTBubblingEventBlock)
             @"longitude": @(userLocation.coordinate.longitude),
             @"accuracy": @((userLocation.location.horizontalAccuracy + userLocation.location.verticalAccuracy) / 2),
     });
+}
+
+- (MAAnnotationView *)mapView:(MAMapView *)mapView viewForAnnotation:(AMapMarker *)marker {
+    if (marker.active) {
+        [mapView selectAnnotation:marker animated:YES];
+    }
+    return [marker getAnnotationView];
 }
 
 @end
