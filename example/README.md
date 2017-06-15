@@ -25,10 +25,4 @@ $ npm run ios
 
 ## 截图
 
-![s70615-220144](https://user-images.githubusercontent.com/1709072/27188519-fa37680a-5220-11e7-82ea-8f39d8b04061.jpg) ![s70615-220157](https://user-images.githubusercontent.com/1709072/27188521-fb345402-5220-11e7-8a3b-950b906755f8.jpg)
-
-![s70615-220207](https://user-images.githubusercontent.com/1709072/27188522-fb420660-5220-11e7-9348-bbcb5fef942b.jpg) ![s70615-220219](https://user-images.githubusercontent.com/1709072/27188523-fb6d3e48-5220-11e7-873e-7005965eb400.jpg)
-
-![s70615-220241](https://user-images.githubusercontent.com/1709072/27188524-fb6fa03e-5220-11e7-96f5-cabb4ba5a515.jpg) ![s70615-220257](https://user-images.githubusercontent.com/1709072/27188525-fb706424-5220-11e7-933d-5032518759d7.jpg)
-
-![s70615-220306](https://user-images.githubusercontent.com/1709072/27188526-fb719196-5220-11e7-8051-ec7da8c6928d.jpg) ![s70615-220316](https://user-images.githubusercontent.com/1709072/27188527-fb863af6-5220-11e7-9560-8b655c5ea12b.jpg)
+![s70615-220144](https://user-images.githubusercontent.com/1709072/27193097-43c47044-5230-11e7-8057-7b789841fc34.jpg) ![s70615-220157](https://user-images.githubusercontent.com/1709072/27193098-43c6f59e-5230-11e7-8dfa-66ca09dc602f.jpg) ![s70615-220207](https://user-images.githubusercontent.com/1709072/27193102-440bb03a-5230-11e7-8abc-e35acaf2b294.jpg) ![s70615-220219](https://user-images.githubusercontent.com/1709072/27193099-4406b972-5230-11e7-80dc-0cca9eac9a48.jpg) ![s70615-220241](https://user-images.githubusercontent.com/1709072/27193101-4409a38a-5230-11e7-8f0e-7b366a4665ee.jpg) ![s70615-220257](https://user-images.githubusercontent.com/1709072/27193100-440835ea-5230-11e7-8b4d-168ec1543026.jpg) ![s70615-220306](https://user-images.githubusercontent.com/1709072/27193103-44363332-5230-11e7-8bfb-8d6f8db034d2.jpg) ![s70615-220316](https://user-images.githubusercontent.com/1709072/27193104-44406c26-5230-11e7-94ed-9e9751294de0.jpg)
