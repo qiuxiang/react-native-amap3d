@@ -1,14 +1,15 @@
 #import "AMapMarker.h"
-#import "AMapView.h"
 
 #pragma ide diagnostic ignored "OCUnusedMethodInspection"
 
 @implementation AMapMarker {
     MAAnnotationView *_pinView;
+    AMapOverlay *_iconView;
+    BOOL _active;
 }
 
 - (void)setActive:(BOOL)active {
-    self._active = active;
+    _active = active;
     if (active) {
         [self.mapView selectAnnotation:self animated:YES];
     }
@@ -27,6 +28,9 @@
         _pinView = [[MAPinAnnotationView alloc] initWithAnnotation:self reuseIdentifier: nil];
         _pinView.annotation = self;
     }
+    if (_iconView != nil) {
+        _pinView.image = nil;
+    }
     _pinView.zIndex = self.zIndex;
     _pinView.draggable = self.draggable;
     _pinView.canShowCallout = self.canShowCallout;
@@ -34,7 +38,23 @@
 }
 
 - (BOOL)active {
-    return self._active;
+    return _active;
+}
+
+- (void)insertReactSubview:(id<RCTComponent>)subview atIndex:(NSInteger)atIndex {
+    if ([subview isKindOfClass:[AMapOverlay class]]) {
+        _iconView = (AMapOverlay *)subview;
+        _iconView.delegate = self;
+    }
+}
+
+#pragma mark AMapOverlayDelegate
+- (void)update {
+    UIGraphicsBeginImageContextWithOptions([_iconView bounds].size, NO, 0.0f);
+    [_iconView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    _pinView.image = image;
 }
 
 @end
