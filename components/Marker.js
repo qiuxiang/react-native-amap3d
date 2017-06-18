@@ -1,5 +1,5 @@
 import React, {PropTypes, Component} from 'react'
-import {requireNativeComponent, View, PixelRatio} from 'react-native'
+import {requireNativeComponent, View, PixelRatio, Platform} from 'react-native'
 import {LatLng} from './PropTypes'
 import InfoWindow from './InfoWindow'
 
@@ -100,11 +100,15 @@ class Marker extends Component {
   render() {
     const props = {
       ...this.props,
-      onMarkerClick: this._handle('onPress'),
-      onMarkerDragStart: this._handle('onDragStart'),
-      onMarkerDrag: this._handle('onDrag'),
-      onMarkerDragEnd: this._handle('onDragEnd'),
-      onInfoWindowClick: this._handle('onInfoWindowPress'),
+      ...Platform.select({
+        android: {
+          onMarkerClick: this._handle('onPress'),
+          onMarkerDragStart: this._handle('onDragStart'),
+          onMarkerDrag: this._handle('onDrag'),
+          onMarkerDragEnd: this._handle('onDragEnd'),
+          onInfoWindowClick: this._handle('onInfoWindowPress'),
+        },
+      })
     }
 
     let customInfoWindow = null
