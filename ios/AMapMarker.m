@@ -34,6 +34,7 @@
     _pinView.zIndex = self.zIndex;
     _pinView.draggable = self.draggable;
     _pinView.canShowCallout = self.canShowCallout;
+    _pinView.customCalloutView = self.customCalloutView;
     return _pinView;
 }
 
@@ -45,6 +46,9 @@
     if ([subview isKindOfClass:[AMapOverlay class]]) {
         _iconView = (AMapOverlay *)subview;
         _iconView.delegate = self;
+    }
+    if ([subview isKindOfClass:[AMapInfoWindow class]]) {
+        self.customCalloutView = [[MACustomCalloutView alloc] initWithCustomView:(id) subview];
     }
 }
 

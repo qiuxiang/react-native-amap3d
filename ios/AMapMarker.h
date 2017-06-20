@@ -3,11 +3,13 @@
 #import <React/RCTComponent.h>
 #import "AMapView.h"
 #import "AMapOverlay.h"
+#import "AMapInfoWindow.h"
 
 #pragma ide diagnostic ignored "OCUnusedPropertyInspection"
 
 @class AMapView;
 @class AMapOverlay;
+@class AMapInfoWindow;
 
 @interface AMapMarker : MAAnnotationView <MAAnnotation, AMapOverlayDelegate>
 
