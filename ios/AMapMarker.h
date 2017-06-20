@@ -3,20 +3,10 @@
 #import <React/RCTComponent.h>
 #import "AMapView.h"
 #import "AMapOverlay.h"
-#import "AMapInfoWindow.h"
 
-#pragma ide diagnostic ignored "OCUnusedPropertyInspection"
+#pragma ide diagnostic ignored "OCUnusedMethodInspection"
 
-@class AMapView;
-@class AMapOverlay;
-@class AMapInfoWindow;
-
-@interface AMapMarker : MAPinAnnotationView <MAAnnotation, AMapOverlayDelegate>
-
-@property(nonatomic, assign) CLLocationCoordinate2D coordinate;
-@property(nonatomic, copy) NSString *title;
-@property(nonatomic, copy) NSString *subtitle;
-@property(nonatomic, strong) AMapView *mapView;
+@interface AMapMarker : UIView <MAAnnotation, AMapOverlayDelegate>
 
 @property (nonatomic, copy) RCTBubblingEventBlock onPress;
 @property (nonatomic, copy) RCTBubblingEventBlock onInfoWindowPress;
@@ -24,7 +14,14 @@
 @property (nonatomic, copy) RCTBubblingEventBlock onDrag;
 @property (nonatomic, copy) RCTBubblingEventBlock onDragEnd;
 
-- (MAAnnotationView *)getAnnotationView;
 - (BOOL)active;
+- (CLLocationCoordinate2D)coordinate;
+- (NSString *)title;
+- (NSString *)subtitle;
+
+- (MAAnnotationView *)annotationView;
+
+- (void)setMapView:(AMapView *)mapView;
+- (void)setCoordinate:(CLLocationCoordinate2D)coordinate;
 
 @end

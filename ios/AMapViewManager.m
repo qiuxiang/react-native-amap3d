@@ -85,7 +85,7 @@ RCT_EXPORT_VIEW_PROPERTY(onLocation, RCTBubblingEventBlock)
     if (marker.active) {
         [mapView selectAnnotation:marker animated:YES];
     }
-    return [marker getAnnotationView];
+    return marker.annotationView;
 }
 
 - (void)mapView:(MAMapView *)mapView didSelectAnnotationView:(MAAnnotationView *)view {

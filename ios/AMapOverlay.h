@@ -7,6 +7,6 @@
 @end
 
 @interface AMapOverlay : RCTView
-@property(nonatomic, strong) id delegate;
+@property(nonatomic, strong) id<AMapOverlayDelegate> delegate;
 - (void)update;
 @end

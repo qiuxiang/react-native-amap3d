@@ -27,8 +27,9 @@ export default class MarkerExample extends Component {
   render() {
     return <MapView style={StyleSheet.absoluteFill}>
       <Marker
+        active
         draggable
-        title='一个可拖拽的 Marker'
+        title={'一个可拖拽的 Marker ' + this.state.time.toLocaleTimeString()}
         onDragEnd={({nativeEvent}) =>
           Alert.alert(`新坐标：${nativeEvent.latitude}, ${nativeEvent.longitude}`)}
         onInfoWindowPress={() => Alert.alert('信息窗口点击事件')}
@@ -38,8 +39,7 @@ export default class MarkerExample extends Component {
         }}
       />
       <Marker
-        active
-        icon='red'
+        icon='green'
         infoWindowWidth={100}
         coordinate={{
           latitude: 39.806901,
@@ -84,15 +84,19 @@ const styles = StyleSheet.create({
     height: 40,
   },
   customInfoWindow: {
-    backgroundColor: '#fff',
+    backgroundColor: '#8bc34a',
     position: 'absolute',
     padding: 10,
+    borderRadius: 10,
     elevation: 4,
+    borderWidth: 2,
+    borderColor: '#689F38',
   },
   customMarker: {
     position: 'absolute',
     backgroundColor: '#009688',
     alignItems: 'center',
+    borderRadius: 5,
     padding: 5,
   },
   markerText: {

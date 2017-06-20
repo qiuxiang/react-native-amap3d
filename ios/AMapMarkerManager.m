@@ -13,9 +13,7 @@
 RCT_EXPORT_MODULE()
 
 - (UIView *)view {
-    AMapMarker *marker = [AMapMarker new];
-    marker.canShowCallout = YES;
-    return marker;
+    return [AMapMarker new];
 }
 
 RCT_EXPORT_VIEW_PROPERTY(coordinate, CLLocationCoordinate2D)
