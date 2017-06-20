@@ -81,11 +81,15 @@ RCT_EXPORT_VIEW_PROPERTY(onLocation, RCTBubblingEventBlock)
     }
 }
 
-- (MAAnnotationView *)mapView:(MAMapView *)mapView viewForAnnotation:(AMapMarker *)marker {
-    if (marker.active) {
-        [mapView selectAnnotation:marker animated:YES];
+- (MAAnnotationView *)mapView:(MAMapView *)mapView viewForAnnotation:(id <MAAnnotation>)annotation {
+    if ([annotation isKindOfClass:[AMapMarker class]]) {
+        AMapMarker *marker = (AMapMarker *) annotation;
+        if (marker.active) {
+            [mapView selectAnnotation:marker animated:YES];
+        }
+        return marker.annotationView;
     }
-    return marker.annotationView;
+    return nil;
 }
 
 - (void)mapView:(MAMapView *)mapView didSelectAnnotationView:(MAAnnotationView *)view {
