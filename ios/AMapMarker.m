@@ -3,7 +3,7 @@
 #pragma ide diagnostic ignored "OCUnusedMethodInspection"
 
 @implementation AMapMarker {
-    MAAnnotationView *_pinView;
+    MAPinAnnotationView *_pinView;
     AMapOverlay *_iconView;
     BOOL _active;
 }
@@ -13,6 +13,10 @@
     if (active) {
         [self.mapView selectAnnotation:self animated:YES];
     }
+}
+
+- (void)setIcon:(MAPinAnnotationColor)color {
+    self.pinColor = color;
 }
 
 - (void)setDescription:(NSString *)description {
@@ -27,14 +31,15 @@
     if (_pinView == nil) {
         _pinView = [[MAPinAnnotationView alloc] initWithAnnotation:self reuseIdentifier: nil];
         _pinView.annotation = self;
+        _pinView.zIndex = self.zIndex;
+        _pinView.pinColor = self.pinColor;
+        _pinView.draggable = self.draggable;
+        _pinView.canShowCallout = self.canShowCallout;
+        _pinView.customCalloutView = self.customCalloutView;
     }
     if (_iconView != nil) {
         _pinView.image = nil;
     }
-    _pinView.zIndex = self.zIndex;
-    _pinView.draggable = self.draggable;
-    _pinView.canShowCallout = self.canShowCallout;
-    _pinView.customCalloutView = self.customCalloutView;
     return _pinView;
 }
 

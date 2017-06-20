@@ -11,7 +11,7 @@
 @class AMapOverlay;
 @class AMapInfoWindow;
 
-@interface AMapMarker : MAAnnotationView <MAAnnotation, AMapOverlayDelegate>
+@interface AMapMarker : MAPinAnnotationView <MAAnnotation, AMapOverlayDelegate>
 
 @property(nonatomic, assign) CLLocationCoordinate2D coordinate;
 @property(nonatomic, copy) NSString *title;
