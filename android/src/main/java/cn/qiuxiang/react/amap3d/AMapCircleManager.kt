@@ -16,7 +16,7 @@ internal class AMapCircleManager : ViewGroupManager<AMapCircle>() {
         return AMapCircle(reactContext)
     }
 
-    @ReactProp(name = "center")
+    @ReactProp(name = "coordinate")
     fun setCoordinate(circle: AMapCircle, coordinate: ReadableMap) {
         circle.center = LatLng(
                 coordinate.getDouble("latitude"),
