@@ -1,5 +1,3 @@
-#import <Foundation/Foundation.h>
-#import <MAMapKit/MAMapKit.h>
 #import "AMapView.h"
 #import "AMapOverlay.h"
 

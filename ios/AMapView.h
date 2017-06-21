@@ -1,4 +1,3 @@
-#import <Foundation/Foundation.h>
 #import <MAMapKit/MAMapKit.h>
 #import <React/RCTComponent.h>
 

@@ -1,4 +1,3 @@
-#import <Foundation/Foundation.h>
 #import <React/RCTView.h>
 
 @protocol AMapOverlayDelegate <NSObject>

@@ -1,4 +1,3 @@
-#import <MAMapKit/MAMapView.h>
 #import <React/RCTViewManager.h>
 #import "AMapMarker.h"
 

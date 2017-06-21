@@ -1,7 +1,6 @@
 #import "AMapView.h"
 #import "AMapMarker.h"
 #import "AMapPolyline.h"
-#import "AMapPolygon.h"
 
 #pragma ide diagnostic ignored "OCUnusedMethodInspection"
 
@@ -33,7 +32,7 @@
         ((AMapMarker *) subview).mapView = self;
         [self addAnnotation:(id <MAAnnotation>) subview];
     }
-    if ([subview isKindOfClass:[AMapPolyline class]] || [subview isKindOfClass:[AMapPolygon class]]) {;
+    if ([subview isKindOfClass:[AMapModel class]]) {
         [self addOverlay:(id <MAOverlay>) subview];
     }
 }
@@ -42,7 +41,7 @@
     if ([subview isKindOfClass:[AMapMarker class]]) {
         [self removeAnnotation:(id <MAAnnotation>) subview];
     }
-    if ([subview isKindOfClass:[AMapPolyline class]] || [subview isKindOfClass:[AMapPolygon class]]) {
+    if ([subview isKindOfClass:[AMapModel class]]) {
         [self removeOverlay:(id <MAOverlay>) subview];
     }
 }
