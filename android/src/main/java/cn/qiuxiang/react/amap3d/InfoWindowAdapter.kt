@@ -8,7 +8,7 @@ import android.widget.TextView
 import com.amap.api.maps.AMap
 import com.amap.api.maps.model.Marker
 
-class AMapInfoWindowAdapter(
+class InfoWindowAdapter(
         val context: Context,
         val markers: HashMap<String, AMapMarker>
 ) : AMap.InfoWindowAdapter {

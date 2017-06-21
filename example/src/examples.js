@@ -34,7 +34,7 @@ export default class Examples extends Component {
       <View style={styles.group}>
         {this._renderItem('地图模式', 'MapTypes')}
         <View style={styles.separator}/>
-        {this._renderItem('图层功能', 'Layers')}
+        {this._renderItem('基本图层', 'Layers')}
         <View style={styles.separator}/>
         {this._renderItem('室内地图', 'Indoor')}
         <View style={styles.separator}/>

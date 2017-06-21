@@ -85,7 +85,7 @@ class AMapView(context: ThemedReactContext) : MapView(context) {
             emit(polylines[polyline.id]?.id, "onPolylineClick")
         }
 
-        map.setInfoWindowAdapter(AMapInfoWindowAdapter(context, markers))
+        map.setInfoWindowAdapter(InfoWindowAdapter(context, markers))
     }
 
     fun addMarker(marker: AMapMarker) {

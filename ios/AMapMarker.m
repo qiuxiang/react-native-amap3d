@@ -85,11 +85,15 @@
 
 - (void)insertReactSubview:(id <RCTComponent>)subview atIndex:(NSInteger)atIndex {
     if ([subview isKindOfClass:[AMapOverlay class]]) {
-        _overlay = (AMapOverlay *) subview;
-        _overlay.delegate = self;
-        _annotationView.image = nil;
-    } else {
-        _annotationView.customCalloutView = [[MACustomCalloutView alloc] initWithCustomView:(id) subview];
+        if (atIndex == 0) {
+            _overlay = (AMapOverlay *) subview;
+            _overlay.delegate = self;
+            _annotationView.image = nil;
+        }
+        if (atIndex == 1) {
+            // TODO: customCalloutView 的位置不太对
+            _annotationView.customCalloutView = [[MACustomCalloutView alloc] initWithCustomView:(id) subview];
+        }
     }
 }
 

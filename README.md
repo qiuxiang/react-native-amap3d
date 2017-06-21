@@ -113,18 +113,18 @@ import MapView from 'react-native-amap3d'
 ```jsx
 <Marker
   icon={() =>
-    <Overlay style={styles.customMarker}>
+    <View style={styles.customMarker}>
       <Image style={styles.customIcon} source={require('marker.png')}/>
-    </Overlay>
+    </View>
   }
   coordinate={{
     latitude: 39.706901,
     longitude: 116.397972,
   }}
 >
-  <InfoWindow style={styles.customInfoWindow}>
+  <View style={styles.customInfoWindow}>
     <Text>自定义信息窗体</Text>
-  </InfoWindow>
+  </View>
 </Marker>
 ```
 
@@ -157,7 +157,7 @@ import MapView from 'react-native-amap3d'
 - [x] 手势交互（平移、缩放、旋转、倾斜）
 - [x] 中心坐标、缩放级别、倾斜度
 - [x] 地图事件（onPress、onLongPress、onLocation）
-- [ ] 地图标记（Marker）
+- [x] 地图标记（Marker）
   - [x] 基本属性及事件
   - [x] 自定义信息窗体
   - [x] 自定义图标

@@ -23,7 +23,7 @@ class AMapMarker(context: ThemedReactContext) : ReactViewGroup(context) {
         )
     }
 
-    var infoWindow: ReactViewGroup? = null
+    var infoWindow: AMapOverlay? = null
     var infoWindowEnabled: Boolean = true
 
     var marker: Marker? = null

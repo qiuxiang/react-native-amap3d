@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
-import {StyleSheet, Alert, Text, Image} from 'react-native'
-import {MapView, Marker, InfoWindow, Overlay} from 'react-native-amap3d'
+import {StyleSheet, Alert, Text, Image, View} from 'react-native'
+import {MapView, Marker} from 'react-native-amap3d'
 
 export default class MarkerExample extends Component {
   static navigationOptions = {
@@ -45,15 +45,15 @@ export default class MarkerExample extends Component {
           latitude: 39.806901,
           longitude: 116.297972,
         }}>
-        <InfoWindow style={styles.customInfoWindow}>
+        <View style={styles.customInfoWindow}>
           <Text>Custom View InfoWindow</Text>
-        </InfoWindow>
+        </View>
       </Marker>
       <Marker
         icon={() =>
-          <Overlay style={styles.customIcon}>
+          <View style={styles.customIcon}>
             <Image style={styles.customIcon} source={require('../../images/marker.png')}/>
-          </Overlay>
+          </View>
         }
         title='自定义图片'
         description="Note the use of nativeOnly above. Sometimes you'll have some special properties that you need to expose for the native component, but don't actually want them as part of the API for the associated React component."
@@ -65,9 +65,9 @@ export default class MarkerExample extends Component {
       <Marker
         title='Custom View Marker'
         icon={() =>
-          <Overlay style={styles.customMarker}>
+          <View style={styles.customMarker}>
             <Text style={styles.markerText}>{this.state.time.toLocaleTimeString()}</Text>
-          </Overlay>
+          </View>
         }
         coordinate={{
           latitude: 39.706901,
@@ -85,7 +85,6 @@ const styles = StyleSheet.create({
   },
   customInfoWindow: {
     backgroundColor: '#8bc34a',
-    position: 'absolute',
     padding: 10,
     borderRadius: 10,
     elevation: 4,
@@ -93,7 +92,6 @@ const styles = StyleSheet.create({
     borderColor: '#689F38',
   },
   customMarker: {
-    position: 'absolute',
     backgroundColor: '#009688',
     alignItems: 'center',
     borderRadius: 5,
