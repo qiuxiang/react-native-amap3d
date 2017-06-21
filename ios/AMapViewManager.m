@@ -2,6 +2,7 @@
 #import <React/RCTViewManager.h>
 #import "AMapView.h"
 #import "AMapMarker.h"
+#import "AMapPolyline.h"
 
 #pragma ide diagnostic ignored "OCUnusedClassInspection"
 #pragma ide diagnostic ignored "-Woverriding-method-mismatch"
@@ -45,8 +46,6 @@ RCT_EXPORT_VIEW_PROPERTY(onPress, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onLongPress, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onLocation, RCTBubblingEventBlock)
 
-#pragma mark MAMapViewDelegate
-
 - (void)mapInitComplete:(AMapView *)mapView {
     if (mapView.onReady) {
         mapView.onReady(@{});
@@ -88,6 +87,13 @@ RCT_EXPORT_VIEW_PROPERTY(onLocation, RCTBubblingEventBlock)
             [mapView selectAnnotation:marker animated:YES];
         }
         return marker.annotationView;
+    }
+    return nil;
+}
+
+- (MAOverlayRenderer *)mapView:(MAMapView *)mapView rendererForOverlay:(id <MAOverlay>)overlay {
+    if ([overlay isKindOfClass:[AMapPolyline class]]) {
+        return ((AMapPolyline *)overlay).renderer;
     }
     return nil;
 }

@@ -1,5 +1,6 @@
 #import "AMapView.h"
 #import "AMapMarker.h"
+#import "AMapPolyline.h"
 
 #pragma ide diagnostic ignored "OCUnusedMethodInspection"
 
@@ -26,14 +27,17 @@
     super.cameraDegree = degree;
 }
 
-- (void)insertReactSubview:(id<RCTComponent>)subview atIndex:(NSInteger)atIndex {
+- (void)insertReactSubview:(id <RCTComponent>)subview atIndex:(NSInteger)atIndex {
     if ([subview isKindOfClass:[AMapMarker class]]) {
         ((AMapMarker *) subview).mapView = self;
         [self addAnnotation:(id <MAAnnotation>) subview];
     }
+    if ([subview isKindOfClass:[AMapPolyline class]]) {;
+        [self addOverlay:(id <MAOverlay>) subview];
+    }
 }
 
-- (void)removeReactSubview:(id<RCTComponent>)subview {
+- (void)removeReactSubview:(id <RCTComponent>)subview {
     if ([subview isKindOfClass:[AMapMarker class]]) {
         [self removeAnnotation:(id <MAAnnotation>) subview];
     }
