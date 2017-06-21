@@ -1,5 +1,5 @@
 import React, {PropTypes, Component} from 'react'
-import {requireNativeComponent, View, PixelRatio} from 'react-native'
+import {requireNativeComponent, View, PixelRatio, Platform} from 'react-native'
 import {LatLng} from './PropTypes'
 
 class Polygon extends Component {
@@ -16,7 +16,11 @@ class Polygon extends Component {
   render() {
     const props = {
       ...this.props,
-      strokeWidth: PixelRatio.getPixelSizeForLayoutSize(this.props.strokeWidth),
+      ...Platform.select({
+        android: {
+          strokeWidth: PixelRatio.getPixelSizeForLayoutSize(this.props.strokeWidth),
+        },
+      }),
     }
     return <AMapPolygon {...props}/>
   }

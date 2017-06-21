@@ -161,8 +161,8 @@ import MapView from 'react-native-amap3d'
   - [x] 基本属性及事件
   - [x] 自定义信息窗体
   - [x] 自定义图标
-- [ ] 折线绘制（Polyline）🚀
-- [ ] 多边形绘制（Polygon）
-- [ ] 圆形绘制（Circle）
+- [x] 折线绘制（Polyline）
+- [x] 多边形绘制（Polygon）
+- [ ] 圆形绘制（Circle）🚀
 - [ ] POI 检索
 - [ ] 地理编码转换

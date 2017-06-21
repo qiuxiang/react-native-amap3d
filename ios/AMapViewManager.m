@@ -3,6 +3,7 @@
 #import "AMapView.h"
 #import "AMapMarker.h"
 #import "AMapPolyline.h"
+#import "AMapPolygon.h"
 
 #pragma ide diagnostic ignored "OCUnusedClassInspection"
 #pragma ide diagnostic ignored "-Woverriding-method-mismatch"
@@ -87,6 +88,9 @@ RCT_EXPORT_VIEW_PROPERTY(onLocation, RCTBubblingEventBlock)
 - (MAOverlayRenderer *)mapView:(MAMapView *)mapView rendererForOverlay:(id <MAOverlay>)overlay {
     if ([overlay isKindOfClass:[AMapPolyline class]]) {
         return ((AMapPolyline *)overlay).renderer;
+    }
+    if ([overlay isKindOfClass:[AMapPolygon class]]) {
+        return ((AMapPolygon *)overlay).renderer;
     }
     return nil;
 }
