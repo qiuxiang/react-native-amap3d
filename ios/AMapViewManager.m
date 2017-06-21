@@ -41,16 +41,9 @@ RCT_EXPORT_VIEW_PROPERTY(mapType, MAMapType)
 RCT_EXPORT_VIEW_PROPERTY(coordinate, CLLocationCoordinate2D)
 RCT_EXPORT_VIEW_PROPERTY(tilt, CGFloat)
 
-RCT_EXPORT_VIEW_PROPERTY(onReady, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onPress, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onLongPress, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onLocation, RCTBubblingEventBlock)
-
-- (void)mapInitComplete:(AMapView *)mapView {
-    if (mapView.onReady) {
-        mapView.onReady(@{});
-    }
-}
 
 - (void)mapView:(AMapView *)mapView didSingleTappedAtCoordinate:(CLLocationCoordinate2D)coordinate {
     if (mapView.onPress) {

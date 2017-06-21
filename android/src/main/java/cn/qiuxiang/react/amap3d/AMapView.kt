@@ -28,10 +28,6 @@ class AMapView(context: ThemedReactContext) : MapView(context) {
         locationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATION_ROTATE_NO_CENTER)
         map.myLocationStyle = locationStyle
 
-        map.setOnMapLoadedListener {
-            emit(id, "onMapLoaded")
-        }
-
         map.setOnMapClickListener { latLng ->
             val event = Arguments.createMap()
             event.putDouble("latitude", latLng.latitude)

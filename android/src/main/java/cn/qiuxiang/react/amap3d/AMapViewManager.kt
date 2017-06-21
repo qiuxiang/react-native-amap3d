@@ -55,7 +55,6 @@ internal class AMapViewManager : ViewGroupManager<AMapView>() {
 
     override fun getExportedCustomDirectEventTypeConstants(): Map<String, Any> {
         return mapOf(
-                "onMapLoaded" to mapOf("registrationName" to "onReady"),
                 "onMapClick" to mapOf("registrationName" to "onPress"),
                 "onMapLongClick" to mapOf("registrationName" to "onLongPress"),
                 "onAnimateCancel" to mapOf("registrationName" to "onAnimateCancel"),
