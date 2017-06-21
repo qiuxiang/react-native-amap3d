@@ -43,7 +43,7 @@ class AMapPolyline(context: ThemedReactContext) : ReactViewGroup(context) {
             polyline?.isGeodesic = value
         }
 
-    var dottedLine: Boolean = false
+    var dashed: Boolean = false
         set(value) {
             field = value
             polyline?.isDottedLine = value
@@ -74,7 +74,7 @@ class AMapPolyline(context: ThemedReactContext) : ReactViewGroup(context) {
                 .width(width)
                 .useGradient(gradient)
                 .geodesic(geodesic)
-                .setDottedLine(dottedLine)
+                .setDottedLine(dashed)
                 .transparency(opacity)
                 .zIndex(zIndex))
     }

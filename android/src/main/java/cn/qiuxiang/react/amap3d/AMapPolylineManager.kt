@@ -54,9 +54,9 @@ internal class AMapPolylineManager : ViewGroupManager<AMapPolyline>() {
         polyline.geodesic = geodesic
     }
 
-    @ReactProp(name = "dottedLine")
-    fun setDottedLine(polyline: AMapPolyline, dottedLine: Boolean) {
-        polyline.dottedLine = dottedLine
+    @ReactProp(name = "dashed")
+    fun setDashed(polyline: AMapPolyline, dashed: Boolean) {
+        polyline.dashed = dashed
     }
 
     @ReactProp(name = "gradient")

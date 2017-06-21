@@ -36,7 +36,7 @@
     _renderer.strokeColor = color;
 }
 
-- (void)setDottedLine:(BOOL)dashed {
+- (void)setDashed:(BOOL)dashed {
     _dashed = dashed;
     _renderer.lineDash = dashed;
 }
