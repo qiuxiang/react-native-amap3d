@@ -1,9 +1,9 @@
 import React, {PropTypes, Component} from 'react'
-import {requireNativeComponent, View, PixelRatio, Platform} from 'react-native'
+import {requireNativeComponent, View, Platform, StyleSheet} from 'react-native'
 import {LatLng} from './PropTypes'
-import InfoWindow from './InfoWindow'
+import Overlay from './Overlay'
 
-class Marker extends Component {
+export default class Marker extends Component {
   static propTypes = {
     ...View.propTypes,
 
@@ -111,15 +111,15 @@ class Marker extends Component {
       })
     }
 
-    let customInfoWindow = null
-    let customMarker = null
+    let customInfoWindow = <View collapsable={false}/>
+    let customMarker = <View collapsable={false}/>
 
     if (props.children) {
-      customInfoWindow = props.children
+      customInfoWindow = <Overlay style={styles.overlay}>{props.children}</Overlay>
     }
 
     if (typeof props.icon === 'function') {
-      customMarker = props.icon()
+      customMarker = <Overlay style={styles.overlay}>{props.icon()}</Overlay>
       delete props.icon
     }
 
@@ -132,4 +132,8 @@ class Marker extends Component {
 
 AMapMarker = requireNativeComponent('AMapMarker', Marker)
 
-export default Marker
+const styles = StyleSheet.create({
+  overlay: {
+    position: 'absolute',
+  },
+})

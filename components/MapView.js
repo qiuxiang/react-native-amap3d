@@ -7,7 +7,6 @@ import {
 } from 'react-native'
 import {LatLng} from './PropTypes'
 import Marker from './Marker'
-import InfoWindow from './InfoWindow'
 import Overlay from './Overlay'
 import Polyline from './Polyline'
 import Polygon from './Polygon'
@@ -124,11 +123,6 @@ class MapView extends Component {
     tiltEnabled: PropTypes.bool,
 
     /**
-     * 地图加载完毕事件
-     */
-    onReady: React.PropTypes.func,
-
-    /**
      * 点击事件
      */
     onPress: React.PropTypes.func,
@@ -176,7 +170,6 @@ class MapView extends Component {
 
   static Marker = Marker
   static Overlay = Overlay
-  static InfoWindow = InfoWindow
   static Polyline = Polyline
   static Polygon = Polygon
   static Circle = Circle
@@ -185,4 +178,4 @@ class MapView extends Component {
 AMapView = requireNativeComponent('AMapView', MapView)
 
 export default MapView
-export {MapView, Marker, InfoWindow, Overlay, Polyline, Polygon, Circle}
+export {MapView, Marker, Overlay, Polyline, Polygon, Circle}

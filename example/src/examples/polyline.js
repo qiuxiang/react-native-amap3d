@@ -11,18 +11,6 @@ export default class PolylineExample extends Component {
     return <MapView style={StyleSheet.absoluteFill}>
       <Polyline
         width={5}
-        coordinates={[
-          {
-            latitude: 40.106901,
-            longitude: 116.097972,
-          },
-          {
-            latitude: 40.106901,
-            longitude: 116.597972,
-          },
-        ]}/>
-      <Polyline
-        width={5}
         color='red'
         coordinates={[
           {
@@ -35,7 +23,7 @@ export default class PolylineExample extends Component {
           },
         ]}/>
       <Polyline
-        dottedLine
+        dashed
         width={5}
         coordinates={[
           {
@@ -50,7 +38,6 @@ export default class PolylineExample extends Component {
       <Polyline
         gradient
         width={5}
-        color='blue'
         colors={['#f44336', '#2196f3', '#4caf50']}
         onPress={() => Alert.alert('onPress')}
         coordinates={[
