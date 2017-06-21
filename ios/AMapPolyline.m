@@ -16,14 +16,7 @@
     for (NSUInteger i = 0; i < coordinates.count; i++) {
         coords[i] = coordinates[i].coordinate;
     }
-    if (_color == nil) {
-        _color = UIColor.blackColor;
-    }
     _polyline = [MAPolyline polylineWithCoordinates:coords count:coordinates.count];
-    _renderer = [[MAPolylineRenderer alloc] initWithPolyline:_polyline];
-    _renderer.lineWidth = _width;
-    _renderer.strokeColor = _color;
-    _renderer.lineDash = _dashed;
 }
 
 - (void)setWidth:(CGFloat)width {
@@ -50,6 +43,13 @@
 }
 
 - (MAOverlayRenderer *)renderer {
+    if (_color == nil) {
+        _color = UIColor.blackColor;
+    }
+    _renderer = [[MAPolylineRenderer alloc] initWithPolyline:_polyline];
+    _renderer.lineWidth = _width;
+    _renderer.strokeColor = _color;
+    _renderer.lineDash = _dashed;
     return _renderer;
 }
 

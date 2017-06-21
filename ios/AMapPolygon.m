@@ -16,14 +16,7 @@
     for (NSUInteger i = 0; i < coordinates.count; i++) {
         coords[i] = coordinates[i].coordinate;
     }
-    if (_strokeColor == nil) {
-        _strokeColor = UIColor.blackColor;
-    }
     _polygon = [MAPolygon polygonWithCoordinates:coords count:coordinates.count];
-    _renderer = [[MAPolygonRenderer alloc] initWithPolygon:_polygon];
-    _renderer.lineWidth = _strokeWidth;
-    _renderer.strokeColor = _strokeColor;
-    _renderer.fillColor = _fillColor;
 }
 
 - (void)setStrokeWidth:(CGFloat)strokeWidth {
@@ -50,6 +43,13 @@
 }
 
 - (MAOverlayRenderer *)renderer {
+    if (_strokeColor == nil) {
+        _strokeColor = UIColor.blackColor;
+    }
+    _renderer = [[MAPolygonRenderer alloc] initWithPolygon:_polygon];
+    _renderer.lineWidth = _strokeWidth;
+    _renderer.strokeColor = _strokeColor;
+    _renderer.fillColor = _fillColor;
     return _renderer;
 }
 
