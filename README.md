@@ -28,7 +28,21 @@ $ react-native link react-native-amap3d
 ```
 
 #### iOS
-TODO: 待完善
+在 `ios` 目录下新建文件 `Podfile`：
+```ruby
+platform :ios, '8.0'
+
+target 'Your Target' do
+  pod 'Yoga', path: '../node_modules/react-native/ReactCommon/yoga/'
+  pod 'React', path: '../node_modules/react-native/'
+  pod 'react-native-amap3d', path: '../node_modules/react-native-amap3d/'
+end
+```
+
+然后运行：
+```
+$ pod install
+```
 
 ### 添加高德 Key
 #### Android
@@ -56,7 +70,10 @@ TODO: 待完善
    ```
 
 #### iOS
-TODO: 待完善
+1. [获取高德 Key](https://lbs.amap.com/api/ios-sdk/guide/create-project/get-key)。
+
+2. 在 `AppDelegate.m` 里引入 SDK 头文件 `#import <AMapFoundationKit/AMapFoundationKit.h>`，
+   并设置高德 Key `[AMapServices sharedServices].apiKey = @"你的高德 Key";`。
 
 
 ## 用法
