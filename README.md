@@ -77,7 +77,7 @@ $ pod install
 
 
 ## 用法
-更多示例请参考[示例项目](https://github.com/qiuxiang/react-native-amap3d/tree/develop/example)。
+更多示例请参考[示例项目](https://github.com/qiuxiang/react-native-amap3d/tree/master/example)。
 
 ### 导入地图模块
 ```jsx
