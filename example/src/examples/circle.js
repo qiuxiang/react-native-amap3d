@@ -14,7 +14,7 @@ export default class CircleExample extends Component {
         strokeColor='blue'
         fillColor='red'
         radius={10000}
-        center={{
+        coordinate={{
           latitude: 39.906901,
           longitude: 116.397972,
         }}/>
