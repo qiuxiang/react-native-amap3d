@@ -14,8 +14,14 @@
     "type": "git",
     "url": "https://github.com/qiuxiang/react-native-amap3d"
   },
+  "scripts": {
+    "docgen": "react-docgen components 2>/dev/null | node scripts/docgen.js"
+  },
   "peerDependencies": {
     "react": "*",
     "react-native": "*"
+  },
+  "devDependencies": {
+    "react-docgen": "^2.16.0"
   }
 }
