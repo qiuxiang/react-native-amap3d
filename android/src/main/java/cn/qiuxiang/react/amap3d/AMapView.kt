@@ -4,11 +4,13 @@ import android.view.View
 import com.amap.api.maps.AMap
 import com.amap.api.maps.CameraUpdateFactory
 import com.amap.api.maps.MapView
+import com.amap.api.maps.model.CameraPosition
 import com.amap.api.maps.model.LatLng
 import com.amap.api.maps.model.Marker
 import com.amap.api.maps.model.MyLocationStyle
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReadableArray
+import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.bridge.WritableMap
 import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.events.RCTEventEmitter
@@ -139,17 +141,30 @@ class AMapView(context: ThemedReactContext) : MapView(context) {
         }
     }
 
-    fun animateToCoordinate(args: ReadableArray?) {
-        val coordinate = args?.getMap(0)!!
+    fun animateTo(args: ReadableArray?) {
+        val currentCameraPosition = map.cameraPosition
+        val target = args?.getMap(0)!!
         val duration = args.getInt(1)
-        val cameraUpdate = CameraUpdateFactory.newLatLng(LatLng(
-                coordinate.getDouble("latitude"), coordinate.getDouble("longitude")))
-        map.animateCamera(cameraUpdate, duration.toLong(), animateCallback)
-    }
 
-    fun animateToZoomLevel(args: ReadableArray?) {
-        val zoomLevel = args?.getDouble(0)!!
-        val duration = args.getInt(1)
-        map.animateCamera(CameraUpdateFactory.zoomTo(zoomLevel.toFloat()), duration.toLong(), animateCallback)
+        var coordinate = currentCameraPosition.target
+        var zoomLevel = currentCameraPosition.zoom
+        var tilt = currentCameraPosition.tilt
+
+        if (target.hasKey("coordinate")) {
+            val json = target.getMap("coordinate")
+            coordinate = LatLng(json.getDouble("latitude"), json.getDouble("longitude"))
+        }
+
+        if (target.hasKey("zoomLevel")) {
+            zoomLevel = target.getDouble("zoomLevel").toFloat()
+        }
+
+        if (target.hasKey("tilt")) {
+            tilt = target.getDouble("tilt").toFloat()
+        }
+
+        val cameraUpdate = CameraUpdateFactory.newCameraPosition(CameraPosition(
+                coordinate, zoomLevel, tilt, currentCameraPosition.bearing))
+        map.animateCamera(cameraUpdate, duration.toLong(), animateCallback)
     }
 }
