@@ -34,7 +34,9 @@ platform :ios, '8.0'
 
 target 'Your Target' do
   pod 'Yoga', path: '../node_modules/react-native/ReactCommon/yoga/'
-  pod 'React', path: '../node_modules/react-native/'
+  pod 'React', path: '../node_modules/react-native/', :subspaces => [
+    'jschelpers_legacy',
+  ]
   pod 'react-native-amap3d', path: '../node_modules/react-native-amap3d/'
 end
 ```
@@ -144,42 +146,3 @@ import MapView from 'react-native-amap3d'
   </View>
 </Marker>
 ```
-
-
-## 进度
-
-### Android
-- [x] 各地图模式（常规、卫星、导航、夜间）
-- [x] 3D 建筑、路况、内置标签
-- [x] 室内地图
-- [x] 内置地图控件（指南针、比例尺、定位按钮、缩放按钮）
-- [x] 手势交互（平移、缩放、旋转、倾斜）
-- [x] 中心坐标、缩放级别、倾斜度
-- [x] 地图事件（onPress、onLongPress、onLocation）
-- [x] 地图标记（Marker）
-  - [x] 基本属性及事件
-  - [x] 自定义信息窗体
-  - [x] 自定义图标
-- [x] 折线绘制（Polyline）
-- [x] 多边形绘制（Polygon）
-- [x] 圆形绘制（Circle）
-- [ ] POI 检索 🚀
-- [ ] 地理编码转换
-
-### iOS
-- [x] 各地图模式（常规、卫星、导航、夜间）
-- [x] 3D 建筑、路况、内置标签
-- [x] 室内地图
-- [x] 内置地图控件（指南针和比例尺通过内置接口提供支持，定位按钮、缩放按钮需要自行实现）
-- [x] 手势交互（平移、缩放、旋转、倾斜）
-- [x] 中心坐标、缩放级别、倾斜度
-- [x] 地图事件（onPress、onLongPress、onLocation）
-- [x] 地图标记（Marker）
-  - [x] 基本属性及事件
-  - [x] 自定义信息窗体
-  - [x] 自定义图标
-- [x] 折线绘制（Polyline）
-- [x] 多边形绘制（Polygon）
-- [x] 圆形绘制（Circle）
-- [ ] POI 检索 🚀
-- [ ] 地理编码转换
