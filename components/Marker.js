@@ -26,7 +26,11 @@ export default class Marker extends Component {
      * 自定义图标
      *
      * 可以是回调函数返回的自定义 View，需要注意的是，
-     * Root View 必须是 Overlay，且需设置 style width
+     * Root View 必须是 Overlay，且需设置 style width。
+     *
+     * 内置的颜色有限，如需真正的自定义颜色，
+     * 建议使用自定义 View 引用 Image，如此，
+     * 任何颜色都可以通过 tintColor 进行设置。
      */
     icon: PropTypes.oneOfType([
       Platform.select({
