@@ -29,7 +29,25 @@ export default class Marker extends Component {
      * Root View 必须是 Overlay，且需设置 style width
      */
     icon: PropTypes.oneOfType([
-      PropTypes.string,
+      Platform.select({
+        android: PropTypes.oneOf([
+          'azure',
+          'blue',
+          'cyan',
+          'green',
+          'magenta',
+          'orange',
+          'red',
+          'rose',
+          'violet',
+          'yellow',
+        ]),
+        ios: PropTypes.oneOf([
+          'red',
+          'green',
+          'purple',
+        ]),
+      }),
       PropTypes.func,
     ]),
 
