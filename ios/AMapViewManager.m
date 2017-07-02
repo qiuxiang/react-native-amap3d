@@ -49,7 +49,6 @@ RCT_EXPORT_METHOD(animateTo:(nonnull NSNumber *)reactTag data:(NSArray *)data) {
     [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, UIView *> *viewRegistry) {
         AMapView *mapView = (AMapView *) viewRegistry[reactTag];
         NSDictionary *params = data[0];
-        CFTimeInterval duration = [data[1] doubleValue] / 1000;
         if (params[@"zoomLevel"]) {
             [mapView setZoomLevel:[params[@"zoomLevel"] floatValue] animated: YES];
         }
@@ -60,7 +59,7 @@ RCT_EXPORT_METHOD(animateTo:(nonnull NSNumber *)reactTag data:(NSArray *)data) {
                     [coordinate[@"longitude"] doubleValue]) animated:YES];
         }
         if (params[@"tilt"]) {
-            [mapView setCameraDegree:[params[@"tilt"] floatValue] animated:YES duration:duration];
+            [mapView setCameraDegree:[params[@"tilt"] floatValue] animated:YES duration:0.3];
         }
     }];
 }
