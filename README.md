@@ -5,11 +5,20 @@ react-native 高德地图组件，使用最新 3D SDK，支持 Android + iOS。
 该项目很大一定程度参考了 [react-native-maps](https://github.com/airbnb/react-native-maps)。
 
 
-## 特性（目标）
+## 功能
 
-- 使用 gradle 和 cocoapods 管理和安装地图 SDK，避免繁琐且容易出错的手动配置
-- 涵盖 SDK 提供的大部分功能，并提供适合 react-native 调用的接口
-- 提供不限于高德地图的其他地图 SDK 封装（可能是另一个项目了）
+- 地图模式切换（常规、卫星、导航、夜间）
+- 3D 建筑、路况、室内地图
+- 内置地图控件的显示隐藏（指南针、比例尺、定位按钮、缩放按钮）
+- 手势交互控制（平移、缩放、旋转、倾斜）
+- 中心坐标、缩放级别、倾斜度的设置，支持动画过渡
+- 地图事件（onPress、onLongPress、onLocation）
+- 地图标记（Marker）
+  - 自定义信息窗体
+  - 自定义图标
+- 折线绘制（Polyline）
+- 多边形绘制（Polygon）
+- 圆形绘制（Circle）
 
 ![](https://user-images.githubusercontent.com/1709072/27509246-28ee8a0a-592b-11e7-9148-ed24c86ede82.jpg) ![](https://user-images.githubusercontent.com/1709072/27509248-29000d20-592b-11e7-90ef-3f56c4300625.jpg) ![](https://user-images.githubusercontent.com/1709072/27509247-28feba88-592b-11e7-90ec-3e3680cee241.jpg) ![](https://user-images.githubusercontent.com/1709072/27509249-2902531e-592b-11e7-801d-5fef6a87cead.jpg) ![](https://user-images.githubusercontent.com/1709072/27509250-2906e64a-592b-11e7-8cc5-1ce84090ce66.jpg) ![](https://user-images.githubusercontent.com/1709072/27509251-29084d5a-592b-11e7-84af-f49dbcea9873.jpg) ![](https://user-images.githubusercontent.com/1709072/27509252-291d5876-592b-11e7-8849-15360c2e16c2.jpg) ![](https://user-images.githubusercontent.com/1709072/27509253-2933ef5a-592b-11e7-88b4-10f67fa03706.jpg)
 
