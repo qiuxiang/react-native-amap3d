@@ -1,4 +1,5 @@
 #import <React/RCTViewManager.h>
+#import <React/RCTUIManager.h>
 #import "AMapView.h"
 #import "AMapMarker.h"
 #import "AMapModel.h"
@@ -43,6 +44,26 @@ RCT_EXPORT_VIEW_PROPERTY(tilt, CGFloat)
 RCT_EXPORT_VIEW_PROPERTY(onPress, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onLongPress, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onLocation, RCTBubblingEventBlock)
+
+RCT_EXPORT_METHOD(animateTo:(nonnull NSNumber *)reactTag data:(NSArray *)data) {
+    [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, UIView *> *viewRegistry) {
+        AMapView *mapView = (AMapView *) viewRegistry[reactTag];
+        NSDictionary *params = data[0];
+        CFTimeInterval duration = [data[1] doubleValue] / 1000;
+        if (params[@"zoomLevel"]) {
+            [mapView setZoomLevel:[params[@"zoomLevel"] floatValue] animated: YES];
+        }
+        if (params[@"coordinate"]) {
+            NSDictionary *coordinate = params[@"coordinate"];
+            [mapView setCenterCoordinate:CLLocationCoordinate2DMake(
+                    [coordinate[@"latitude"] doubleValue],
+                    [coordinate[@"longitude"] doubleValue]) animated:YES];
+        }
+        if (params[@"tilt"]) {
+            [mapView setCameraDegree:[params[@"tilt"] floatValue] animated:YES duration:duration];
+        }
+    }];
+}
 
 - (void)mapView:(AMapView *)mapView didSingleTappedAtCoordinate:(CLLocationCoordinate2D)coordinate {
     if (mapView.onPress) {

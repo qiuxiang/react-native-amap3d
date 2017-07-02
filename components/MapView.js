@@ -2,6 +2,8 @@ import React, {PropTypes, Component} from 'react'
 import {
   View,
   UIManager,
+  NativeModules,
+  Platform,
   findNodeHandle,
   requireNativeComponent,
 } from 'react-native'
@@ -159,11 +161,19 @@ class MapView extends Component {
   }
 
   _sendCommand(command, params = null) {
-    UIManager.dispatchViewManagerCommand(
-      findNodeHandle(this),
-      UIManager.AMapView.Commands[command],
-      params,
-    )
+    switch (Platform.OS) {
+      case 'android':
+        UIManager.dispatchViewManagerCommand(
+          findNodeHandle(this),
+          UIManager.AMapView.Commands[command],
+          params,
+        )
+        break;
+      case 'ios':
+        params[1] = 300
+        NativeModules.AMapViewManager[command](findNodeHandle(this), params)
+        break;
+    }
   }
 
   render() {
