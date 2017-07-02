@@ -2,7 +2,8 @@
 
 react-native 高德地图组件，使用最新 3D SDK，支持 Android + iOS。
 
-该项目很大一定程度参考了 [react-native-maps](https://github.com/airbnb/react-native-maps)。
+该项目很大一定程度参考了 [react-native-maps](https://github.com/airbnb/react-native-maps)，
+目前正在开发中，欢迎各种 [Issue](https://github.com/qiuxiang/react-native-amap3d/issues/new)。
 
 
 ## 功能
