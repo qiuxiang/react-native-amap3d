@@ -1,13 +1,11 @@
 import React, {PropTypes, Component} from 'react'
 import {
+  requireNativeComponent,
+  findNodeHandle,
   View,
   UIManager,
-  NativeModules,
-  Platform,
-  findNodeHandle,
-  requireNativeComponent,
 } from 'react-native'
-import {LatLng} from './PropTypes'
+import { LatLng, Region } from './PropTypes'
 import Marker from './Marker'
 import Overlay from './Overlay'
 import Polyline from './Polyline'
@@ -19,7 +17,7 @@ class MapView extends Component {
     ...View.propTypes,
 
     /**
-     * 地图类型
+     * 设置地图类型
      *
      * - standard: 标准地图
      * - satellite: 卫星地图
@@ -80,29 +78,39 @@ class MapView extends Component {
     showsTraffic: PropTypes.bool,
 
     /**
-     * 最大缩放级别
+     * 设置最大缩放级别
      */
     maxZoomLevel: PropTypes.number,
 
     /**
-     * 最小缩放级别
+     * 设置最小缩放级别
      */
     minZoomLevel: PropTypes.number,
 
     /**
-     * 当前缩放级别，取值范围 [3, 20]
+     * 设置当前缩放级别，取值范围 [3, 20]
      */
     zoomLevel: PropTypes.number,
 
     /**
-     * 中心坐标
+     * 设置中心坐标
      */
     coordinate: LatLng,
 
     /**
-     * 倾斜角度，取值范围 [0, 60]
+     * 设置可见地图区域的矩形
+     */
+    limitRegion: Region,
+
+    /**
+     * 设置倾斜角度，取值范围 [0, 60]
      */
     tilt: PropTypes.number,
+
+    /**
+     * 设置旋转角度，取值范围 [0, 360]
+     */
+    rotate: PropTypes.number,
 
     /**
      * 是否启用缩放手势，用于放大缩小
@@ -150,29 +158,24 @@ class MapView extends Component {
     onAnimateCancel: React.PropTypes.func,
   }
 
-  /**
-   * 动画过渡到某个位置（坐标、缩放级别、倾斜度）
-   *
-   * @param {{zoomLevel: ?number, coordinate: ?LatLng, titl: ?number}} target
-   * @param duration
-   */
-  animateTo(target, duration = 1000) {
-    this._sendCommand('animateTo', [target, duration])
+  animateToCoordinate(coordinate, duration = 1000) {
+    this._sendCommand('animateToCoordinate', [coordinate, duration])
+  }
+
+  animateToZoomLevel(zoomLevel, duration = 1000) {
+    this._sendCommand('animateToZoomLevel', [zoomLevel, duration])
+  }
+
+  animateToMapStatus(mapStatus, duration = 1000) {
+    this._sendCommand('animateToMapStatus', [mapStatus, duration])
   }
 
   _sendCommand(command, params = null) {
-    switch (Platform.OS) {
-      case 'android':
-        UIManager.dispatchViewManagerCommand(
-          findNodeHandle(this),
-          UIManager.AMapView.Commands[command],
-          params,
-        )
-        break;
-      case 'ios':
-        NativeModules.AMapViewManager[command](findNodeHandle(this), params)
-        break;
-    }
+    UIManager.dispatchViewManagerCommand(
+      findNodeHandle(this),
+      UIManager.AMapView.Commands[command],
+      params,
+    )
   }
 
   render() {

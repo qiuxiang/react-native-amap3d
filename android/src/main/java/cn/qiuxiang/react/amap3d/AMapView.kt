@@ -1,5 +1,6 @@
 package cn.qiuxiang.react.amap3d
 
+import android.annotation.SuppressLint
 import android.view.View
 import com.amap.api.maps.AMap
 import com.amap.api.maps.CameraUpdateFactory
@@ -10,7 +11,6 @@ import com.amap.api.maps.model.Marker
 import com.amap.api.maps.model.MyLocationStyle
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReadableArray
-import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.bridge.WritableMap
 import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.events.RCTEventEmitter
@@ -31,10 +31,14 @@ class AMapView(context: ThemedReactContext) : MapView(context) {
         map.myLocationStyle = locationStyle
 
         map.setOnMapClickListener { latLng ->
+            for (marker in markers.values) {
+                marker.active = false
+            }
+
             val event = Arguments.createMap()
             event.putDouble("latitude", latLng.latitude)
             event.putDouble("longitude", latLng.longitude)
-            emit(id, "onMapClick")
+            emit(id, "onMapClick", event)
         }
 
         map.setOnMapLongClickListener { latLng ->
@@ -49,7 +53,7 @@ class AMapView(context: ThemedReactContext) : MapView(context) {
             event.putDouble("latitude", location.latitude)
             event.putDouble("longitude", location.longitude)
             event.putDouble("accuracy", location.accuracy.toDouble())
-            emit(id, "onLocationChange")
+            emit(id, "onLocationChange", event)
         }
 
         map.setOnMarkerClickListener { marker ->
@@ -84,6 +88,12 @@ class AMapView(context: ThemedReactContext) : MapView(context) {
         }
 
         map.setInfoWindowAdapter(InfoWindowAdapter(context, markers))
+    }
+
+    @SuppressLint("MissingSuperCall")
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        map.isMyLocationEnabled = false
     }
 
     fun addMarker(marker: AMapMarker) {
@@ -141,30 +151,49 @@ class AMapView(context: ThemedReactContext) : MapView(context) {
         }
     }
 
-    fun animateTo(args: ReadableArray?) {
-        val currentCameraPosition = map.cameraPosition
-        val target = args?.getMap(0)!!
+    fun animateToCoordinate(args: ReadableArray?) {
+        val coordinate = args?.getMap(0)!!
         val duration = args.getInt(1)
+        val cameraUpdate = CameraUpdateFactory.newLatLng(LatLng(
+                coordinate.getDouble("latitude"), coordinate.getDouble("longitude")))
 
-        var coordinate = currentCameraPosition.target
-        var zoomLevel = currentCameraPosition.zoom
-        var tilt = currentCameraPosition.tilt
+        if (duration <= 0) {
+            map.moveCamera(cameraUpdate)
+        } else {
+            map.animateCamera(cameraUpdate, duration.toLong(), animateCallback)
+        }
+    }
 
-        if (target.hasKey("coordinate")) {
-            val json = target.getMap("coordinate")
-            coordinate = LatLng(json.getDouble("latitude"), json.getDouble("longitude"))
+    fun animateToZoomLevel(args: ReadableArray?) {
+        val zoomLevel = args?.getDouble(0)!!
+        val duration = args.getInt(1)
+        val cameraUpdate = CameraUpdateFactory.zoomTo(zoomLevel.toFloat())
+
+        if (duration <= 0) {
+            map.moveCamera(cameraUpdate)
+        } else {
+            map.animateCamera(cameraUpdate, duration.toLong(), animateCallback)
+        }
+    }
+
+    fun animateToMapStatus(args: ReadableArray?) {
+        val mapStatusMap = args?.getMap(0)
+        val duration = args?.getInt(1) ?: 0
+        if (mapStatusMap == null) {
+            return
         }
 
-        if (target.hasKey("zoomLevel")) {
-            zoomLevel = target.getDouble("zoomLevel").toFloat()
-        }
+        val centerCoordinate = if (mapStatusMap.hasKey("coordinate")) AMapConverter.LatLng(mapStatusMap.getMap("coordinate")) else null
+        val zoomLevel = if (mapStatusMap.hasKey("zoomLevel")) mapStatusMap.getDouble("zoomLevel").toFloat() else null
+        val rotationDegree = if (mapStatusMap.hasKey("rotate")) mapStatusMap.getDouble("rotate").toFloat() else null
+        val cameraDegree = if (mapStatusMap.hasKey("tilt")) mapStatusMap.getDouble("tilt").toFloat() else null
+        val position = CameraPosition(centerCoordinate ?: map.cameraPosition.target, zoomLevel ?: map.cameraPosition.zoom, cameraDegree ?: map.cameraPosition.tilt, rotationDegree ?: map.cameraPosition.bearing)
+        val cameraUpdate = CameraUpdateFactory.newCameraPosition(position)
 
-        if (target.hasKey("tilt")) {
-            tilt = target.getDouble("tilt").toFloat()
+        if (duration <= 0) {
+            map.moveCamera(cameraUpdate)
+        } else {
+            map.animateCamera(cameraUpdate, duration.toLong(), animateCallback)
         }
-
-        val cameraUpdate = CameraUpdateFactory.newCameraPosition(CameraPosition(
-                coordinate, zoomLevel, tilt, currentCameraPosition.bearing))
-        map.animateCamera(cameraUpdate, duration.toLong(), animateCallback)
     }
 }

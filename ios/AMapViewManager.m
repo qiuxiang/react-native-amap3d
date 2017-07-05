@@ -17,6 +17,9 @@ RCT_EXPORT_MODULE()
 
 - (UIView *)view {
     AMapView *mapView = [AMapView new];
+    // when scroll view contains Map maybe we need stop Map Rending Cost.
+    mapView.runLoopMode = NSDefaultRunLoopMode;
+    mapView.allowsAnnotationViewSorting = YES;
     mapView.centerCoordinate = CLLocationCoordinate2DMake(39.9042, 116.4074);
     mapView.zoomLevel = 10;
     mapView.delegate = self;
@@ -39,30 +42,13 @@ RCT_EXPORT_VIEW_PROPERTY(rotateEnabled, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(tiltEnabled, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(mapType, MAMapType)
 RCT_EXPORT_VIEW_PROPERTY(coordinate, CLLocationCoordinate2D)
+RCT_EXPORT_VIEW_PROPERTY(limitRegion, MACoordinateRegion)
 RCT_EXPORT_VIEW_PROPERTY(tilt, CGFloat)
+RCT_EXPORT_VIEW_PROPERTY(rotate, CGFloat)
 
 RCT_EXPORT_VIEW_PROPERTY(onPress, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onLongPress, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onLocation, RCTBubblingEventBlock)
-
-RCT_EXPORT_METHOD(animateTo:(nonnull NSNumber *)reactTag data:(NSArray *)data) {
-    [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, UIView *> *viewRegistry) {
-        AMapView *mapView = (AMapView *) viewRegistry[reactTag];
-        NSDictionary *params = data[0];
-        if (params[@"zoomLevel"]) {
-            [mapView setZoomLevel:[params[@"zoomLevel"] floatValue] animated: YES];
-        }
-        if (params[@"coordinate"]) {
-            NSDictionary *coordinate = params[@"coordinate"];
-            [mapView setCenterCoordinate:CLLocationCoordinate2DMake(
-                    [coordinate[@"latitude"] doubleValue],
-                    [coordinate[@"longitude"] doubleValue]) animated:YES];
-        }
-        if (params[@"tilt"]) {
-            [mapView setCameraDegree:[params[@"tilt"] floatValue] animated:YES duration:0.3];
-        }
-    }];
-}
 
 - (void)mapView:(AMapView *)mapView didSingleTappedAtCoordinate:(CLLocationCoordinate2D)coordinate {
     if (mapView.onPress) {
@@ -96,7 +82,11 @@ RCT_EXPORT_METHOD(animateTo:(nonnull NSNumber *)reactTag data:(NSArray *)data) {
     if ([annotation isKindOfClass:[AMapMarker class]]) {
         AMapMarker *marker = (AMapMarker *) annotation;
         if (marker.active) {
-            [mapView selectAnnotation:marker animated:YES];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                // directly call selectAnnotation not work, because of there has no current AnnotationView presentation.
+                // use RUNLOOP
+                [mapView selectAnnotation:marker animated:YES];
+            });
         }
         return marker.annotationView;
     }
@@ -112,33 +102,90 @@ RCT_EXPORT_METHOD(animateTo:(nonnull NSNumber *)reactTag data:(NSArray *)data) {
 
 - (void)mapView:(MAMapView *)mapView didSelectAnnotationView:(MAAnnotationView *)view {
     AMapMarker *marker = (AMapMarker *) view.annotation;
-    if (marker.onPress) {
-        marker.onPress(@{});
+    if (marker.onMarkerClick) {
+        marker.onMarkerClick(@{});
     }
 }
 
 - (void)mapView:(MAMapView *)mapView didAnnotationViewCalloutTapped:(MAAnnotationView *)view {
     AMapMarker *marker = (AMapMarker *) view.annotation;
-    if (marker.onInfoWindowPress) {
-        marker.onInfoWindowPress(@{});
+    if (marker.onInfoWindowClick) {
+        marker.onInfoWindowClick(@{});
     }
 }
 
 - (void)mapView:(MAMapView *)mapView annotationView:(MAAnnotationView *)view didChangeDragState:(MAAnnotationViewDragState)newState
    fromOldState:(MAAnnotationViewDragState)oldState {
     AMapMarker *marker = (AMapMarker *) view.annotation;
-    if (newState == MAAnnotationViewDragStateStarting && marker.onDragStart) {
-        marker.onDragStart(@{});
+    
+    if (newState == MAAnnotationViewDragStateStarting && marker.onMarkerDragStart) {
+        marker.onMarkerDragStart(@{});
     }
-    if (newState == MAAnnotationViewDragStateDragging && marker.onDrag) {
-        marker.onDrag(@{});
+    if (newState == MAAnnotationViewDragStateDragging && marker.onMarkerDrag) {
+        marker.onMarkerDrag(@{});
     }
-    if (newState == MAAnnotationViewDragStateEnding && marker.onDragEnd) {
-        marker.onDragEnd(@{
+    if (newState == MAAnnotationViewDragStateEnding && marker.onMarkerDragEnd) {
+        marker.onMarkerDragEnd(@{
                 @"latitude": @(marker.coordinate.latitude),
                 @"longitude": @(marker.coordinate.longitude),
         });
     }
+    if (newState == MAAnnotationViewDragStateCanceling || newState == MAAnnotationViewDragStateEnding) {
+        [marker resetImage];
+    }
+}
+
+RCT_EXPORT_METHOD(animateToCoordinate:(nonnull NSNumber *)reactTag coordinate:(CLLocationCoordinate2D)coord duration:(NSInteger)duration) {
+    [self.bridge.uiManager addUIBlock:^(RCTUIManager *uiManager, NSDictionary<NSNumber *,UIView *> *viewRegistry) {
+        UIView *view = [viewRegistry objectForKey:reactTag];
+        if (view && [view isKindOfClass:[MAMapView class]]) {
+            MAMapView *mapView = (MAMapView *) view;
+            MAMapStatus *mapStatus = [mapView getMapStatus];
+            
+            mapStatus.centerCoordinate = coord;
+            [mapView setMapStatus:mapStatus animated:duration > 0 duration:1.0f * duration / 1000];
+        }
+    }];
+}
+
+RCT_EXPORT_METHOD(animateToZoomLevel:(nonnull NSNumber *)reactTag zoomLevel:(CGFloat)zoomLevel duration:(NSInteger)duration) {
+    [self.bridge.uiManager addUIBlock:^(RCTUIManager *uiManager, NSDictionary<NSNumber *,UIView *> *viewRegistry) {
+        UIView *view = [viewRegistry objectForKey:reactTag];
+        if (view && [view isKindOfClass:[MAMapView class]]) {
+            MAMapView *mapView = (MAMapView *) view;
+            MAMapStatus *mapStatus = [mapView getMapStatus];
+            
+            mapStatus.zoomLevel = zoomLevel;
+            [mapView setMapStatus:mapStatus animated:duration > 0 duration:1.0f * duration / 1000];
+        }
+    }];
+}
+
+RCT_EXPORT_METHOD(animateToMapStatus:(nonnull NSNumber *)reactTag mapStatus:(MAMapStatus *)changeStatus duration:(NSInteger)duration) {
+    [self.bridge.uiManager addUIBlock:^(RCTUIManager *uiManager, NSDictionary<NSNumber *,UIView *> *viewRegistry) {
+        UIView *view = [viewRegistry objectForKey:reactTag];
+        if (view && [view isKindOfClass:[MAMapView class]]) {
+            MAMapView *mapView = (MAMapView *) view;
+            MAMapStatus *mapStatus = [mapView getMapStatus];
+            if (changeStatus.centerCoordinate.latitude >= 0 && changeStatus.centerCoordinate.longitude >= 0) {
+                mapStatus.centerCoordinate = changeStatus.centerCoordinate;
+            }
+            if (changeStatus.zoomLevel >= 0) {
+                mapStatus.zoomLevel = changeStatus.zoomLevel;
+            }
+            if (changeStatus.cameraDegree >= 0) {
+                mapStatus.cameraDegree = changeStatus.cameraDegree;
+            }
+            if (changeStatus.rotationDegree >= 0) {
+                mapStatus.rotationDegree = changeStatus.rotationDegree;
+            }
+            if (changeStatus.screenAnchor.x >= 0 && changeStatus.screenAnchor.y >= 0) {
+                mapStatus.screenAnchor = changeStatus.screenAnchor;
+            }
+            
+            [mapView setMapStatus:mapStatus animated:duration > 0 duration:1.0f * duration / 1000];
+        }
+    }];
 }
 
 @end

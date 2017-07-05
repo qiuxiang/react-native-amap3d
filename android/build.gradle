@@ -21,11 +21,21 @@ android {
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 25
+
+        ndk {
+            abiFilters "armeabi-v7a", "x86"
+        }
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
     }
 }
 
 dependencies {
     provided 'com.facebook.react:react-native:+'
-    compile 'com.amap.api:3dmap:5.1.0'
+    compile('com.amap.api:3dmap:5.2.1')
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 }

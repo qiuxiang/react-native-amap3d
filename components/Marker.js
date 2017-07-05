@@ -122,15 +122,11 @@ export default class Marker extends Component {
   render() {
     const props = {
       ...this.props,
-      ...Platform.select({
-        android: {
-          onMarkerClick: this._handle('onPress'),
-          onMarkerDragStart: this._handle('onDragStart'),
-          onMarkerDrag: this._handle('onDrag'),
-          onMarkerDragEnd: this._handle('onDragEnd'),
-          onInfoWindowClick: this._handle('onInfoWindowPress'),
-        },
-      })
+      onMarkerClick: this._handle('onPress'),
+      onMarkerDragStart: this._handle('onDragStart'),
+      onMarkerDrag: this._handle('onDrag'),
+      onMarkerDragEnd: this._handle('onDragEnd'),
+      onInfoWindowClick: this._handle('onInfoWindowPress'),
     }
 
     let customInfoWindow = <View collapsable={false}/>
@@ -152,7 +148,15 @@ export default class Marker extends Component {
   }
 }
 
-AMapMarker = requireNativeComponent('AMapMarker', Marker)
+AMapMarker = requireNativeComponent('AMapMarker', Marker, {
+  nativeOnly: {
+    onMarkerClick: true,
+    onMarkerDragStart: true,
+    onMarkerDrag: true,
+    onMarkerDragEnd: true,
+    onInfoWindowClick: true,
+  }
+})
 
 const styles = StyleSheet.create({
   overlay: {

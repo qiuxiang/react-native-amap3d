@@ -84,12 +84,12 @@ def enableProguardInReleaseBuilds = false
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    buildToolsVersion '25.0.0'
 
     defaultConfig {
         applicationId "cn.qiuxiang.react.amap3d.example"
         minSdkVersion 16
-        targetSdkVersion 22
+        targetSdkVersion 25
         versionCode 1
         versionName "1.0"
         ndk {
@@ -122,6 +122,15 @@ android {
                         versionCodes.get(abi) * 1048576 + defaultConfig.versionCode
             }
         }
+    }
+
+    packagingOptions {
+        pickFirst('lib/*/libRoadLineRebuildAPI.so')
+        pickFirst('lib/*/libGNaviUtils.so')
+        pickFirst('lib/*/libGNaviData.so')
+        pickFirst('lib/*/libGNaviMap.so')
+        pickFirst('lib/*/libGNaviMapex.so')
+        pickFirst('lib/*/libGNaviSearch.so')
     }
 }
 

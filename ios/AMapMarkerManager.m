@@ -24,10 +24,10 @@ RCT_EXPORT_VIEW_PROPERTY(infoWindowEnabled, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(zIndex, NSInteger)
 RCT_EXPORT_VIEW_PROPERTY(icon, MAPinAnnotationColor)
 
-RCT_EXPORT_VIEW_PROPERTY(onPress, RCTBubblingEventBlock)
-RCT_EXPORT_VIEW_PROPERTY(onInfoWindowPress, RCTBubblingEventBlock)
-RCT_EXPORT_VIEW_PROPERTY(onDragStart, RCTBubblingEventBlock)
-RCT_EXPORT_VIEW_PROPERTY(onDrag, RCTBubblingEventBlock)
-RCT_EXPORT_VIEW_PROPERTY(onDragEnd, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onMarkerClick, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onInfoWindowClick, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onMarkerDragStart, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onMarkerDrag, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onMarkerDragEnd, RCTBubblingEventBlock)
 
 @end

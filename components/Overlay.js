@@ -12,21 +12,14 @@ class Overlay extends Component {
   static propTypes = {
     ...View.propTypes,
   }
-
+  
   componentDidUpdate() {
     setTimeout(() => {
-      switch (Platform.OS) {
-        case 'android':
-          UIManager.dispatchViewManagerCommand(
+      UIManager.dispatchViewManagerCommand(
             findNodeHandle(this),
             UIManager.AMapOverlay.Commands.update,
             null,
           )
-          break;
-        case 'ios':
-          NativeModules.AMapOverlayManager.update(findNodeHandle(this))
-          break;
-      }
     }, 0)
   }
 
