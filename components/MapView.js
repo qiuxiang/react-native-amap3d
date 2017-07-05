@@ -7,7 +7,7 @@ import {
   findNodeHandle,
   requireNativeComponent,
 } from 'react-native'
-import {LatLng} from './PropTypes'
+import {LatLng, Region} from './PropTypes'
 import Marker from './Marker'
 import Overlay from './Overlay'
 import Polyline from './Polyline'
@@ -100,7 +100,12 @@ class MapView extends Component {
     coordinate: LatLng,
 
     /**
-     * 倾斜角度，取值范围 [0, 60]
+     * 设置可见地图区域的矩形
+     */
+    limitRegion: Region,
+
+    /**
+     * 设置倾斜角度，取值范围 [0, 60]
      */
     tilt: PropTypes.number,
 

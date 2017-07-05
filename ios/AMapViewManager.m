@@ -17,6 +17,9 @@ RCT_EXPORT_MODULE()
 
 - (UIView *)view {
     AMapView *mapView = [AMapView new];
+    // when scroll view contains Map maybe we need stop Map Rending Cost.
+    mapView.runLoopMode = NSDefaultRunLoopMode;
+    mapView.allowsAnnotationViewSorting = YES;
     mapView.centerCoordinate = CLLocationCoordinate2DMake(39.9042, 116.4074);
     mapView.zoomLevel = 10;
     mapView.delegate = self;
@@ -39,6 +42,7 @@ RCT_EXPORT_VIEW_PROPERTY(rotateEnabled, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(tiltEnabled, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(mapType, MAMapType)
 RCT_EXPORT_VIEW_PROPERTY(coordinate, CLLocationCoordinate2D)
+RCT_EXPORT_VIEW_PROPERTY(limitRegion, MACoordinateRegion)
 RCT_EXPORT_VIEW_PROPERTY(tilt, CGFloat)
 
 RCT_EXPORT_VIEW_PROPERTY(onPress, RCTBubblingEventBlock)
@@ -96,7 +100,11 @@ RCT_EXPORT_METHOD(animateTo:(nonnull NSNumber *)reactTag data:(NSArray *)data) {
     if ([annotation isKindOfClass:[AMapMarker class]]) {
         AMapMarker *marker = (AMapMarker *) annotation;
         if (marker.active) {
-            [mapView selectAnnotation:marker animated:YES];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                // directly call selectAnnotation not work, because of there has no current AnnotationView presentation.
+                // use RUNLOOP
+                [mapView selectAnnotation:marker animated:YES];
+            });
         }
         return marker.annotationView;
     }
@@ -138,6 +146,9 @@ RCT_EXPORT_METHOD(animateTo:(nonnull NSNumber *)reactTag data:(NSArray *)data) {
                 @"latitude": @(marker.coordinate.latitude),
                 @"longitude": @(marker.coordinate.longitude),
         });
+    }
+    if (newState == MAAnnotationViewDragStateCanceling || newState == MAAnnotationViewDragStateEnding) {
+        [marker resetImage];
     }
 }
 

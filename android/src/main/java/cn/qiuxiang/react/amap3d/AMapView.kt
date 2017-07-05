@@ -1,5 +1,6 @@
 package cn.qiuxiang.react.amap3d
 
+import android.annotation.SuppressLint
 import android.view.View
 import com.amap.api.maps.AMap
 import com.amap.api.maps.CameraUpdateFactory
@@ -31,10 +32,14 @@ class AMapView(context: ThemedReactContext) : MapView(context) {
         map.myLocationStyle = locationStyle
 
         map.setOnMapClickListener { latLng ->
+            for (marker in markers.values) {
+                marker.active = false
+            }
+
             val event = Arguments.createMap()
             event.putDouble("latitude", latLng.latitude)
             event.putDouble("longitude", latLng.longitude)
-            emit(id, "onMapClick")
+            emit(id, "onMapClick", event)
         }
 
         map.setOnMapLongClickListener { latLng ->
@@ -49,7 +54,7 @@ class AMapView(context: ThemedReactContext) : MapView(context) {
             event.putDouble("latitude", location.latitude)
             event.putDouble("longitude", location.longitude)
             event.putDouble("accuracy", location.accuracy.toDouble())
-            emit(id, "onLocationChange")
+            emit(id, "onLocationChange", event)
         }
 
         map.setOnMarkerClickListener { marker ->
@@ -84,6 +89,12 @@ class AMapView(context: ThemedReactContext) : MapView(context) {
         }
 
         map.setInfoWindowAdapter(InfoWindowAdapter(context, markers))
+    }
+
+    @SuppressLint("MissingSuperCall")
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        map.isMyLocationEnabled = false
     }
 
     fun addMarker(marker: AMapMarker) {

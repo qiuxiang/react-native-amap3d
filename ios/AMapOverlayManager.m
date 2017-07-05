@@ -9,7 +9,7 @@
 @implementation AMapOverlayManager {
 }
 
-RCT_EXPORT_MODULE()
+RCT_EXPORT_MODULE(AMapOverlay)
 
 - (UIView *)view {
     return [AMapOverlay new];

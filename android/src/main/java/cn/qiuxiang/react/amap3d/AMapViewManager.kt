@@ -13,9 +13,7 @@ import com.facebook.react.uimanager.annotations.ReactProp
 @Suppress("unused")
 internal class AMapViewManager : ViewGroupManager<AMapView>() {
     companion object {
-        val ANIMATE_TO_COORDINATE = 1
-        val ANIMATE_TO_ZOOM_LEVEL = 2
-        val ANIMATE_TO = 3
+        val ANIMATE_TO = 1
     }
 
     override fun getName(): String {
@@ -161,6 +159,11 @@ internal class AMapViewManager : ViewGroupManager<AMapView>() {
         view.map.moveCamera(CameraUpdateFactory.changeLatLng(LatLng(
                 coordinate.getDouble("latitude"),
                 coordinate.getDouble("longitude"))))
+    }
+
+    @ReactProp(name = "limitRegion")
+    fun setLimitRegion(view: AMapView, limitRegion: ReadableMap) {
+        view.map.setMapStatusLimits(AMapConverter.LatLngBounds(limitRegion))
     }
 
     @ReactProp(name = "tilt")
