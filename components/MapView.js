@@ -108,6 +108,11 @@ class MapView extends Component {
     tilt: PropTypes.number,
 
     /**
+     * 设置旋转角度，取值范围 [0, 360]
+     */
+    rotate: PropTypes.number,
+
+    /**
      * 是否启用缩放手势，用于放大缩小
      */
     zoomEnabled: PropTypes.bool,

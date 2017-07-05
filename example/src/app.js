@@ -4,6 +4,7 @@ import Examples from './examples'
 import MapTypes from './examples/map-types'
 import Layers from './examples/layers'
 import Indoor from './examples/indoor'
+import Animated from './examples/animated'
 import Controls from './examples/controls'
 import Gestures from './examples/gestures'
 import Marker from './examples/marker'
@@ -16,6 +17,7 @@ export default StackNavigator({
   MapTypes: {screen: MapTypes},
   Layers: {screen: Layers},
   Indoor: {screen: Indoor},
+  Animated: {screen: Animated},
   Controls: {screen: Controls},
   Gestures: {screen: Gestures},
   Marker: {screen: Marker},

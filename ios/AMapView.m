@@ -28,6 +28,10 @@
     super.cameraDegree = degree;
 }
 
+- (void)setRotate:(CGFloat)rotate {
+    super.rotationDegree = rotate;
+}
+
 - (void)insertReactSubview:(id <RCTComponent>)subview atIndex:(NSInteger)atIndex {
     [super insertReactSubview:(UIView *) subview atIndex:atIndex];
     if ([subview isKindOfClass:[AMapMarker class]]) {

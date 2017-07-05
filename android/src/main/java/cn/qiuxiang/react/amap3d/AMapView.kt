@@ -1,14 +1,14 @@
 package cn.qiuxiang.react.amap3d
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.View
 import com.amap.api.maps.AMap
-import com.amap.api.maps.CameraUpdate
 import com.amap.api.maps.CameraUpdateFactory
 import com.amap.api.maps.MapView
-import com.amap.api.maps.model.*
-import com.autonavi.amap.mapcore.CameraUpdateMessage
+import com.amap.api.maps.model.CameraPosition
+import com.amap.api.maps.model.LatLng
+import com.amap.api.maps.model.Marker
+import com.amap.api.maps.model.MyLocationStyle
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.WritableMap
@@ -183,10 +183,10 @@ class AMapView(context: ThemedReactContext) : MapView(context) {
             return
         }
 
-        val centerCoordinate = if (mapStatusMap.hasKey("centerCoordinate")) AMapConverter.LatLng(mapStatusMap.getMap("centerCoordinate")) else null
+        val centerCoordinate = if (mapStatusMap.hasKey("coordinate")) AMapConverter.LatLng(mapStatusMap.getMap("coordinate")) else null
         val zoomLevel = if (mapStatusMap.hasKey("zoomLevel")) mapStatusMap.getDouble("zoomLevel").toFloat() else null
-        val rotationDegree = if (mapStatusMap.hasKey("rotationDegree")) mapStatusMap.getDouble("rotationDegree").toFloat() else null
-        val cameraDegree = if (mapStatusMap.hasKey("cameraDegree")) mapStatusMap.getDouble("cameraDegree").toFloat() else null
+        val rotationDegree = if (mapStatusMap.hasKey("rotate")) mapStatusMap.getDouble("rotate").toFloat() else null
+        val cameraDegree = if (mapStatusMap.hasKey("tilt")) mapStatusMap.getDouble("tilt").toFloat() else null
         val position = CameraPosition(centerCoordinate ?: map.cameraPosition.target, zoomLevel ?: map.cameraPosition.zoom, cameraDegree ?: map.cameraPosition.tilt, rotationDegree ?: map.cameraPosition.bearing)
         val cameraUpdate = CameraUpdateFactory.newCameraPosition(position)
 

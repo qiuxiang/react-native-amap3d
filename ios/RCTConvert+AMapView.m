@@ -40,11 +40,11 @@ RCT_ENUM_CONVERTER(MAPinAnnotationColor, (@{
 }
 
 + (MAMapStatus *)MAMapStatus:(id)json {
-    return [MAMapStatus statusWithCenterCoordinate:(json[@"centerCoordinate"] ? [self CLLocationCoordinate2D:json[@"centerCoordinate"]] : (CLLocationCoordinate2D){-1.0f, -1.0f})
+    return [MAMapStatus statusWithCenterCoordinate:(json[@"coordinate"] ? [self CLLocationCoordinate2D:json[@"coordinate"]] : (CLLocationCoordinate2D){-1.0f, -1.0f})
                                     zoomLevel:json[@"zoomLevel"] ? [self CGFloat:json[@"zoomLevel"]] : -1
-                                    rotationDegree:json[@"rotationDegree"] ? [self CGFloat:json[@"rotationDegree"]] : -1
-                                    cameraDegree:json[@"cameraDegree"] ? [self CGFloat:json[@"cameraDegree"]] : -1
-                                    screenAnchor:json[@"screenAnchor"] ? [self CGPoint:json[@"screenAnchor"]] : CGPointMake(-1, -1)];
+                                    rotationDegree:json[@"rotate"] ? [self CGFloat:json[@"rotate"]] : -1
+                                    cameraDegree:json[@"tilt"] ? [self CGFloat:json[@"tilt"]] : -1
+                                    screenAnchor:json[@"anchor"] ? [self CGPoint:json[@"anchor"]] : CGPointMake(-1, -1)];
 }
 
 RCT_ARRAY_CONVERTER(Coordinate)

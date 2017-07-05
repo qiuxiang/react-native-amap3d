@@ -52,7 +52,7 @@ export default class MarkerExample extends Component {
       <Marker
         icon={() =>
           <View style={styles.customIcon}>
-            <Image style={styles.customIcon} source={require('../../images/marker.png')}/>
+            <Image style={styles.customIcon} source={require('../../images/flag.png')}/>
           </View>
         }
         title='自定义图片'
@@ -60,6 +60,20 @@ export default class MarkerExample extends Component {
         coordinate={{
           latitude: 39.906901,
           longitude: 116.397972,
+        }}
+      />
+      <Marker
+        icon={() =>
+          <View style={styles.customIcon}>
+            <Image
+              style={[styles.customIcon, {tintColor: '#e91e63'}]}
+              source={require('../../images/marker.png')}/>
+          </View>
+        }
+        title='自定义颜色'
+        coordinate={{
+          latitude: 39.806901,
+          longitude: 116.457972,
         }}
       />
       <Marker

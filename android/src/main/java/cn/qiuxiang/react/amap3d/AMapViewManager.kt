@@ -179,5 +179,10 @@ internal class AMapViewManager : ViewGroupManager<AMapView>() {
         view.map.moveCamera(CameraUpdateFactory.changeTilt(tilt))
     }
 
+    @ReactProp(name = "rotate")
+    fun changeRotate(view: AMapView, rotate: Float) {
+        view.map.moveCamera(CameraUpdateFactory.changeBearing(rotate))
+    }
+
     // todo: 自定义 locationStyle
 }
