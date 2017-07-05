@@ -27,8 +27,9 @@ class AMapPolyline(context: ThemedReactContext) : ReactViewGroup(context) {
 
     var opacity: Float = 1f
         set(value) {
-            field = value
-            polyline?.setTransparency(value)
+            val tvalue = Math.max(0.01f, value)
+            field = tvalue
+            polyline?.setTransparency(tvalue)
         }
 
     var zIndex: Float = 0f
@@ -69,13 +70,20 @@ class AMapPolyline(context: ThemedReactContext) : ReactViewGroup(context) {
     fun addToMap(map: AMap) {
         polyline = map.addPolyline(PolylineOptions()
                 .addAll(coordinates)
-                .color(color)
-                .colorValues(colors)
+                .color(AMapConverter.color(color, opacity))
+                .colorValues(colorValues())
                 .width(width)
                 .useGradient(gradient)
                 .geodesic(geodesic)
                 .setDottedLine(dashed)
                 .transparency(opacity)
                 .zIndex(zIndex))
+    }
+
+    private fun colorValues(): List<Int> {
+        if (colors.count() > 0) {
+            return colors.map { colorTmp -> AMapConverter.color(colorTmp, opacity) }
+        }
+        return listOf(AMapConverter.color(color, opacity), AMapConverter.color(color, opacity))
     }
 }

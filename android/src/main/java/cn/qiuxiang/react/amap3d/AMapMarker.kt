@@ -35,6 +35,12 @@ class AMapMarker(context: ThemedReactContext) : ReactViewGroup(context) {
             marker?.position = value
         }
 
+    var zIndex: Float = 0.0f
+        set(value) {
+            field = value
+            marker?.zIndex = value
+        }
+
     var title = ""
         set(value) {
             field = value
@@ -86,7 +92,8 @@ class AMapMarker(context: ThemedReactContext) : ReactViewGroup(context) {
                 .position(position)
                 .title(title)
                 .infoWindowEnable(infoWindowEnabled)
-                .snippet(snippet))
+                .snippet(snippet)
+                .zIndex(zIndex))
 
         if (active) {
             marker?.showInfoWindow()

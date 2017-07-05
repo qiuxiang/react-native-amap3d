@@ -42,7 +42,10 @@ class Polyline extends Component {
   }
 
   static defaultProps = {
+    width: 4,
+    color: 'red',
     colors: [],
+    opacity: 1.0,
   }
 
   _handle(name) {
@@ -59,9 +62,9 @@ class Polyline extends Component {
       ...Platform.select({
         android: {
           width: PixelRatio.getPixelSizeForLayoutSize(this.props.width),
+          colors: this.props.colors.map(processColor),
         },
       }),
-      colors: this.props.colors.map(processColor),
       onPolylineClick: this._handle('onPress'),
     }
     return <AMapPolyline {...props}/>

@@ -6,15 +6,20 @@
     MAPinAnnotationView *_annotationView;
     MAPointAnnotation *_annotation;
     AMapOverlay *_overlay;
+    AMapOverlay *_callout;
     AMapView *_mapView;
     BOOL _active;
+    UIImage *_image;
+    CGPoint _centerOffset;
+    CGPoint _calloutOffset;
 }
 
 - (instancetype)init {
+    self = [super init];
     _annotation = [MAPointAnnotation new];
     _annotationView = [[MAPinAnnotationView alloc] initWithAnnotation:_annotation reuseIdentifier:nil];
     _annotationView.canShowCallout = YES;
-    self = [super init];
+
     return self;
 }
 
@@ -55,6 +60,13 @@
     }
 }
 
+- (void)resetImage {
+    if (_image) {
+        _annotationView.image = _image;
+        _annotationView.centerOffset = _centerOffset;
+    }
+}
+
 - (void)setIcon:(MAPinAnnotationColor)color {
     _annotationView.pinColor = color;
 }
@@ -89,22 +101,51 @@
             _overlay = (AMapOverlay *) subview;
             _overlay.delegate = self;
             _annotationView.image = nil;
+            _image = nil;
         }
         if (atIndex == 1) {
             // TODO: customCalloutView 的位置不太对
-            _annotationView.customCalloutView = [[MACustomCalloutView alloc] initWithCustomView:(id) subview];
+            _callout = (AMapOverlay *) subview;
+            
+            // f**king amap only support button as callout, so below it is.
+            // more funny thing is callout offset shown right when using button. unbelievable!!!
+            _callout.delegate = self;
+            UIButton *button = [[UIButton alloc] initWithFrame:CGRectZero];
+            [button addSubview:(UIView *) subview];
+            
+            _annotationView.customCalloutView = [[MACustomCalloutView alloc] initWithCustomView:button];
         }
     }
 }
 
 #pragma mark AMapOverlayDelegate
 
-- (void)update {
-    UIGraphicsBeginImageContextWithOptions([_overlay bounds].size, NO, 0.0f);
-    [_overlay.layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    _annotationView.image = image;
+- (void)update:(AMapOverlay *)overlay {
+    if (overlay == _overlay) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            UIGraphicsBeginImageContextWithOptions([_overlay bounds].size, NO, 0.0f);
+            [_overlay.layer renderInContext:UIGraphicsGetCurrentContext()];
+            UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+            _annotationView.image = image;
+            
+            _image = image;
+        });
+    }
+}
+
+- (void)updateLayout:(AMapOverlay *)overlay {
+    CGFloat width = CGRectGetWidth(overlay.bounds);
+    CGFloat height = CGRectGetHeight(overlay.bounds);
+    
+    if (overlay == _overlay) {
+        // change default image center
+        _centerOffset = CGPointMake(0, -height / 2);
+        _annotationView.centerOffset = _centerOffset;
+    } else if (overlay == _callout) {
+        // change default callout offset
+        _annotationView.customCalloutView.bounds = CGRectMake(0, 0, width, height);
+    }
 }
 
 @end

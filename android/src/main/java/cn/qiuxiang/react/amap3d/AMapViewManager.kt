@@ -4,6 +4,7 @@ import android.view.View
 import com.amap.api.maps.AMap
 import com.amap.api.maps.CameraUpdateFactory
 import com.amap.api.maps.model.LatLng
+import com.amap.api.maps.model.LatLngBounds
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.uimanager.ThemedReactContext
@@ -15,6 +16,7 @@ internal class AMapViewManager : ViewGroupManager<AMapView>() {
     companion object {
         val ANIMATE_TO_COORDINATE = 1
         val ANIMATE_TO_ZOOM_LEVEL = 2
+        val ANIMATE_TO_MAP_STATUS = 3
     }
 
     override fun getName(): String {
@@ -28,13 +30,15 @@ internal class AMapViewManager : ViewGroupManager<AMapView>() {
     override fun getCommandsMap(): Map<String, Int> {
         return mapOf(
                 "animateToCoordinate" to ANIMATE_TO_COORDINATE,
-                "animateToZoomLevel" to ANIMATE_TO_ZOOM_LEVEL)
+                "animateToZoomLevel" to ANIMATE_TO_ZOOM_LEVEL,
+                "animateToMapStatus" to ANIMATE_TO_MAP_STATUS)
     }
 
     override fun receiveCommand(overlay: AMapView, commandId: Int, args: ReadableArray?) {
         when (commandId) {
             ANIMATE_TO_COORDINATE -> overlay.animateToCoordinate(args)
             ANIMATE_TO_ZOOM_LEVEL -> overlay.animateToZoomLevel(args)
+            ANIMATE_TO_MAP_STATUS -> overlay.animateToMapStatus(args)
         }
     }
 
@@ -163,6 +167,11 @@ internal class AMapViewManager : ViewGroupManager<AMapView>() {
         view.map.moveCamera(CameraUpdateFactory.changeLatLng(LatLng(
                 coordinate.getDouble("latitude"),
                 coordinate.getDouble("longitude"))))
+    }
+
+    @ReactProp(name = "limitRegion")
+    fun setLimitRegion(view: AMapView, limitRegion: ReadableMap) {
+        view.map.setMapStatusLimits(AMapConverter.LatLngBounds(limitRegion))
     }
 
     @ReactProp(name = "tilt")

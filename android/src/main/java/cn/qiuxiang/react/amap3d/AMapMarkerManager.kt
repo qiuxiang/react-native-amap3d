@@ -81,4 +81,9 @@ internal class AMapMarkerManager : ViewGroupManager<AMapMarker>() {
     fun setEnabledInfoWindow(marker: AMapMarker, enabled: Boolean) {
         marker.infoWindowEnabled = enabled
     }
+
+    @ReactProp(name = "zIndex")
+    fun setZInex(marker: AMapMarker, zIndex: Float) {
+        marker.zIndex = zIndex
+    }
 }

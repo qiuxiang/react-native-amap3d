@@ -5,7 +5,7 @@ import {
   View,
   UIManager,
 } from 'react-native'
-import {LatLng} from './PropTypes'
+import { LatLng, Region } from './PropTypes'
 import Marker from './Marker'
 import Overlay from './Overlay'
 import Polyline from './Polyline'
@@ -98,6 +98,11 @@ class MapView extends Component {
     coordinate: LatLng,
 
     /**
+     * 设置可见地图区域的矩形
+     */
+    limitRegion: Region,
+
+    /**
      * 设置倾斜角度，取值范围 [0, 60]
      */
     tilt: PropTypes.number,
@@ -154,6 +159,10 @@ class MapView extends Component {
 
   animateToZoomLevel(zoomLevel, duration = 1000) {
     this._sendCommand('animateToZoomLevel', [zoomLevel, duration])
+  }
+
+  animateToMapStatus(mapStatus, duration = 1000) {
+    this._sendCommand('animateToMapStatus', [mapStatus, duration])
   }
 
   _sendCommand(command, params = null) {

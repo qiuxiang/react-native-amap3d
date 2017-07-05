@@ -1,3 +1,4 @@
+#import <React/UIView+React.h>
 #import "AMapView.h"
 #import "AMapMarker.h"
 #import "AMapPolyline.h"
@@ -28,6 +29,7 @@
 }
 
 - (void)insertReactSubview:(id <RCTComponent>)subview atIndex:(NSInteger)atIndex {
+    [super insertReactSubview:(UIView *) subview atIndex:atIndex];
     if ([subview isKindOfClass:[AMapMarker class]]) {
         ((AMapMarker *) subview).mapView = self;
         [self addAnnotation:(id <MAAnnotation>) subview];
@@ -38,12 +40,16 @@
 }
 
 - (void)removeReactSubview:(id <RCTComponent>)subview {
+    [super removeReactSubview:(UIView *) subview];
     if ([subview isKindOfClass:[AMapMarker class]]) {
         [self removeAnnotation:(id <MAAnnotation>) subview];
     }
     if ([subview isKindOfClass:[AMapModel class]]) {
         [self removeOverlay:(id <MAOverlay>) subview];
     }
+}
+
+- (void)didUpdateReactSubviews {
 }
 
 @end
