@@ -160,6 +160,7 @@ class AMapView(context: Context) : MapView(context) {
         var coordinate = currentCameraPosition.target
         var zoomLevel = currentCameraPosition.zoom
         var tilt = currentCameraPosition.tilt
+        var rotation = currentCameraPosition.bearing
 
         if (target.hasKey("coordinate")) {
             val json = target.getMap("coordinate")
@@ -174,8 +175,12 @@ class AMapView(context: Context) : MapView(context) {
             tilt = target.getDouble("tilt").toFloat()
         }
 
-        val cameraUpdate = CameraUpdateFactory.newCameraPosition(CameraPosition(
-                coordinate, zoomLevel, tilt, currentCameraPosition.bearing))
+        if (target.hasKey("rotation")) {
+            rotation = target.getDouble("rotation").toFloat()
+        }
+
+        val cameraUpdate = CameraUpdateFactory.newCameraPosition(
+                CameraPosition(coordinate, zoomLevel, tilt, rotation))
         map.animateCamera(cameraUpdate, duration.toLong(), animateCallback)
     }
 }
