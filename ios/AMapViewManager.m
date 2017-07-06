@@ -48,22 +48,26 @@ RCT_EXPORT_VIEW_PROPERTY(onPress, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onLongPress, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onLocation, RCTBubblingEventBlock)
 
-RCT_EXPORT_METHOD(animateTo:(nonnull NSNumber *)reactTag data:(NSArray *)data) {
+RCT_EXPORT_METHOD(animateTo:(nonnull NSNumber *)reactTag params:(NSDictionary *)params duration:(NSInteger)duration) {
     [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, UIView *> *viewRegistry) {
         AMapView *mapView = (AMapView *) viewRegistry[reactTag];
-        NSDictionary *params = data[0];
+        MAMapStatus *mapStatus = mapView.getMapStatus;
         if (params[@"zoomLevel"]) {
-            [mapView setZoomLevel:[params[@"zoomLevel"] floatValue] animated: YES];
+            mapStatus.zoomLevel = [params[@"zoomLevel"] floatValue];
         }
         if (params[@"coordinate"]) {
             NSDictionary *coordinate = params[@"coordinate"];
-            [mapView setCenterCoordinate:CLLocationCoordinate2DMake(
+            mapStatus.centerCoordinate = CLLocationCoordinate2DMake(
                     [coordinate[@"latitude"] doubleValue],
-                    [coordinate[@"longitude"] doubleValue]) animated:YES];
+                    [coordinate[@"longitude"] doubleValue]);
         }
         if (params[@"tilt"]) {
-            [mapView setCameraDegree:[params[@"tilt"] floatValue] animated:YES duration:0.3];
+            mapStatus.cameraDegree = [params[@"tilt"] floatValue];
         }
+        if (params[@"rotation"]) {
+            mapStatus.rotationDegree = [params[@"rotation"] floatValue];
+        }
+        [mapView setMapStatus:mapStatus animated:YES duration:duration / 1000];
     }];
 }
 

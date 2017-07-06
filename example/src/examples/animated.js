@@ -16,6 +16,7 @@ export default class AnimatedExample extends Component {
   _animatedToZGC() {
     this.mapView.animateTo({
       tilt: 45,
+      rotation: 90,
       zoomLevel: 18,
       coordinate: {
         latitude: 39.97837,
@@ -27,6 +28,7 @@ export default class AnimatedExample extends Component {
   _animatedToTAM() {
     this.mapView.animateTo({
       tilt: 0,
+      rotation: 0,
       zoomLevel: 16,
       coordinate: {
         latitude: 39.90864,

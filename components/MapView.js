@@ -175,7 +175,7 @@ class MapView extends Component {
         )
         break;
       case 'ios':
-        NativeModules.AMapViewManager[command](findNodeHandle(this), params)
+        NativeModules.AMapViewManager[command](findNodeHandle(this), ...params)
         break;
     }
   }
