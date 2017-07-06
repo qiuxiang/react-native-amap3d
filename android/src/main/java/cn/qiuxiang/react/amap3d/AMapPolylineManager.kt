@@ -44,11 +44,6 @@ internal class AMapPolylineManager : ViewGroupManager<AMapPolyline>() {
         polyline.zIndex = zIndex
     }
 
-    @ReactProp(name = "opacity")
-    override fun setOpacity(polyline: AMapPolyline, opacity: Float) {
-        polyline.opacity = opacity
-    }
-
     @ReactProp(name = "geodesic")
     fun setGeodesic(polyline: AMapPolyline, geodesic: Boolean) {
         polyline.geodesic = geodesic

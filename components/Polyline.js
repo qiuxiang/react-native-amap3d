@@ -10,7 +10,6 @@ class Polyline extends Component {
     width: PropTypes.number,
     color: PropTypes.string,
     zIndex: PropTypes.number,
-    opacity: PropTypes.number,
 
     /**
      * 多段颜色
@@ -59,9 +58,9 @@ class Polyline extends Component {
       ...Platform.select({
         android: {
           width: PixelRatio.getPixelSizeForLayoutSize(this.props.width),
+          colors: this.props.colors.map(processColor),
         },
       }),
-      colors: this.props.colors.map(processColor),
       onPolylineClick: this._handle('onPress'),
     }
     return <AMapPolyline {...props}/>

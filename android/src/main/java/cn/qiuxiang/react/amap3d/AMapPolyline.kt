@@ -25,12 +25,6 @@ class AMapPolyline(context: ThemedReactContext) : ReactViewGroup(context) {
             polyline?.color = value
         }
 
-    var opacity: Float = 1f
-        set(value) {
-            field = value
-            polyline?.setTransparency(value)
-        }
-
     var zIndex: Float = 0f
         set(value) {
             field = value
@@ -75,7 +69,6 @@ class AMapPolyline(context: ThemedReactContext) : ReactViewGroup(context) {
                 .useGradient(gradient)
                 .geodesic(geodesic)
                 .setDottedLine(dashed)
-                .transparency(opacity)
                 .zIndex(zIndex))
     }
 }
