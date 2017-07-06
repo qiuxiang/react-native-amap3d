@@ -1,4 +1,3 @@
-#import <React/RCTViewManager.h>
 #import <React/RCTUIManager.h>
 #import "AMapView.h"
 #import "AMapMarker.h"
@@ -135,20 +134,21 @@ RCT_EXPORT_METHOD(animateTo:(nonnull NSNumber *)reactTag data:(NSArray *)data) {
 - (void)mapView:(MAMapView *)mapView annotationView:(MAAnnotationView *)view didChangeDragState:(MAAnnotationViewDragState)newState
    fromOldState:(MAAnnotationViewDragState)oldState {
     AMapMarker *marker = (AMapMarker *) view.annotation;
+    marker.dragging = NO;
     if (newState == MAAnnotationViewDragStateStarting && marker.onDragStart) {
         marker.onDragStart(@{});
     }
-    if (newState == MAAnnotationViewDragStateDragging && marker.onDrag) {
-        marker.onDrag(@{});
+    if (newState == MAAnnotationViewDragStateDragging) {
+        marker.dragging = YES;
+        if (marker.onDrag) {
+            marker.onDrag(@{});
+        }
     }
     if (newState == MAAnnotationViewDragStateEnding && marker.onDragEnd) {
         marker.onDragEnd(@{
                 @"latitude": @(marker.coordinate.latitude),
                 @"longitude": @(marker.coordinate.longitude),
         });
-    }
-    if (newState == MAAnnotationViewDragStateCanceling || newState == MAAnnotationViewDragStateEnding) {
-        [marker resetImage];
     }
 }
 

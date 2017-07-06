@@ -9,7 +9,7 @@
 @implementation AMapOverlayManager {
 }
 
-RCT_EXPORT_MODULE(AMapOverlay)
+RCT_EXPORT_MODULE()
 
 - (UIView *)view {
     return [AMapOverlay new];
@@ -20,7 +20,6 @@ RCT_EXPORT_METHOD(update:(nonnull NSNumber *)reactTag) {
         id view = viewRegistry[reactTag];
         [(AMapOverlay *) view update];
     }];
-
 }
 
 @end

@@ -3,24 +3,18 @@
 #pragma ide diagnostic ignored "OCUnusedMethodInspection"
 
 @implementation AMapMarker {
-    MAPinAnnotationView *_annotationView;
+    MAAnnotationView *_annotationView;
     MAPointAnnotation *_annotation;
-    AMapOverlay *_overlay;
+    AMapOverlay *_marker;
     AMapOverlay *_callout;
     AMapView *_mapView;
     BOOL _active;
-    UIImage *_image;
-    CGPoint _centerOffset;
-    CGPoint _calloutOffset;
-}
-
-- (instancetype)init {
-    self = [super init];
-    _annotation = [MAPointAnnotation new];
-    _annotationView = [[MAPinAnnotationView alloc] initWithAnnotation:_annotation reuseIdentifier:nil];
-    _annotationView.canShowCallout = YES;
-
-    return self;
+    NSString *_title;
+    NSString *_subtitle;
+    CLLocationCoordinate2D _coordinate;
+    MAPinAnnotationColor _pinColor;
+    BOOL _draggable;
+    NSInteger _zIndex;
 }
 
 - (MAAnnotationView *)annotationView {
@@ -28,27 +22,25 @@
 }
 
 - (NSString *)title {
-    return _annotation.title;
+    return _title;
 }
 
 - (NSString *)subtitle {
-    return _annotation.subtitle;
+    return _subtitle;
 }
 
 - (CLLocationCoordinate2D)coordinate {
-    return _annotation.coordinate;
+    return _coordinate;
 }
 
 - (void)setCoordinate:(CLLocationCoordinate2D)coordinate {
+    _coordinate = coordinate;
     _annotation.coordinate = coordinate;
 }
 
 - (void)setTitle:(NSString *)title {
+    _title = title;
     _annotation.title = title;
-}
-
-- (void)setSubtitle:(NSString *)subtitle {
-    _annotation.subtitle = subtitle;
 }
 
 - (void)setActive:(BOOL)active {
@@ -60,22 +52,18 @@
     }
 }
 
-- (void)resetImage {
-    if (_image) {
-        _annotationView.image = _image;
-        _annotationView.centerOffset = _centerOffset;
-    }
-}
-
 - (void)setIcon:(MAPinAnnotationColor)color {
-    _annotationView.pinColor = color;
+    _pinColor = color;
+    ((MAPinAnnotationView *) _annotationView).pinColor = color;
 }
 
 - (void)setDescription:(NSString *)description {
-    _annotationView.annotation.subtitle = description;
+    _subtitle = description;
+    _annotation.subtitle = description;
 }
 
 - (void)setDraggable:(BOOL)draggable {
+    _draggable = draggable;
     _annotationView.draggable = draggable;
 }
 
@@ -84,6 +72,7 @@
 }
 
 - (void)setZIndex:(NSInteger)zIndex {
+    _zIndex = zIndex;
     _annotationView.zIndex = zIndex;
 }
 
@@ -96,54 +85,54 @@
 }
 
 - (void)insertReactSubview:(id <RCTComponent>)subview atIndex:(NSInteger)atIndex {
-    if ([subview isKindOfClass:[AMapOverlay class]]) {
-        if (atIndex == 0) {
-            _overlay = (AMapOverlay *) subview;
-            _overlay.delegate = self;
-            _annotationView.image = nil;
-            _image = nil;
+    if (atIndex == 0) {
+        _annotation = [MAPointAnnotation new];
+        _annotation.coordinate = _coordinate;
+        _annotation.title = _title;
+        _annotation.subtitle = _subtitle;
+
+        if ([subview isKindOfClass:[AMapOverlay class]]) {
+            _marker = (AMapOverlay *) subview;
+            _marker.delegate = self;
+            _annotationView = [[MAAnnotationView alloc] initWithAnnotation:_annotation reuseIdentifier:nil];
+        } else {
+            _annotationView = [[MAPinAnnotationView alloc] initWithAnnotation:_annotation reuseIdentifier:nil];
+            ((MAPinAnnotationView *) _annotationView).pinColor = _pinColor;
         }
-        if (atIndex == 1) {
-            // TODO: customCalloutView 的位置不太对
-            _callout = (AMapOverlay *) subview;
-            
-            // f**king amap only support button as callout, so below it is.
-            // more funny thing is callout offset shown right when using button. unbelievable!!!
-            _callout.delegate = self;
-            UIButton *button = [[UIButton alloc] initWithFrame:CGRectZero];
-            [button addSubview:(UIView *) subview];
-            
-            _annotationView.customCalloutView = [[MACustomCalloutView alloc] initWithCustomView:button];
-        }
+
+        _annotationView.canShowCallout = YES;
+        _annotationView.draggable = _draggable;
+        _annotationView.zIndex = _zIndex;
+    } else if (atIndex == 1 && [subview isKindOfClass:[AMapOverlay class]]) {
+        _callout = (AMapOverlay *) subview;
+        _callout.delegate = self;
+
+        UIButton *button = [[UIButton alloc] initWithFrame:CGRectZero];
+        [button addSubview:_callout];
+
+        _annotationView.customCalloutView = [[MACustomCalloutView alloc] initWithCustomView:button];
     }
 }
 
 #pragma mark AMapOverlayDelegate
 
 - (void)update:(AMapOverlay *)overlay {
-    if (overlay == _overlay) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            UIGraphicsBeginImageContextWithOptions([_overlay bounds].size, NO, 0.0f);
-            [_overlay.layer renderInContext:UIGraphicsGetCurrentContext()];
-            UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-            UIGraphicsEndImageContext();
-            _annotationView.image = image;
-            
-            _image = image;
-        });
+    if (self.dragging) {
+        return;
     }
-}
 
-- (void)updateLayout:(AMapOverlay *)overlay {
     CGFloat width = CGRectGetWidth(overlay.bounds);
     CGFloat height = CGRectGetHeight(overlay.bounds);
-    
-    if (overlay == _overlay) {
-        // change default image center
-        _centerOffset = CGPointMake(0, -height / 2);
-        _annotationView.centerOffset = _centerOffset;
+
+    if (overlay == _marker) {
+        UIGraphicsBeginImageContextWithOptions([_marker bounds].size, NO, 0.0f);
+        [_marker.layer renderInContext:UIGraphicsGetCurrentContext()];
+        UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+
+        _annotationView.image = image;
+        _annotationView.centerOffset = CGPointMake(0, -height / 2);
     } else if (overlay == _callout) {
-        // change default callout offset
         _annotationView.customCalloutView.bounds = CGRectMake(0, 0, width, height);
     }
 }

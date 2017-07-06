@@ -8,11 +8,11 @@
 @property(nonatomic, copy) RCTBubblingEventBlock onDragStart;
 @property(nonatomic, copy) RCTBubblingEventBlock onDrag;
 @property(nonatomic, copy) RCTBubblingEventBlock onDragEnd;
+@property(nonatomic, assign) BOOL dragging;
 
 - (CLLocationCoordinate2D)coordinate;
 - (NSString *)title;
 - (NSString *)subtitle;
-- (void)resetImage;
 
 - (BOOL)active;
 - (MAAnnotationView *)annotationView;
