@@ -11,8 +11,8 @@ export default class CircleExample extends Component {
     return <MapView style={StyleSheet.absoluteFill}>
       <Circle
         strokeWidth={5}
-        strokeColor='blue'
-        fillColor='red'
+        strokeColor='rgba(0, 0, 255, 0.5)'
+        fillColor='rgba(255, 0, 0, 0.5)'
         radius={10000}
         coordinate={{
           latitude: 39.906901,

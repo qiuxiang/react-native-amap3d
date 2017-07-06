@@ -11,8 +11,8 @@ export default class PolygonExample extends Component {
     return <MapView style={StyleSheet.absoluteFill}>
       <Polygon
         strokeWidth={5}
-        strokeColor='blue'
-        fillColor='red'
+        strokeColor='rgba(0, 0, 255, 0.5)'
+        fillColor='rgba(255, 0, 0, 0.5)'
         coordinates={[
           {
             latitude: 39.806901,

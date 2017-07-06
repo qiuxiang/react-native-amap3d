@@ -11,7 +11,7 @@ export default class PolylineExample extends Component {
     return <MapView style={StyleSheet.absoluteFill}>
       <Polyline
         width={5}
-        color='red'
+        color='rgba(255, 0, 0, 0.5)'
         coordinates={[
           {
             latitude: 40.006901,
