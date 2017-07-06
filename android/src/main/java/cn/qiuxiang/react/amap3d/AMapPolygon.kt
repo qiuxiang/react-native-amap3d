@@ -1,15 +1,15 @@
 package cn.qiuxiang.react.amap3d
 
+import android.content.Context
 import android.graphics.Color
 import com.amap.api.maps.AMap
 import com.amap.api.maps.model.LatLng
 import com.amap.api.maps.model.Polygon
 import com.amap.api.maps.model.PolygonOptions
 import com.facebook.react.bridge.ReadableArray
-import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.views.view.ReactViewGroup
 
-class AMapPolygon(context: ThemedReactContext) : ReactViewGroup(context) {
+class AMapPolygon(context: Context) : ReactViewGroup(context) {
     var polygon: Polygon? = null
         private set
 

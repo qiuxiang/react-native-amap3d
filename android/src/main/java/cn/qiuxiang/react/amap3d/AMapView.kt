@@ -1,6 +1,7 @@
 package cn.qiuxiang.react.amap3d
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.view.View
 import com.amap.api.maps.AMap
 import com.amap.api.maps.CameraUpdateFactory
@@ -11,13 +12,12 @@ import com.amap.api.maps.model.Marker
 import com.amap.api.maps.model.MyLocationStyle
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReadableArray
-import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.bridge.WritableMap
 import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.events.RCTEventEmitter
 
-class AMapView(context: ThemedReactContext) : MapView(context) {
-    private val eventEmitter: RCTEventEmitter = context.getJSModule(RCTEventEmitter::class.java)
+class AMapView(context: Context) : MapView(context) {
+    private val eventEmitter: RCTEventEmitter = (context as ThemedReactContext).getJSModule(RCTEventEmitter::class.java)
     private val markers = HashMap<String, AMapMarker>()
     private val polylines = HashMap<String, AMapPolyline>()
     private val polygons = HashMap<String, AMapPolygon>()

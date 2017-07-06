@@ -1,13 +1,13 @@
 package cn.qiuxiang.react.amap3d
 
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import com.amap.api.maps.AMap
 import com.amap.api.maps.model.*
-import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.views.view.ReactViewGroup
 
-class AMapMarker(context: ThemedReactContext) : ReactViewGroup(context) {
+class AMapMarker(context: Context) : ReactViewGroup(context) {
     companion object {
         private val COLORS = mapOf(
                 "AZURE" to BitmapDescriptorFactory.HUE_AZURE,

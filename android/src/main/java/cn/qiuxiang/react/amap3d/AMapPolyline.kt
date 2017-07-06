@@ -1,15 +1,15 @@
 package cn.qiuxiang.react.amap3d
 
+import android.content.Context
 import android.graphics.Color
 import com.amap.api.maps.AMap
 import com.amap.api.maps.model.LatLng
 import com.amap.api.maps.model.Polyline
 import com.amap.api.maps.model.PolylineOptions
 import com.facebook.react.bridge.ReadableArray
-import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.views.view.ReactViewGroup
 
-class AMapPolyline(context: ThemedReactContext) : ReactViewGroup(context) {
+class AMapPolyline(context: Context) : ReactViewGroup(context) {
     var polyline: Polyline? = null
         private set
 
