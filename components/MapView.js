@@ -105,7 +105,12 @@ class MapView extends Component {
     limitRegion: Region,
 
     /**
-     * 设置倾斜角度，取值范围 [0, 60]
+     * 旋转角度，取值范围 [0, 360]
+     */
+    rotation: PropTypes.number,
+
+    /**
+     * 倾斜角度，取值范围 [0, 60]
      */
     tilt: PropTypes.number,
 
@@ -158,7 +163,7 @@ class MapView extends Component {
   /**
    * 动画过渡到某个位置（坐标、缩放级别、倾斜度）
    *
-   * @param {{zoomLevel: ?number, coordinate: ?LatLng, titl: ?number}} target
+   * @param {{zoomLevel: ?number, coordinate: ?LatLng, titl: ?number, rotation: ?number}} target
    * @param duration
    */
   animateTo(target, duration = 1000) {
