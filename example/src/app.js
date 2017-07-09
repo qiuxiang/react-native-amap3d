@@ -11,6 +11,7 @@ import Marker from './examples/marker'
 import Polyline from './examples/polyline'
 import Polygon from './examples/polygon'
 import Circle from './examples/circle'
+import Events from './examples/events'
 
 export default StackNavigator({
   Examples: {screen: Examples},
@@ -24,6 +25,7 @@ export default StackNavigator({
   Polyline: {screen: Polyline},
   Polygon: {screen: Polygon},
   Circle: {screen: Circle},
+  Events: {screen: Events},
 }, {
   navigationOptions: {
     headerTintColor: '#212121',
