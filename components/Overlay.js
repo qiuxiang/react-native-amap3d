@@ -2,8 +2,6 @@ import React, {PropTypes, Component} from 'react'
 import {
   View,
   UIManager,
-  Platform,
-  NativeModules,
   findNodeHandle,
   requireNativeComponent,
 } from 'react-native'
@@ -13,7 +11,7 @@ class Overlay extends Component {
     ...View.propTypes,
   }
 
-  componentDidUpdate() {
+  _update() {
     setTimeout(() => {
       UIManager.dispatchViewManagerCommand(
         findNodeHandle(this),
@@ -22,6 +20,9 @@ class Overlay extends Component {
       )
     }, 0)
   }
+
+  componentDidUpdate = this._update
+  componentDidMount = this._update
 
   render() {
     return <AMapOverlay {...this.props}/>

@@ -40,7 +40,6 @@ export default class MarkerExample extends Component {
       />
       <Marker
         icon='green'
-        infoWindowWidth={100}
         coordinate={{
           latitude: 39.806901,
           longitude: 116.297972,
