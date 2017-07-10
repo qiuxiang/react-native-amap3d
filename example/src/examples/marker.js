@@ -1,5 +1,12 @@
 import React, {Component} from 'react'
-import {StyleSheet, Alert, Text, Image, View} from 'react-native'
+import {
+  StyleSheet,
+  Alert,
+  Text,
+  Image,
+  View,
+  TouchableOpacity,
+} from 'react-native'
 import {MapView, Marker} from 'react-native-amap3d'
 
 export default class MarkerExample extends Component {
@@ -44,9 +51,11 @@ export default class MarkerExample extends Component {
           latitude: 39.806901,
           longitude: 116.297972,
         }}>
-        <View style={styles.customInfoWindow}>
-          <Text>Custom View InfoWindow</Text>
-        </View>
+        <TouchableOpacity activeOpacity={0.9} onPress={() => Alert.alert('Custom View InfoWindow onPress')}>
+          <View style={styles.customInfoWindow}>
+            <Text>Custom View InfoWindow</Text>
+          </View>
+        </TouchableOpacity>
       </Marker>
       <Marker
         icon={() =>

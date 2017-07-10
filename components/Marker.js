@@ -107,6 +107,7 @@ export default class Marker extends Component {
 
     /**
      * 信息窗体点击事件
+     * 使用自定义 View 会使该事件失效，这时候可以用 Touchable* 代替
      */
     onInfoWindowPress: React.PropTypes.func,
   }

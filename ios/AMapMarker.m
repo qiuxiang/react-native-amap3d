@@ -107,7 +107,7 @@
         _callout = (AMapOverlay *) subview;
         _callout.delegate = self;
 
-        UIButton *button = [[UIButton alloc] initWithFrame:CGRectZero];
+        UIButton *button = [UIButton new];
         [button addSubview:_callout];
 
         _annotationView.customCalloutView = [[MACustomCalloutView alloc] initWithCustomView:button];
