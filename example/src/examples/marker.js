@@ -31,15 +31,38 @@ export default class MarkerExample extends Component {
     this.mounted = false
   }
 
+  _handleDragEvent = ({nativeEvent}) =>
+    Alert.alert(`新坐标：${nativeEvent.latitude}, ${nativeEvent.longitude}`)
+
+  _handleInfoWindowPress = () => Alert.alert('信息窗口点击事件')
+
+  _handleCustomInfoWindowPress = () => Alert.alert('Custom View InfoWindow onPress')
+
+  _renderCustomMarker = () =>
+    <View style={styles.customMarker}>
+      <Text style={styles.markerText}>{this.state.time.toLocaleTimeString()}</Text>
+    </View>
+
+  _renderColoredMarker = () =>
+    <View style={styles.customIcon}>
+      <Image
+        style={[styles.customIcon, styles.coloredImage]}
+        source={require('../../images/marker.png')}/>
+    </View>
+
+  _renderImageMarker = () =>
+    <View style={styles.customIcon}>
+      <Image style={styles.customIcon} source={require('../../images/flag.png')}/>
+    </View>
+
   render() {
     return <MapView style={StyleSheet.absoluteFill}>
       <Marker
         active
         draggable
         title={'一个可拖拽的 Marker ' + this.state.time.toLocaleTimeString()}
-        onDragEnd={({nativeEvent}) =>
-          Alert.alert(`新坐标：${nativeEvent.latitude}, ${nativeEvent.longitude}`)}
-        onInfoWindowPress={() => Alert.alert('信息窗口点击事件')}
+        onDragEnd={this._handleDragEvent}
+        onInfoWindowPress={this._handleInfoWindowPress}
         coordinate={{
           latitude: 39.806901,
           longitude: 116.397972,
@@ -51,18 +74,14 @@ export default class MarkerExample extends Component {
           latitude: 39.806901,
           longitude: 116.297972,
         }}>
-        <TouchableOpacity activeOpacity={0.9} onPress={() => Alert.alert('Custom View InfoWindow onPress')}>
+        <TouchableOpacity activeOpacity={0.9} onPress={this._handleCustomInfoWindowPress}>
           <View style={styles.customInfoWindow}>
             <Text>Custom View InfoWindow</Text>
           </View>
         </TouchableOpacity>
       </Marker>
       <Marker
-        icon={() =>
-          <View style={styles.customIcon}>
-            <Image style={styles.customIcon} source={require('../../images/flag.png')}/>
-          </View>
-        }
+        icon={this._renderImageMarker}
         title='自定义图片'
         description="Note the use of nativeOnly above. Sometimes you'll have some special properties that you need to expose for the native component, but don't actually want them as part of the API for the associated React component."
         coordinate={{
@@ -71,13 +90,7 @@ export default class MarkerExample extends Component {
         }}
       />
       <Marker
-        icon={() =>
-          <View style={styles.customIcon}>
-            <Image
-              style={[styles.customIcon, {tintColor: '#e91e63'}]}
-              source={require('../../images/marker.png')}/>
-          </View>
-        }
+        icon={this._renderColoredMarker}
         title='自定义颜色'
         coordinate={{
           latitude: 39.806901,
@@ -86,11 +99,7 @@ export default class MarkerExample extends Component {
       />
       <Marker
         title='Custom View Marker'
-        icon={() =>
-          <View style={styles.customMarker}>
-            <Text style={styles.markerText}>{this.state.time.toLocaleTimeString()}</Text>
-          </View>
-        }
+        icon={this._renderCustomMarker}
         coordinate={{
           latitude: 39.706901,
           longitude: 116.397972,
@@ -121,5 +130,8 @@ const styles = StyleSheet.create({
   },
   markerText: {
     color: '#fff',
+  },
+  coloredImage: {
+    tintColor: '#e91e63',
   },
 })

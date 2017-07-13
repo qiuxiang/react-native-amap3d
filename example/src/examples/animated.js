@@ -13,7 +13,7 @@ export default class AnimatedExample extends Component {
     title: '动画移动',
   }
 
-  _animatedToZGC() {
+  _animatedToZGC = () => {
     this.mapView.animateTo({
       tilt: 45,
       rotation: 90,
@@ -25,7 +25,7 @@ export default class AnimatedExample extends Component {
     })
   }
 
-  _animatedToTAM() {
+  _animatedToTAM = () => {
     this.mapView.animateTo({
       tilt: 0,
       rotation: 0,
@@ -42,12 +42,12 @@ export default class AnimatedExample extends Component {
       <MapView ref={ref => this.mapView = ref} style={styles.body}/>
       <View style={styles.buttons}>
         <View style={styles.button}>
-          <TouchableOpacity  onPress={() => this._animatedToZGC()}>
+          <TouchableOpacity onPress={this._animatedToZGC}>
             <Text style={styles.text}>中关村</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.button}>
-          <TouchableOpacity onPress={() => this._animatedToTAM()}>
+          <TouchableOpacity onPress={this._animatedToTAM}>
             <Text style={styles.text}>天安门</Text>
           </TouchableOpacity>
         </View>
