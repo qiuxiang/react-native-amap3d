@@ -70,7 +70,7 @@ RCT_EXPORT_METHOD(animateTo:(nonnull NSNumber *)reactTag params:(NSDictionary *)
         if (params[@"rotation"]) {
             mapStatus.rotationDegree = [params[@"rotation"] floatValue];
         }
-        [mapView setMapStatus:mapStatus animated:YES duration:duration / 1000];
+        [mapView setMapStatus:mapStatus animated:YES duration:duration / 1000.0];
     }];
 }
 
