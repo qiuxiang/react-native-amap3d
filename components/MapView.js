@@ -2,14 +2,11 @@ import React, {PropTypes, Component} from 'react'
 import {
   View,
   UIManager,
-  NativeModules,
-  Platform,
   findNodeHandle,
   requireNativeComponent,
 } from 'react-native'
 import {LatLng, Region} from './PropTypes'
 import Marker from './Marker'
-import Overlay from './Overlay'
 import Polyline from './Polyline'
 import Polygon from './Polygon'
 import Circle from './Circle'
@@ -171,23 +168,16 @@ class MapView extends Component {
    * @param {{zoomLevel: ?number, coordinate: ?LatLng, titl: ?number}} target
    * @param duration
    */
-  animateTo(target, duration = 1000) {
+  animateTo(target, duration = 500) {
     this._sendCommand('animateTo', [target, duration])
   }
 
   _sendCommand(command, params = null) {
-    switch (Platform.OS) {
-      case 'android':
-        UIManager.dispatchViewManagerCommand(
-          findNodeHandle(this),
-          UIManager.AMapView.Commands[command],
-          params,
-        )
-        break;
-      case 'ios':
-        NativeModules.AMapViewManager[command](findNodeHandle(this), params)
-        break;
-    }
+    UIManager.dispatchViewManagerCommand(
+      findNodeHandle(this),
+      UIManager.AMapView.Commands[command],
+      params,
+    )
   }
 
   render() {
@@ -195,7 +185,6 @@ class MapView extends Component {
   }
 
   static Marker = Marker
-  static Overlay = Overlay
   static Polyline = Polyline
   static Polygon = Polygon
   static Circle = Circle
@@ -204,4 +193,4 @@ class MapView extends Component {
 AMapView = requireNativeComponent('AMapView', MapView)
 
 export default MapView
-export {MapView, Marker, Overlay, Polyline, Polygon, Circle}
+export {MapView, Marker, Polyline, Polygon, Circle}
