@@ -13,7 +13,7 @@ react-native 高德地图组件，使用最新 3D SDK，支持 Android + iOS。
 - 内置地图控件的显示隐藏（指南针、比例尺、定位按钮、缩放按钮）
 - 手势交互控制（平移、缩放、旋转、倾斜）
 - 中心坐标、缩放级别、倾斜度的设置，支持动画过渡
-- 地图事件（onPress、onLongPress、onLocation）
+- 地图事件（onPress、onLongPress、onLocation, OnStatusChange）
 - 地图标记（Marker）
   - 自定义信息窗体
   - 自定义图标
