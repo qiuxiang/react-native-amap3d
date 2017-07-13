@@ -5,19 +5,12 @@ const LatLng = PropTypes.shape({
   longitude: PropTypes.number.isRequired,
 })
 
-const Span = PropTypes.shape({
+const Region = PropTypes.shape({
+  latitude: PropTypes.number.isRequired,
+  longitude: PropTypes.number.isRequired,
   latitudeDelta: PropTypes.number.isRequired,
   longitudeDelta: PropTypes.number.isRequired,
 })
 
-const Region = PropTypes.shape({
-  center: LatLng,
-  span: Span,
-})
-
-export {
-  LatLng,
-  Span,
-  Region,
-}
+export {LatLng, Region}
 

@@ -165,7 +165,7 @@ internal class AMapViewManager : ViewGroupManager<AMapView>() {
 
     @ReactProp(name = "limitRegion")
     fun setLimitRegion(view: AMapView, limitRegion: ReadableMap) {
-        view.map.setMapStatusLimits(AMapConverter.LatLngBounds(limitRegion))
+        view.setLimitRegion(limitRegion)
     }
 
     @ReactProp(name = "tilt")

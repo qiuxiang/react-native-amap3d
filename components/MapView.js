@@ -97,12 +97,12 @@ class MapView extends Component {
     coordinate: LatLng,
 
     /**
-     * 设置可见地图区域的矩形
+     * 限制地图只能显示某个矩形区域
      */
     limitRegion: Region,
 
     /**
-     * 设置倾斜角度，取值范围 [0, 60]
+     * 倾斜角度，取值范围 [0, 60]
      */
     tilt: PropTypes.number,
 

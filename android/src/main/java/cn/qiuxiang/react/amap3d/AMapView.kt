@@ -6,12 +6,10 @@ import android.view.View
 import com.amap.api.maps.AMap
 import com.amap.api.maps.CameraUpdateFactory
 import com.amap.api.maps.MapView
-import com.amap.api.maps.model.CameraPosition
-import com.amap.api.maps.model.LatLng
-import com.amap.api.maps.model.Marker
-import com.amap.api.maps.model.MyLocationStyle
+import com.amap.api.maps.model.*
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReadableArray
+import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.bridge.WritableMap
 import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.events.RCTEventEmitter
@@ -204,5 +202,16 @@ class AMapView(context: Context) : MapView(context) {
         val cameraUpdate = CameraUpdateFactory.newCameraPosition(
                 CameraPosition(coordinate, zoomLevel, tilt, rotation))
         map.animateCamera(cameraUpdate, duration.toLong(), animateCallback)
+    }
+
+    fun setLimitRegion(limitRegion: ReadableMap) {
+        val latitude = limitRegion.getDouble("latitude")
+        val longitude = limitRegion.getDouble("longitude")
+        val latitudeDelta = limitRegion.getDouble("latitudeDelta")
+        val longitudeDelta = limitRegion.getDouble("longitudeDelta")
+        map.setMapStatusLimits(LatLngBounds(
+                LatLng(latitude - latitudeDelta, longitude - longitudeDelta),
+                LatLng(latitude + latitudeDelta, longitude + longitudeDelta)
+        ))
     }
 }
