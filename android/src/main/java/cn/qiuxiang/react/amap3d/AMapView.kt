@@ -110,7 +110,7 @@ class AMapView(context: Context) : MapView(context) {
     fun emitCameraChangeEvent(event: String, position: CameraPosition?) {
         position?.let {
             val data = Arguments.createMap()
-            data.putDouble("zoom", it.zoom.toDouble())
+            data.putDouble("zoomLevel", it.zoom.toDouble())
             data.putDouble("tilt", it.tilt.toDouble())
             data.putDouble("rotation", it.bearing.toDouble())
             data.putDouble("latitude", it.target.latitude)
