@@ -6,12 +6,8 @@ import {
   requireNativeComponent,
 } from 'react-native'
 import {LatLng, Region} from './PropTypes'
-import Marker from './Marker'
-import Polyline from './Polyline'
-import Polygon from './Polygon'
-import Circle from './Circle'
 
-class MapView extends Component {
+export default class MapView extends Component {
   static propTypes = {
     ...View.propTypes,
 
@@ -183,14 +179,6 @@ class MapView extends Component {
   render() {
     return <AMapView {...this.props}/>
   }
-
-  static Marker = Marker
-  static Polyline = Polyline
-  static Polygon = Polygon
-  static Circle = Circle
 }
 
 AMapView = requireNativeComponent('AMapView', MapView)
-
-export default MapView
-export {MapView, Marker, Polyline, Polygon, Circle}
