@@ -48,6 +48,8 @@ RCT_EXPORT_VIEW_PROPERTY(rotation, CGFloat)
 RCT_EXPORT_VIEW_PROPERTY(onPress, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onLongPress, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onLocation, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onStatusChange, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onStatusChangeComplete, RCTBubblingEventBlock)
 
 RCT_EXPORT_METHOD(animateTo:(nonnull NSNumber *)reactTag params:(NSDictionary *)params duration:(NSInteger)duration) {
     [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, UIView *> *viewRegistry) {
@@ -154,6 +156,28 @@ RCT_EXPORT_METHOD(animateTo:(nonnull NSNumber *)reactTag params:(NSDictionary *)
                 @"latitude": @(marker.coordinate.latitude),
                 @"longitude": @(marker.coordinate.longitude),
         });
+    }
+}
+
+- (NSDictionary *)buildStatusData:(MAMapStatus *)status {
+    return @{
+            @"zoomLevel": @(status.zoomLevel),
+            @"tilt": @(status.cameraDegree),
+            @"rotation": @(status.rotationDegree),
+            @"latitude": @(status.centerCoordinate.latitude),
+            @"longitude": @(status.centerCoordinate.longitude),
+    };
+}
+
+- (void)mapViewRegionChanged:(AMapView *)mapView {
+    if (mapView.onStatusChange) {
+        mapView.onStatusChange([self buildStatusData:mapView.getMapStatus]);
+    }
+}
+
+- (void)mapView:(AMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
+    if (mapView.onStatusChangeComplete) {
+        mapView.onStatusChangeComplete([self buildStatusData:mapView.getMapStatus]);
     }
 }
 
