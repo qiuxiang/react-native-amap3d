@@ -80,6 +80,16 @@ class AMapView(context: Context) : MapView(context) {
             }
         })
 
+        map.setOnCameraChangeListener(object: AMap.OnCameraChangeListener {
+            override fun onCameraChangeFinish(position: CameraPosition?) {
+                emitCameraChangeEvent("onCameraChangeFinish", position)
+            }
+
+            override fun onCameraChange(position: CameraPosition?) {
+                emitCameraChangeEvent("onCameraChange", position)
+            }
+        })
+
         map.setOnInfoWindowClickListener { marker ->
             emit(markers[marker.id]?.id, "onInfoWindowClick")
         }
@@ -95,6 +105,18 @@ class AMapView(context: Context) : MapView(context) {
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
         map.isMyLocationEnabled = false
+    }
+
+    fun emitCameraChangeEvent(event: String, position: CameraPosition?) {
+        position?.let {
+            val data = Arguments.createMap()
+            data.putDouble("zoom", it.zoom.toDouble())
+            data.putDouble("tilt", it.tilt.toDouble())
+            data.putDouble("rotation", it.bearing.toDouble())
+            data.putDouble("latitude", it.target.latitude)
+            data.putDouble("longitude", it.target.longitude)
+            emit(id, event, data)
+        }
     }
 
     fun addMarker(marker: AMapMarker) {

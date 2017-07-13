@@ -55,6 +55,8 @@ internal class AMapViewManager : ViewGroupManager<AMapView>() {
                 "onMapLongClick" to mapOf("registrationName" to "onLongPress"),
                 "onAnimateCancel" to mapOf("registrationName" to "onAnimateCancel"),
                 "onAnimateFinish" to mapOf("registrationName" to "onAnimateFinish"),
+                "onCameraChange" to mapOf("registrationName" to "onStatusChange"),
+                "onCameraChangeFinish" to mapOf("registrationName" to "onStatusChangeComplete"),
                 "onLocationChange" to mapOf("registrationName" to "onLocation"))
     }
 
