@@ -38,7 +38,9 @@ $ react-native link react-native-amap3d
 ```
 
 #### iOS
-在 `ios` 目录下新建文件 `Podfile`：
+在 `ios` 目录下新建文件 `Podfile`。
+
+react-native > 0.44：
 ```ruby
 platform :ios, '8.0'
 
@@ -47,6 +49,17 @@ target 'Your Target' do
   pod 'React', path: '../node_modules/react-native/', :subspaces => [
     'jschelpers_legacy',
   ]
+  pod 'react-native-amap3d', path: '../node_modules/react-native-amap3d/'
+end
+```
+
+react-native <= 0.44：
+```ruby
+platform :ios, '8.0'
+
+target 'Your Target' do
+  pod 'Yoga', path: '../node_modules/react-native/ReactCommon/yoga/'
+  pod 'React', path: '../node_modules/react-native/'
   pod 'react-native-amap3d', path: '../node_modules/react-native-amap3d/'
 end
 ```
