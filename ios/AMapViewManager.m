@@ -16,7 +16,6 @@ RCT_EXPORT_MODULE()
 
 - (UIView *)view {
     AMapView *mapView = [AMapView new];
-    // when scroll view contains Map maybe we need stop Map Rending Cost.
     mapView.runLoopMode = NSDefaultRunLoopMode;
     mapView.allowsAnnotationViewSorting = YES;
     mapView.centerCoordinate = CLLocationCoordinate2DMake(39.9042, 116.4074);
@@ -105,13 +104,7 @@ RCT_EXPORT_METHOD(animateTo:(nonnull NSNumber *)reactTag params:(NSDictionary *)
 - (MAAnnotationView *)mapView:(MAMapView *)mapView viewForAnnotation:(id <MAAnnotation>)annotation {
     if ([annotation isKindOfClass:[AMapMarker class]]) {
         AMapMarker *marker = (AMapMarker *) annotation;
-        if (marker.active) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                // directly call selectAnnotation not work, because of there has no current AnnotationView presentation.
-                // use RUNLOOP
-                [mapView selectAnnotation:marker animated:YES];
-            });
-        }
+        [marker updateActive];
         return marker.annotationView;
     }
     return nil;
@@ -141,12 +134,10 @@ RCT_EXPORT_METHOD(animateTo:(nonnull NSNumber *)reactTag params:(NSDictionary *)
 - (void)mapView:(MAMapView *)mapView annotationView:(MAAnnotationView *)view didChangeDragState:(MAAnnotationViewDragState)newState
    fromOldState:(MAAnnotationViewDragState)oldState {
     AMapMarker *marker = (AMapMarker *) view.annotation;
-    marker.dragging = NO;
     if (newState == MAAnnotationViewDragStateStarting && marker.onDragStart) {
         marker.onDragStart(@{});
     }
     if (newState == MAAnnotationViewDragStateDragging) {
-        marker.dragging = YES;
         if (marker.onDrag) {
             marker.onDrag(@{});
         }

@@ -1,9 +1,11 @@
+#import <React/UIView+React.h>
 #import "AMapOverlay.h"
 
 @implementation AMapOverlay {
 }
 
-- (void)update {
+- (void)didUpdateReactSubviews {
+    [super didUpdateReactSubviews];
     [self.delegate update:self];
 }
 

@@ -15,11 +15,6 @@ RCT_EXPORT_MODULE()
     return [AMapOverlay new];
 }
 
-RCT_EXPORT_METHOD(update:(nonnull NSNumber *)reactTag) {
-    [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, UIView *> *viewRegistry) {
-        id view = viewRegistry[reactTag];
-        [(AMapOverlay *) view update];
-    }];
-}
+RCT_EXPORT_METHOD(update:(nonnull NSNumber *)reactTag) {}
 
 @end

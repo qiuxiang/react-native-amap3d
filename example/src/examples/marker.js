@@ -70,6 +70,7 @@ export default class MarkerExample extends Component {
       />
       <Marker
         icon='green'
+        onInfoWindowPress={this._handleCustomInfoWindowPress}
         coordinate={{
           latitude: 39.806901,
           longitude: 116.297972,
