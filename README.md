@@ -13,7 +13,7 @@ react-native 高德地图组件，使用最新 3D SDK，支持 Android + iOS。
 - 内置地图控件的显示隐藏（指南针、比例尺、定位按钮、缩放按钮）
 - 手势交互控制（平移、缩放、旋转、倾斜）
 - 中心坐标、缩放级别、倾斜度的设置，支持动画过渡
-- 地图事件（onPress、onLongPress、onLocation, OnStatusChange）
+- 地图事件（onPress、onLongPress、onLocation、OnStatusChange）
 - 地图标记（Marker）
   - 自定义信息窗体
   - 自定义图标
@@ -32,13 +32,14 @@ $ npm i react-native-amap3d --save
 
 ### 项目配置
 #### Android
-推荐使用 `react-native link`
+推荐使用 `react-native link`：
 ```
 $ react-native link react-native-amap3d
 ```
+当然，你也可以手动配置，参考 [Android Studio 配置工程](http://lbs.amap.com/api/android-sdk/guide/create-project/android-studio-create-project)。
 
 #### iOS
-在 `ios` 目录下新建文件 `Podfile`。
+推荐使用 CocoaPods，在 `ios` 目录下新建文件 `Podfile`。
 
 react-native > 0.44：
 ```ruby
@@ -68,6 +69,9 @@ end
 ```
 $ pod install
 ```
+需要注意的是，使用 CocoaPods 的 iOS 项目不需要也不能 `react-native link react-native-amap3d`。
+
+如果你不想用 CocoaPods，手动配置请参考：[手动部署](http://lbs.amap.com/api/ios-sdk/guide/create-project/manual-configuration)。
 
 ### 添加高德 Key
 #### Android
