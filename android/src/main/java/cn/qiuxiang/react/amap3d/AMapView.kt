@@ -216,8 +216,8 @@ class AMapView(context: Context) : MapView(context) {
         val latitudeDelta = limitRegion.getDouble("latitudeDelta")
         val longitudeDelta = limitRegion.getDouble("longitudeDelta")
         map.setMapStatusLimits(LatLngBounds(
-                LatLng(latitude - latitudeDelta, longitude - longitudeDelta),
-                LatLng(latitude + latitudeDelta, longitude + longitudeDelta)
+                LatLng(latitude - latitudeDelta / 2, longitude - longitudeDelta / 2),
+                LatLng(latitude + latitudeDelta / 2, longitude + longitudeDelta / 2)
         ))
     }
 }
