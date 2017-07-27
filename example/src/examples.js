@@ -29,7 +29,7 @@ export default class Examples extends Component {
   }
 
   render() {
-    return <ScrollView contentContainerStyle={styles.scrollView}>
+    return <ScrollView style={styles.scrollView}>
       <StatusBar barStyle='dark-content' backgroundColor='#e0e0e0'/>
       <View style={styles.group}>
         {this._renderItem('地图模式', 'MapTypes')}
@@ -61,7 +61,6 @@ export default class Examples extends Component {
 
 const styles = StyleSheet.create({
   scrollView: {
-    flex: 1,
     ...Platform.select({
       android: {
         backgroundColor: '#f5f5f5',
