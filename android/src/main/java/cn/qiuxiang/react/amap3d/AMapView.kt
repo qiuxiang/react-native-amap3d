@@ -113,6 +113,12 @@ class AMapView(context: Context) : MapView(context) {
             data.putDouble("rotation", it.bearing.toDouble())
             data.putDouble("latitude", it.target.latitude)
             data.putDouble("longitude", it.target.longitude)
+            if (event == "onCameraChangeFinish") {
+                val southwest = map.projection.visibleRegion.latLngBounds.southwest
+                val northeast = map.projection.visibleRegion.latLngBounds.northeast
+                data.putDouble("latitudeDelta", Math.abs(southwest.latitude - northeast.latitude))
+                data.putDouble("longitudeDelta", Math.abs(southwest.longitude - northeast.longitude))
+            }
             emit(id, event, data)
         }
     }

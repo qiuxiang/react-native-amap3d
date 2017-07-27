@@ -162,13 +162,29 @@ RCT_EXPORT_METHOD(animateTo:(nonnull NSNumber *)reactTag params:(NSDictionary *)
 
 - (void)mapViewRegionChanged:(AMapView *)mapView {
     if (mapView.onStatusChange) {
-        mapView.onStatusChange([self buildStatusData:mapView.getMapStatus]);
+        MAMapStatus *status = mapView.getMapStatus;
+        mapView.onStatusChange(@{
+                @"zoomLevel": @(status.zoomLevel),
+                @"tilt": @(status.cameraDegree),
+                @"rotation": @(status.rotationDegree),
+                @"latitude": @(status.centerCoordinate.latitude),
+                @"longitude": @(status.centerCoordinate.longitude),
+        });
     }
 }
 
 - (void)mapView:(AMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
     if (mapView.onStatusChangeComplete) {
-        mapView.onStatusChangeComplete([self buildStatusData:mapView.getMapStatus]);
+        MAMapStatus *status = mapView.getMapStatus;
+        mapView.onStatusChangeComplete(@{
+                @"zoomLevel": @(status.zoomLevel),
+                @"tilt": @(status.cameraDegree),
+                @"rotation": @(status.rotationDegree),
+                @"latitude": @(status.centerCoordinate.latitude),
+                @"longitude": @(status.centerCoordinate.longitude),
+                @"latitudeDelta": @(mapView.region.span.latitudeDelta),
+                @"longitudeDelta": @(mapView.region.span.longitudeDelta),
+        });
     }
 }
 
