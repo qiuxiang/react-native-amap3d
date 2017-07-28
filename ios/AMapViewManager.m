@@ -150,16 +150,6 @@ RCT_EXPORT_METHOD(animateTo:(nonnull NSNumber *)reactTag params:(NSDictionary *)
     }
 }
 
-- (NSDictionary *)buildStatusData:(MAMapStatus *)status {
-    return @{
-            @"zoomLevel": @(status.zoomLevel),
-            @"tilt": @(status.cameraDegree),
-            @"rotation": @(status.rotationDegree),
-            @"latitude": @(status.centerCoordinate.latitude),
-            @"longitude": @(status.centerCoordinate.longitude),
-    };
-}
-
 - (void)mapViewRegionChanged:(AMapView *)mapView {
     if (mapView.onStatusChange) {
         MAMapStatus *status = mapView.getMapStatus;
