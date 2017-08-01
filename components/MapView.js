@@ -39,6 +39,8 @@ export default class MapView extends Component {
 
     /**
      * 是否显示3D建筑
+     *
+     * TODO: 似乎并不能正常显示
      */
     showsBuildings: PropTypes.bool,
 
@@ -54,6 +56,8 @@ export default class MapView extends Component {
 
     /**
      * 是否显示放大缩小按钮
+     *
+     * Android only
      */
     showsZoomControls: PropTypes.bool,
 
@@ -64,6 +68,8 @@ export default class MapView extends Component {
 
     /**
      * 是否显示定位按钮
+     *
+     * Android only
      */
     showsLocationButton: PropTypes.bool,
 
