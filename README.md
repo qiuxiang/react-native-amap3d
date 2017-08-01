@@ -173,3 +173,13 @@ import MapView from 'react-native-amap3d'
   </View>
 </Marker>
 ```
+
+
+## 接口
+
+请参考注释文档：
+- [MapView](https://github.com/qiuxiang/react-native-amap3d/blob/master/components/MapView.js#L10)
+- [Marker](https://github.com/qiuxiang/react-native-amap3d/blob/master/components/Marker.js#L6)
+- [Polyline](https://github.com/qiuxiang/react-native-amap3d/blob/master/components/Polyline.js#L5)
+- [Polygon](https://github.com/qiuxiang/react-native-amap3d/blob/master/components/Polygon.js#L5)
+- [Circle](https://github.com/qiuxiang/react-native-amap3d/blob/master/components/Circle.js#L5)
