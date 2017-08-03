@@ -34,13 +34,13 @@ export default class MapView extends Component {
 
     /**
      * 是否显示室内地图楼层切换控件
+     *
+     * TODO: 似乎并不能正常显示
      */
     showsIndoorSwitch: PropTypes.bool,
 
     /**
      * 是否显示3D建筑
-     *
-     * TODO: 似乎并不能正常显示
      */
     showsBuildings: PropTypes.bool,
 
