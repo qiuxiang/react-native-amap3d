@@ -29,7 +29,7 @@ export default class Examples extends Component {
   }
 
   render() {
-    return <ScrollView style={styles.scrollView}>
+    return <ScrollView style={styles.scrollView} contentContainerStyle={styles.container}>
       <StatusBar barStyle='dark-content' backgroundColor='#e0e0e0'/>
       <View style={styles.group}>
         {this._renderItem('地图模式', 'MapTypes')}
@@ -66,6 +66,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#f5f5f5',
       },
     })
+  },
+  container: {
+    paddingBottom: 15,
   },
   group: {
     marginTop: 15,
