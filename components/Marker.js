@@ -66,6 +66,11 @@ export default class Marker extends Component {
     draggable: PropTypes.bool,
 
     /**
+     * 是否可点击
+     */
+    clickable: PropTypes.bool,
+
+    /**
      * 是否平贴地图
      */
     flat: PropTypes.bool,
@@ -81,7 +86,7 @@ export default class Marker extends Component {
     active: PropTypes.bool,
 
     /**
-     * 是否启用信息窗体，该属性只能开始时设置一次
+     * 是否启用信息窗体
      */
     infoWindowEnabled: PropTypes.bool,
 

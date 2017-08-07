@@ -24,7 +24,12 @@ class AMapMarker(context: Context) : ReactViewGroup(context) {
     }
 
     var infoWindow: AMapOverlay? = null
+
     var infoWindowEnabled: Boolean = true
+        set(value) {
+            field = value
+            marker?.isInfoWindowEnable = value
+        }
 
     var marker: Marker? = null
         private set
