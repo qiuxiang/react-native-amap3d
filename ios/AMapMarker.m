@@ -58,6 +58,10 @@
     [self updateActive];
 }
 
+- (void)setClickable:(BOOL)enabled {
+    self.enabled = enabled;
+}
+
 - (void)updateActive {
     dispatch_async(dispatch_get_main_queue(), ^{
         if (_active) {
