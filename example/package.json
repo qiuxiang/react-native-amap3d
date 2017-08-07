@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "init": "rm -r node_modules/react-native-amap3d; mkdir node_modules/react-native-amap3d; cp -r ../components node_modules/react-native-amap3d; cp -r ../package.json node_modules/react-native-amap3d",
+    "init": "rm -r node_modules/react-native-amap3d; mkdir node_modules/react-native-amap3d; cp -r ../components node_modules/react-native-amap3d; cp -r ../package.json node_modules/react-native-amap3d; cp -r ../index.js node_modules/react-native-amap3d",
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "android": "node node_modules/react-native/local-cli/cli.js run-android",
     "android-log": "node node_modules/react-native/local-cli/cli.js log-android",
