@@ -10,6 +10,7 @@
 @property(nonatomic, copy) RCTBubblingEventBlock onDragEnd;
 
 - (BOOL)active;
+- (void)setActive:(BOOL)active;
 - (MAAnnotationView *)annotationView;
 - (void)setMapView:(AMapView *)mapView;
 - (void)updateActive;
