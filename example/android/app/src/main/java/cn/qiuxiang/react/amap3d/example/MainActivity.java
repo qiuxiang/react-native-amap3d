@@ -1,4 +1,4 @@
-package com.example;
+package cn.qiuxiang.react.amap3d.example;
 
 import com.facebook.react.ReactActivity;
 
