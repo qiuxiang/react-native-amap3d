@@ -71,6 +71,12 @@ class AMapMarker(context: Context) : ReactViewGroup(context) {
             marker?.isDraggable = value
         }
 
+    var clickable_: Boolean = true
+        set(value) {
+            field = value
+            marker?.isClickable = value
+        }
+
     var active: Boolean = false
         set(value) {
             field = value
@@ -100,6 +106,8 @@ class AMapMarker(context: Context) : ReactViewGroup(context) {
         } else {
             marker?.hideInfoWindow()
         }
+
+        marker?.isClickable = this.clickable_
     }
 
     fun setIcon(icon: String) {

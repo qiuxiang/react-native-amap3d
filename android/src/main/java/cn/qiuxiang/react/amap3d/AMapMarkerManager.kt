@@ -67,6 +67,11 @@ internal class AMapMarkerManager : ViewGroupManager<AMapMarker>() {
         marker.draggable = draggable
     }
 
+    @ReactProp(name = "clickable")
+    fun setClickable(marker: AMapMarker, clickable: Boolean) {
+        marker.clickable_ = clickable
+    }
+
     @ReactProp(name = "active")
     fun setSelected(marker: AMapMarker, active: Boolean) {
         marker.active = active
