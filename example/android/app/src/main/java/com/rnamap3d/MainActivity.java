@@ -1,4 +1,4 @@
-package cn.qiuxiang.react.amap3d.example;
+package com.rnamap3d;
 
 import com.facebook.react.ReactActivity;
 
@@ -10,6 +10,6 @@ public class MainActivity extends ReactActivity {
      */
     @Override
     protected String getMainComponentName() {
-        return "Example";
+        return "RNAMap3D";
     }
 }

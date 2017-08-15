@@ -1,4 +1,4 @@
-package cn.qiuxiang.react.amap3d.example;
+package com.rnamap3d;
 
 import android.app.Application;
 

@@ -1,3 +1,3 @@
 import {AppRegistry} from 'react-native'
 import App from './src/app'
-AppRegistry.registerComponent('Example', () => App)
+AppRegistry.registerComponent('RNAMap3D', () => App)
