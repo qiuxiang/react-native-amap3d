@@ -154,7 +154,7 @@ export default class MapView extends Component {
     onAnimateCancel: React.PropTypes.func,
 
     /**
-     * 地图状态变化事件
+     * 地图状态变化(包括移动、缩放、倾斜、旋转)事件
      */
     onStatusChange: React.PropTypes.func,
 
