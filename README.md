@@ -13,7 +13,7 @@ react-native 高德地图组件，使用最新 3D SDK，支持 Android + iOS。
 - 内置地图控件的显示隐藏（指南针、比例尺、定位按钮、缩放按钮）
 - 手势交互控制（平移、缩放、旋转、倾斜）
 - 中心坐标、缩放级别、倾斜度的设置，支持动画过渡
-- 地图事件（onPress、onLongPress、onLocation、OnStatusChange）
+- 地图事件（onPress、onLongPress、onLocation、onStatusChange）
 - 地图标记（Marker）
   - 自定义信息窗体
   - 自定义图标
@@ -39,22 +39,8 @@ $ react-native link react-native-amap3d
 当然，你也可以手动配置，参考 [Android Studio 配置工程](http://lbs.amap.com/api/android-sdk/guide/create-project/android-studio-create-project)。
 
 #### iOS
-推荐使用 CocoaPods，在 `ios` 目录下新建文件 `Podfile`。
+推荐使用 CocoaPods，在 `ios` 目录下新建文件 `Podfile`：
 
-react-native > 0.44：
-```ruby
-platform :ios, '8.0'
-
-target 'Your Target' do
-  pod 'Yoga', path: '../node_modules/react-native/ReactCommon/yoga/'
-  pod 'React', path: '../node_modules/react-native/', :subspaces => [
-    'jschelpers_legacy',
-  ]
-  pod 'react-native-amap3d', path: '../node_modules/react-native-amap3d/'
-end
-```
-
-react-native <= 0.44：
 ```ruby
 platform :ios, '8.0'
 
@@ -71,7 +57,7 @@ $ pod install
 ```
 需要注意的是，使用 CocoaPods 的 iOS 项目不需要也不能 `react-native link react-native-amap3d`。
 
-如果你不想用 CocoaPods，手动配置请参考：[手动部署](http://lbs.amap.com/api/ios-sdk/guide/create-project/manual-configuration)。
+如果你不想使用 CocoaPods，手动配置请参考：[手动部署](http://lbs.amap.com/api/ios-sdk/guide/create-project/manual-configuration)。
 
 ### 添加高德 Key
 #### Android
@@ -183,3 +169,9 @@ import MapView from 'react-native-amap3d'
 - [Polyline](https://github.com/qiuxiang/react-native-amap3d/blob/master/components/Polyline.js#L5)
 - [Polygon](https://github.com/qiuxiang/react-native-amap3d/blob/master/components/Polygon.js#L5)
 - [Circle](https://github.com/qiuxiang/react-native-amap3d/blob/master/components/Circle.js#L5)
+
+
+## 注意
+
+- 该项目只支持最新 RN，因为 RN 经常改接口，导致向后兼容几乎无法做到
+- 由于 3D 地图渲染需要硬件加速，部分 Android 模拟器会因为缺少硬件加速而导致运行崩溃
