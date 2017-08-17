@@ -23,6 +23,7 @@ react-native 高德地图组件，使用最新 3D SDK，支持 Android + iOS。
 
 ![](https://user-images.githubusercontent.com/1709072/27509246-28ee8a0a-592b-11e7-9148-ed24c86ede82.jpg) ![](https://user-images.githubusercontent.com/1709072/27509248-29000d20-592b-11e7-90ef-3f56c4300625.jpg) ![](https://user-images.githubusercontent.com/1709072/27509247-28feba88-592b-11e7-90ec-3e3680cee241.jpg) ![](https://user-images.githubusercontent.com/1709072/27509249-2902531e-592b-11e7-801d-5fef6a87cead.jpg) ![](https://user-images.githubusercontent.com/1709072/27509250-2906e64a-592b-11e7-8cc5-1ce84090ce66.jpg) ![](https://user-images.githubusercontent.com/1709072/27509251-29084d5a-592b-11e7-84af-f49dbcea9873.jpg) ![](https://user-images.githubusercontent.com/1709072/27509252-291d5876-592b-11e7-8849-15360c2e16c2.jpg) ![](https://user-images.githubusercontent.com/1709072/27509253-2933ef5a-592b-11e7-88b4-10f67fa03706.jpg)
 
+
 ## 安装
 
 ### 安装依赖
@@ -92,7 +93,6 @@ $ pod install
 
 
 ## 用法
-更多示例请参考[示例项目](https://github.com/qiuxiang/react-native-amap3d/tree/master/example)。
 
 ### 导入地图模块
 ```jsx
@@ -160,6 +160,8 @@ import MapView from 'react-native-amap3d'
 </Marker>
 ```
 
+更多示例请参考[示例项目](https://github.com/qiuxiang/react-native-amap3d/tree/master/example)。
+
 
 ## 接口
 
@@ -173,5 +175,5 @@ import MapView from 'react-native-amap3d'
 
 ## 注意
 
-- 该项目只支持最新 RN，因为 RN 经常改接口，导致向后兼容几乎无法做到
+- 该项目只保证在最新 RN 下测试通过，这是因为 RN 经常改接口，导致向后兼容几乎无法做到
 - 由于 3D 地图渲染需要硬件加速，部分 Android 模拟器会因为缺少硬件加速而导致运行崩溃
