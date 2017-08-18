@@ -1,10 +1,15 @@
 import React, {PropTypes, Component} from 'react'
-import {requireNativeComponent, View, PixelRatio, Platform} from 'react-native'
+import {
+  requireNativeComponent,
+  ViewPropTypes,
+  PixelRatio,
+  Platform,
+} from 'react-native'
 import {LatLng} from './PropTypes'
 
-class Circle extends Component {
+export default class Circle extends Component {
   static propTypes = {
-    ...View.propTypes,
+    ...ViewPropTypes,
 
     /**
      * 圆点
@@ -16,9 +21,24 @@ class Circle extends Component {
      */
     radius: PropTypes.number.isRequired,
 
+    /**
+     * 边线宽度
+     */
     strokeWidth: PropTypes.number,
+
+    /**
+     * 边线颜色
+     */
     strokeColor: PropTypes.string,
+
+    /**
+     * 填充颜色
+     */
     fillColor: PropTypes.string,
+
+    /**
+     * 层级
+     */
     zIndex: PropTypes.number,
   }
 
@@ -35,6 +55,4 @@ class Circle extends Component {
   }
 }
 
-AMapCircle = requireNativeComponent('AMapCircle', Circle)
-
-export default Circle
+const AMapCircle = requireNativeComponent('AMapCircle', Circle)

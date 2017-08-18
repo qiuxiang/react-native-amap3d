@@ -1,14 +1,14 @@
 import React, {PropTypes, Component} from 'react'
 import {
-  View,
+  ViewPropTypes,
   UIManager,
   findNodeHandle,
   requireNativeComponent,
 } from 'react-native'
 
-class Overlay extends Component {
+export default class Overlay extends Component {
   static propTypes = {
-    ...View.propTypes,
+    ...ViewPropTypes,
   }
 
   _update() {
@@ -29,6 +29,4 @@ class Overlay extends Component {
   }
 }
 
-AMapOverlay = requireNativeComponent('AMapOverlay', Overlay)
-
-export default Overlay
+const AMapOverlay = requireNativeComponent('AMapOverlay', Overlay)

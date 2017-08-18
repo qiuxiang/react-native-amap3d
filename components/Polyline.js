@@ -1,14 +1,35 @@
 import React, {PropTypes, Component} from 'react'
-import {processColor, requireNativeComponent, View, PixelRatio, Platform} from 'react-native'
+import {
+  processColor,
+  requireNativeComponent,
+  ViewPropTypes,
+  PixelRatio,
+  Platform,
+} from 'react-native'
 import {LatLng} from './PropTypes'
 
-class Polyline extends Component {
+export default class Polyline extends Component {
   static propTypes = {
-    ...View.propTypes,
+    ...ViewPropTypes,
 
+    /**
+     * 节点
+     */
     coordinates: PropTypes.arrayOf(LatLng).isRequired,
+
+    /**
+     * 线段宽度
+     */
     width: PropTypes.number,
+
+    /**
+     * 线段颜色
+     */
     color: PropTypes.string,
+
+    /**
+     * 层级
+     */
     zIndex: PropTypes.number,
 
     /**
@@ -67,6 +88,4 @@ class Polyline extends Component {
   }
 }
 
-AMapPolyline = requireNativeComponent('AMapPolyline', Polyline)
-
-export default Polyline
+const AMapPolyline = requireNativeComponent('AMapPolyline', Polyline)

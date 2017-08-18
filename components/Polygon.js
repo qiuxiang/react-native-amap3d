@@ -1,15 +1,39 @@
 import React, {PropTypes, Component} from 'react'
-import {requireNativeComponent, View, PixelRatio, Platform} from 'react-native'
+import {
+  requireNativeComponent,
+  ViewPropTypes,
+  PixelRatio,
+  Platform,
+} from 'react-native'
 import {LatLng} from './PropTypes'
 
-class Polygon extends Component {
+export default class Polygon extends Component {
   static propTypes = {
-    ...View.propTypes,
+    ...ViewPropTypes,
 
+    /**
+     * 节点
+     */
     coordinates: PropTypes.arrayOf(LatLng).isRequired,
+
+    /**
+     * 边线宽度
+     */
     strokeWidth: PropTypes.number,
+
+    /**
+     * 边线颜色
+     */
     strokeColor: PropTypes.string,
+
+    /**
+     * 填充颜色
+     */
     fillColor: PropTypes.string,
+
+    /**
+     * 层级
+     */
     zIndex: PropTypes.number,
   }
 
@@ -27,5 +51,3 @@ class Polygon extends Component {
 }
 
 AMapPolygon = requireNativeComponent('AMapPolygon', Polygon)
-
-export default Polygon

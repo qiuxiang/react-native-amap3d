@@ -1,15 +1,23 @@
-import React, {PropTypes, Component} from 'react'
+// @flow
+import React, {Component, PropTypes} from 'react'
 import {
-  View,
-  UIManager,
   findNodeHandle,
   requireNativeComponent,
+  UIManager,
+  ViewPropTypes,
 } from 'react-native'
 import {LatLng, Region} from './PropTypes'
 
+type Target = {
+  zoomLevel?: number,
+  coordinate?: LatLng,
+  titl?: number,
+  rotation?: number,
+}
+
 export default class MapView extends Component {
   static propTypes = {
-    ...View.propTypes,
+    ...ViewPropTypes,
 
     /**
      * 地图类型
@@ -57,7 +65,7 @@ export default class MapView extends Component {
     /**
      * 是否显示放大缩小按钮
      *
-     * Android only
+     * @platform android
      */
     showsZoomControls: PropTypes.bool,
 
@@ -69,7 +77,7 @@ export default class MapView extends Component {
     /**
      * 是否显示定位按钮
      *
-     * Android only
+     * @platform android
      */
     showsLocationButton: PropTypes.bool,
 
@@ -154,7 +162,7 @@ export default class MapView extends Component {
     onAnimateCancel: React.PropTypes.func,
 
     /**
-     * 地图状态变化(包括移动、缩放、倾斜、旋转)事件
+     * 地图状态变化事件
      */
     onStatusChange: React.PropTypes.func,
 
@@ -165,16 +173,18 @@ export default class MapView extends Component {
   }
 
   /**
-   * 动画过渡到某个位置（坐标、缩放级别、倾斜度）
-   *
-   * @param {{zoomLevel: ?number, coordinate: ?LatLng, titl: ?number}} target
-   * @param duration
+   * 动画过渡到某个状态（坐标、缩放级别、倾斜度、旋转角度）
    */
-  animateTo(target, duration = 500) {
+  animateTo(target: Target, duration?: number = 500) {
     this._sendCommand('animateTo', [target, duration])
   }
 
-  _sendCommand(command, params = null) {
+  /**
+   * call native method
+   *
+   * @private
+   */
+  _sendCommand(command: string, params?: []) {
     UIManager.dispatchViewManagerCommand(
       findNodeHandle(this),
       UIManager.AMapView.Commands[command],
@@ -187,4 +197,4 @@ export default class MapView extends Component {
   }
 }
 
-AMapView = requireNativeComponent('AMapView', MapView)
+const AMapView = requireNativeComponent('AMapView', MapView)
