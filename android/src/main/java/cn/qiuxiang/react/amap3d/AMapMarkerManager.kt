@@ -29,10 +29,10 @@ internal class AMapMarkerManager : ViewGroupManager<AMapMarker>() {
     override fun getExportedCustomDirectEventTypeConstants(): Map<String, Any>? {
         return mapOf(
                 "onMarkerClick" to mapOf("registrationName" to "onMarkerClick"),
-                "onMarkerDragStart" to mapOf("registrationName" to "onMarkerDragStart"),
-                "onMarkerDrag" to mapOf("registrationName" to "onMarkerDrag"),
-                "onMarkerDragEnd" to mapOf("registrationName" to "onMarkerDragEnd"),
-                "onInfoWindowClick" to mapOf("registrationName" to "onInfoWindowClick"))
+                "onMarkerDragStart" to mapOf("registrationName" to "onDragStart"),
+                "onMarkerDrag" to mapOf("registrationName" to "onDrag"),
+                "onMarkerDragEnd" to mapOf("registrationName" to "onDragEnd"),
+                "onInfoWindowClick" to mapOf("registrationName" to "onInfoWindowPress"))
     }
 
     @ReactProp(name = "title")

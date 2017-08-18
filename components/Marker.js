@@ -1,11 +1,17 @@
-import React, {PropTypes, Component} from 'react'
-import {requireNativeComponent, View, Platform, StyleSheet} from 'react-native'
+import React, {PropTypes, PureComponent} from 'react'
+import {
+  requireNativeComponent,
+  View,
+  ViewPropTypes,
+  Platform,
+  StyleSheet,
+} from 'react-native'
 import {LatLng} from './PropTypes'
 import Overlay from './Overlay'
 
-export default class Marker extends Component {
+export default class Marker extends PureComponent {
   static propTypes = {
-    ...View.propTypes,
+    ...ViewPropTypes,
 
     /**
      * 坐标
@@ -117,24 +123,14 @@ export default class Marker extends Component {
     onInfoWindowPress: React.PropTypes.func,
   }
 
-  _handle(name) {
-    return event => {
-      if (this.props[name]) {
-        this.props[name](event)
-      }
-    }
-  }
+  _onPress = event => this.props.onPress && this.props.onPress(event)
 
   render() {
     const props = {
       ...this.props,
       ...Platform.select({
         android: {
-          onMarkerClick: this._handle('onPress'),
-          onMarkerDragStart: this._handle('onDragStart'),
-          onMarkerDrag: this._handle('onDrag'),
-          onMarkerDragEnd: this._handle('onDragEnd'),
-          onInfoWindowClick: this._handle('onInfoWindowPress'),
+          onMarkerClick: this._onPress,
         },
       })
     }
@@ -158,7 +154,7 @@ export default class Marker extends Component {
   }
 }
 
-AMapMarker = requireNativeComponent('AMapMarker', Marker)
+const AMapMarker = requireNativeComponent('AMapMarker', Marker)
 
 const styles = StyleSheet.create({
   overlay: {
