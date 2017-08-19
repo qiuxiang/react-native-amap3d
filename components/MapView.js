@@ -1,5 +1,5 @@
 // @flow
-import React, {Component, PropTypes} from 'react'
+import React, {PureComponent, PropTypes} from 'react'
 import {
   findNodeHandle,
   requireNativeComponent,
@@ -15,7 +15,7 @@ type Target = {
   rotation?: number,
 }
 
-export default class MapView extends Component {
+export default class MapView extends PureComponent {
   static propTypes = {
     ...ViewPropTypes,
 

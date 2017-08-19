@@ -1,4 +1,4 @@
-import React, {PropTypes, Component} from 'react'
+import React, {PropTypes, PureComponent} from 'react'
 import {
   ViewPropTypes,
   UIManager,
@@ -6,7 +6,7 @@ import {
   requireNativeComponent,
 } from 'react-native'
 
-export default class Overlay extends Component {
+export default class Overlay extends PureComponent {
   static propTypes = {
     ...ViewPropTypes,
   }

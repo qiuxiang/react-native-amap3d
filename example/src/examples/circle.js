@@ -1,10 +1,15 @@
 import React, {Component} from 'react'
-import {StyleSheet} from 'react-native'
+import {StyleSheet, View} from 'react-native'
 import {MapView, Circle} from 'react-native-amap3d'
 
 export default class CircleExample extends Component {
   static navigationOptions = {
     title: '绘制圆形',
+  }
+
+  coordinate = {
+    latitude: 39.906901,
+    longitude: 116.397972,
   }
 
   render() {
@@ -14,10 +19,7 @@ export default class CircleExample extends Component {
         strokeColor='rgba(0, 0, 255, 0.5)'
         fillColor='rgba(255, 0, 0, 0.5)'
         radius={10000}
-        coordinate={{
-          latitude: 39.906901,
-          longitude: 116.397972,
-        }}/>
+        coordinate={this.coordinate}/>
     </MapView>
   }
 }

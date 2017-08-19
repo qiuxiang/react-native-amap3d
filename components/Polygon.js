@@ -1,4 +1,4 @@
-import React, {PropTypes, Component} from 'react'
+import React, {PropTypes, PureComponent} from 'react'
 import {
   requireNativeComponent,
   ViewPropTypes,
@@ -7,7 +7,7 @@ import {
 } from 'react-native'
 import {LatLng} from './PropTypes'
 
-export default class Polygon extends Component {
+export default class Polygon extends PureComponent {
   static propTypes = {
     ...ViewPropTypes,
 
@@ -50,4 +50,4 @@ export default class Polygon extends Component {
   }
 }
 
-AMapPolygon = requireNativeComponent('AMapPolygon', Polygon)
+const AMapPolygon = requireNativeComponent('AMapPolygon', Polygon)

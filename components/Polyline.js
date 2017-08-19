@@ -1,4 +1,4 @@
-import React, {PropTypes, Component} from 'react'
+import React, {PropTypes, PureComponent} from 'react'
 import {
   processColor,
   requireNativeComponent,
@@ -8,7 +8,7 @@ import {
 } from 'react-native'
 import {LatLng} from './PropTypes'
 
-export default class Polyline extends Component {
+export default class Polyline extends PureComponent {
   static propTypes = {
     ...ViewPropTypes,
 

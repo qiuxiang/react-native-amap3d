@@ -77,7 +77,7 @@ export default class MarkerExample extends Component {
       <Marker
         icon={this._renderImageMarker}
         title='自定义图片'
-        description="Note the use of nativeOnly above. Sometimes you'll have some special properties that you need to expose for the native component, but don't actually want them as part of the API for the associated React component."
+        description="Sometimes you'll have some special properties that you need to expose for the native component, but don't actually want them as part of the API for the associated React component."
         coordinate={{
           latitude: 39.906901,
           longitude: 116.397972,

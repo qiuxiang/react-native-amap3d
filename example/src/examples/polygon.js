@@ -7,26 +7,28 @@ export default class PolygonExample extends Component {
     title: '绘制多边形',
   }
 
+  _coordinates = [
+    {
+      latitude: 39.806901,
+      longitude: 116.397972,
+    },
+    {
+      latitude: 39.806901,
+      longitude: 116.297972,
+    },
+    {
+      latitude: 39.906901,
+      longitude: 116.397972,
+    },
+  ]
+
   render() {
     return <MapView style={StyleSheet.absoluteFill}>
       <Polygon
         strokeWidth={5}
         strokeColor='rgba(0, 0, 255, 0.5)'
         fillColor='rgba(255, 0, 0, 0.5)'
-        coordinates={[
-          {
-            latitude: 39.806901,
-            longitude: 116.397972,
-          },
-          {
-            latitude: 39.806901,
-            longitude: 116.297972,
-          },
-          {
-            latitude: 39.906901,
-            longitude: 116.397972,
-          },
-        ]}/>
+        coordinates={this._coordinates}/>
     </MapView>
   }
 }
