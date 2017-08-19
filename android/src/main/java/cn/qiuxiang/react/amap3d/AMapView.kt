@@ -96,7 +96,7 @@ class AMapView(context: Context) : TextureMapView(context) {
             emit(polylines[polyline.id]?.id, "onPolylineClick")
         }
 
-        map.setInfoWindowAdapter(InfoWindowAdapter(context, markers))
+        map.setInfoWindowAdapter(AMapInfoWindowAdapter(context, markers))
     }
 
     @SuppressLint("MissingSuperCall")

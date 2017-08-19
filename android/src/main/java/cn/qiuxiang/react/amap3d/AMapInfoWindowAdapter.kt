@@ -5,13 +5,13 @@ import android.graphics.Color
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
-import com.amap.api.maps.AMap
+import com.amap.api.maps.AMap.InfoWindowAdapter
 import com.amap.api.maps.model.Marker
 
-class InfoWindowAdapter(
+class AMapInfoWindowAdapter(
         val context: Context,
         val markers: HashMap<String, AMapMarker>
-) : AMap.InfoWindowAdapter {
+) : InfoWindowAdapter {
     val paddingTop = context.resources.displayMetrics.density
 
     override fun getInfoWindow(marker: Marker): View? {
@@ -31,7 +31,6 @@ class InfoWindowAdapter(
         if (!snippet.isEmpty()) {
             val snippetView = TextView(context)
             snippetView.text = snippet
-            snippetView.setSingleLine(false)
             snippetView.maxEms = 12
             snippetView.setPadding(0, paddingTop.toInt(), 0, 0)
             snippetView.setTextColor(Color.parseColor("#757575"))

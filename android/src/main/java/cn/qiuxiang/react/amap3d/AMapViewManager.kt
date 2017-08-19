@@ -177,6 +177,4 @@ internal class AMapViewManager : ViewGroupManager<AMapView>() {
     fun changeRotation(view: AMapView, rotation: Float) {
         view.map.moveCamera(CameraUpdateFactory.changeBearing(rotation))
     }
-
-    // todo: 自定义 locationStyle
 }

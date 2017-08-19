@@ -129,6 +129,9 @@ class AMapMarker(context: Context) : ReactViewGroup(context) {
         }
     }
 
+    /**
+     * TODO: 如果 IconView 里包含 Image，由于不知道 Image 什么时候加载完毕，会导致 Image 可能无法正确显示
+     */
     private fun updateIconView(overlay: AMapOverlay) {
         val bitmap = Bitmap.createBitmap(
                 overlay.width, overlay.height, Bitmap.Config.ARGB_8888)
