@@ -3,6 +3,7 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "android": "node node_modules/react-native/local-cli/cli.js run-android",
+    "log-android": "node node_modules/react-native/local-cli/cli.js log-android",
     "ios": "node node_modules/react-native/local-cli/cli.js run-ios"
   },
   "dependencies": {
