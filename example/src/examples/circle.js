@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {StyleSheet, View} from 'react-native'
+import {StyleSheet} from 'react-native'
 import {MapView, Circle} from 'react-native-amap3d'
 
 export default class CircleExample extends Component {

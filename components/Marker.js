@@ -1,4 +1,4 @@
-import React, {PropTypes, Component} from 'react'
+import React, {PropTypes, PureComponent} from 'react'
 import {
   requireNativeComponent,
   View,
@@ -9,7 +9,7 @@ import {
 import {LatLng} from './PropTypes'
 import Overlay from './Overlay'
 
-export default class Marker extends Component {
+export default class Marker extends PureComponent {
   static propTypes = {
     ...ViewPropTypes,
 

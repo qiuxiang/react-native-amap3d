@@ -65,13 +65,7 @@ export default class Polyline extends PureComponent {
     colors: [],
   }
 
-  _handle(name) {
-    return event => {
-      if (this.props[name]) {
-        this.props[name](event)
-      }
-    }
-  }
+  _onPress = event => this.props.onPress && this.props.onPress(event)
 
   render() {
     const props = {
@@ -82,7 +76,7 @@ export default class Polyline extends PureComponent {
           colors: this.props.colors.map(processColor),
         },
       }),
-      onPolylineClick: this._handle('onPress'),
+      onPolylineClick: this._onPress,
     }
     return <AMapPolyline {...props}/>
   }
