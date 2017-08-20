@@ -166,14 +166,14 @@ import MapView from 'react-native-amap3d'
 ## 接口
 
 请参考注释文档：
-- [MapView](https://github.com/qiuxiang/react-native-amap3d/blob/master/components/MapView.js#L10)
-- [Marker](https://github.com/qiuxiang/react-native-amap3d/blob/master/components/Marker.js#L6)
-- [Polyline](https://github.com/qiuxiang/react-native-amap3d/blob/master/components/Polyline.js#L5)
-- [Polygon](https://github.com/qiuxiang/react-native-amap3d/blob/master/components/Polygon.js#L5)
-- [Circle](https://github.com/qiuxiang/react-native-amap3d/blob/master/components/Circle.js#L5)
+- [MapView](https://github.com/qiuxiang/react-native-amap3d/blob/master/components/MapView.js#L18)
+- [Marker](https://github.com/qiuxiang/react-native-amap3d/blob/master/components/Marker.js#L12)
+- [Polyline](https://github.com/qiuxiang/react-native-amap3d/blob/master/components/Polyline.js#L11)
+- [Polygon](https://github.com/qiuxiang/react-native-amap3d/blob/master/components/Polygon.js#L10)
+- [Circle](https://github.com/qiuxiang/react-native-amap3d/blob/master/components/Circle.js#L10)
 
 
 ## 注意
 
-- 该项目只保证在最新 RN 下测试通过，这是因为 RN 经常改接口，导致向后兼容几乎无法做到
+- 由于 RN 经常改接口，该项目只能保证在最新 RN 下测试通过
 - 由于 3D 地图渲染需要硬件加速，部分 Android 模拟器会因为缺少硬件加速而导致运行崩溃
