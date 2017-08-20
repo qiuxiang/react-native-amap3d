@@ -117,7 +117,4 @@ const styles = StyleSheet.create({
   markerText: {
     color: '#fff',
   },
-  coloredImage: {
-    tintColor: '#e91e63',
-  },
 })
