@@ -11,6 +11,10 @@ class AMapOverlay(context: Context) : ReactViewGroup(context) {
     }
 
     fun update() {
+        val layoutParams = this.layoutParams
+        if (layoutParams == null || layoutParams.width != this.width || layoutParams.height != this.height) {
+            this.layoutParams = LayoutParams(this.width, this.height)
+        }
         updateHandler?.invoke()
     }
 }
