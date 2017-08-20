@@ -40,7 +40,7 @@ class AMapPolygon(context: Context) : ReactViewGroup(context) {
     private var coordinates: ArrayList<LatLng> = ArrayList()
 
     fun setCoordinates(coordinates: ReadableArray) {
-        this.coordinates = ArrayList((0..coordinates.size() - 1)
+        this.coordinates = ArrayList((0 until coordinates.size())
                 .map { coordinates.getMap(it) }
                 .map { LatLng(it.getDouble("latitude"), it.getDouble("longitude")) })
 

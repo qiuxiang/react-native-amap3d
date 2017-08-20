@@ -9,8 +9,8 @@ import com.amap.api.maps.AMap.InfoWindowAdapter
 import com.amap.api.maps.model.Marker
 
 class AMapInfoWindowAdapter(
-        val context: Context,
-        val markers: HashMap<String, AMapMarker>
+        private val context: Context,
+        private val markers: HashMap<String, AMapMarker>
 ) : InfoWindowAdapter {
     val paddingTop = context.resources.displayMetrics.density
 

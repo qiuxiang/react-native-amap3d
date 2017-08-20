@@ -168,7 +168,7 @@ class AMapView(context: Context) : TextureMapView(context) {
         }
     }
 
-    val animateCallback = object: AMap.CancelableCallback {
+    private val animateCallback = object: AMap.CancelableCallback {
         override fun onCancel() {
             emit(id, "onAnimateCancel")
         }
