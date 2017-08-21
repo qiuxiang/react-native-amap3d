@@ -45,7 +45,6 @@ class AMapNavigationManager : ViewGroupManager<AMapNavigation>() {
 
     override fun getExportedCustomDirectEventTypeConstants(): Map<String, Any> {
         return mapOf(
-                "onReady" to mapOf("registrationName" to "onReady"),
                 "onCalculateRouteSuccess" to mapOf("registrationName" to "onCalculateRouteSuccess"),
                 "onCalculateRouteFailure" to mapOf("registrationName" to "onCalculateRouteFailure")
         )

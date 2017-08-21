@@ -72,7 +72,6 @@ class AMapNavigation(context: ThemedReactContext) :
     }
 
     override fun onInitNaviSuccess() {
-        sendEvent("onReady")
     }
 
     override fun onServiceAreaUpdate(p0: Array<out AMapServiceAreaInfo>?) {
