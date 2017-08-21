@@ -1,13 +1,13 @@
 import React, {Component} from 'react'
 import {
-  View,
-  Text,
+  Platform,
   ScrollView,
+  StatusBar,
   StyleSheet,
+  Text,
   TouchableHighlight,
   TouchableNativeFeedback,
-  Platform,
-  StatusBar,
+  View,
 } from 'react-native'
 
 let Touchable = TouchableHighlight
@@ -45,6 +45,8 @@ export default class Examples extends Component {
         {this._renderItem('动画移动', 'Animated')}
         <View style={styles.separator}/>
         {this._renderItem('地图事件', 'Events')}
+        <View style={styles.separator}/>
+        {this._renderItem('导航', 'Navigation')}
       </View>
       <View style={styles.group}>
         {this._renderItem('添加标记', 'Marker')}
