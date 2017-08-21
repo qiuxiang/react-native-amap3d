@@ -121,7 +121,7 @@ RCT_EXPORT_METHOD(animateTo:(nonnull NSNumber *)reactTag params:(NSDictionary *)
     if ([view.annotation isKindOfClass:[AMapMarker class]]) {
         AMapMarker *marker = (AMapMarker *) view.annotation;
         if (marker.onPress) {
-            marker.onPress(@{});
+            marker.onPress(nil);
         }
     }
 }
@@ -137,7 +137,7 @@ RCT_EXPORT_METHOD(animateTo:(nonnull NSNumber *)reactTag params:(NSDictionary *)
     if ([view.annotation isKindOfClass:[AMapMarker class]]) {
         AMapMarker *marker = (AMapMarker *) view.annotation;
         if (marker.onInfoWindowPress) {
-            marker.onInfoWindowPress(@{});
+            marker.onInfoWindowPress(nil);
         }
     }
 }
@@ -146,11 +146,11 @@ RCT_EXPORT_METHOD(animateTo:(nonnull NSNumber *)reactTag params:(NSDictionary *)
    fromOldState:(MAAnnotationViewDragState)oldState {
     AMapMarker *marker = (AMapMarker *) view.annotation;
     if (newState == MAAnnotationViewDragStateStarting && marker.onDragStart) {
-        marker.onDragStart(@{});
+        marker.onDragStart(nil);
     }
     if (newState == MAAnnotationViewDragStateDragging) {
         if (marker.onDrag) {
-            marker.onDrag(@{});
+            marker.onDrag(nil);
         }
     }
     if (newState == MAAnnotationViewDragStateEnding && marker.onDragEnd) {

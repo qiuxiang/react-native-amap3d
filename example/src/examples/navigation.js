@@ -7,7 +7,7 @@ export default class NavigationExample extends Component {
     title: '导航',
   }
 
-  _ready = () => {
+  componentDidMount() {
     this._navigation.calculateDriveRoute(
       {
         latitude: 39.906901,
@@ -26,7 +26,6 @@ export default class NavigationExample extends Component {
     return <Navigation
       ref={ref => this._navigation = ref}
       style={StyleSheet.absoluteFill}
-      onReady={this._ready}
       onCalculateRouteSuccess={this._start}
     />
   }

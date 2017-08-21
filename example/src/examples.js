@@ -28,6 +28,10 @@ export default class Examples extends Component {
     </Touchable>
   }
 
+  componentDidMount() {
+    this.props.navigation.navigate('Navigation')
+  }
+
   render() {
     return <ScrollView style={styles.scrollView} contentContainerStyle={styles.container}>
       <StatusBar barStyle='dark-content' backgroundColor='#e0e0e0'/>
@@ -45,8 +49,6 @@ export default class Examples extends Component {
         {this._renderItem('动画移动', 'Animated')}
         <View style={styles.separator}/>
         {this._renderItem('地图事件', 'Events')}
-        <View style={styles.separator}/>
-        {this._renderItem('导航', 'Navigation')}
       </View>
       <View style={styles.group}>
         {this._renderItem('添加标记', 'Marker')}
@@ -56,6 +58,9 @@ export default class Examples extends Component {
         {this._renderItem('绘制多边形', 'Polygon')}
         <View style={styles.separator}/>
         {this._renderItem('绘制圆形', 'Circle')}
+      </View>
+      <View style={styles.group}>
+        {this._renderItem('导航', 'Navigation')}
       </View>
     </ScrollView>
   }
@@ -81,6 +86,7 @@ const styles = StyleSheet.create({
   },
   separator: {
     height: StyleSheet.hairlineWidth,
+    backgroundColor: '#eee',
   },
   itemText: {
     fontSize: 16,

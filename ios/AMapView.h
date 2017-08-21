@@ -1,5 +1,4 @@
 #import <MAMapKit/MAMapKit.h>
-#import <React/RCTComponent.h>
 
 @interface AMapView : MAMapView
 

@@ -85,7 +85,7 @@
     _active = YES;
     [self updateActive];
     if (self.onInfoWindowPress) {
-        self.onInfoWindowPress(@{});
+        self.onInfoWindowPress(nil);
     }
 }
 
