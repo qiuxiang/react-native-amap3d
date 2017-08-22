@@ -1,10 +1,7 @@
 #import <React/RCTUIManager.h>
-#import <AMapNaviKit/AMapNaviWalkView.h>
 #import <AMapNaviKit/AMapNaviWalkManager.h>
 #import "AMapNavigationManager.h"
 #import "AMapWalk.h"
-
-#pragma ide diagnostic ignored "OCUnusedClassInspection"
 
 @interface AMapWalkManager : RCTViewManager <AMapNaviWalkManagerDelegate>
 + (AMapWalk *)navigationView;

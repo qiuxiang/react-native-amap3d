@@ -1,5 +1,4 @@
 #import <React/RCTUIManager.h>
-#import <AMapNaviKit/AMapNaviDriveView.h>
 #import <AMapNaviKit/AMapNaviDriveManager.h>
 #import "AMapNavigationManager.h"
 #import "AMapDrive.h"

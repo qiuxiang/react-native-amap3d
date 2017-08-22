@@ -17,7 +17,6 @@ RCT_EXPORT_MODULE()
 - (UIView *)view {
     AMapView *mapView = [AMapView new];
     mapView.runLoopMode = NSDefaultRunLoopMode;
-    mapView.allowsAnnotationViewSorting = YES;
     mapView.centerCoordinate = CLLocationCoordinate2DMake(39.9042, 116.4074);
     mapView.zoomLevel = 10;
     mapView.delegate = self;
