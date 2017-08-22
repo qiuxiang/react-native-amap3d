@@ -29,7 +29,7 @@ internal class AMapPolylineManager : ViewGroupManager<AMapPolyline>() {
         polyline.setColors(colors)
     }
 
-    @ReactProp(name = "build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/color", customType = "Color")
+    @ReactProp(name = "color", customType = "Color")
     fun setColor(polyline: AMapPolyline, color: Int) {
         polyline.color = color
     }
