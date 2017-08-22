@@ -99,12 +99,6 @@ class AMapView(context: Context) : TextureMapView(context) {
         map.setInfoWindowAdapter(AMapInfoWindowAdapter(context, markers))
     }
 
-    @SuppressLint("MissingSuperCall")
-    override fun onDetachedFromWindow() {
-        super.onDetachedFromWindow()
-        map.isMyLocationEnabled = false
-    }
-
     fun emitCameraChangeEvent(event: String, position: CameraPosition?) {
         position?.let {
             val data = Arguments.createMap()

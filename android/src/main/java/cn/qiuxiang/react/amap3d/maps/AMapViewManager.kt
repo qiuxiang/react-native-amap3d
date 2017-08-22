@@ -25,6 +25,11 @@ internal class AMapViewManager : ViewGroupManager<AMapView>() {
         return AMapView(reactContext)
     }
 
+    override fun onDropViewInstance(view: AMapView) {
+        super.onDropViewInstance(view)
+        view.onDestroy()
+    }
+
     override fun getCommandsMap(): Map<String, Int> {
         return mapOf("animateTo" to ANIMATE_TO)
     }

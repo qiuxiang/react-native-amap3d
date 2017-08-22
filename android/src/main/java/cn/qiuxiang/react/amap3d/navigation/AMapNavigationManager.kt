@@ -7,6 +7,7 @@ import com.facebook.react.uimanager.ViewGroupManager
 abstract class AMapNavigationManager<T : AMapNavigation> : ViewGroupManager<T>() {
     override fun onDropViewInstance(view: T) {
         super.onDropViewInstance(view)
+        view.stop()
         view.onDestroy()
     }
 

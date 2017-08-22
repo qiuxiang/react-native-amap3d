@@ -33,6 +33,10 @@ abstract class AMapNavigation(context: ThemedReactContext) :
         navigation.startNavi(NaviType.GPS)
     }
 
+    fun stop() {
+        navigation.stopNavi()
+    }
+
     protected fun latLngFromReadableMap(map: ReadableMap): NaviLatLng {
         return NaviLatLng(map.getDouble("latitude"), map.getDouble("longitude"))
     }
