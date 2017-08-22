@@ -1,10 +1,10 @@
 import React, {PropTypes, PureComponent} from 'react'
 import {
+  Platform,
   requireNativeComponent,
+  StyleSheet,
   View,
   ViewPropTypes,
-  Platform,
-  StyleSheet,
 } from 'react-native'
 import {LatLng} from './PropTypes'
 import Overlay from './Overlay'
@@ -116,17 +116,8 @@ export default class Marker extends PureComponent {
     onInfoWindowPress: React.PropTypes.func,
   }
 
-  _onPress = event => this.props.onPress && this.props.onPress(event)
-
   render() {
-    const props = {
-      ...this.props,
-      ...Platform.select({
-        android: {
-          onMarkerClick: this._onPress,
-        },
-      })
-    }
+    const props = {...this.props}
 
     let customInfoWindow = <View collapsable={false}/>
     let customMarker = <View collapsable={false}/>

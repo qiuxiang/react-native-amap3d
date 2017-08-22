@@ -16,7 +16,7 @@ internal class AMapPolylineManager : ViewGroupManager<AMapPolyline>() {
     }
 
     override fun getExportedCustomDirectEventTypeConstants(): Map<String, Any> {
-        return mapOf("onPolylineClick" to mapOf("registrationName" to "onPolylineClick"))
+        return mapOf("onPress" to mapOf("registrationName" to "onPress"))
     }
 
     @ReactProp(name = "coordinates")

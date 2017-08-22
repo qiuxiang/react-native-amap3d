@@ -3,6 +3,7 @@ package cn.qiuxiang.react.amap3d
 import android.view.View
 import com.amap.api.maps.model.LatLng
 import com.facebook.react.bridge.ReadableMap
+import com.facebook.react.common.MapBuilder
 import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.ViewGroupManager
 import com.facebook.react.uimanager.annotations.ReactProp
@@ -27,12 +28,13 @@ internal class AMapMarkerManager : ViewGroupManager<AMapMarker>() {
     }
 
     override fun getExportedCustomDirectEventTypeConstants(): Map<String, Any>? {
-        return mapOf(
-                "onMarkerClick" to mapOf("registrationName" to "onMarkerClick"),
-                "onMarkerDragStart" to mapOf("registrationName" to "onDragStart"),
-                "onMarkerDrag" to mapOf("registrationName" to "onDrag"),
-                "onMarkerDragEnd" to mapOf("registrationName" to "onDragEnd"),
-                "onInfoWindowClick" to mapOf("registrationName" to "onInfoWindowPress"))
+        return MapBuilder.of(
+                "onPress", MapBuilder.of("registrationName", "onPress"),
+                "onDragStart", MapBuilder.of("registrationName", "onDragStart"),
+                "onDrag", MapBuilder.of("registrationName", "onDrag"),
+                "onDragEnd", MapBuilder.of("registrationName", "onDragEnd"),
+                "onInfoWindowPress", MapBuilder.of("registrationName", "onInfoWindowPress")
+        )
     }
 
     @ReactProp(name = "title")

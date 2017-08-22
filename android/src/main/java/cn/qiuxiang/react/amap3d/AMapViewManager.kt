@@ -6,6 +6,7 @@ import com.amap.api.maps.CameraUpdateFactory
 import com.amap.api.maps.model.LatLng
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.ReadableMap
+import com.facebook.react.common.MapBuilder
 import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.ViewGroupManager
 import com.facebook.react.uimanager.annotations.ReactProp
@@ -50,14 +51,15 @@ internal class AMapViewManager : ViewGroupManager<AMapView>() {
     }
 
     override fun getExportedCustomDirectEventTypeConstants(): Map<String, Any> {
-        return mapOf(
-                "onMapClick" to mapOf("registrationName" to "onPress"),
-                "onMapLongClick" to mapOf("registrationName" to "onLongPress"),
-                "onAnimateCancel" to mapOf("registrationName" to "onAnimateCancel"),
-                "onAnimateFinish" to mapOf("registrationName" to "onAnimateFinish"),
-                "onCameraChange" to mapOf("registrationName" to "onStatusChange"),
-                "onCameraChangeFinish" to mapOf("registrationName" to "onStatusChangeComplete"),
-                "onLocationChange" to mapOf("registrationName" to "onLocation"))
+        return MapBuilder.of(
+                "onPress", MapBuilder.of("registrationName", "onPress"),
+                "onLongPress", MapBuilder.of("registrationName", "onLongPress"),
+                "onAnimateCancel", MapBuilder.of("registrationName", "onAnimateCancel"),
+                "onAnimateFinish", MapBuilder.of("registrationName", "onAnimateFinish"),
+                "onStatusChange", MapBuilder.of("registrationName", "onStatusChange"),
+                "onStatusChangeComplete", MapBuilder.of("registrationName", "onStatusChangeComplete"),
+                "onLocation", MapBuilder.of("registrationName", "onLocation")
+        )
     }
 
     @ReactProp(name = "locationEnabled")

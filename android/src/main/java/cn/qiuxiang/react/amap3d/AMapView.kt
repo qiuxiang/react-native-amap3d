@@ -37,14 +37,14 @@ class AMapView(context: Context) : TextureMapView(context) {
             val event = Arguments.createMap()
             event.putDouble("latitude", latLng.latitude)
             event.putDouble("longitude", latLng.longitude)
-            emit(id, "onMapClick", event)
+            emit(id, "onPress", event)
         }
 
         map.setOnMapLongClickListener { latLng ->
             val event = Arguments.createMap()
             event.putDouble("latitude", latLng.latitude)
             event.putDouble("longitude", latLng.longitude)
-            emit(id, "onMapLongClick", event)
+            emit(id, "onLongPress", event)
         }
 
         map.setOnMyLocationChangeListener { location ->
@@ -52,21 +52,21 @@ class AMapView(context: Context) : TextureMapView(context) {
             event.putDouble("latitude", location.latitude)
             event.putDouble("longitude", location.longitude)
             event.putDouble("accuracy", location.accuracy.toDouble())
-            emit(id, "onLocationChange", event)
+            emit(id, "onLocation", event)
         }
 
         map.setOnMarkerClickListener { marker ->
-            emit(markers[marker.id]?.id, "onMarkerClick")
+            emit(markers[marker.id]?.id, "onPress")
             false
         }
 
         map.setOnMarkerDragListener(object : AMap.OnMarkerDragListener {
             override fun onMarkerDragStart(marker: Marker) {
-                emit(markers[marker.id]?.id, "onMarkerDragStart")
+                emit(markers[marker.id]?.id, "onDragStart")
             }
 
             override fun onMarkerDrag(marker: Marker) {
-                emit(markers[marker.id]?.id, "onMarkerDrag")
+                emit(markers[marker.id]?.id, "onDrag")
             }
 
             override fun onMarkerDragEnd(marker: Marker) {
@@ -74,26 +74,26 @@ class AMapView(context: Context) : TextureMapView(context) {
                 val data = Arguments.createMap()
                 data.putDouble("latitude", position.latitude)
                 data.putDouble("longitude", position.longitude)
-                emit(markers[marker.id]?.id, "onMarkerDragEnd", data)
+                emit(markers[marker.id]?.id, "onDragEnd", data)
             }
         })
 
         map.setOnCameraChangeListener(object: AMap.OnCameraChangeListener {
             override fun onCameraChangeFinish(position: CameraPosition?) {
-                emitCameraChangeEvent("onCameraChangeFinish", position)
+                emitCameraChangeEvent("onStatusChangeComplete", position)
             }
 
             override fun onCameraChange(position: CameraPosition?) {
-                emitCameraChangeEvent("onCameraChange", position)
+                emitCameraChangeEvent("onStatusChange", position)
             }
         })
 
         map.setOnInfoWindowClickListener { marker ->
-            emit(markers[marker.id]?.id, "onInfoWindowClick")
+            emit(markers[marker.id]?.id, "onInfoWindowPress")
         }
 
         map.setOnPolylineClickListener { polyline ->
-            emit(polylines[polyline.id]?.id, "onPolylineClick")
+            emit(polylines[polyline.id]?.id, "onPress")
         }
 
         map.setInfoWindowAdapter(AMapInfoWindowAdapter(context, markers))
@@ -113,7 +113,7 @@ class AMapView(context: Context) : TextureMapView(context) {
             data.putDouble("rotation", it.bearing.toDouble())
             data.putDouble("latitude", it.target.latitude)
             data.putDouble("longitude", it.target.longitude)
-            if (event == "onCameraChangeFinish") {
+            if (event == "onStatusChangeComplete") {
                 val southwest = map.projection.visibleRegion.latLngBounds.southwest
                 val northeast = map.projection.visibleRegion.latLngBounds.northeast
                 data.putDouble("latitudeDelta", Math.abs(southwest.latitude - northeast.latitude))

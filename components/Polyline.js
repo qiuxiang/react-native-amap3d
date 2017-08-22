@@ -1,10 +1,10 @@
 import React, {PropTypes, PureComponent} from 'react'
 import {
+  PixelRatio,
+  Platform,
   processColor,
   requireNativeComponent,
   ViewPropTypes,
-  PixelRatio,
-  Platform,
 } from 'react-native'
 import {LatLng} from './PropTypes'
 
@@ -65,8 +65,6 @@ export default class Polyline extends PureComponent {
     colors: [],
   }
 
-  _onPress = event => this.props.onPress && this.props.onPress(event)
-
   render() {
     const props = {
       ...this.props,
@@ -76,7 +74,6 @@ export default class Polyline extends PureComponent {
           colors: this.props.colors.map(processColor),
         },
       }),
-      onPolylineClick: this._onPress,
     }
     return <AMapPolyline {...props}/>
   }
