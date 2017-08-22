@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {StyleSheet} from 'react-native'
-import {Navigation} from 'react-native-amap3d'
+import {Drive} from 'react-native-amap3d'
 
 export default class NavigationExample extends Component {
   static navigationOptions = {
@@ -8,7 +8,7 @@ export default class NavigationExample extends Component {
   }
 
   componentDidMount() {
-    this._navigation.calculateDriveRoute(
+    this._navigation.calculateRoute(
       {
         latitude: 39.906901,
         longitude: 116.397972,
@@ -20,10 +20,10 @@ export default class NavigationExample extends Component {
     )
   }
 
-  _start = () => this._navigation.start()
+  _start = () => {}
 
   render() {
-    return <Navigation
+    return <Drive
       ref={ref => this._navigation = ref}
       style={StyleSheet.absoluteFill}
       onCalculateRouteSuccess={this._start}

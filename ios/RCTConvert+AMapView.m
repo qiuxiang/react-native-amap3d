@@ -39,5 +39,6 @@ RCT_ENUM_CONVERTER(MAPinAnnotationColor, (@{
 }
 
 RCT_ARRAY_CONVERTER(Coordinate)
+RCT_ARRAY_CONVERTER(AMapNaviPoint)
 
 @end

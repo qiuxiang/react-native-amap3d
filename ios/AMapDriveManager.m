@@ -1,24 +1,24 @@
 #import <React/RCTUIManager.h>
 #import <AMapNaviKit/AMapNaviDriveView.h>
 #import <AMapNaviKit/AMapNaviDriveManager.h>
-#import "AMapNavigation.h"
+#import "AMapDrive.h"
 
 #pragma ide diagnostic ignored "OCUnusedClassInspection"
 
-@interface AMapNavigationManager : RCTViewManager <AMapNaviDriveManagerDelegate>
-+ (AMapNavigation *)driveView;
+@interface AMapDriveManager : RCTViewManager <AMapNaviDriveManagerDelegate>
++ (AMapDrive *)driveView;
 + (AMapNaviDriveManager *)driveManager;
 @end
 
-@implementation AMapNavigationManager {
-    AMapNavigation *_driveView;
+@implementation AMapDriveManager {
+    AMapDrive *_driveView;
     AMapNaviDriveManager *_driveManager;
 }
 
 - (instancetype)init {
     if (self = [super init]) {
-        _driveView = [AMapNavigationManager driveView];
-        _driveManager = [AMapNavigationManager driveManager];
+        _driveView = [AMapDriveManager driveView];
+        _driveManager = [AMapDriveManager driveManager];
         _driveManager.delegate = self;
     }
     return self;
@@ -27,8 +27,9 @@
 RCT_EXPORT_MODULE()
 
 RCT_EXPORT_VIEW_PROPERTY(onCalculateRouteSuccess, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onCalculateRouteFailure, RCTBubblingEventBlock)
 
-RCT_EXPORT_METHOD(calculateDriveRoute:(nonnull NSNumber *)reactTag start:(AMapNaviPoint *)start endPoints:(AMapNaviPoint *)end) {
+RCT_EXPORT_METHOD(calculateRoute:(nonnull NSNumber *)reactTag start:(AMapNaviPoint *)start end:(AMapNaviPoint *)end way:(NSArray<AMapNaviPoint *> *)way) {
     [self.bridge.uiManager addUIBlock:^(RCTUIManager *uiManager, NSDictionary<NSNumber *, UIView *> *viewRegistry) {
         [_driveManager calculateDriveRouteWithStartPoints:@[start]
                                                 endPoints:@[end]
@@ -53,19 +54,27 @@ RCT_EXPORT_METHOD(start:(nonnull NSNumber *)reactTag) {
     }
 }
 
+- (void)driveManager:(AMapNaviDriveManager *)driveManager onCalculateRouteFailure:(NSError *)error {
+    if (_driveView.onCalculateRouteFailure) {
+        _driveView.onCalculateRouteFailure(@{
+                @"code": @(error.code),
+        });
+    }
+}
+
 + (AMapNaviDriveManager *)driveManager {
     static AMapNaviDriveManager *driveManager;
     if (driveManager == nil) {
         driveManager = [AMapNaviDriveManager new];
-        [driveManager addDataRepresentative:[AMapNavigationManager driveView]];
+        [driveManager addDataRepresentative:[AMapDriveManager driveView]];
     }
     return driveManager;
 }
 
-+ (AMapNavigation *)driveView {
-    static AMapNavigation *driveView;
++ (AMapDrive *)driveView {
+    static AMapDrive *driveView;
     if (driveView == nil) {
-        driveView = [AMapNavigation new];
+        driveView = [AMapDrive new];
     }
     return driveView;
 }
