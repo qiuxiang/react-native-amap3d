@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {StyleSheet} from 'react-native'
-import {Drive} from 'react-native-amap3d'
+import {Navigation} from 'react-native-amap3d'
 
 export default class NavigationExample extends Component {
   static navigationOptions = {
@@ -29,7 +29,7 @@ export default class NavigationExample extends Component {
   _start = () => this._navigation.start()
 
   render() {
-    return <Drive
+    return <Navigation.Drive
       ref={ref => this._navigation = ref}
       style={StyleSheet.absoluteFill}
       onCalculateRouteSuccess={this._start}

@@ -1,11 +1,9 @@
-import MapView from './components/MapView'
-import Marker from './components/Marker'
-import Polyline from './components/Polyline'
-import Polygon from './components/Polygon'
-import Circle from './components/Circle'
-import Drive from './components/Drive'
-import Walk from './components/Walk'
-import Ride from './components/Ride'
+import MapView from './components/maps/MapView'
+import Marker from './components/maps/Marker'
+import Polyline from './components/maps/Polyline'
+import Polygon from './components/maps/Polygon'
+import Circle from './components/maps/Circle'
+import Navigation from './components/navigation'
 import MapUtils from './components/Utils'
 
 MapView.Marker = Marker
@@ -20,8 +18,6 @@ export {
   Polyline,
   Polygon,
   Circle,
-  Drive,
-  Walk,
-  Ride,
+  Navigation,
   MapUtils,
 }

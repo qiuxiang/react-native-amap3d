@@ -28,10 +28,6 @@ export default class Examples extends Component {
     </Touchable>
   }
 
-  componentDidMount() {
-    this.props.navigation.navigate('Navigation')
-  }
-
   render() {
     return <ScrollView style={styles.scrollView} contentContainerStyle={styles.container}>
       <StatusBar barStyle='dark-content' backgroundColor='#e0e0e0'/>
