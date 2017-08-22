@@ -1,12 +1,12 @@
+@file:Suppress("OverridingDeprecatedMember", "DEPRECATION", "LeakingThis")
+
 package cn.qiuxiang.react.amap3d
 
-import android.annotation.SuppressLint
 import com.amap.api.navi.AMapNavi
 import com.amap.api.navi.AMapNaviListener
 import com.amap.api.navi.AMapNaviView
 import com.amap.api.navi.AMapNaviViewListener
 import com.amap.api.navi.enums.NaviType
-import com.amap.api.navi.enums.PathPlanningStrategy
 import com.amap.api.navi.model.*
 import com.autonavi.tbt.TrafficFacilityInfo
 import com.facebook.react.bridge.Arguments
@@ -16,11 +16,12 @@ import com.facebook.react.bridge.WritableMap
 import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.events.RCTEventEmitter
 
-@SuppressLint("ViewConstructor")
-class AMapNavigation(context: ThemedReactContext) :
+abstract class AMapNavigation(context: ThemedReactContext) :
         AMapNaviView(context.currentActivity), AMapNaviViewListener, AMapNaviListener {
-    val eventEmitter: RCTEventEmitter = context.getJSModule(RCTEventEmitter::class.java)
-    val navigation = AMapNavi.getInstance(context)!!
+    private val eventEmitter: RCTEventEmitter = context.getJSModule(RCTEventEmitter::class.java)
+    protected val navigation = AMapNavi.getInstance(context)!!
+
+    abstract fun calculateRoute(args: ReadableArray?)
 
     init {
         super.onCreate(null)
@@ -28,36 +29,15 @@ class AMapNavigation(context: ThemedReactContext) :
         navigation.addAMapNaviListener(this)
     }
 
-    fun calculateWalkRoute(args: ReadableArray?) {
-        navigation.calculateWalkRoute(
-                latLngFromReadableMap(args?.getMap(0)!!),
-                latLngFromReadableMap(args.getMap(1)))
-    }
-
-    fun calculateRideRoute(args: ReadableArray?) {
-        navigation.calculateRideRoute(
-                latLngFromReadableMap(args?.getMap(0)!!),
-                latLngFromReadableMap(args.getMap(1)))
-    }
-
-    fun calculateDriveRoute(args: ReadableArray?) {
-        navigation.calculateDriveRoute(
-                listOf(latLngFromReadableMap(args?.getMap(0)!!)),
-                listOf(latLngFromReadableMap(args.getMap(1))),
-                listOf(),
-                PathPlanningStrategy.DRIVING_DEFAULT
-        )
-    }
-
     fun start() {
         navigation.startNavi(NaviType.GPS)
     }
 
-    fun latLngFromReadableMap(map: ReadableMap): NaviLatLng {
+    protected fun latLngFromReadableMap(map: ReadableMap): NaviLatLng {
         return NaviLatLng(map.getDouble("latitude"), map.getDouble("longitude"))
     }
 
-    fun sendEvent(name: String, data: WritableMap = Arguments.createMap()) {
+    private fun sendEvent(name: String, data: WritableMap = Arguments.createMap()) {
         eventEmitter.receiveEvent(id, name, data)
     }
 
@@ -65,9 +45,9 @@ class AMapNavigation(context: ThemedReactContext) :
         sendEvent("onCalculateRouteSuccess")
     }
 
-    override fun onCalculateRouteFailure(errorCode: Int) {
+    override fun onCalculateRouteFailure(code: Int) {
         val event = Arguments.createMap()
-        event.putInt("errorCode", errorCode)
+        event.putInt("code", code)
         sendEvent("onCalculateRouteFailure", event)
     }
 

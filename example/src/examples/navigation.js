@@ -16,11 +16,17 @@ export default class NavigationExample extends Component {
       {
         latitude: 39.806901,
         longitude: 116.397972,
-      }
+      },
+      [
+        {
+          latitude: 39.866901,
+          longitude: 116.407972,
+        },
+      ]
     )
   }
 
-  _start = () => {}
+  _start = () => this._navigation.start()
 
   render() {
     return <Drive
