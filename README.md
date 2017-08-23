@@ -20,6 +20,7 @@ react-native 高德地图组件，使用最新 3D SDK，支持 Android + iOS。
 - 折线绘制（Polyline）
 - 多边形绘制（Polygon）
 - 圆形绘制（Circle）
+- 导航（驾车、步行、骑行）（还不够完善）
 
 ![](https://user-images.githubusercontent.com/1709072/27509246-28ee8a0a-592b-11e7-9148-ed24c86ede82.jpg) ![](https://user-images.githubusercontent.com/1709072/27509248-29000d20-592b-11e7-90ef-3f56c4300625.jpg) ![](https://user-images.githubusercontent.com/1709072/27509247-28feba88-592b-11e7-90ec-3e3680cee241.jpg) ![](https://user-images.githubusercontent.com/1709072/27509249-2902531e-592b-11e7-801d-5fef6a87cead.jpg) ![](https://user-images.githubusercontent.com/1709072/27509250-2906e64a-592b-11e7-8cc5-1ce84090ce66.jpg) ![](https://user-images.githubusercontent.com/1709072/27509251-29084d5a-592b-11e7-84af-f49dbcea9873.jpg) ![](https://user-images.githubusercontent.com/1709072/27509252-291d5876-592b-11e7-8849-15360c2e16c2.jpg) ![](https://user-images.githubusercontent.com/1709072/27509253-2933ef5a-592b-11e7-88b4-10f67fa03706.jpg)
 
@@ -33,11 +34,9 @@ $ npm i react-native-amap3d --save
 
 ### 项目配置
 #### Android
-推荐使用 `react-native link`：
 ```
 $ react-native link react-native-amap3d
 ```
-当然，你也可以手动配置，参考 [Android Studio 配置工程](http://lbs.amap.com/api/android-sdk/guide/create-project/android-studio-create-project)。
 
 #### iOS
 推荐使用 CocoaPods，在 `ios` 目录下新建文件 `Podfile`：
@@ -72,17 +71,6 @@ $ pod install
          android:name="com.amap.api.v2.apikey"
          android:value="你的高德 Key"/>
    </application>
-   ```
-
-3. 同时，配置必要的权限：
-   ```xml
-   <uses-permission android:name="android.permission.INTERNET" />
-   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-   <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-   <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-   <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-   <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
    ```
 
 #### iOS
@@ -166,11 +154,11 @@ import MapView from 'react-native-amap3d'
 ## 接口
 
 请参考注释文档：
-- [MapView](https://github.com/qiuxiang/react-native-amap3d/blob/master/components/MapView.js#L18)
-- [Marker](https://github.com/qiuxiang/react-native-amap3d/blob/master/components/Marker.js#L12)
-- [Polyline](https://github.com/qiuxiang/react-native-amap3d/blob/master/components/Polyline.js#L11)
-- [Polygon](https://github.com/qiuxiang/react-native-amap3d/blob/master/components/Polygon.js#L10)
-- [Circle](https://github.com/qiuxiang/react-native-amap3d/blob/master/components/Circle.js#L10)
+- [MapView](https://github.com/qiuxiang/react-native-amap3d/blob/master/components/maps/MapView.js#L14)
+- [Marker](https://github.com/qiuxiang/react-native-amap3d/blob/master/components/maps/Marker.js#L6)
+- [Polyline](https://github.com/qiuxiang/react-native-amap3d/blob/master/components/maps/Polyline.js#L5)
+- [Polygon](https://github.com/qiuxiang/react-native-amap3d/blob/master/components/maps/Polygon.js#L5)
+- [Circle](https://github.com/qiuxiang/react-native-amap3d/blob/master/components/maps/Circle.js#L5)
 
 
 ## 注意
