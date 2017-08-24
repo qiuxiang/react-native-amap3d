@@ -15,6 +15,4 @@ RCT_EXPORT_MODULE()
     return [AMapOverlay new];
 }
 
-RCT_EXPORT_METHOD(update:(nonnull NSNumber *)reactTag) {}
-
 @end

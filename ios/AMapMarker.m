@@ -1,5 +1,6 @@
 #import <React/UIView+React.h>
 #import "AMapMarker.h"
+#import "AMapOverlay.h"
 
 #pragma ide diagnostic ignored "OCUnusedMethodInspection"
 
@@ -8,7 +9,7 @@
     MAPinAnnotationView *_pinView;
     MAPinAnnotationColor _pinColor;
     MACustomCalloutView *_calloutView;
-    AMapOverlay *_callout;
+    AMapInfoWindow *_callout;
     AMapView *_mapView;
     BOOL _active;
 }
@@ -109,12 +110,12 @@
 }
 
 - (void)insertReactSubview:(id <RCTComponent>)subview atIndex:(NSInteger)atIndex {
-    if (atIndex == 0 && subview.reactSubviews.count > 0) {
+    if ([subview isKindOfClass:[AMapOverlay class]] && subview.reactSubviews.count > 0) {
         [super insertReactSubview:subview atIndex:atIndex];
     }
 
-    if (atIndex == 1 && [subview isKindOfClass:[AMapOverlay class]]) {
-        _callout = (AMapOverlay *) subview;
+    if ([subview isKindOfClass:[AMapInfoWindow class]]) {
+        _callout = (AMapInfoWindow *) subview;
         _callout.delegate = self;
 
         UIButton *button = [UIButton new];
@@ -130,9 +131,7 @@
     self.bounds = self.reactSubviews[0].bounds;
 }
 
-#pragma mark AMapOverlayDelegate
-
-- (void)update:(AMapOverlay *)overlay {
+- (void)updateInfoWindow:(AMapInfoWindow *)overlay {
     self.customCalloutView.bounds = overlay.bounds;
 }
 

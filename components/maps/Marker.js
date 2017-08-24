@@ -1,9 +1,11 @@
-import React, {PropTypes, PureComponent} from 'react'
+import React, {PropTypes} from 'react'
 import {Platform, requireNativeComponent, StyleSheet, View, ViewPropTypes} from 'react-native'
 import Overlay from './Overlay'
+import InfoWindow from './InfoWindow'
 import {LatLng} from '../PropTypes'
+import BaseComponent from '../BaseComponent'
 
-export default class Marker extends PureComponent {
+export default class Marker extends BaseComponent {
   static propTypes = {
     ...ViewPropTypes,
 
@@ -105,36 +107,44 @@ export default class Marker extends PureComponent {
 
     /**
      * 信息窗体点击事件
-     * 使用自定义 View 会使该事件失效，这时候可以用 Touchable* 代替
+     *
+     * Android 在使用自定义 View 时，该事件会失效，这时候可以用 Touchable* 代替
      */
     onInfoWindowPress: React.PropTypes.func,
+  }
+
+  _renderInfoWindow(view) {
+    if (view) {
+      return <InfoWindow style={style.overlay}>{view}</InfoWindow>
+    }
+  }
+
+  componentDidUpdate() {
+    if (this._customMarker && Platform.OS === 'android') {
+      setTimeout(() => this._sendCommand('update'), 0)
+    }
   }
 
   render() {
     const props = {...this.props}
 
-    let customInfoWindow = <View collapsable={false}/>
-    let customMarker = <View collapsable={false}/>
-
-    if (props.children) {
-      customInfoWindow = <Overlay style={styles.overlay}>{props.children}</Overlay>
-    }
-
     if (typeof props.icon === 'function') {
-      customMarker = <Overlay style={styles.overlay}>{props.icon()}</Overlay>
+      this._customMarker = <Overlay style={style.overlay}>{props.icon()}</Overlay>
       delete props.icon
     }
 
     return <AMapMarker {...props}>
-      {customMarker}
-      {customInfoWindow}
+      {this._customMarker}
+      {this._renderInfoWindow(props.children)}
     </AMapMarker>
   }
+
+  name = 'AMapMarker'
 }
 
 const AMapMarker = requireNativeComponent('AMapMarker', Marker)
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   overlay: {
     position: 'absolute',
   },

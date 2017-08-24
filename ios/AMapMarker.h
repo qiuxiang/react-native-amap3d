@@ -1,7 +1,7 @@
 #import "AMapView.h"
-#import "AMapOverlay.h"
+#import "AMapInfoWindow.h"
 
-@interface AMapMarker : MAAnnotationView <MAAnnotation, AMapOverlayDelegate>
+@interface AMapMarker : MAAnnotationView <MAAnnotation, AMapInfoWindowDelegate>
 
 @property(nonatomic, copy) RCTBubblingEventBlock onPress;
 @property(nonatomic, copy) RCTBubblingEventBlock onInfoWindowPress;

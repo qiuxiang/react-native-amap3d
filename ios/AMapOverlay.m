@@ -4,9 +4,4 @@
 @implementation AMapOverlay {
 }
 
-- (void)didUpdateReactSubviews {
-    [super didUpdateReactSubviews];
-    [self.delegate update:self];
-}
-
 @end

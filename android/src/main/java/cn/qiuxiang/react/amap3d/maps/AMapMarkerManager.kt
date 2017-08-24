@@ -2,6 +2,7 @@ package cn.qiuxiang.react.amap3d.maps
 
 import android.view.View
 import com.amap.api.maps.model.LatLng
+import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.common.MapBuilder
 import com.facebook.react.uimanager.ThemedReactContext
@@ -19,11 +20,9 @@ internal class AMapMarkerManager : ViewGroupManager<AMapMarker>() {
     }
 
     override fun addView(marker: AMapMarker, view: View, index: Int) {
-        if (view is AMapOverlay) {
-            when(index) {
-                0 -> marker.setIconView(view)
-                1 -> marker.infoWindow = view
-            }
+        when (view) {
+            is AMapOverlay -> marker.customIcon = view
+            is AMapInfoWindow -> marker.infoWindow = view
         }
     }
 
@@ -35,6 +34,20 @@ internal class AMapMarkerManager : ViewGroupManager<AMapMarker>() {
                 "onDragEnd", MapBuilder.of("registrationName", "onDragEnd"),
                 "onInfoWindowPress", MapBuilder.of("registrationName", "onInfoWindowPress")
         )
+    }
+
+    companion object {
+        val UPDATE = 1
+    }
+
+    override fun getCommandsMap(): Map<String, Int> {
+        return mapOf("update" to UPDATE)
+    }
+
+    override fun receiveCommand(marker: AMapMarker, commandId: Int, args: ReadableArray?) {
+        when (commandId) {
+            UPDATE -> marker.updateCustomIcon()
+        }
     }
 
     @ReactProp(name = "title")
@@ -81,7 +94,7 @@ internal class AMapMarkerManager : ViewGroupManager<AMapMarker>() {
 
     @ReactProp(name = "icon")
     fun setIcon(marker: AMapMarker, icon: String) {
-        marker.setIcon(icon)
+        marker.setIconColor(icon)
     }
 
     @ReactProp(name = "infoWindowEnabled")

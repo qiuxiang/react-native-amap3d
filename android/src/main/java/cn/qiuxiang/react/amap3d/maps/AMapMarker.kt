@@ -23,7 +23,7 @@ class AMapMarker(context: Context) : ReactViewGroup(context) {
         )
     }
 
-    var infoWindow: AMapOverlay? = null
+    var infoWindow: AMapInfoWindow? = null
 
     var infoWindowEnabled: Boolean = true
         set(value) {
@@ -92,6 +92,12 @@ class AMapMarker(context: Context) : ReactViewGroup(context) {
             }
         }
 
+    var customIcon: AMapOverlay? = null
+        set(value) {
+            field = value
+            value?.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ -> updateCustomIcon() }
+        }
+
     private var bitmapDescriptor: BitmapDescriptor? = null
 
     fun addToMap(map: AMap) {
@@ -115,28 +121,20 @@ class AMapMarker(context: Context) : ReactViewGroup(context) {
         marker?.isClickable = this.clickable_
     }
 
-    fun setIcon(icon: String) {
+    fun setIconColor(icon: String) {
         bitmapDescriptor = COLORS[icon.toUpperCase()]?.let {
             BitmapDescriptorFactory.defaultMarker(it)
         }
         marker?.setIcon(bitmapDescriptor)
     }
 
-    fun setIconView(overlay: AMapOverlay) {
-        overlay.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ -> updateIconView(overlay) }
-        overlay.onUpdate {
-            updateIconView(overlay)
+    fun updateCustomIcon() {
+        customIcon?.let {
+            val bitmap = Bitmap.createBitmap(
+                    it.width, it.height, Bitmap.Config.ARGB_8888)
+            it.draw(Canvas(bitmap))
+            bitmapDescriptor = BitmapDescriptorFactory.fromBitmap(bitmap)
+            marker?.setIcon(bitmapDescriptor)
         }
-    }
-
-    /**
-     * TODO: 如果 IconView 里包含 Image，由于不知道 Image 什么时候加载完毕，会导致 Image 可能无法正确显示
-     */
-    private fun updateIconView(overlay: AMapOverlay) {
-        val bitmap = Bitmap.createBitmap(
-                overlay.width, overlay.height, Bitmap.Config.ARGB_8888)
-        overlay.draw(Canvas(bitmap))
-        bitmapDescriptor = BitmapDescriptorFactory.fromBitmap(bitmap)
-        marker?.setIcon(bitmapDescriptor)
     }
 }
