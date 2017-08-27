@@ -32,6 +32,13 @@ export default class MapView extends BaseComponent {
     locationEnabled: PropTypes.bool,
 
     /**
+     * 定位间隔(ms)，默认 2000，小于 1000 将只进行单次定位
+     *
+     * @platform android
+     */
+    locationInterval: PropTypes.number,
+
+    /**
      * 是否显示室内地图
      */
     showsIndoorMap: PropTypes.bool,

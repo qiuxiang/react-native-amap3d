@@ -220,4 +220,9 @@ class AMapView(context: Context) : TextureMapView(context) {
         map.myLocationStyle = locationStyle
         map.isMyLocationEnabled = enabled
     }
+
+    fun setLocationInterval(interval: Long) {
+        locationStyle.interval(interval)
+        map.myLocationStyle = locationStyle
+    }
 }

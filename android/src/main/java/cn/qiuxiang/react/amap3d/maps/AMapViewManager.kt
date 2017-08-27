@@ -185,4 +185,9 @@ internal class AMapViewManager : ViewGroupManager<AMapView>() {
     fun changeRotation(view: AMapView, rotation: Float) {
         view.map.moveCamera(CameraUpdateFactory.changeBearing(rotation))
     }
+
+    @ReactProp(name = "locationInterval")
+    fun setLocationInterval(view: AMapView, interval: Int) {
+        view.setLocationInterval(interval.toLong())
+    }
 }
