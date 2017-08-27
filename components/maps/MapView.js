@@ -39,6 +39,13 @@ export default class MapView extends BaseComponent {
     locationInterval: PropTypes.number,
 
     /**
+     * 定位的最小更新距离
+     *
+     * @platform ios
+     */
+    distanceFilter: PropTypes.number,
+
+    /**
      * 是否显示室内地图
      */
     showsIndoorMap: PropTypes.bool,
