@@ -4,6 +4,7 @@ import android.view.View
 import com.amap.api.maps.AMap
 import com.amap.api.maps.CameraUpdateFactory
 import com.amap.api.maps.model.LatLng
+import com.amap.api.maps.model.MyLocationStyle
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.common.MapBuilder
@@ -69,7 +70,7 @@ internal class AMapViewManager : ViewGroupManager<AMapView>() {
 
     @ReactProp(name = "locationEnabled")
     fun setMyLocationEnabled(view: AMapView, enabled: Boolean) {
-        view.map.isMyLocationEnabled = enabled
+        view.setLocationEnabled(enabled)
     }
 
     @ReactProp(name = "showsIndoorMap")

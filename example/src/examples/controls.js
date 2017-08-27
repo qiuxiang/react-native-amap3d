@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {StyleSheet, View, Text, Switch} from 'react-native'
+import {StyleSheet, Switch, Text, View} from 'react-native'
 import MapView from 'react-native-amap3d'
 import styles from '../styles'
 
@@ -48,7 +48,7 @@ export default class Controls extends Component {
         </View>
       </View>
       <MapView
-        locationEnabled={true}
+        locationEnabled={this.state.showsLocationButton}
         showsCompass={this.state.showsCompass}
         showsScale={this.state.showsScale}
         showsLocationButton={this.state.showsLocationButton}

@@ -20,14 +20,15 @@ class AMapView(context: Context) : TextureMapView(context) {
     private val polylines = HashMap<String, AMapPolyline>()
     private val polygons = HashMap<String, AMapPolygon>()
     private val circles = HashMap<String, AMapCircle>()
+    private var locationType = MyLocationStyle.LOCATION_TYPE_FOLLOW_NO_CENTER
+    private val locationStyle by lazy {
+        val locationStyle = MyLocationStyle()
+        locationStyle.myLocationType(locationType)
+        locationStyle
+    }
 
     init {
         super.onCreate(null)
-
-        // 设置默认的定位模式
-        val locationStyle = MyLocationStyle()
-        locationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATION_ROTATE_NO_CENTER)
-        map.myLocationStyle = locationStyle
 
         map.setOnMapClickListener { latLng ->
             for (marker in markers.values) {
@@ -213,5 +214,10 @@ class AMapView(context: Context) : TextureMapView(context) {
                 LatLng(latitude - latitudeDelta / 2, longitude - longitudeDelta / 2),
                 LatLng(latitude + latitudeDelta / 2, longitude + longitudeDelta / 2)
         ))
+    }
+
+    fun setLocationEnabled(enabled: Boolean) {
+        map.myLocationStyle = locationStyle
+        map.isMyLocationEnabled = enabled
     }
 }
