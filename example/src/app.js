@@ -13,6 +13,7 @@ import Polygon from './examples/polygon'
 import Circle from './examples/circle'
 import Events from './examples/events'
 import Navigation from './examples/navigation'
+import HeatMap from './examples/heat-map'
 
 export default StackNavigator({
   Examples: {screen: Examples},
@@ -28,6 +29,7 @@ export default StackNavigator({
   Circle: {screen: Circle},
   Events: {screen: Events},
   Navigation: {screen: Navigation},
+  HeatMap: {screen: HeatMap},
 }, {
   navigationOptions: {
     headerTintColor: '#212121',

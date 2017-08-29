@@ -138,6 +138,10 @@ class AMapView(context: Context) : TextureMapView(context) {
         circles.put(circle.circle?.id!!, circle)
     }
 
+    fun addHeatMap(heatMap: AMapHeatMap) {
+        heatMap.addToMap(map)
+    }
+
     fun emit(id: Int?, name: String, data: WritableMap = Arguments.createMap()) {
         id?.let { eventEmitter.receiveEvent(it, name, data) }
     }
@@ -159,6 +163,9 @@ class AMapView(context: Context) : TextureMapView(context) {
             is AMapCircle -> {
                 polygons.remove(child.circle?.id)
                 child.circle?.remove()
+            }
+            is AMapHeatMap -> {
+                child.overlay?.remove()
             }
         }
     }

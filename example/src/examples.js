@@ -54,6 +54,8 @@ export default class Examples extends Component {
         {this._renderItem('绘制多边形', 'Polygon')}
         <View style={styles.separator}/>
         {this._renderItem('绘制圆形', 'Circle')}
+        <View style={styles.separator}/>
+        {this._renderItem('热力图', 'HeatMap')}
       </View>
       <View style={styles.group}>
         {this._renderItem('导航', 'Navigation')}

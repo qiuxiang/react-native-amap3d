@@ -48,6 +48,7 @@ internal class AMapViewManager : ViewGroupManager<AMapView>() {
             is AMapPolyline -> mapView.addPolyline(child)
             is AMapPolygon -> mapView.addPolygon(child)
             is AMapCircle -> mapView.addCircle(child)
+            is AMapHeatMap -> mapView.addHeatMap(child)
         }
     }
 
