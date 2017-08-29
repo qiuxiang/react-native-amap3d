@@ -2,12 +2,11 @@ package cn.qiuxiang.react.amap3d.maps
 
 import com.amap.api.maps.model.LatLng
 import com.facebook.react.bridge.ReadableMap
+import com.facebook.react.uimanager.SimpleViewManager
 import com.facebook.react.uimanager.ThemedReactContext
-import com.facebook.react.uimanager.ViewGroupManager
 import com.facebook.react.uimanager.annotations.ReactProp
 
-@Suppress("unused")
-internal class AMapCircleManager : ViewGroupManager<AMapCircle>() {
+internal class AMapCircleManager : SimpleViewManager<AMapCircle>() {
     override fun getName(): String {
         return "AMapCircle"
     }

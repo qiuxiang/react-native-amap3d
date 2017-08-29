@@ -1,12 +1,11 @@
 package cn.qiuxiang.react.amap3d.maps
 
 import com.facebook.react.bridge.ReadableArray
+import com.facebook.react.uimanager.SimpleViewManager
 import com.facebook.react.uimanager.ThemedReactContext
-import com.facebook.react.uimanager.ViewGroupManager
 import com.facebook.react.uimanager.annotations.ReactProp
 
-@Suppress("unused")
-internal class AMapPolygonManager : ViewGroupManager<AMapPolygon>() {
+internal class AMapPolygonManager : SimpleViewManager<AMapPolygon>() {
     override fun getName(): String {
         return "AMapPolygon"
     }

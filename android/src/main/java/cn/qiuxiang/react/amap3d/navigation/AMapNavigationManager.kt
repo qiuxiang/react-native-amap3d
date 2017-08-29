@@ -2,9 +2,9 @@ package cn.qiuxiang.react.amap3d.navigation
 
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.common.MapBuilder
-import com.facebook.react.uimanager.ViewGroupManager
+import com.facebook.react.uimanager.SimpleViewManager
 
-abstract class AMapNavigationManager<T : AMapNavigation> : ViewGroupManager<T>() {
+abstract class AMapNavigationManager<T : AMapNavigation> : SimpleViewManager<T>() {
     override fun onDropViewInstance(view: T) {
         super.onDropViewInstance(view)
         view.stop()
