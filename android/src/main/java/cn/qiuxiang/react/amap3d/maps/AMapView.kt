@@ -1,6 +1,5 @@
 package cn.qiuxiang.react.amap3d.maps
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.view.View
 import com.amap.api.maps.AMap
@@ -18,8 +17,6 @@ class AMapView(context: Context) : TextureMapView(context) {
     private val eventEmitter: RCTEventEmitter = (context as ThemedReactContext).getJSModule(RCTEventEmitter::class.java)
     private val markers = HashMap<String, AMapMarker>()
     private val polylines = HashMap<String, AMapPolyline>()
-    private val polygons = HashMap<String, AMapPolygon>()
-    private val circles = HashMap<String, AMapCircle>()
     private var locationType = MyLocationStyle.LOCATION_TYPE_FOLLOW_NO_CENTER
     private val locationStyle by lazy {
         val locationStyle = MyLocationStyle()
@@ -79,7 +76,7 @@ class AMapView(context: Context) : TextureMapView(context) {
             }
         })
 
-        map.setOnCameraChangeListener(object: AMap.OnCameraChangeListener {
+        map.setOnCameraChangeListener(object : AMap.OnCameraChangeListener {
             override fun onCameraChangeFinish(position: CameraPosition?) {
                 emitCameraChangeEvent("onStatusChangeComplete", position)
             }
@@ -118,59 +115,35 @@ class AMapView(context: Context) : TextureMapView(context) {
         }
     }
 
-    fun addMarker(marker: AMapMarker) {
-        marker.addToMap(map)
-        markers.put(marker.marker?.id!!, marker)
-    }
-
-    fun addPolyline(polyline: AMapPolyline) {
-        polyline.addToMap(map)
-        polylines.put(polyline.polyline?.id!!, polyline)
-    }
-
-    fun  addPolygon(polygon: AMapPolygon) {
-        polygon.addToMap(map)
-        polygons.put(polygon.polygon?.id!!, polygon)
-    }
-
-    fun addCircle(circle: AMapCircle) {
-        circle.addToMap(map)
-        circles.put(circle.circle?.id!!, circle)
-    }
-
-    fun addHeatMap(heatMap: AMapHeatMap) {
-        heatMap.addToMap(map)
-    }
-
     fun emit(id: Int?, name: String, data: WritableMap = Arguments.createMap()) {
         id?.let { eventEmitter.receiveEvent(it, name, data) }
     }
 
-    fun remove(child: View) {
-        when (child) {
-            is AMapMarker -> {
-                markers.remove(child.marker?.id)
-                child.marker?.destroy()
+    fun add(child: View) {
+        if (child is AMapOverlay) {
+            child.add(map)
+            if (child is AMapMarker) {
+                markers.put(child.marker?.id!!, child)
             }
-            is AMapPolyline -> {
-                polylines.remove(child.polyline?.id)
-                child.polyline?.remove()
-            }
-            is AMapPolygon -> {
-                polygons.remove(child.polygon?.id)
-                child.polygon?.remove()
-            }
-            is AMapCircle -> {
-                polygons.remove(child.circle?.id)
-                child.circle?.remove()
-            }
-            is AMapHeatMap -> {
-                child.overlay?.remove()
+            if (child is AMapPolyline) {
+                polylines.put(child.polyline?.id!!, child)
             }
         }
     }
 
-    private val animateCallback = object: AMap.CancelableCallback {
+    fun remove(child: View) {
+        if (child is AMapOverlay) {
+            child.remove()
+            if (child is AMapMarker) {
+                markers.remove(child.marker?.id)
+            }
+            if (child is AMapPolyline) {
+                polylines.remove(child.polyline?.id)
+            }
+        }
+    }
+
+    private val animateCallback = object : AMap.CancelableCallback {
         override fun onCancel() {
             emit(id, "onAnimateCancel")
         }

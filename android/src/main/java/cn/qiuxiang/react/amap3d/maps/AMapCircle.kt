@@ -8,9 +8,8 @@ import com.amap.api.maps.model.Circle
 import com.amap.api.maps.model.CircleOptions
 import com.facebook.react.views.view.ReactViewGroup
 
-class AMapCircle(context: Context) : ReactViewGroup(context) {
-    var circle: Circle? = null
-        private set
+class AMapCircle(context: Context) : ReactViewGroup(context), AMapOverlay {
+    private var circle: Circle? = null
 
     var center: LatLng? = null
         set(value) {
@@ -48,7 +47,7 @@ class AMapCircle(context: Context) : ReactViewGroup(context) {
             circle?.zIndex = value
         }
 
-    fun addToMap(map: AMap) {
+    override fun add(map: AMap) {
         circle = map.addCircle(CircleOptions()
                 .center(center)
                 .radius(radius)
@@ -56,5 +55,9 @@ class AMapCircle(context: Context) : ReactViewGroup(context) {
                 .strokeWidth(strokeWidth)
                 .fillColor(fillColor)
                 .zIndex(zIndex))
+    }
+
+    override fun remove() {
+        circle?.remove()
     }
 }

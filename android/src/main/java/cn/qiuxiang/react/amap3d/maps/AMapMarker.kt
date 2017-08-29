@@ -7,7 +7,7 @@ import com.amap.api.maps.AMap
 import com.amap.api.maps.model.*
 import com.facebook.react.views.view.ReactViewGroup
 
-class AMapMarker(context: Context) : ReactViewGroup(context) {
+class AMapMarker(context: Context) : ReactViewGroup(context), AMapOverlay {
     companion object {
         private val COLORS = mapOf(
                 "AZURE" to BitmapDescriptorFactory.HUE_AZURE,
@@ -92,7 +92,7 @@ class AMapMarker(context: Context) : ReactViewGroup(context) {
             }
         }
 
-    var customIcon: AMapOverlay? = null
+    var customIcon: AMapMarkerIcon? = null
         set(value) {
             field = value
             value?.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ -> updateCustomIcon() }
@@ -100,7 +100,7 @@ class AMapMarker(context: Context) : ReactViewGroup(context) {
 
     private var bitmapDescriptor: BitmapDescriptor? = null
 
-    fun addToMap(map: AMap) {
+    override fun add(map: AMap) {
         marker = map.addMarker(MarkerOptions()
                 .setFlat(flat)
                 .icon(bitmapDescriptor)
@@ -119,6 +119,10 @@ class AMapMarker(context: Context) : ReactViewGroup(context) {
         }
 
         marker?.isClickable = this.clickable_
+    }
+
+    override fun remove() {
+        marker?.destroy()
     }
 
     fun setIconColor(icon: String) {

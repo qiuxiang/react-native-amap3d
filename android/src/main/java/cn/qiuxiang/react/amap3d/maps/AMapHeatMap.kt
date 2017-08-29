@@ -9,14 +9,12 @@ import com.amap.api.maps.model.TileOverlayOptions
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.views.view.ReactViewGroup
 
-class AMapHeatMap(context: Context) : ReactViewGroup(context) {
-    var overlay: TileOverlay? = null
-        private set
+class AMapHeatMap(context: Context) : ReactViewGroup(context), AMapOverlay {
+    private var overlay: TileOverlay? = null
+    private var coordinates: ArrayList<LatLng> = ArrayList()
 
     var opacity: Double = 0.6
     var radius: Int = 12
-
-    private var coordinates: ArrayList<LatLng> = ArrayList()
 
     fun setCoordinates(coordinates: ReadableArray) {
         this.coordinates = ArrayList((0 until coordinates.size())
@@ -24,12 +22,16 @@ class AMapHeatMap(context: Context) : ReactViewGroup(context) {
                 .map { LatLng(it.getDouble("latitude"), it.getDouble("longitude")) })
     }
 
-    fun addToMap(map: AMap) {
+    override fun add(map: AMap) {
         overlay = map.addTileOverlay(TileOverlayOptions().tileProvider(
                 HeatmapTileProvider.Builder()
                         .data(coordinates)
                         .radius(radius)
                         .transparency(opacity)
                         .build()))
+    }
+
+    override fun remove() {
+        overlay?.remove()
     }
 }

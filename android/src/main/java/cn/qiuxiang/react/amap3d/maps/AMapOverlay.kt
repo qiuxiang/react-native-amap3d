@@ -1,7 +1,8 @@
 package cn.qiuxiang.react.amap3d.maps
 
-import android.content.Context
-import com.facebook.react.views.view.ReactViewGroup
+import com.amap.api.maps.AMap
 
-class AMapOverlay(context: Context) : ReactViewGroup(context) {
+interface AMapOverlay {
+    fun add(map: AMap)
+    fun remove()
 }

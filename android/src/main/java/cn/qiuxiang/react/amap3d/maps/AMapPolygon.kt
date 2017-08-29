@@ -9,9 +9,9 @@ import com.amap.api.maps.model.PolygonOptions
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.views.view.ReactViewGroup
 
-class AMapPolygon(context: Context) : ReactViewGroup(context) {
-    var polygon: Polygon? = null
-        private set
+class AMapPolygon(context: Context) : ReactViewGroup(context), AMapOverlay {
+    private var polygon: Polygon? = null
+    private var coordinates: ArrayList<LatLng> = ArrayList()
 
     var strokeWidth: Float = 1f
         set(value) {
@@ -37,8 +37,6 @@ class AMapPolygon(context: Context) : ReactViewGroup(context) {
             polygon?.zIndex = value
         }
 
-    private var coordinates: ArrayList<LatLng> = ArrayList()
-
     fun setCoordinates(coordinates: ReadableArray) {
         this.coordinates = ArrayList((0 until coordinates.size())
                 .map { coordinates.getMap(it) }
@@ -47,12 +45,16 @@ class AMapPolygon(context: Context) : ReactViewGroup(context) {
         polygon?.points = this.coordinates
     }
 
-    fun addToMap(map: AMap) {
+    override fun add(map: AMap) {
         polygon = map.addPolygon(PolygonOptions()
                 .addAll(coordinates)
                 .strokeColor(strokeColor)
                 .strokeWidth(strokeWidth)
                 .fillColor(fillColor)
                 .zIndex(zIndex))
+    }
+
+    override fun remove() {
+        polygon?.remove()
     }
 }

@@ -9,9 +9,12 @@ import com.amap.api.maps.model.PolylineOptions
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.views.view.ReactViewGroup
 
-class AMapPolyline(context: Context) : ReactViewGroup(context) {
+class AMapPolyline(context: Context) : ReactViewGroup(context), AMapOverlay {
     var polyline: Polyline? = null
         private set
+
+    private var coordinates: ArrayList<LatLng> = ArrayList()
+    private var colors: ArrayList<Int> = ArrayList()
 
     var width: Float = 1f
         set(value) {
@@ -45,9 +48,6 @@ class AMapPolyline(context: Context) : ReactViewGroup(context) {
 
     var gradient: Boolean = false
 
-    private var coordinates: ArrayList<LatLng> = ArrayList()
-    private var colors: ArrayList<Int> = ArrayList()
-
     fun setCoordinates(coordinates: ReadableArray) {
         this.coordinates = ArrayList((0 until coordinates.size())
                 .map { coordinates.getMap(it) }
@@ -57,10 +57,10 @@ class AMapPolyline(context: Context) : ReactViewGroup(context) {
     }
 
     fun setColors(colors: ReadableArray) {
-        this.colors = ArrayList((0..colors.size() - 1).map { colors.getInt(it) })
+        this.colors = ArrayList((0 until colors.size()).map { colors.getInt(it) })
     }
 
-    fun addToMap(map: AMap) {
+    override fun add(map: AMap) {
         polyline = map.addPolyline(PolylineOptions()
                 .addAll(coordinates)
                 .color(color)
@@ -70,5 +70,9 @@ class AMapPolyline(context: Context) : ReactViewGroup(context) {
                 .geodesic(geodesic)
                 .setDottedLine(dashed)
                 .zIndex(zIndex))
+    }
+
+    override fun remove() {
+        polyline?.remove()
     }
 }

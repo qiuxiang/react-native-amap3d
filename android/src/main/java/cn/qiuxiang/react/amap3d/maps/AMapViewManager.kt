@@ -4,7 +4,6 @@ import android.view.View
 import com.amap.api.maps.AMap
 import com.amap.api.maps.CameraUpdateFactory
 import com.amap.api.maps.model.LatLng
-import com.amap.api.maps.model.MyLocationStyle
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.common.MapBuilder
@@ -42,14 +41,8 @@ internal class AMapViewManager : ViewGroupManager<AMapView>() {
     }
 
     override fun addView(mapView: AMapView, child: View, index: Int) {
+        mapView.add(child)
         super.addView(mapView, child, index)
-        when (child) {
-            is AMapMarker -> mapView.addMarker(child)
-            is AMapPolyline -> mapView.addPolyline(child)
-            is AMapPolygon -> mapView.addPolygon(child)
-            is AMapCircle -> mapView.addCircle(child)
-            is AMapHeatMap -> mapView.addHeatMap(child)
-        }
     }
 
     override fun removeViewAt(parent: AMapView, index: Int) {

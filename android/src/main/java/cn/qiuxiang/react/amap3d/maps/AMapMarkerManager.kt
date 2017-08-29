@@ -21,7 +21,7 @@ internal class AMapMarkerManager : ViewGroupManager<AMapMarker>() {
 
     override fun addView(marker: AMapMarker, view: View, index: Int) {
         when (view) {
-            is AMapOverlay -> marker.customIcon = view
+            is AMapMarkerIcon -> marker.customIcon = view
             is AMapInfoWindow -> marker.infoWindow = view
         }
     }
