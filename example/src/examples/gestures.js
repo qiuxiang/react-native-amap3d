@@ -3,7 +3,7 @@ import {StyleSheet, View, Text, Switch} from 'react-native'
 import MapView from 'react-native-amap3d'
 import styles from '../styles'
 
-export default class Gestures extends Component {
+export default class GesturesExample extends Component {
   static navigationOptions = {
     title: '手势交互',
   }

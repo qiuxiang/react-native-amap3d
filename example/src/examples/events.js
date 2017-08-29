@@ -7,7 +7,7 @@ import {
 } from 'react-native'
 import MapView from 'react-native-amap3d'
 
-export default class Events extends Component {
+export default class EventsExample extends Component {
   static navigationOptions = {
     title: '地图事件',
   }

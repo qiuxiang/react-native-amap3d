@@ -3,7 +3,7 @@ import {StyleSheet, Switch, Text, View} from 'react-native'
 import MapView from 'react-native-amap3d'
 import styles from '../styles'
 
-export default class Controls extends Component {
+export default class ControlsExample extends Component {
   static navigationOptions = {
     title: '地图控件',
   }
