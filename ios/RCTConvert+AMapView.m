@@ -24,6 +24,13 @@ RCT_ENUM_CONVERTER(MAPinAnnotationColor, (@{
     return [[Coordinate alloc] initWithCoordinate:[self CLLocationCoordinate2D:json]];
 }
 
++ (MAHeatMapNode *)MAHeatMapNode:(id)json {
+    MAHeatMapNode *node = [MAHeatMapNode new];
+    node.coordinate = [self CLLocationCoordinate2D:json];
+    node.intensity = 1;
+    return node;
+}
+
 + (MACoordinateRegion)MACoordinateRegion:(id)json {
     return MACoordinateRegionMake(
             [self CLLocationCoordinate2D:json],
@@ -39,6 +46,7 @@ RCT_ENUM_CONVERTER(MAPinAnnotationColor, (@{
 }
 
 RCT_ARRAY_CONVERTER(Coordinate)
+RCT_ARRAY_CONVERTER(MAHeatMapNode)
 RCT_ARRAY_CONVERTER(AMapNaviPoint)
 
 @end
