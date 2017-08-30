@@ -3,7 +3,7 @@
 
 #pragma ide diagnostic ignored "OCUnusedClassInspection"
 
-@interface AMapMarkerManager : RCTViewManager <MAMapViewDelegate>
+@interface AMapMarkerManager : RCTViewManager
 @end
 
 @implementation AMapMarkerManager {

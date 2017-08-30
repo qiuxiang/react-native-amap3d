@@ -46,10 +46,12 @@
     if (_strokeColor == nil) {
         _strokeColor = UIColor.blackColor;
     }
-    _renderer = [[MAPolygonRenderer alloc] initWithPolygon:_polygon];
-    _renderer.lineWidth = _strokeWidth;
-    _renderer.strokeColor = _strokeColor;
-    _renderer.fillColor = _fillColor;
+    if (_renderer == nil) {
+        _renderer = [[MAPolygonRenderer alloc] initWithPolygon:_polygon];
+        _renderer.lineWidth = _strokeWidth;
+        _renderer.strokeColor = _strokeColor;
+        _renderer.fillColor = _fillColor;
+    }
     return _renderer;
 }
 

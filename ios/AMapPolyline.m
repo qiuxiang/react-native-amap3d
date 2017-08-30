@@ -94,13 +94,14 @@
     if (_color == nil) {
         _color = UIColor.blackColor;
     }
-
-    _renderer = [[MAMultiColoredPolylineRenderer alloc] initWithMultiPolyline:_polyline];
-    _renderer.lineWidth = _width;
-    _renderer.strokeColor = _color;
-    _renderer.strokeColors = _colors;
-    _renderer.lineDash = _dashed;
-    _renderer.gradient = _gradient;
+    if (_renderer == nil) {
+        _renderer = [[MAMultiColoredPolylineRenderer alloc] initWithMultiPolyline:_polyline];
+        _renderer.lineWidth = _width;
+        _renderer.strokeColor = _color;
+        _renderer.strokeColors = _colors;
+        _renderer.lineDash = _dashed;
+        _renderer.gradient = _gradient;
+    }
     return _renderer;
 }
 

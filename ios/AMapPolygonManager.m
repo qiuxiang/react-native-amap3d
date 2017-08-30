@@ -4,7 +4,7 @@
 
 #pragma ide diagnostic ignored "OCUnusedClassInspection"
 
-@interface AMapPolygonManager : RCTViewManager <MAMapViewDelegate>
+@interface AMapPolygonManager : RCTViewManager
 @end
 
 @implementation AMapPolygonManager {

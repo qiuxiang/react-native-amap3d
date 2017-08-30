@@ -4,7 +4,7 @@
 
 #pragma ide diagnostic ignored "OCUnusedClassInspection"
 
-@interface AMapCircleManager : RCTViewManager <MAMapViewDelegate>
+@interface AMapCircleManager : RCTViewManager
 @end
 
 @implementation AMapCircleManager {

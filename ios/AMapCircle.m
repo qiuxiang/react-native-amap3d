@@ -49,11 +49,13 @@
     if (_strokeColor == nil) {
         _strokeColor = UIColor.blackColor;
     }
-    _circle = [MACircle circleWithCenterCoordinate:_coordinate radius:_radius];
-    _renderer = [[MACircleRenderer alloc] initWithCircle:_circle];
-    _renderer.lineWidth = _strokeWidth;
-    _renderer.strokeColor = _strokeColor;
-    _renderer.fillColor = _fillColor;
+    if (_renderer == nil) {
+        _circle = [MACircle circleWithCenterCoordinate:_coordinate radius:_radius];
+        _renderer = [[MACircleRenderer alloc] initWithCircle:_circle];
+        _renderer.lineWidth = _strokeWidth;
+        _renderer.strokeColor = _strokeColor;
+        _renderer.fillColor = _fillColor;
+    }
     return _renderer;
 }
 
