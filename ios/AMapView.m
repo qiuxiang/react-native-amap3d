@@ -33,7 +33,6 @@
 }
 
 - (void)insertReactSubview:(id <RCTComponent>)subview atIndex:(NSInteger)atIndex {
-    [super insertReactSubview:subview atIndex:atIndex];
     dispatch_async(dispatch_get_main_queue(), ^{
         if ([subview isKindOfClass:[AMapMarker class]]) {
             ((AMapMarker *) subview).mapView = self;
@@ -42,11 +41,11 @@
         if ([subview isKindOfClass:[AMapModel class]]) {
             [self addOverlay:(id <MAOverlay>) subview];
         }
+        [super insertReactSubview:subview atIndex:atIndex];
     });
 }
 
 - (void)removeReactSubview:(id <RCTComponent>)subview {
-    [super removeReactSubview:subview];
     dispatch_async(dispatch_get_main_queue(), ^{
         if ([subview isKindOfClass:[AMapMarker class]]) {
             [self removeAnnotation:(id <MAAnnotation>) subview];
@@ -54,6 +53,7 @@
         if ([subview isKindOfClass:[AMapModel class]]) {
             [self removeOverlay:(id <MAOverlay>) subview];
         }
+        [super removeReactSubview:subview];
     });
 }
 
