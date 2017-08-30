@@ -32,7 +32,7 @@ export default class MapView extends BaseComponent {
     locationEnabled: PropTypes.bool,
 
     /**
-     * 定位间隔(ms)，默认 2000，小于 1000 将只进行单次定位
+     * 定位间隔(ms)，默认 2000
      *
      * @platform android
      */
