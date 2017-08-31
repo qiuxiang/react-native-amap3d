@@ -40,6 +40,7 @@ RCT_EXPORT_VIEW_PROPERTY(tiltEnabled, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(mapType, MAMapType)
 RCT_EXPORT_VIEW_PROPERTY(coordinate, CLLocationCoordinate2D)
 RCT_EXPORT_VIEW_PROPERTY(limitRegion, MACoordinateRegion)
+RCT_EXPORT_VIEW_PROPERTY(region, MACoordinateRegion)
 RCT_EXPORT_VIEW_PROPERTY(tilt, CGFloat)
 RCT_EXPORT_VIEW_PROPERTY(rotation, CGFloat)
 RCT_EXPORT_VIEW_PROPERTY(distanceFilter, CLLocationDistance)
@@ -186,6 +187,16 @@ RCT_EXPORT_METHOD(animateTo:(nonnull NSNumber *)reactTag params:(NSDictionary *)
                 @"latitudeDelta": @(mapView.region.span.latitudeDelta),
                 @"longitudeDelta": @(mapView.region.span.longitudeDelta),
         });
+    }
+}
+
+- (void)mapInitComplete:(AMapView *)mapView {
+    mapView.loaded = YES;
+
+    // struct 里的值会被初始化为 0，这里以此作为条件，判断 initialRegion 是否被设置过
+    // 但实际上经度为 0 是一个合法的坐标（赤道），只是考虑到高德地图只在中国使用，就这样吧
+    if (mapView.initialRegion.center.latitude != 0) {
+        mapView.region = mapView.initialRegion;
     }
 }
 

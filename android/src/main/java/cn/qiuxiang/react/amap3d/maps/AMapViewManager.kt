@@ -164,6 +164,11 @@ internal class AMapViewManager : ViewGroupManager<AMapView>() {
                 coordinate.getDouble("longitude"))))
     }
 
+    @ReactProp(name = "region")
+    fun setRegion(view: AMapView, region: ReadableMap) {
+        view.setRegion(region)
+    }
+
     @ReactProp(name = "limitRegion")
     fun setLimitRegion(view: AMapView, limitRegion: ReadableMap) {
         view.setLimitRegion(limitRegion)

@@ -9,27 +9,36 @@
 }
 
 - (void)setShowsTraffic:(BOOL)shows {
-    super.showTraffic = shows;
+    self.showTraffic = shows;
 }
 
 - (void)setTiltEnabled:(BOOL)enabled {
-    super.rotateCameraEnabled = enabled;
+    self.rotateCameraEnabled = enabled;
 }
 
 - (void)setLocationEnabled:(BOOL)enabled {
-    super.showsUserLocation = enabled;
+    self.showsUserLocation = enabled;
 }
 
 - (void)setCoordinate:(CLLocationCoordinate2D)json {
-    super.centerCoordinate = json;
+    self.centerCoordinate = json;
 }
 
 - (void)setTilt:(CGFloat)degree {
-    super.cameraDegree = degree;
+    self.cameraDegree = degree;
 }
 
 - (void)setRotation:(CGFloat)degree {
-    super.rotationDegree = degree;
+    self.rotationDegree = degree;
+}
+
+// 不能直接 setRegion，因为如果地图未加载 setRegion 是无效的
+- (void)setRegion:(MACoordinateRegion)region {
+    if (self.loaded) {
+        super.region = region;
+    } else {
+        self.initialRegion = region;
+    }
 }
 
 - (void)insertReactSubview:(id <RCTComponent>)subview atIndex:(NSInteger)atIndex {

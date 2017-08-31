@@ -185,15 +185,12 @@ class AMapView(context: Context) : TextureMapView(context) {
         map.animateCamera(cameraUpdate, duration.toLong(), animateCallback)
     }
 
-    fun setLimitRegion(limitRegion: ReadableMap) {
-        val latitude = limitRegion.getDouble("latitude")
-        val longitude = limitRegion.getDouble("longitude")
-        val latitudeDelta = limitRegion.getDouble("latitudeDelta")
-        val longitudeDelta = limitRegion.getDouble("longitudeDelta")
-        map.setMapStatusLimits(LatLngBounds(
-                LatLng(latitude - latitudeDelta / 2, longitude - longitudeDelta / 2),
-                LatLng(latitude + latitudeDelta / 2, longitude + longitudeDelta / 2)
-        ))
+    fun setRegion(region: ReadableMap) {
+        map.moveCamera(CameraUpdateFactory.newLatLngBounds(latLngBoundsFromReadableMap(region), 0))
+    }
+
+    fun setLimitRegion(region: ReadableMap) {
+        map.setMapStatusLimits(latLngBoundsFromReadableMap(region))
     }
 
     fun setLocationEnabled(enabled: Boolean) {
@@ -204,5 +201,16 @@ class AMapView(context: Context) : TextureMapView(context) {
     fun setLocationInterval(interval: Long) {
         locationStyle.interval(interval)
         map.myLocationStyle = locationStyle
+    }
+
+    private fun latLngBoundsFromReadableMap(region: ReadableMap): LatLngBounds {
+        val latitude = region.getDouble("latitude")
+        val longitude = region.getDouble("longitude")
+        val latitudeDelta = region.getDouble("latitudeDelta")
+        val longitudeDelta = region.getDouble("longitudeDelta")
+        return LatLngBounds(
+                LatLng(latitude - latitudeDelta / 2, longitude - longitudeDelta / 2),
+                LatLng(latitude + latitudeDelta / 2, longitude + longitudeDelta / 2)
+        )
     }
 }

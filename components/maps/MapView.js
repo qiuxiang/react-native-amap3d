@@ -117,6 +117,11 @@ export default class MapView extends BaseComponent {
     coordinate: LatLng,
 
     /**
+     * 显示区域
+     */
+    region: Region,
+
+    /**
      * 限制地图只能显示某个矩形区域
      */
     limitRegion: Region,
