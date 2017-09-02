@@ -14,6 +14,7 @@ import Circle from './examples/circle'
 import Events from './examples/events'
 import Navigation from './examples/navigation'
 import HeatMap from './examples/heat-map'
+import MultiPoint from './examples/multi-point'
 
 export default StackNavigator({
   Examples: {screen: Examples},
@@ -30,6 +31,7 @@ export default StackNavigator({
   Events: {screen: Events},
   Navigation: {screen: Navigation},
   HeatMap: {screen: HeatMap},
+  MultiPoint: {screen: MultiPoint},
 }, {
   navigationOptions: {
     headerTintColor: '#212121',

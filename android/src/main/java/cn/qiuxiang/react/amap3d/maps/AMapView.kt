@@ -94,6 +94,14 @@ class AMapView(context: Context) : TextureMapView(context) {
             emit(polylines[polyline.id]?.id, "onPress")
         }
 
+        map.setOnMultiPointClickListener { item ->
+            val slice = item.customerId.split("_")
+            val data = Arguments.createMap()
+            data.putInt("index", slice[1].toInt())
+            emit(slice[0].toInt(), "onItemPress", data)
+            false
+        }
+
         map.setInfoWindowAdapter(AMapInfoWindowAdapter(context, markers))
     }
 

@@ -56,6 +56,8 @@ export default class Examples extends Component {
         {this._renderItem('绘制圆形', 'Circle')}
         <View style={styles.separator}/>
         {this._renderItem('热力图', 'HeatMap')}
+        <View style={styles.separator}/>
+        {this._renderItem('海量点', 'MultiPoint')}
       </View>
       <View style={styles.group}>
         {this._renderItem('导航', 'Navigation')}

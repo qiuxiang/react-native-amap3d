@@ -9,8 +9,8 @@
   "dependencies": {
     "react": "16.0.0-alpha.12",
     "react-native": "0.47.1",
-    "react-native-amap3d": "^0.3.1",
-    "react-navigation": "^1.0.0-beta.11"
+    "react-native-amap3d": "^0.3.3",
+    "react-navigation": "^1.0.0-beta.12"
   },
   "devDependencies": {
     "babel-preset-react-native": "2.1.0"
