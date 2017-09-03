@@ -20,7 +20,7 @@ internal class AMapMarkerManager : ViewGroupManager<AMapMarker>() {
 
     override fun addView(marker: AMapMarker, view: View, index: Int) {
         when (view) {
-            is AMapMarkerIcon -> marker.customIcon = view
+            is AMapMarkerIcon -> marker.icon = view
             is AMapInfoWindow -> marker.infoWindow = view
         }
     }
@@ -45,7 +45,7 @@ internal class AMapMarkerManager : ViewGroupManager<AMapMarker>() {
 
     override fun receiveCommand(marker: AMapMarker, commandId: Int, args: ReadableArray?) {
         when (commandId) {
-            UPDATE -> marker.updateCustomIcon()
+            UPDATE -> marker.updateIcon()
         }
     }
 
@@ -91,9 +91,14 @@ internal class AMapMarkerManager : ViewGroupManager<AMapMarker>() {
         marker.active = active
     }
 
-    @ReactProp(name = "icon")
+    @ReactProp(name = "color")
     fun setIcon(marker: AMapMarker, icon: String) {
         marker.setIconColor(icon)
+    }
+
+    @ReactProp(name = "image")
+    fun setImage(marker: AMapMarker, image: String) {
+        marker.setImage(image)
     }
 
     @ReactProp(name = "infoWindowEnabled")

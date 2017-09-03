@@ -23,6 +23,7 @@ class AMapMarker(context: Context) : ReactViewGroup(context), AMapOverlay {
         )
     }
 
+    private var bitmapDescriptor: BitmapDescriptor? = null
     var infoWindow: AMapInfoWindow? = null
 
     var infoWindowEnabled: Boolean = true
@@ -92,13 +93,11 @@ class AMapMarker(context: Context) : ReactViewGroup(context), AMapOverlay {
             }
         }
 
-    var customIcon: AMapMarkerIcon? = null
+    var icon: AMapMarkerIcon? = null
         set(value) {
             field = value
-            value?.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ -> updateCustomIcon() }
+            value?.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ -> updateIcon() }
         }
-
-    private var bitmapDescriptor: BitmapDescriptor? = null
 
     override fun add(map: AMap) {
         marker = map.addMarker(MarkerOptions()
@@ -132,13 +131,19 @@ class AMapMarker(context: Context) : ReactViewGroup(context), AMapOverlay {
         marker?.setIcon(bitmapDescriptor)
     }
 
-    fun updateCustomIcon() {
-        customIcon?.let {
+    fun updateIcon() {
+        icon?.let {
             val bitmap = Bitmap.createBitmap(
                     it.width, it.height, Bitmap.Config.ARGB_8888)
             it.draw(Canvas(bitmap))
             bitmapDescriptor = BitmapDescriptorFactory.fromBitmap(bitmap)
             marker?.setIcon(bitmapDescriptor)
         }
+    }
+
+    fun setImage(name: String) {
+        val drawable = context.resources.getIdentifier(name, "drawable", context.packageName)
+        bitmapDescriptor = BitmapDescriptorFactory.fromResource(drawable)
+        marker?.setIcon(bitmapDescriptor)
     }
 }

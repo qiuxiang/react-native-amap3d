@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react'
-import {Platform, requireNativeComponent, StyleSheet, View, ViewPropTypes} from 'react-native'
+import {Platform, requireNativeComponent, StyleSheet, ViewPropTypes} from 'react-native'
 import Overlay from './Overlay'
 import InfoWindow from './InfoWindow'
 import {LatLng} from '../PropTypes'
@@ -25,30 +25,37 @@ export default class Marker extends BaseComponent {
     description: PropTypes.string,
 
     /**
+     * 默认图标颜色
+     */
+    color: Platform.select({
+      android: PropTypes.oneOf([
+        'azure',
+        'blue',
+        'cyan',
+        'green',
+        'magenta',
+        'orange',
+        'red',
+        'rose',
+        'violet',
+        'yellow',
+      ]),
+      ios: PropTypes.oneOf([
+        'red',
+        'green',
+        'purple',
+      ]),
+    }),
+
+    /**
      * 自定义图标
      */
-    icon: PropTypes.oneOfType([
-      Platform.select({
-        android: PropTypes.oneOf([
-          'azure',
-          'blue',
-          'cyan',
-          'green',
-          'magenta',
-          'orange',
-          'red',
-          'rose',
-          'violet',
-          'yellow',
-        ]),
-        ios: PropTypes.oneOf([
-          'red',
-          'green',
-          'purple',
-        ]),
-      }),
-      PropTypes.func,
-    ]),
+    icon: PropTypes.func,
+
+    /**
+     * 自定义图片
+     */
+    image: PropTypes.string,
 
     /**
      * 透明度 [0, 1]
@@ -119,23 +126,23 @@ export default class Marker extends BaseComponent {
     }
   }
 
+  _renderCustomMarker(icon) {
+    if (icon) {
+      this._icon = <Overlay style={style.overlay}>{icon()}</Overlay>
+      return this._icon
+    }
+  }
+
   componentDidUpdate() {
-    if (this._customMarker && Platform.OS === 'android') {
+    if (this._icon && Platform.OS === 'android') {
       setTimeout(() => this._sendCommand('update'), 0)
     }
   }
 
   render() {
-    const props = {...this.props}
-
-    if (typeof props.icon === 'function') {
-      this._customMarker = <Overlay style={style.overlay}>{props.icon()}</Overlay>
-      delete props.icon
-    }
-
-    return <AMapMarker {...props}>
-      {this._customMarker}
-      {this._renderInfoWindow(props.children)}
+    return <AMapMarker {...this.props}>
+      {this._renderCustomMarker(this.props.icon)}
+      {this._renderInfoWindow(this.props.children)}
     </AMapMarker>
   }
 

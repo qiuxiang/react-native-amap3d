@@ -58,7 +58,7 @@ export default class MarkerExample extends Component {
         coordinate={this._coordinates[0]}
       />
       <Marker
-        icon='green'
+        color='green'
         onInfoWindowPress={this._onCustomInfoWindowPress}
         coordinate={this._coordinates[1]}>
         <TouchableOpacity activeOpacity={0.9} onPress={this._onCustomInfoWindowPress}>
@@ -68,11 +68,7 @@ export default class MarkerExample extends Component {
         </TouchableOpacity>
       </Marker>
       <Marker
-        icon={() =>
-          <View style={styles.customIcon}>
-            <Image style={styles.customIcon} source={require('../../images/flag.png')}/>
-          </View>
-        }
+        image='flag'
         title='自定义图片'
         description="Sometimes you'll have some special properties that you need to expose for the native component, but don't actually want them as part of the API for the associated React component."
         coordinate={this._coordinates[2]}

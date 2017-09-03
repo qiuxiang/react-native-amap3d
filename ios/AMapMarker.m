@@ -9,6 +9,7 @@
     MAPinAnnotationView *_pinView;
     MAPinAnnotationColor _pinColor;
     MACustomCalloutView *_calloutView;
+    UIImage *_image;
     AMapInfoWindow *_callout;
     AMapView *_mapView;
     BOOL _active;
@@ -39,9 +40,17 @@
     _annotation.title = title;
 }
 
-- (void)setIcon:(MAPinAnnotationColor)color {
+- (void)setColor:(MAPinAnnotationColor)color {
     _pinColor = color;
     _pinView.pinColor = color;
+}
+
+#pragma clang diagnostic ignored "-Woverriding-method-mismatch"
+- (void)setImage:(NSString *)name {
+    _image = [UIImage imageNamed:name];
+    if (_image != nil) {
+        _pinView.image = _image;
+    }
 }
 
 - (void)setDescription:(NSString *)description {
@@ -102,6 +111,9 @@
             _pinView.draggable = self.draggable;
             _pinView.pinColor = _pinColor;
             _pinView.customCalloutView = _calloutView;
+            if (_image != nil) {
+                _pinView.image = _image;
+            }
         }
         return _pinView;
     } else {
