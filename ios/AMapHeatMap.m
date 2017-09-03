@@ -1,5 +1,4 @@
 #import "AMapHeatMap.h"
-#import "Coordinate.h"
 
 #pragma ide diagnostic ignored "OCUnusedMethodInspection"
 
