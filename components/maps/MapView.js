@@ -132,6 +132,11 @@ export default class MapView extends BaseComponent {
     tilt: PropTypes.number,
 
     /**
+     * 旋转角度
+     */
+    rotation: PropTypes.number,
+
+    /**
      * 是否启用缩放手势，用于放大缩小
      */
     zoomEnabled: PropTypes.bool,
