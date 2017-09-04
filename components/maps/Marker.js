@@ -115,7 +115,7 @@ export default class Marker extends BaseComponent {
     /**
      * 信息窗体点击事件
      *
-     * Android 在使用自定义 View 时，该事件会失效，这时候可以用 Touchable* 代替
+     * 注意，对于自定义信息窗体，该事件是无效的
      */
     onInfoWindowPress: React.PropTypes.func,
   }

@@ -59,7 +59,6 @@ export default class MarkerExample extends Component {
       />
       <Marker
         color='green'
-        onInfoWindowPress={this._onCustomInfoWindowPress}
         coordinate={this._coordinates[1]}>
         <TouchableOpacity activeOpacity={0.9} onPress={this._onCustomInfoWindowPress}>
           <View style={styles.customInfoWindow}>

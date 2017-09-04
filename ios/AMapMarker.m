@@ -94,9 +94,6 @@
 - (void)_handleTap:(UITapGestureRecognizer *)recognizer {
     _active = YES;
     [self updateActive];
-    if (self.onInfoWindowPress) {
-        self.onInfoWindowPress(nil);
-    }
 }
 
 - (BOOL)active {
