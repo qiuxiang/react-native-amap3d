@@ -5,18 +5,26 @@ PODS:
   - AMapNavi (5.2.1):
     - AMap3DMap (>= 5.2.1)
     - AMapFoundation (~> 1.4)
-  - React (0.47.2):
-    - React/Core (= 0.47.2)
+  - React (0.48.1):
+    - React/Core (= 0.48.1)
   - react-native-amap3d (0.6.2):
     - AMapNavi
     - React
-  - React/Core (0.47.2):
-    - Yoga (= 0.47.2.React)
-  - Yoga (0.47.2.React)
+  - React/Core (0.48.1):
+    - Yoga (= 0.48.1.React)
+  - React/DevSupport (0.48.1):
+    - React/Core
+    - React/RCTWebSocket
+  - React/RCTBlob (0.48.1):
+    - React/Core
+  - React/RCTWebSocket (0.48.1):
+    - React/Core
+    - React/RCTBlob
+  - Yoga (0.48.1.React)
 
 DEPENDENCIES:
-  - React (from `../node_modules/react-native/`)
   - react-native-amap3d (from `../../`)
+  - React/DevSupport (from `../node_modules/react-native/`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga/`)
 
 EXTERNAL SOURCES:
@@ -31,10 +39,10 @@ SPEC CHECKSUMS:
   AMap3DMap: 0614b5b7ed7a8b69f1d9ba7bc40ce30362497dc5
   AMapFoundation: 6c0471c9a6a0ad17dad46e3d800ad56ca170f82a
   AMapNavi: bb4d65295ed0ee0ad4b5f5792e9e2ea0e5117ffa
-  React: fbe1a006550fb55871cb377ba7741f5d1cfff733
+  React: c409fc3f984bbc91da9328ace90b0851759c8111
   react-native-amap3d: 44464626a64bc948be18c335b5d54957ccf45c10
-  Yoga: ff8531e8cf9f7ec92a75dd44286a68c4a084c507
+  Yoga: 1a0ed95233aeb0ed308fc70fabeb4348234a61d5
 
-PODFILE CHECKSUM: 532b8476f224a7e69d8d5ec4a246f7ed1173a8e1
+PODFILE CHECKSUM: 1f58898cdd2f530b47ca5a2d025ad7beb07cc506
 
 COCOAPODS: 1.2.0

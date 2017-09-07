@@ -31,7 +31,7 @@ react-native 高德地图组件，使用最新 3D SDK，支持 Android + iOS。
 
 ### 安装依赖
 ```
-$ npm i react-native-amap3d --save
+$ npm i react-native-amap3d
 ```
 
 ### 项目配置
@@ -48,7 +48,9 @@ platform :ios, '8.0'
 
 target 'Your Target' do
   pod 'Yoga', path: '../node_modules/react-native/ReactCommon/yoga/'
-  pod 'React', path: '../node_modules/react-native/'
+  pod 'React', path: '../node_modules/react-native/', :subspecs => [
+    'DevSupport',
+  ]
   pod 'react-native-amap3d', path: '../node_modules/react-native-amap3d/'
 end
 ```
