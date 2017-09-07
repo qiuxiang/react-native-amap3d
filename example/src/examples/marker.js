@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Alert, Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
+import {Alert, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 import {MapView, Marker} from 'react-native-amap3d'
 
 export default class MarkerExample extends Component {
@@ -52,7 +52,8 @@ export default class MarkerExample extends Component {
       <Marker
         active
         draggable
-        title={'一个可拖拽的标记 ' + this.state.time.toLocaleTimeString()}
+        title='一个可拖拽的标记 '
+        description={this.state.time.toLocaleTimeString()}
         onDragEnd={this._onDragEvent}
         onInfoWindowPress={this._onInfoWindowPress}
         coordinate={this._coordinates[0]}
@@ -62,18 +63,18 @@ export default class MarkerExample extends Component {
         coordinate={this._coordinates[1]}>
         <TouchableOpacity activeOpacity={0.9} onPress={this._onCustomInfoWindowPress}>
           <View style={styles.customInfoWindow}>
-            <Text>Custom View InfoWindow</Text>
+            <Text>自定义信息窗口</Text>
+            <Text>{this.state.time.toLocaleTimeString()}</Text>
           </View>
         </TouchableOpacity>
       </Marker>
       <Marker
         image='flag'
         title='自定义图片'
-        description="Sometimes you'll have some special properties that you need to expose for the native component, but don't actually want them as part of the API for the associated React component."
         coordinate={this._coordinates[2]}
       />
       <Marker
-        title='自定义标记'
+        title='自定义 View'
         icon={() =>
           <View style={styles.customMarker}>
             <Text style={styles.markerText}>{this.state.time.toLocaleTimeString()}</Text>
@@ -97,6 +98,7 @@ const styles = StyleSheet.create({
     elevation: 4,
     borderWidth: 2,
     borderColor: '#689F38',
+    marginBottom: 5,
   },
   customMarker: {
     backgroundColor: '#009688',

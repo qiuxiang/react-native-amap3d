@@ -1,6 +1,5 @@
 #import <React/UIView+React.h>
 #import "AMapMarker.h"
-#import "AMapOverlay.h"
 
 #pragma ide diagnostic ignored "OCUnusedMethodInspection"
 
@@ -119,10 +118,6 @@
 }
 
 - (void)insertReactSubview:(id <RCTComponent>)subview atIndex:(NSInteger)atIndex {
-    if ([subview isKindOfClass:[AMapOverlay class]] && subview.reactSubviews.count > 0) {
-        [super insertReactSubview:subview atIndex:atIndex];
-    }
-
     if ([subview isKindOfClass:[AMapInfoWindow class]]) {
         _callout = (AMapInfoWindow *) subview;
         _callout.delegate = self;
@@ -132,6 +127,8 @@
 
         _calloutView = [[MACustomCalloutView alloc] initWithCustomView:button];
         self.customCalloutView = _calloutView;
+    } else {
+        [super insertReactSubview:subview atIndex:atIndex];
     }
 }
 

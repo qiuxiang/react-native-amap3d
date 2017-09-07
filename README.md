@@ -131,14 +131,10 @@ import MapView from 'react-native-amap3d'
 </MapView>
 ```
 
-### 自定义地图标记及信息窗体
+### 自定义标记图片及信息窗体
 ```jsx
 <Marker
-  icon={() =>
-    <View style={styles.customMarker}>
-      <Image style={styles.customIcon} source={require('marker.png')}/>
-    </View>
-  }
+  image='flag'
   coordinate={{
     latitude: 39.706901,
     longitude: 116.397972,

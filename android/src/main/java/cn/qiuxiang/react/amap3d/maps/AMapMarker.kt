@@ -3,6 +3,7 @@ package cn.qiuxiang.react.amap3d.maps
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.view.View
 import com.amap.api.maps.AMap
 import com.amap.api.maps.model.*
 import com.facebook.react.views.view.ReactViewGroup
@@ -23,6 +24,7 @@ class AMapMarker(context: Context) : ReactViewGroup(context), AMapOverlay {
         )
     }
 
+    private var icon: View? = null
     private var bitmapDescriptor: BitmapDescriptor? = null
     var infoWindow: AMapInfoWindow? = null
 
@@ -93,11 +95,11 @@ class AMapMarker(context: Context) : ReactViewGroup(context), AMapOverlay {
             }
         }
 
-    var icon: AMapMarkerIcon? = null
-        set(value) {
-            field = value
-            value?.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ -> updateIcon() }
-        }
+    override fun addView(child: View, index: Int) {
+        super.addView(child, index)
+        icon = child
+        icon?.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ -> updateIcon() }
+    }
 
     override fun add(map: AMap) {
         marker = map.addMarker(MarkerOptions()

@@ -1,6 +1,5 @@
 import React, {PropTypes} from 'react'
-import {Platform, requireNativeComponent, StyleSheet, ViewPropTypes} from 'react-native'
-import Overlay from './Overlay'
+import {Platform, requireNativeComponent, StyleSheet, View, ViewPropTypes} from 'react-native'
 import InfoWindow from './InfoWindow'
 import {LatLng} from '../PropTypes'
 import BaseComponent from '../BaseComponent'
@@ -128,7 +127,7 @@ export default class Marker extends BaseComponent {
 
   _renderCustomMarker(icon) {
     if (icon) {
-      this._icon = <Overlay style={style.overlay}>{icon()}</Overlay>
+      this._icon = <View style={style.overlay}>{icon()}</View>
       return this._icon
     }
   }
