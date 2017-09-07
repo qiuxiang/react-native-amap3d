@@ -7,7 +7,7 @@ PODS:
     - AMapFoundation (~> 1.4)
   - React (0.47.2):
     - React/Core (= 0.47.2)
-  - react-native-amap3d (0.6.0):
+  - react-native-amap3d (0.6.2):
     - AMapNavi
     - React
   - React/Core (0.47.2):
@@ -32,7 +32,7 @@ SPEC CHECKSUMS:
   AMapFoundation: 6c0471c9a6a0ad17dad46e3d800ad56ca170f82a
   AMapNavi: bb4d65295ed0ee0ad4b5f5792e9e2ea0e5117ffa
   React: fbe1a006550fb55871cb377ba7741f5d1cfff733
-  react-native-amap3d: 7d8c90111b6411b881a3fa25f02ce3e6a83501f1
+  react-native-amap3d: 44464626a64bc948be18c335b5d54957ccf45c10
   Yoga: ff8531e8cf9f7ec92a75dd44286a68c4a084c507
 
 PODFILE CHECKSUM: 532b8476f224a7e69d8d5ec4a246f7ed1173a8e1
