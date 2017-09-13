@@ -12,5 +12,10 @@ const Region = PropTypes.shape({
   longitudeDelta: PropTypes.number.isRequired,
 })
 
-export {LatLng, Region}
+const Point = PropTypes.shape({
+  x: PropTypes.number.isRequired,
+  y: PropTypes.number.isRequired,
+})
+
+export {LatLng, Region, Point}
 

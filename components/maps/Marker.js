@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react'
-import {Platform, requireNativeComponent, StyleSheet, View, ViewPropTypes} from 'react-native'
+import {Platform, requireNativeComponent, StyleSheet, ViewPropTypes, View} from 'react-native'
 import InfoWindow from './InfoWindow'
-import {LatLng} from '../PropTypes'
+import {LatLng, Point} from '../PropTypes'
 import BaseComponent from '../BaseComponent'
 
 export default class Marker extends BaseComponent {
@@ -80,6 +80,14 @@ export default class Marker extends BaseComponent {
      * 层级
      */
     zIndex: PropTypes.number,
+
+    /**
+     * 设置覆盖物的锚点比例
+     *
+     * @link http://a.amap.com/lbs/static/unzip/Android_Map_Doc/3D/com/amap/api/maps/model/Marker.html#setAnchor-float-float-
+     * @platform android
+     */
+    anchor: Point,
 
     /**
      * 是否选中，选中时将显示信息窗体，一个地图只能有一个正在选中的 marker

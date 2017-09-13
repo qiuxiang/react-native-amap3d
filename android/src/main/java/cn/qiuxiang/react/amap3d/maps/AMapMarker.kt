@@ -26,6 +26,8 @@ class AMapMarker(context: Context) : ReactViewGroup(context), AMapOverlay {
 
     private var icon: View? = null
     private var bitmapDescriptor: BitmapDescriptor? = null
+    private var anchorU: Float = 0.5f
+    private var anchorV: Float = 1f
     var infoWindow: AMapInfoWindow? = null
 
     var infoWindowEnabled: Boolean = true
@@ -108,6 +110,7 @@ class AMapMarker(context: Context) : ReactViewGroup(context), AMapOverlay {
                 .alpha(opacity)
                 .draggable(draggable)
                 .position(position)
+                .anchor(anchorU, anchorV)
                 .title(title)
                 .infoWindowEnable(infoWindowEnabled)
                 .snippet(snippet)
@@ -147,5 +150,11 @@ class AMapMarker(context: Context) : ReactViewGroup(context), AMapOverlay {
         val drawable = context.resources.getIdentifier(name, "drawable", context.packageName)
         bitmapDescriptor = BitmapDescriptorFactory.fromResource(drawable)
         marker?.setIcon(bitmapDescriptor)
+    }
+
+    fun setAnchor(x: Double, y: Double) {
+        anchorU = x.toFloat()
+        anchorV = y.toFloat()
+        marker?.setAnchor(anchorU, anchorV)
     }
 }

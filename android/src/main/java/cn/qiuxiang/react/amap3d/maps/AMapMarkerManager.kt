@@ -110,4 +110,11 @@ internal class AMapMarkerManager : ViewGroupManager<AMapMarker>() {
     fun setZInex(marker: AMapMarker, zIndex: Float) {
         marker.zIndex = zIndex
     }
+
+    @ReactProp(name = "anchor")
+    fun setAnchor(view: AMapMarker, coordinate: ReadableMap) {
+        view.setAnchor(
+                coordinate.getDouble("x"),
+                coordinate.getDouble("y"))
+    }
 }
