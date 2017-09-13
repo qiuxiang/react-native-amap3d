@@ -107,6 +107,7 @@
             _pinView.draggable = self.draggable;
             _pinView.pinColor = _pinColor;
             _pinView.customCalloutView = _calloutView;
+            _pinView.centerOffset = self.centerOffset;
             if (_image != nil) {
                 _pinView.image = _image;
             }

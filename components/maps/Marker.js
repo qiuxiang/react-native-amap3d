@@ -82,12 +82,20 @@ export default class Marker extends BaseComponent {
     zIndex: PropTypes.number,
 
     /**
-     * 设置覆盖物的锚点比例
+     * 覆盖物锚点比例
      *
      * @link http://a.amap.com/lbs/static/unzip/Android_Map_Doc/3D/com/amap/api/maps/model/Marker.html#setAnchor-float-float-
      * @platform android
      */
     anchor: Point,
+
+    /**
+     * 覆盖物偏移位置
+     *
+     * @link http://a.amap.com/lbs/static/unzip/iOS_Map_Doc/AMap_iOS_API_Doc_3D/interface_m_a_annotation_view.html#a78f23c1e6a6d92faf12a00877ac278a7
+     * @platform ios
+     */
+    centerOffset: Point,
 
     /**
      * 是否选中，选中时将显示信息窗体，一个地图只能有一个正在选中的 marker
