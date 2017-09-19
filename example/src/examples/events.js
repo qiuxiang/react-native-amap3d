@@ -1,10 +1,5 @@
 import React, {Component} from 'react'
-import {
-  View,
-  Text,
-  FlatList,
-  StyleSheet,
-} from 'react-native'
+import {FlatList, StyleSheet, Text, View} from 'react-native'
 import MapView from 'react-native-amap3d'
 
 export default class EventsExample extends Component {
@@ -43,13 +38,16 @@ export default class EventsExample extends Component {
     return <View style={styles.body}>
       <MapView
         locationEnabled
+        locationInterval={10000}
+        distanceFilter={10}
         onPress={this._logPressEvent}
         onLongPress={this._logLongPressEvent}
         onLocation={this._logLocationEvent}
         onStatusChange={this._logStatusChangeEvent}
         onStatusChangeComplete={this._logStatusChangeCompleteEvent}
         style={styles.body}/>
-      <FlatList style={styles.logs} data={this.state.logs} renderItem={this._renderItem}/>
+      <FlatList style={styles.logs} data={this.state.logs}
+                renderItem={this._renderItem}/>
     </View>
   }
 }
