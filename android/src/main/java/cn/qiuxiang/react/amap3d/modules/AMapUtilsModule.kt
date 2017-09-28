@@ -1,4 +1,4 @@
-package cn.qiuxiang.react.amap3d
+package cn.qiuxiang.react.amap3d.modules
 
 import com.amap.api.maps.AMapUtils
 import com.amap.api.maps.model.LatLng
