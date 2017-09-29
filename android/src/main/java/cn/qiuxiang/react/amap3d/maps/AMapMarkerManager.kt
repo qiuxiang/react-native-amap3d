@@ -37,15 +37,20 @@ internal class AMapMarkerManager : ViewGroupManager<AMapMarker>() {
 
     companion object {
         val UPDATE = 1
+        val ACTIVE = 2
     }
 
     override fun getCommandsMap(): Map<String, Int> {
-        return mapOf("update" to UPDATE)
+        return mapOf(
+                "update" to UPDATE,
+                "active" to ACTIVE
+        )
     }
 
     override fun receiveCommand(marker: AMapMarker, commandId: Int, args: ReadableArray?) {
         when (commandId) {
             UPDATE -> marker.updateIcon()
+            ACTIVE -> marker.active = true
         }
     }
 

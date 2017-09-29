@@ -148,6 +148,10 @@ export default class Marker extends BaseComponent {
     }
   }
 
+  active() {
+    this._sendCommand('active')
+  }
+
   componentDidUpdate() {
     if (this._icon && Platform.OS === 'android') {
       setTimeout(() => this._sendCommand('update'), 0)
