@@ -1,4 +1,5 @@
-import React, {PropTypes, PureComponent} from 'react'
+import React, {PureComponent} from 'react'
+import PropTypes from 'prop-types'
 import {requireNativeComponent, resolveAssetSource, ViewPropTypes} from 'react-native'
 
 export default class MultiPoint extends PureComponent {
@@ -25,7 +26,7 @@ export default class MultiPoint extends PureComponent {
     /**
      * 点击事件
      */
-    onItemPress: React.PropTypes.func,
+    onItemPress: PropTypes.func,
   }
 
   _onItemPress = event => {

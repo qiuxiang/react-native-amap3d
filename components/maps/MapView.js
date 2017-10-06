@@ -1,5 +1,6 @@
 // @flow
-import React, {PropTypes} from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import {requireNativeComponent, ViewPropTypes} from 'react-native'
 import {LatLng, Region} from '../PropTypes'
 import BaseComponent from '../BaseComponent'
@@ -159,37 +160,37 @@ export default class MapView extends BaseComponent {
     /**
      * 点击事件
      */
-    onPress: React.PropTypes.func,
+    onPress: PropTypes.func,
 
     /**
      * 长按事件
      */
-    onLongPress: React.PropTypes.func,
+    onLongPress: PropTypes.func,
 
     /**
      * 定位事件
      */
-    onLocation: React.PropTypes.func,
+    onLocation: PropTypes.func,
 
     /**
      * 动画完成事件
      */
-    onAnimateFinish: React.PropTypes.func,
+    onAnimateFinish: PropTypes.func,
 
     /**
      * 动画取消事件
      */
-    onAnimateCancel: React.PropTypes.func,
+    onAnimateCancel: PropTypes.func,
 
     /**
      * 地图状态变化事件
      */
-    onStatusChange: React.PropTypes.func,
+    onStatusChange: PropTypes.func,
 
     /**
      * 地图状态变化完成事件
      */
-    onStatusChangeComplete: React.PropTypes.func,
+    onStatusChangeComplete: PropTypes.func,
   }
 
   /**

@@ -1,4 +1,5 @@
-import React, {PropTypes, PureComponent} from 'react'
+import React, {PureComponent} from 'react'
+import PropTypes from 'prop-types'
 import {PixelRatio, Platform, processColor, requireNativeComponent, ViewPropTypes} from 'react-native'
 import {LatLng} from '../PropTypes'
 

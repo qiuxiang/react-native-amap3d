@@ -1,4 +1,5 @@
-import React, {PropTypes} from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import {Platform, requireNativeComponent, StyleSheet, ViewPropTypes, View} from 'react-native'
 import InfoWindow from './InfoWindow'
 import {LatLng, Point} from '../PropTypes'
@@ -110,29 +111,29 @@ export default class Marker extends BaseComponent {
     /**
      * 点击事件
      */
-    onPress: React.PropTypes.func,
+    onPress: PropTypes.func,
 
     /**
      * 拖放开始事件
      */
-    onDragStart: React.PropTypes.func,
+    onDragStart: PropTypes.func,
 
     /**
      * 拖放进行事件，类似于 mousemove，在结束之前会不断调用
      */
-    onDrag: React.PropTypes.func,
+    onDrag: PropTypes.func,
 
     /**
      * 拖放结束事件，最终坐标将传入参数
      */
-    onDragEnd: React.PropTypes.func,
+    onDragEnd: PropTypes.func,
 
     /**
      * 信息窗体点击事件
      *
      * 注意，对于自定义信息窗体，该事件是无效的
      */
-    onInfoWindowPress: React.PropTypes.func,
+    onInfoWindowPress: PropTypes.func,
   }
 
   _renderInfoWindow(view) {
