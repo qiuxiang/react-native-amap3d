@@ -5,6 +5,7 @@ import com.facebook.react.uimanager.SimpleViewManager
 import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.annotations.ReactProp
 
+@Suppress("unused")
 internal class AMapPolylineManager : SimpleViewManager<AMapPolyline>() {
     override fun getName(): String {
         return "AMapPolyline"

@@ -7,6 +7,7 @@ import com.facebook.react.uimanager.SimpleViewManager
 import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.annotations.ReactProp
 
+@Suppress("unused")
 internal class AMapMultiPointManager : SimpleViewManager<AMapMultiPoint>() {
     override fun getName(): String {
         return "AMapMultiPoint"
