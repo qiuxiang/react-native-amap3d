@@ -24,7 +24,7 @@ react-native 高德地图组件，使用最新 3D SDK，支持 Android + iOS。
 - 海量点（MultiPoint）
 - 导航（驾车、步行、骑行）（还不够完善）
 
-![](https://user-images.githubusercontent.com/1709072/27509246-28ee8a0a-592b-11e7-9148-ed24c86ede82.jpg) ![](https://user-images.githubusercontent.com/1709072/27509248-29000d20-592b-11e7-90ef-3f56c4300625.jpg) ![](https://user-images.githubusercontent.com/1709072/27509247-28feba88-592b-11e7-90ec-3e3680cee241.jpg) ![](https://user-images.githubusercontent.com/1709072/27509249-2902531e-592b-11e7-801d-5fef6a87cead.jpg) ![](https://user-images.githubusercontent.com/1709072/27509250-2906e64a-592b-11e7-8cc5-1ce84090ce66.jpg) ![](https://user-images.githubusercontent.com/1709072/27509251-29084d5a-592b-11e7-84af-f49dbcea9873.jpg) ![](https://user-images.githubusercontent.com/1709072/27509252-291d5876-592b-11e7-8849-15360c2e16c2.jpg) ![](https://user-images.githubusercontent.com/1709072/27509253-2933ef5a-592b-11e7-88b4-10f67fa03706.jpg)
+<img src="http://upload-images.jianshu.io/upload_images/51256-f585098064a8d9de.png?imageView2/2/w/600" width="215"> <img src="http://upload-images.jianshu.io/upload_images/51256-a2b8b7fb93738f2e.png?imageView2/2/w/600" width="215"> <img src="http://upload-images.jianshu.io/upload_images/51256-85b17548888e2bd6.png?imageView2/2/w/600" width="215"> <img src="http://upload-images.jianshu.io/upload_images/51256-8c8b685f3cfbc350.png?imageView2/2/w/600" width="215">
 
 
 ## 安装
