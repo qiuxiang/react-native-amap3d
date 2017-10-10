@@ -22,7 +22,7 @@ react-native 高德地图组件，使用最新 3D SDK，支持 Android + iOS。
 - 圆形绘制（Circle）
 - 热力图（HeatMap）
 - 海量点（MultiPoint）
-- 导航（驾车、步行、骑行）（还不够完善）
+- 导航（驾车、步行、骑行）（待完善 🚧）
 
 <img src="http://upload-images.jianshu.io/upload_images/51256-f585098064a8d9de.png?imageView2/2/w/600" width="215"> <img src="http://upload-images.jianshu.io/upload_images/51256-a2b8b7fb93738f2e.png?imageView2/2/w/600" width="215"> <img src="http://upload-images.jianshu.io/upload_images/51256-85b17548888e2bd6.png?imageView2/2/w/600" width="215"> <img src="http://upload-images.jianshu.io/upload_images/51256-8c8b685f3cfbc350.png?imageView2/2/w/600" width="215">
 
@@ -148,19 +148,19 @@ import MapView from 'react-native-amap3d'
 </Marker>
 ```
 
-更多示例请参考[示例项目](https://github.com/qiuxiang/react-native-amap3d/tree/v0.6.0/example)。
+更多示例请参考[示例项目](https://github.com/qiuxiang/react-native-amap3d/tree/v0.7.3/example)。
 
 
 ## 接口
 
 请参考注释文档：
-- [MapView](https://github.com/qiuxiang/react-native-amap3d/tree/v0.6.0/components/maps/MapView.js#L14)
-- [Marker](https://github.com/qiuxiang/react-native-amap3d/tree/v0.6.0/components/maps/Marker.js#L6)
-- [Polyline](https://github.com/qiuxiang/react-native-amap3d/tree/v0.6.0/components/maps/Polyline.js#L5)
-- [Polygon](https://github.com/qiuxiang/react-native-amap3d/tree/v0.6.0/components/maps/Polygon.js#L5)
-- [Circle](https://github.com/qiuxiang/react-native-amap3d/tree/v0.6.0/components/maps/Circle.js#L5)
-- [HeatMap](https://github.com/qiuxiang/react-native-amap3d/tree/v0.6.0/components/maps/HeatMap.js#L8)
-- [MultiPoint](https://github.com/qiuxiang/react-native-amap3d/tree/v0.6.0/components/maps/MultiPoint.js#L4)
+- [MapView](https://github.com/qiuxiang/react-native-amap3d/tree/v0.7.3/components/maps/MapView.js#L15)
+- [Marker](https://github.com/qiuxiang/react-native-amap3d/tree/v0.7.3/components/maps/Marker.js#L8)
+- [Polyline](https://github.com/qiuxiang/react-native-amap3d/tree/v0.7.3/components/maps/Polyline.js#L6)
+- [Polygon](https://github.com/qiuxiang/react-native-amap3d/tree/v0.7.3/components/maps/Polygon.js#L6)
+- [Circle](https://github.com/qiuxiang/react-native-amap3d/tree/v0.7.3/components/maps/Circle.js#L6)
+- [HeatMap](https://github.com/qiuxiang/react-native-amap3d/tree/v0.7.3/components/maps/HeatMap.js#L6)
+- [MultiPoint](https://github.com/qiuxiang/react-native-amap3d/tree/v0.7.3/components/maps/MultiPoint.js#L5)
 
 
 ## 常见问题
