@@ -47,10 +47,8 @@ $ react-native link react-native-amap3d
 platform :ios, '8.0'
 
 target 'Your Target' do
-  pod 'Yoga', path: '../node_modules/react-native/ReactCommon/yoga/'
-  pod 'React', path: '../node_modules/react-native/', :subspecs => [
-    'DevSupport',
-  ]
+  pod 'yoga', path: '../node_modules/react-native/ReactCommon/yoga/'
+  pod 'React', path: '../node_modules/react-native/'
   pod 'react-native-amap3d', path: '../node_modules/react-native-amap3d/'
 end
 ```
