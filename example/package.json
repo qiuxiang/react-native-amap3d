@@ -9,12 +9,12 @@
   "dependencies": {
     "prop-types": "^15.6.0",
     "react": "16.0.0-beta.5",
-    "react-native": "^0.49.1",
+    "react-native": "^0.49.3",
     "react-native-amap3d": "^0.7.3",
-    "react-navigation": "^1.0.0-beta.12"
+    "react-navigation": "^1.0.0-beta.15"
   },
   "devDependencies": {
-    "babel-preset-react-native": "2.1.0"
+    "babel-preset-react-native": "^4.0.0"
   },
   "presets": [
     "react-native"

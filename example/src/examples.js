@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import {
   Platform,
   ScrollView,
-  StatusBar,
   StyleSheet,
   Text,
   TouchableHighlight,
@@ -30,7 +29,6 @@ export default class Examples extends Component {
 
   render() {
     return <ScrollView style={styles.scrollView} contentContainerStyle={styles.container}>
-      <StatusBar barStyle='dark-content' backgroundColor='#e0e0e0'/>
       <View style={styles.group}>
         {this._renderItem('地图模式', 'MapTypes')}
         <View style={styles.separator}/>
