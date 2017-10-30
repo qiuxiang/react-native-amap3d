@@ -6,13 +6,15 @@
 import React, {PureComponent} from 'react'
 import {findNodeHandle, UIManager} from 'react-native'
 
-export default class BaseComponent extends PureComponent {
+export default class BaseComponent<T> extends PureComponent<T> {
+  name: string
+
   /**
    * 调用原生方法
    *
    * @private
    */
-  _sendCommand(command: string, params?: []) {
+  _sendCommand(command: string, params?: any[]) {
     UIManager.dispatchViewManagerCommand(
       findNodeHandle(this),
       UIManager[this.name].Commands[command],

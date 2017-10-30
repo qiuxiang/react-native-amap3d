@@ -13,8 +13,15 @@
     "type": "git",
     "url": "https://github.com/qiuxiang/react-native-amap3d"
   },
+  "scripts": {
+    "flow": "flow"
+  },
   "peerDependencies": {
-    "react": "*",
-    "react-native": "*"
+    "react": ">=16",
+    "react-native": ">=0.47"
+  },
+  "devDependencies": {
+    "flow-bin": "^0.57.3",
+    "prop-types": "^15.6.0"
   }
 }

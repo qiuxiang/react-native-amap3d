@@ -1,0 +1,11 @@
+[ignore]
+.*/node_modules/react-native/*
+.*/example/node_modules/.*
+
+[include]
+
+[libs]
+
+[lints]
+
+[options]
