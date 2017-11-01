@@ -18,6 +18,8 @@ jobs:
   test-android-example:
     docker:
       - image: circleci/android:api-26-alpha
+    environment:
+      - TERM: "dumb"
     steps:
       - checkout
       - run:
