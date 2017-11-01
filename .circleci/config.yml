@@ -1,12 +1,12 @@
 version: 2
 
 aliases:
-  - &restore-example-cache
-    key: example-package-{{ checksum "example/package-lock.json" }}
+  - &restore-cache-example
+    key: example-{{ checksum "example/package-lock.json" }}
 
-  - &save-example-cache
+  - &save-cache-example
     paths: [example/node_modules]
-    key: example-package-{{ checksum "example/package-lock.json" }}
+    key: example-{{ checksum "example/package-lock.json" }}
 
   - &install-nodejs
     name: Install NodeJS
@@ -17,6 +17,16 @@ aliases:
   - &install-example-dependencies
     working_directory: example
     command: npm i
+
+  - &restore-cache-android
+    key: android
+
+  - &save-cache-android
+    paths:
+      - ~/.gradle/caches
+      - ~/.gradle/wrapper
+      - /opt/android/sdk
+    key: android
 
 jobs:
   test-js:
@@ -40,11 +50,10 @@ jobs:
     steps:
       - checkout
       - run: *install-nodejs
-      - restore_cache: *restore-example-cache
+      - restore_cache: *restore-cache-example
       - run: *install-example-dependencies
-      - save_cache: *save-example-cache
-      - restore_cache:
-          key: gradle-{{ checksum "example/android/build.gradle" }}-{{ checksum  "example/android/app/build.gradle" }}
+      - save_cache: *save-cache-example
+      - restore_cache: *restore-cache-android
       - run:
           name: Build
           working_directory: example/android
@@ -52,24 +61,7 @@ jobs:
             ./gradlew assembleDebug
             ./gradlew assembleRelease
             ls -l app/build/outputs/apk
-      - save_cache:
-          paths: [example/android/.gradle]
-          key: gradle-{{ checksum "example/android/build.gradle" }}-{{ checksum  "example/android/app/build.gradle" }}
-
-  test-ios-example:
-    macos:
-      xcode: "9.1"
-    dependencies:
-      pre:
-        - xcrun instruments -w "iPhone 6 (10.3.1)"
-    steps:
-      - checkout
-      - restore-cache: *restore-example-cache
-      - run: *install-example-dependencies
-      - save-cache: *save-example-cache
-      - run:
-          working_directory: example/ios
-          command: pod install
+      - save_cache: *save-cache-android
 
 workflows:
   version: 2
@@ -77,4 +69,3 @@ workflows:
     jobs:
       - test-js
       - test-android-example
-      - test-ios-example
