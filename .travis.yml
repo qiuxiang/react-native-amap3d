@@ -1,11 +1,12 @@
 jobs:
   include:
-    - stage: test
+    - stage: "test js"
       language: node_js
       node_js: 8
 
-    - stage: test
+    - stage: "test android"
       language: android
+      jdk: oraclejdk8
       android:
         components:
           - build-tools-23.0.1
