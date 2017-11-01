@@ -1,0 +1,10 @@
+matrix:
+  include:
+    - stage: test js
+      language: node_js
+      node_js: 8
+#    - stage: "Static Binding Generator Class Generator Tests"
+#      language: android
+#      jdk: oraclejdk8
+#      script:
+#        - echo a
