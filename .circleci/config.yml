@@ -6,12 +6,10 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys:
-            - package-{{ checksum "package-lock.json" }}
+          key: package-{{ checksum "package-lock.json" }}
       - run: npm i
       - save_cache:
-          paths:
-            - node_modules
+          paths: [node_modules]
           key: package-{{ checksum "package-lock.json" }}
       - run: npm test
 
@@ -28,18 +26,21 @@ jobs:
             curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
             sudo apt install -y nodejs
       - restore_cache:
-          keys:
-            - example-package-{{ checksum "example/package-lock.json" }}
+          key: example-package-{{ checksum "example/package-lock.json" }}
       - run:
           working_directory: example
           command: npm i
       - save_cache:
-          paths:
-            - example/node_modules
+          paths: [example/node_modules]
           key: example-package-{{ checksum "example/package-lock.json" }}
+      - restore_cache:
+          key: gradle-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
           working_directory: example/android
-          command: ./gradlew lint
+          command: ./gradlew assembleDebug
+      - save_cache:
+          paths: [example/android/.gradle]
+          key: gradle-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
 
 workflows:
   version: 2
