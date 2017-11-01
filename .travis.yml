@@ -1,10 +1,12 @@
 jobs:
   include:
-    - stage: "test js"
+    - stage: test
       language: node_js
       node_js: node
+      cache:
+        directories: [node_modules]
 
-    - stage: "build example"
+    - stage: build
       language: android
       jdk: oraclejdk8
       android:
@@ -13,6 +15,11 @@ jobs:
           - android-23
           - extra-android-m2repository
           - extra-android-support
+      cache:
+        directories:
+          - example/node_modules
+          - ~/.gradle/caches
+          - ~/.gradle/wrappers
       script:
         - nvm install node
         - cd example
@@ -22,9 +29,14 @@ jobs:
         - ./gradlew assembleRelease
         - ls -l app/build/outputs/apk
 
-    - stage: "build example"
+    - stage: build
       language: objective-c
       osx_image: xcode9.1
+      cache:
+        directories:
+          - example/node_modules
+          - ~/.rncache
+          - ~/Library/Caches/CocoaPods/Pods
       script:
         - nvm install node
         - cd example
@@ -32,12 +44,3 @@ jobs:
         - cd ios
         - pod install
         - xcodebuild -workspace RNAMap3D.xcworkspace -scheme RNAMap3D -sdk iphonesimulator -quiet
-
-cache:
-  directories:
-    - node_modules
-    - example/node_modules
-    - ~/.gradle/caches
-    - ~/.gradle/wrappers
-    - ~/.rncache
-    - ~/Library/Caches/CocoaPods/Pods/

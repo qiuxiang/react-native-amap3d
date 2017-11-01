@@ -1,5 +1,4 @@
-# react-native-amap3d [![npm version](https://img.shields.io/npm/v/react-native-amap3d.svg)](https://www.npmjs.com/package/react-native-amap3d) 
-[![build status](https://travis-ci.org/qiuxiang/react-native-amap3d.svg?branch=master)](https://travis-ci.org/qiuxiang/react-native-amap3d)
+# react-native-amap3d [![npm version](https://badge.fury.io/js/react-native-amap3d.svg)](https://badge.fury.io/js/react-native-amap3d) [![build status](https://travis-ci.org/qiuxiang/react-native-amap3d.svg?branch=master)](https://travis-ci.org/qiuxiang/react-native-amap3d)
 
 react-native 高德地图组件，使用最新 3D SDK，支持 Android + iOS。
 
