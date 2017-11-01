@@ -21,20 +21,23 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install
+          name: Install Node
           command: |
             curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
             sudo apt install -y nodejs
-            cd example
       - restore_cache:
           keys:
-            - example-package-{{ checksum "package-lock.json" }}
-      - run: npm i
+            - example-package-{{ checksum "example/package-lock.json" }}
+      - run:
+          working_directory: example
+          commmand: npm i
       - save_cache:
           paths:
-            - node_modules
-          key: example-package-{{ checksum "package-lock.json" }}
-      - run: cd android && ./gradlew lint
+            - example/node_modules
+          key: example-package-{{ checksum "example/package-lock.json" }}
+      - run:
+          working_directory: example/android
+          commmand: ./gradlew lint
 
 workflows:
   version: 2
