@@ -25,7 +25,7 @@ android {
 }
 
 dependencies {
-    compile 'com.facebook.react:react-native:+'
+    provided 'com.facebook.react:react-native:+'
     compile 'com.amap.api:navi-3dmap:5.3.0_3dmap5.3.0'
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 }

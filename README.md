@@ -1,4 +1,5 @@
-# react-native-amap3d [![npm version](https://img.shields.io/npm/v/react-native-amap3d.svg)](https://www.npmjs.com/package/react-native-amap3d)
+# react-native-amap3d [![npm version](https://img.shields.io/npm/v/react-native-amap3d.svg)](https://www.npmjs.com/package/react-native-amap3d) 
+[![build status](https://travis-ci.org/qiuxiang/react-native-amap3d.svg?branch=master)](https://travis-ci.org/qiuxiang/react-native-amap3d)
 
 react-native 高德地图组件，使用最新 3D SDK，支持 Android + iOS。
 
@@ -146,7 +147,7 @@ import MapView from 'react-native-amap3d'
 </Marker>
 ```
 
-更多示例请参考[示例项目](https://github.com/qiuxiang/react-native-amap3d/tree/v0.7.3/example)。
+更多示例请参考[示例项目](https://github.com/qiuxiang/react-native-amap3d/tree/master/example)。
 
 
 ## 接口
