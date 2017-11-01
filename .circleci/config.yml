@@ -37,7 +37,9 @@ jobs:
           key: gradle-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
           working_directory: example/android
-          command: ./gradlew assembleDebug
+          command: |
+            ./gradlew assembleDebug
+            ./gradlew assembleRelease
       - save_cache:
           paths: [example/android/.gradle]
           key: gradle-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
