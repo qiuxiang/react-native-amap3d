@@ -1,4 +1,23 @@
 version: 2
+
+aliases:
+  - &restore-example-cache
+    key: example-package-{{ checksum "example/package-lock.json" }}
+
+  - &save-example-cache
+    paths: [example/node_modules]
+    key: example-package-{{ checksum "example/package-lock.json" }}
+
+  - &install-nodejs
+    name: Install NodeJS
+    command: |
+      curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+      sudo apt install -y nodejs
+
+  - &install-example-dependencies
+    working_directory: example
+    command: npm i
+
 jobs:
   test-js:
     docker:
@@ -20,19 +39,10 @@ jobs:
       - TERM: dumb
     steps:
       - checkout
-      - run:
-          name: Install NodeJS
-          command: |
-            curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
-            sudo apt install -y nodejs
-      - restore_cache:
-          key: example-package-{{ checksum "example/package-lock.json" }}
-      - run:
-          working_directory: example
-          command: npm i
-      - save_cache:
-          paths: [example/node_modules]
-          key: example-package-{{ checksum "example/package-lock.json" }}
+      - run: *install-nodejs
+      - restore_cache: *restore-example-cache
+      - run: *install-example-dependencies
+      - save_cache: *save-example-cache
       - restore_cache:
           key: gradle-{{ checksum "example/android/build.gradle" }}-{{ checksum  "example/android/app/build.gradle" }}
       - run:
@@ -46,9 +56,25 @@ jobs:
           paths: [example/android/.gradle]
           key: gradle-{{ checksum "example/android/build.gradle" }}-{{ checksum  "example/android/app/build.gradle" }}
 
+  test-ios-example:
+    macos:
+      xcode: 9.0
+    dependencies:
+      pre:
+        - xcrun instruments -w "iPhone 6 (10.3.1)"
+    steps:
+      - checkout
+      - restore-cache: *restore-example-cache
+      - run: *install-example-dependencies
+      - save-cache: *save-example-cache
+      - run:
+          working_directory: example/ios
+          command: pod install
+
 workflows:
   version: 2
   test:
     jobs:
       - test-js
       - test-android-example
+      - test-ios-example
