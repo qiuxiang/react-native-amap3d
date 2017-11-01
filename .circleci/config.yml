@@ -58,7 +58,7 @@ jobs:
 
   test-ios-example:
     macos:
-      xcode: 9.0
+      xcode: "9.1"
     dependencies:
       pre:
         - xcrun instruments -w "iPhone 6 (10.3.1)"
