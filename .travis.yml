@@ -1,3 +1,0 @@
-matrix:
-  include:
-    - language: node_js
