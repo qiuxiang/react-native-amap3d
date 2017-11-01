@@ -1,0 +1,39 @@
+jobs:
+  include:
+    - stage: test
+      language: node_js
+      node_js: node
+
+    - stage: test
+      language: android
+      jdk: oraclejdk8
+      android:
+        components:
+          - build-tools-23.0.1
+          - android-23
+          - extra-android-m2repository
+          - extra-android-support
+      script:
+        - nvm install node
+        - cd example
+        - npm i
+        - cd android
+        - ./gradlew assembleDebug
+
+    - stage: test
+      language: objective-c
+      osx_image: xcode9.1
+      script:
+        - nvm install node
+        - cd example
+        - npm i
+        - cd ios
+        - pod install
+        - xcodebuild -workspace RNAMap3D.xcworkspace -scheme RNAMap3D -sdk iphonesimulator
+
+cache:
+  directories:
+    - node_modules
+    - example/node_modules
+    - ~/.gradle/caches
+    - ~/.gradle/wrappers

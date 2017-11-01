@@ -14,7 +14,7 @@
     "url": "https://github.com/qiuxiang/react-native-amap3d"
   },
   "scripts": {
-    "flow": "flow"
+    "test": "flow"
   },
   "peerDependencies": {
     "react": ">=16",
