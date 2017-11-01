@@ -30,14 +30,14 @@ jobs:
             - example-package-{{ checksum "example/package-lock.json" }}
       - run:
           working_directory: example
-          commmand: npm i
+          command: npm i
       - save_cache:
           paths:
             - example/node_modules
           key: example-package-{{ checksum "example/package-lock.json" }}
       - run:
           working_directory: example/android
-          commmand: ./gradlew lint
+          command: ./gradlew lint
 
 workflows:
   version: 2
