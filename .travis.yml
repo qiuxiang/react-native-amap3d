@@ -1,10 +1,10 @@
 jobs:
   include:
-    - stage: "test js"
+    - stage: test
       language: node_js
-      node_js: 8
+      node_js: node
 
-    - stage: "test android"
+    - stage: test
       language: android
       jdk: oraclejdk8
       android:
@@ -20,8 +20,20 @@ jobs:
         - cd android
         - ./gradlew assembleDebug
 
+    - stage: test
+      language: objective-c
+      osx_image: xcode9.1
+      script:
+        - nvm install node
+        - cd example
+        - npm i
+        - cd ios
+        - pod install
+        - xcodebuild -workspace RNAMap3D.xcworkspace -scheme RNAMap3D -sdk iphonesimulator
+
 cache:
   directories:
     - node_modules
+    - example/node_modules
     - ~/.gradle/caches
     - ~/.gradle/wrappers
