@@ -15,7 +15,7 @@ jobs:
           key: package-{{ checksum "package-lock.json" }}
       - run: npm test
 
-  test-example-android:
+  test-android-example:
     docker:
       - image: circleci/android:api-26-alpha
     steps:
@@ -42,3 +42,4 @@ workflows:
   test:
     jobs:
       - test-js
+      - test-android-example
