@@ -1,4 +1,4 @@
-matrix:
+jobs:
   include:
     - stage: test
       language: node_js
@@ -11,6 +11,7 @@ matrix:
           - build-tools-23.0.1
           - android-23
           - extra-android-m2repository
+          - extra-android-support
       script:
         - nvm install node
         - cd example
