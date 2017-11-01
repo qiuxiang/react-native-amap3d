@@ -17,11 +17,11 @@ jobs:
     docker:
       - image: circleci/android:api-26-alpha
     environment:
-      - TERM: "dumb"
+      - TERM: dumb
     steps:
       - checkout
       - run:
-          name: Install Node
+          name: Install NodeJS
           command: |
             curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
             sudo apt install -y nodejs
@@ -36,6 +36,7 @@ jobs:
       - restore_cache:
           key: gradle-{{ checksum "example/android/build.gradle" }}-{{ checksum  "example/android/app/build.gradle" }}
       - run:
+          name: Build
           working_directory: example/android
           command: |
             ./gradlew assembleDebug
