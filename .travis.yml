@@ -1,10 +1,25 @@
 matrix:
   include:
-    - stage: test js
+    - stage: test
       language: node_js
       node_js: 8
-#    - stage: "Static Binding Generator Class Generator Tests"
-#      language: android
-#      jdk: oraclejdk8
-#      script:
-#        - echo a
+
+    - stage: test
+      language: android
+      android:
+        components:
+          - build-tools-23.0.1
+          - android-23
+          - extra-android-m2repository
+      script:
+        - nvm install node
+        - cd example
+        - npm i
+        - cd android
+        - ./gradlew assembleDebug
+
+cache:
+  directories:
+    - node_modules
+    - ~/.gradle/caches
+    - ~/.gradle/wrappers
