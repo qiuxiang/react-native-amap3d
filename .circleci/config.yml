@@ -7,17 +7,38 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "package-lock.json" }}
-            - v1-dependencies-
+            - package-{{ checksum "package-lock.json" }}
       - run: npm i
       - save_cache:
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "package-lock.json" }}
+          key: package-{{ checksum "package-lock.json" }}
       - run: npm test
+
+  test-example-android:
+    docker:
+      - image: circleci/android:api-26-alpha
+    steps:
+      - checkout
+      - run:
+        name: Install
+        command: |
+          curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+          sudo apt install -y nodejs
+          cd example
+      - restore_cache:
+          keys:
+            - example-package-{{ checksum "package-lock.json" }}
+      - run: npm i
+      - save_cache:
+          paths:
+            - node_modules
+          keys:
+            - example-package-{{ checksum "package-lock.json" }}
+      - run: cd android && ./gradlew lint
 
 workflows:
   version: 2
-  test-js:
+  test:
     jobs:
       - test-js
