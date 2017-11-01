@@ -33,8 +33,7 @@ jobs:
       - save_cache:
           paths:
             - node_modules
-          key:
-            - example-package-{{ checksum "package-lock.json" }}
+          key: example-package-{{ checksum "package-lock.json" }}
       - run: cd android && ./gradlew lint
 
 workflows:
