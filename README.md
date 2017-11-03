@@ -1,9 +1,6 @@
-# react-native-amap3d [![npm version](https://badge.fury.io/js/react-native-amap3d.svg)](https://badge.fury.io/js/react-native-amap3d) [![build status](https://travis-ci.org/qiuxiang/react-native-amap3d.svg?branch=master)](https://travis-ci.org/qiuxiang/react-native-amap3d)
+# react-native-amap3d [![npm version][version-badge]][npm] [![build status][build-badge]][build]
 
-react-native 高德地图组件，使用最新 3D SDK，支持 Android + iOS。
-
-该项目很大一定程度参考了 [react-native-maps](https://github.com/airbnb/react-native-maps)，
-目前正在开发中，欢迎各种 [Issue](https://github.com/qiuxiang/react-native-amap3d/issues/new)。
+react-native 高德地图组件，使用最新 3D SDK，支持 Android + iOS，受 [react-native-maps](https://github.com/airbnb/react-native-maps) 启发，提供功能丰富且易用的接口。
 
 
 ## 功能
@@ -177,3 +174,8 @@ import MapView from 'react-native-amap3d'
   - 问题不具备普遍性，且缺乏讨论
 
 问题被关闭，仍然可以继续反馈，我会尽量回复。
+
+[npm]: https://www.npmjs.com/package/react-native-amap3d
+[version-badge]: https://badge.fury.io/js/react-native-amap3d.svg
+[build-badge]: https://travis-ci.org/qiuxiang/react-native-amap3d.svg?branch=master
+[build]: https://travis-ci.org/qiuxiang/react-native-amap3d
