@@ -1,10 +1,10 @@
 jobs:
   include:
-    - stage: test
-      language: node_js
-      node_js: node
-      cache:
-        directories: [node_modules]
+#    - stage: test
+#      language: node_js
+#      node_js: node
+#      cache:
+#        directories: [node_modules]
 
     - stage: build
       language: android
@@ -17,30 +17,31 @@ jobs:
           - extra-android-support
       cache:
         directories:
-          - example/node_modules
           - ~/.gradle/caches
           - ~/.gradle/wrappers
       script:
         - nvm install node
-        - cd example
-        - npm i
+        - npm i -g react-native-cli
+        - react-native init App
+        - cd App
+        - npm i react-native-amap3d
+        - react-native link
         - cd android
-        - ./gradlew assembleDebug
-        - ./gradlew assembleRelease
+        - ./gradlew build
         - ls -l app/build/outputs/apk
 
-    - stage: build
-      language: objective-c
-      osx_image: xcode9.1
-      cache:
-        directories:
-          - example/node_modules
-          - ~/.rncache
-          - ~/Library/Caches/CocoaPods/Pods
-      script:
-        - nvm install node
-        - cd example
-        - npm i
-        - cd ios
-        - pod install
-        - xcodebuild -workspace RNAMap3D.xcworkspace -scheme RNAMap3D -sdk iphonesimulator -quiet
+#    - stage: build
+#      language: objective-c
+#      osx_image: xcode9.1
+#      cache:
+#        directories:
+#          - example/node_modules
+#          - ~/.rncache
+#          - ~/Library/Caches/CocoaPods/Pods
+#      script:
+#        - nvm install node
+#        - cd example
+#        - npm i
+#        - cd ios
+#        - pod install
+#        - xcodebuild -workspace RNAMap3D.xcworkspace -scheme RNAMap3D -sdk iphonesimulator -quiet
