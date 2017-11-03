@@ -24,6 +24,7 @@ jobs:
         - npm i -g react-native-cli
         - react-native init App
         - cd App
+        - npm i
         - npm i react-native-amap3d
         - react-native link
         - cd android
