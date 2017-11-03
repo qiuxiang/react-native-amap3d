@@ -38,8 +38,8 @@ jobs:
           - example/node_modules
           - ~/.gradle/caches
           - ~/.gradle/wrappers
-      # branches:
-      #   only: [master]
+      branches:
+        only: [master]
       script:
         - *init-example
         - cd android
@@ -54,8 +54,8 @@ jobs:
           - example/node_modules
           - ~/.rncache
           - ~/Library/Caches/CocoaPods/Pods
-      # branches:
-      #   only: [master]
+      branches:
+        only: [master]
       script:
         - *init-example
         - cd ios
@@ -70,8 +70,8 @@ jobs:
         directories:
           - ~/.gradle/caches
           - ~/.gradle/wrappers
-      # branches:
-      #   only: [master]
+      branches:
+        only: [master]
       script:
         - *init-new-project
         - react-native link
@@ -86,8 +86,8 @@ jobs:
         directories:
           - ~/.rncache
           - ~/Library/Caches/CocoaPods/Pods
-      # branches:
-      #   only: [master]
+      branches:
+        only: [master]
       script:
         - *init-new-project
         - cd ios
