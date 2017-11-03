@@ -2,6 +2,7 @@
 .gradle/
 node_modules/
 build/
+xcuserdata/
 
 *.iml
 local.properties
