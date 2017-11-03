@@ -1,35 +1,50 @@
+aliases:
+  - &android
+    components:
+      - build-tools-23.0.1
+      - android-23
+      - extra-android-m2repository
+      - extra-android-support
+
+  - &init-example
+    |
+      nvm install node
+      cd example
+      npm i
+
+  - &init-new-project
+    |
+      nvm install node
+      npm i -g react-native-cli
+      react-native init App
+      cd App
+      npm i
+      npm i react-native-amap3d
+
 jobs:
   include:
-    - stage: test
+    - stage: "test js"
       language: node_js
       node_js: node
       cache:
         directories: [node_modules]
 
-    - stage: build
+    - stage: "build test for example"
       language: android
       jdk: oraclejdk8
-      android:
-        components:
-          - build-tools-23.0.1
-          - android-23
-          - extra-android-m2repository
-          - extra-android-support
+      android: *android
       cache:
         directories:
           - example/node_modules
           - ~/.gradle/caches
           - ~/.gradle/wrappers
       script:
-        - nvm install node
-        - cd example
-        - npm i
+        - *init-example
         - cd android
-        - ./gradlew assembleDebug
-        - ./gradlew assembleRelease
+        - ./gradlew build
         - ls -l app/build/outputs/apk
 
-    - stage: build
+    - stage: "build test for example"
       language: objective-c
       osx_image: xcode9.1
       cache:
@@ -38,9 +53,44 @@ jobs:
           - ~/.rncache
           - ~/Library/Caches/CocoaPods/Pods
       script:
-        - nvm install node
-        - cd example
-        - npm i
+        - *init-example
         - cd ios
         - pod install
         - xcodebuild -workspace RNAMap3D.xcworkspace -scheme RNAMap3D -sdk iphonesimulator -quiet
+
+    - stage: "build test for new project"
+      language: android
+      jdk: oraclejdk8
+      android: *android
+      cache:
+        directories:
+          - ~/.gradle/caches
+          - ~/.gradle/wrappers
+      script:
+        - *init-new-project
+        - react-native link
+        - cd android
+        - ./gradlew build
+        - ls -l app/build/outputs/apk
+
+    - stage: "build test for new project"
+      language: objective-c
+      osx_image: xcode9.1
+      cache:
+        directories:
+          - ~/.rncache
+          - ~/Library/Caches/CocoaPods/Pods
+      script:
+        - *init-new-project
+        - cd ios
+        - |
+          echo -e "platform :ios, '8.0'\n\ntarget 'App' do\n  pod 'yoga', path: '../node_modules/react-native/ReactCommon/yoga/'\n  pod 'React', path: '../node_modules/react-native/'\n  pod 'react-native-amap3d', path: '../node_modules/react-native-amap3d/'\nend" > Podfile
+        - pod install
+        - xcodebuild -workspace App.xcworkspace -scheme App -sdk iphonesimulator -quiet
+
+stages:
+  - "test js"
+  - name: "build test for example"
+    if: branch = master
+  - name: "build test for new project"
+    if: branch = master
