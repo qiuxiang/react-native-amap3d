@@ -46,6 +46,7 @@ jobs:
         - npm i
         - npm i react-native-amap3d
         - cd ios
-        - echo -e "platform :ios, '8.0'\n\ntarget 'App' do\n  pod 'yoga', path: '../node_modules/react-native/ReactCommon/yoga/'\n  pod 'React', path: '../node_modules/react-native/'\n  pod 'react-native-amap3d', path: '../node_modules/react-native-amap3d/'\nend" > Podfile
+        - |
+          echo -e "platform :ios, '8.0'\n\ntarget 'App' do\n  pod 'yoga', path: '../node_modules/react-native/ReactCommon/yoga/'\n  pod 'React', path: '../node_modules/react-native/'\n  pod 'react-native-amap3d', path: '../node_modules/react-native-amap3d/'\nend" > Podfile
         - pod install
         - xcodebuild -workspace RNAMap3D.xcworkspace -scheme RNAMap3D -sdk iphonesimulator -quiet
