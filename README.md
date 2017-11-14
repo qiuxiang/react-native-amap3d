@@ -46,7 +46,7 @@ platform :ios, '8.0'
 target 'Your Target' do
   pod 'yoga', path: '../node_modules/react-native/ReactCommon/yoga/'
   pod 'React', path: '../node_modules/react-native/'
-  pod 'react-native-amap3d', path: '../node_modules/react-native-amap3d/'
+  pod 'react-native-amap3d', path: '../node_modules/react-native-amap3d/ios/'
 end
 ```
 

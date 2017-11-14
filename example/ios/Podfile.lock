@@ -16,14 +16,14 @@ PODS:
 
 DEPENDENCIES:
   - React (from `../node_modules/react-native/`)
-  - react-native-amap3d (from `../../`)
+  - react-native-amap3d (from `../../ios/`)
   - yoga (from `../node_modules/react-native/ReactCommon/yoga/`)
 
 EXTERNAL SOURCES:
   React:
     :path: "../node_modules/react-native/"
   react-native-amap3d:
-    :path: "../../"
+    :path: "../../ios/"
   yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga/"
 
@@ -32,9 +32,9 @@ SPEC CHECKSUMS:
   AMapFoundation: 6c0471c9a6a0ad17dad46e3d800ad56ca170f82a
   AMapNavi: bb4d65295ed0ee0ad4b5f5792e9e2ea0e5117ffa
   React: 0ba6cae888dc82dc47d6d5f3090615e1b5f6f3e7
-  react-native-amap3d: 9b95196a14a7168d25b7aecf29331d1b2900b6e2
+  react-native-amap3d: 9dfe63ac4831f77cd64078b318fe552a8ae3454f
   yoga: faecc6be81ca7823ccbb470b93a1b228499fa1c0
 
-PODFILE CHECKSUM: 50e0e08e70fb57b3f3476be117f63856ec28e46e
+PODFILE CHECKSUM: 518cbe237be8affd35ed7429281ba62b78ae3b2c
 
 COCOAPODS: 1.2.0

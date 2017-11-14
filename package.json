@@ -9,6 +9,7 @@
     "amap",
     "maps"
   ],
+  "main": "js",
   "repository": {
     "type": "git",
     "url": "https://github.com/qiuxiang/react-native-amap3d"
