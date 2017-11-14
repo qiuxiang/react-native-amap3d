@@ -6,7 +6,8 @@ import Circle from './maps/Circle'
 import HeatMap from './maps/HeatMap'
 import MultiPoint from './maps/MultiPoint'
 import Navigation from './navigation'
-import MapUtils from './Utils'
+import Utils from './Utils'
+import Offline from './Offline'
 
 MapView.Marker = Marker
 MapView.Polyline = Polyline
@@ -25,5 +26,6 @@ export {
   HeatMap,
   MultiPoint,
   Navigation,
-  MapUtils,
+  Utils,
+  Offline
 }
