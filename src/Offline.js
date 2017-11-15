@@ -4,5 +4,5 @@ const {AMapOffline} = NativeModules
 export default {
   getProvinces: () => AMapOffline.getProvinces(),
   getCities: () => AMapOffline.getCities(),
-  download: name => AMapOffline.getDownload(name),
+  download: name => AMapOffline.download(name),
 }
