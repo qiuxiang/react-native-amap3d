@@ -11,7 +11,10 @@ import com.facebook.react.uimanager.ViewManager
 
 class AMap3DPackage : ReactPackage {
     override fun createNativeModules(reactContext: ReactApplicationContext): List<NativeModule> {
-        return listOf(AMapUtilsModule(reactContext))
+        return listOf(
+                AMapUtilsModule(reactContext),
+                AMapOfflineModule(reactContext)
+        )
     }
 
     override fun createViewManagers(reactContext: ReactApplicationContext): List<ViewManager<*, *>> {

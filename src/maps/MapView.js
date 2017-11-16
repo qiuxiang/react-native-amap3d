@@ -12,7 +12,7 @@ type Target = {
   rotation?: number,
 }
 
-export default class MapView extends BaseComponent {
+export default class MapView extends BaseComponent<any> {
   static propTypes = {
     ...ViewPropTypes,
 

@@ -2,9 +2,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {ViewPropTypes} from 'react-native'
+import {LatLng} from '../PropTypes'
 import BaseComponent from '../BaseComponent'
 
-export default class Base extends BaseComponent {
+export default class Base extends BaseComponent<any> {
   static propTypes = {
     ...ViewPropTypes,
 
@@ -22,7 +23,7 @@ export default class Base extends BaseComponent {
   /**
    * 路线规划
    */
-  calculateRoute(start, end, way = []) {
+  calculateRoute(start: LatLng, end: LatLng, way: LatLng[] = []) {
     this._sendCommand('calculateRoute', [start, end, way])
   }
 
