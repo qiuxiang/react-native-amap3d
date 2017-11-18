@@ -84,7 +84,7 @@ jobs:
         - *init-new-project
         - cd ios
         - |
-          echo -e "platform :ios, '8.0'\n\ntarget 'App' do\n  pod 'yoga', path: '../node_modules/react-native/ReactCommon/yoga/'\n  pod 'React', path: '../node_modules/react-native/'\n  pod 'react-native-amap3d', path: '../node_modules/react-native-amap3d/'\nend" > Podfile
+          echo -e "platform :ios, '8.0'\n\ntarget 'App' do\n  pod 'yoga', path: '../node_modules/react-native/ReactCommon/yoga/'\n  pod 'React', path: '../node_modules/react-native/'\n  pod 'react-native-amap3d', path: '../node_modules/react-native-amap3d/ios/'\nend" > Podfile
         - pod install
         - xcodebuild -workspace App.xcworkspace -scheme App -sdk iphonesimulator -quiet
 
