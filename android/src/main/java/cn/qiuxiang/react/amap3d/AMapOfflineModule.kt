@@ -79,19 +79,20 @@ class AMapOfflineModule(private val reactContext: ReactApplicationContext) : Rea
         var state = ""
         when (code) {
             OfflineMapStatus.SUCCESS -> state = "downloaded"
-            OfflineMapStatus.LOADING -> state = "expired"
+            OfflineMapStatus.LOADING -> state = "downloading"
             OfflineMapStatus.NEW_VERSION -> state = "expired"
+            OfflineMapStatus.WAITING -> state = "waiting"
+            OfflineMapStatus.UNZIP -> state = "unzip"
         }
         return state
     }
 
     override fun onDownload(state: Int, progress: Int, name: String?) {
-        if (state == OfflineMapStatus.LOADING) {
-            val data = Arguments.createMap()
-            data.putString("name", name)
-            data.putInt("progress", progress)
-            reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java).emit("onDownload", data)
-        }
+        val data = Arguments.createMap()
+        data.putString("name", name)
+        data.putString("state", getState(state))
+        data.putInt("progress", progress)
+        reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java).emit("download", data)
     }
 
     override fun onCheckUpdate(p0: Boolean, p1: String?) {}
