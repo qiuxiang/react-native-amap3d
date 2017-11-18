@@ -1,9 +1,10 @@
 #import <React/RCTBridgeModule.h>
+#import <React/RCTEventEmitter.h>
 #import <MAMapKit/MAOfflineMap.h>
 
 #pragma ide diagnostic ignored "OCUnusedClassInspection"
 
-@interface AMapOffline : NSObject <RCTBridgeModule>
+@interface AMapOffline : RCTEventEmitter <RCTBridgeModule>
 @end
 
 @implementation AMapOffline
@@ -47,10 +48,29 @@ RCT_REMAP_METHOD(getCities,
 
 RCT_EXPORT_METHOD(download:(NSString *)name) {
     MAOfflineItem *item = [self getItem:name];
+    void (^downloadBlock)(MAOfflineItem *, MAOfflineMapDownloadStatus, id)=^(MAOfflineItem *downloadItem, MAOfflineMapDownloadStatus state, id info) {
+        NSDictionary *data = (NSDictionary *) info;
+        double progress = 0;
+        if (state == MAOfflineMapDownloadStatusProgress) {
+            progress = [data[MAOfflineMapDownloadReceivedSizeKey] doubleValue] / [data[MAOfflineMapDownloadExpectedSizeKey] doubleValue] * 100;
+        }
+        [self sendEventWithName:@"download" body:@{
+                @"name": name,
+                @"state": [self downloadStateString:state],
+                @"progress": @(progress),
+        }];
+    };
     if (item != nil) {
-        [MAOfflineMap.sharedOfflineMap downloadItem: item
+        [MAOfflineMap.sharedOfflineMap downloadItem:item
               shouldContinueWhenAppEntersBackground:YES
-                                      downloadBlock:nil];
+                                      downloadBlock:downloadBlock];
+    }
+}
+
+RCT_EXPORT_METHOD(remove:(NSString *)name) {
+    MAOfflineItem *item = [self getItem:name];
+    if (item != nil) {
+        [MAOfflineMap.sharedOfflineMap deleteItem:item];
     }
 }
 
@@ -77,18 +97,25 @@ RCT_EXPORT_METHOD(download:(NSString *)name) {
     return nil;
 }
 
+- (NSString *)downloadStateString:(MAOfflineMapDownloadStatus)code {
+    switch (code) {
+        case MAOfflineMapDownloadStatusWaiting: return @"waiting";
+        case MAOfflineMapDownloadStatusStart: return @"downloading";
+        case MAOfflineMapDownloadStatusProgress: return @"downloading";
+        case MAOfflineMapDownloadStatusCompleted: return @"unzip";
+        case MAOfflineMapDownloadStatusUnzip: return @"unzip";
+        case MAOfflineMapDownloadStatusFinished: return @"downloaded";
+        default: return @"";
+    }
+}
+
 - (NSString *)stateString:(MAOfflineItemStatus)code {
-    NSString *state = @"";
-    if (code == MAOfflineItemStatusCached) {
-        state = @"downloading";
+    switch (code) {
+        case MAOfflineItemStatusCached: return @"downloading";
+        case MAOfflineItemStatusExpired: return @"expired";
+        case MAOfflineItemStatusInstalled: return @"downloaded";
+        default: return @"";
     }
-    if (code == MAOfflineItemStatusExpired) {
-        state = @"expired";
-    }
-    if (code == MAOfflineItemStatusInstalled) {
-        state = @"downloaded";
-    }
-    return state;
 }
 
 - (NSDictionary *)itemData:(MAOfflineCity *)city {
@@ -97,6 +124,10 @@ RCT_EXPORT_METHOD(download:(NSString *)name) {
             @"size": @(city.size),
             @"state": [self stateString:city.itemStatus],
     };
+}
+
+- (NSArray<NSString *> *)supportedEvents {
+    return @[@"download"];
 }
 
 @end

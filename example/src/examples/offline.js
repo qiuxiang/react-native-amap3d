@@ -9,9 +9,9 @@ export default class IndoorExample extends Component {
 
   async componentDidMount() {
     console.log(await Offline.getProvinces())
-    // Offline.remove('铜陵市')
-    Offline.download('河源市')
     Offline.addDownloadListener(data => console.log(data))
+    Offline.remove('香港特别行政区')
+    Offline.download('香港特别行政区')
   }
 
   render() {
