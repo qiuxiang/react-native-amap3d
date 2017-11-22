@@ -86,7 +86,7 @@ $ pod install
 import {MapView, Marker, Polyline} from 'react-native-amap3d'
 <MapView>
   <Marker .../>
-<MapView/>
+</MapView>
 ```
 或者
 ```jsx
