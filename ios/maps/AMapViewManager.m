@@ -44,6 +44,7 @@ RCT_EXPORT_VIEW_PROPERTY(region, MACoordinateRegion)
 RCT_EXPORT_VIEW_PROPERTY(tilt, CGFloat)
 RCT_EXPORT_VIEW_PROPERTY(rotation, CGFloat)
 RCT_EXPORT_VIEW_PROPERTY(distanceFilter, CLLocationDistance)
+RCT_EXPORT_VIEW_PROPERTY(userTrackingMode, MAUserTrackingMode)
 
 RCT_EXPORT_VIEW_PROPERTY(onPress, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onLongPress, RCTBubblingEventBlock)
