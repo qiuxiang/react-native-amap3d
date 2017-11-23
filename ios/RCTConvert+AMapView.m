@@ -20,6 +20,12 @@ RCT_ENUM_CONVERTER(MAPinAnnotationColor, (@{
         @"purple": @(MAPinAnnotationColorPurple),
 }), MAPinAnnotationColorRed, integerValue)
 
+RCT_ENUM_CONVERTER(MAUserTrackingMode, (@{
+        @"none": @(MAUserTrackingModeNone),
+        @"follow": @(MAUserTrackingModeFollow),
+        @"f_Heading": @(MAUserTrackingModeFollowWithHeading)
+}), MAUserTrackingModeNone, integerValue)
+
 + (Coordinate *)Coordinate:(id)json {
     return [[Coordinate alloc] initWithCoordinate:[self CLLocationCoordinate2D:json]];
 }

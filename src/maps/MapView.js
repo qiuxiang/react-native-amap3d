@@ -191,6 +191,15 @@ export default class MapView extends BaseComponent<any> {
      * 地图状态变化完成事件
      */
     onStatusChangeComplete: PropTypes.func,
+
+    /**
+     * 定位用户模式
+     * - none:不追踪用户位置location更新
+     * - follow:追踪用户location更新
+     * - f_Heading: 追踪用户的location与heading更新
+     * @platform iOS
+     */
+    userTrackingMode: PropTypes.oneOf(['none', 'follow', 'f_Heading'])
   }
 
   /**
