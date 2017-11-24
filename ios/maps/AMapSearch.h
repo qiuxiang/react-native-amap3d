@@ -9,7 +9,7 @@
 #import <React/UIView+React.h>
 #import "AMapModel.h"
 
-@interface AMapSearchTest : AMapModel
+@interface AMapSearch : AMapModel<AMapSearchDelegate>
 @property (nonatomic, strong) AMapSearchAPI *search;
 @property(nonatomic, copy) RCTBubblingEventBlock onUserInfo;
 

@@ -6,22 +6,22 @@
 //
 
 #import <React/RCTUIManager.h>
-#import "AMapSearchTest.h"
+#import "AMapSearch.h"
 #import <AMapSearchKit/AMapSearchKit.h>
 
-@interface AMapSearchTestManager : RCTViewManager<AMapSearchDelegate>
+@interface AMapSearchManager : RCTViewManager
 
 @end
 
-@implementation AMapSearchTestManager
+@implementation AMapSearchManager
 
 RCT_EXPORT_MODULE()
 
 - (UIView *)view {
-    AMapSearchTest *mapSearch = [[AMapSearchTest alloc] init];
-    mapSearch.search.delegate = self;
+    AMapSearch *mapSearch = [[AMapSearch alloc] init];
     return mapSearch;
 }
 
+RCT_EXPORT_VIEW_PROPERTY(coordinate, CLLocationCoordinate2D)
 RCT_EXPORT_VIEW_PROPERTY(onUserInfo, RCTBubblingEventBlock)
 @end

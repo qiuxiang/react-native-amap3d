@@ -5,14 +5,15 @@
 //  Created by YBQ on 2017/11/24.
 //
 
-#import "AMapSearchTest.h"
+#import "AMapSearch.h"
 
-@implementation AMapSearchTest {
+@implementation AMapSearch {
     CLLocationCoordinate2D _coordinate;
 }
 - (instancetype)init {
     if (self = [super init]) {
         self.search = [[AMapSearchAPI alloc] init];
+        self.search.delegate = self;
     }
     return self;
 }
