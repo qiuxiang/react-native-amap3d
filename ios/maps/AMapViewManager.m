@@ -98,6 +98,9 @@ RCT_EXPORT_METHOD(animateTo:(nonnull NSNumber *)reactTag params:(NSDictionary *)
                 @"latitude": @(userLocation.coordinate.latitude),
                 @"longitude": @(userLocation.coordinate.longitude),
                 @"accuracy": @((userLocation.location.horizontalAccuracy + userLocation.location.verticalAccuracy) / 2),
+                @"altitude": @(userLocation.location.altitude),
+                @"speed": @(userLocation.location.speed),
+                @"timestamp": @(userLocation.location.timestamp.timeIntervalSince1970),
         });
     }
 }
@@ -194,7 +197,7 @@ RCT_EXPORT_METHOD(animateTo:(nonnull NSNumber *)reactTag params:(NSDictionary *)
     mapView.loaded = YES;
 
     // struct 里的值会被初始化为 0，这里以此作为条件，判断 initialRegion 是否被设置过
-    // 但实际上经度为 0 是一个合法的坐标（赤道），只是考虑到高德地图只在中国使用，就这样吧
+    // 但实际上经度为 0 是一个合法的坐标，只是考虑到高德地图只在中国使用，就这样吧
     if (mapView.initialRegion.center.latitude != 0) {
         mapView.region = mapView.initialRegion;
     }
