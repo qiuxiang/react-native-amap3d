@@ -17,4 +17,5 @@ Pod::Spec.new do |s|
 
   s.dependency 'React'
   s.dependency 'AMapNavi'
+  s.dependency 'AMapSearch'
 end
