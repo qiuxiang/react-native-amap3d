@@ -14,4 +14,4 @@ export default class AMapSearch extends BaseComponent<any> {
         return <AMapSearch {...this.props}/>
       }
 }
-const AMapSearch = requireNativeComponent('AMapSearch', null)
+const AMapSearch = requireNativeComponent('AMapSearch', AMapSearch)
