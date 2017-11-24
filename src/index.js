@@ -8,6 +8,7 @@ import MultiPoint from './maps/MultiPoint'
 import Navigation from './navigation'
 import Utils from './Utils'
 import Offline from './Offline'
+import MapSearchTest from './maps/MapSearchTest'
 
 MapView.Marker = Marker
 MapView.Polyline = Polyline
@@ -15,6 +16,7 @@ MapView.Polygon = Polygon
 MapView.Circle = Circle
 MapView.HeatMap = HeatMap
 MapView.MultiPoint = MultiPoint
+MapView.MapSearchTest = MapSearchTest
 
 export default MapView
 export {
@@ -27,5 +29,6 @@ export {
   MultiPoint,
   Navigation,
   Utils,
-  Offline
+  Offline,
+  MapSearchTest
 }
