@@ -18,7 +18,7 @@ static const NSInteger RoutePlanningPaddingEdge = 20;
 @property (nonatomic) CLLocationCoordinate2D destinationCoordinate;
 
 //
-@property (nonatomic, strong) NSArray *routePolylines;
+@property (nonatomic, strong) NSMutableArray *routePolylines;
 @end
 
 @implementation AMapPlanDrive {

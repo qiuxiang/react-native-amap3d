@@ -123,8 +123,9 @@ RCT_EXPORT_METHOD(animateTo:(nonnull NSNumber *)reactTag params:(NSDictionary *)
     if ([overlay isKindOfClass:[LineDashPolyline class]]) { // 划线
         MAPolylineRenderer *polylineRenderer = [[MAPolylineRenderer alloc] initWithPolyline:((LineDashPolyline *)overlay).polyline];
         polylineRenderer.lineWidth   = 8;
-//        polylineRenderer.lineDashType = kMALineDashTypeSquare;
-        polylineRenderer.strokeColor = [UIColor redColor];
+        polylineRenderer.lineDash = YES;
+        polylineRenderer.lineCapType = kMALineCapRound;
+        polylineRenderer.lineJoinType = kMALineJoinRound;
         
         return polylineRenderer;
     }
