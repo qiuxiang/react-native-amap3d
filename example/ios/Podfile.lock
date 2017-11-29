@@ -5,18 +5,27 @@ PODS:
   - AMapNavi (5.2.1):
     - AMap3DMap (>= 5.2.1)
     - AMapFoundation (~> 1.4)
+  - AMapSearch (5.5.0):
+    - AMapFoundation (~> 1.4)
   - React (0.50.3):
     - React/Core (= 0.50.3)
-  - react-native-amap3d (0.7.3):
+  - react-native-amap3d (0.8.0):
     - AMapNavi
+    - AMapSearch
     - React
+  - React/BatchedBridge (0.50.3):
+    - React/Core
+    - React/cxxreact_legacy
   - React/Core (0.50.3):
     - yoga (= 0.50.3.React)
+  - React/cxxreact_legacy (0.50.3):
+    - React/jschelpers_legacy
+  - React/jschelpers_legacy (0.50.3)
   - yoga (0.50.3.React)
 
 DEPENDENCIES:
-  - React (from `../node_modules/react-native/`)
   - react-native-amap3d (from `../../ios/`)
+  - React/BatchedBridge (from `../node_modules/react-native/`)
   - yoga (from `../node_modules/react-native/ReactCommon/yoga/`)
 
 EXTERNAL SOURCES:
@@ -31,10 +40,11 @@ SPEC CHECKSUMS:
   AMap3DMap: 0614b5b7ed7a8b69f1d9ba7bc40ce30362497dc5
   AMapFoundation: 6c0471c9a6a0ad17dad46e3d800ad56ca170f82a
   AMapNavi: bb4d65295ed0ee0ad4b5f5792e9e2ea0e5117ffa
+  AMapSearch: dc9958acfb61b58dcbce79736bf14a39dde7506f
   React: 0ba6cae888dc82dc47d6d5f3090615e1b5f6f3e7
-  react-native-amap3d: 9dfe63ac4831f77cd64078b318fe552a8ae3454f
+  react-native-amap3d: 175d9d623f873cd385c3997ade2a790928a3cf31
   yoga: faecc6be81ca7823ccbb470b93a1b228499fa1c0
 
-PODFILE CHECKSUM: 518cbe237be8affd35ed7429281ba62b78ae3b2c
+PODFILE CHECKSUM: 4e429cfe31b22161bacd9864ec7634b04ec7c484
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.2.1

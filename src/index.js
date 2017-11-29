@@ -9,6 +9,7 @@ import Navigation from './navigation'
 import Utils from './Utils'
 import Offline from './Offline'
 import MapSearch from './maps/MapSearch'
+import PlanDrive from './maps/PlanDrive'
 
 MapView.Marker = Marker
 MapView.Polyline = Polyline
@@ -17,6 +18,7 @@ MapView.Circle = Circle
 MapView.HeatMap = HeatMap
 MapView.MultiPoint = MultiPoint
 MapView.MapSearch = MapSearch
+MapView.PlanDrive = PlanDrive
 
 export default MapView
 export {
@@ -30,5 +32,6 @@ export {
   Navigation,
   Utils,
   Offline,
-  MapSearch
+  MapSearch,
+  PlanDrive
 }

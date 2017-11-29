@@ -16,6 +16,9 @@
 
 - (instancetype)init {
     _annotation = [MAPointAnnotation new];
+    _annotation.coordinate = CLLocationCoordinate2DMake(39.992520, 116.336170);
+    _annotation.lockedToScreen = YES;
+    _annotation.lockedScreenPoint = CGPointMake(100, 100);
     self = [super initWithAnnotation:_annotation reuseIdentifier:nil];
     self.canShowCallout = YES;
     [self addGestureRecognizer:[
