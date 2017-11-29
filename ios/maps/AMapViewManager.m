@@ -1,7 +1,9 @@
 #import <React/RCTUIManager.h>
+#import <MAMapKit/MAMapKit.h>
 #import "AMapView.h"
 #import "AMapMarker.h"
 #import "AMapModel.h"
+#import "AMapPlanDrive.h"
 
 #pragma ide diagnostic ignored "OCUnusedClassInspection"
 #pragma ide diagnostic ignored "-Woverriding-method-mismatch"
@@ -10,6 +12,7 @@
 @end
 
 @implementation AMapViewManager {
+    AMapPlanDrive *_drive;
 }
 
 RCT_EXPORT_MODULE()
@@ -44,6 +47,7 @@ RCT_EXPORT_VIEW_PROPERTY(region, MACoordinateRegion)
 RCT_EXPORT_VIEW_PROPERTY(tilt, CGFloat)
 RCT_EXPORT_VIEW_PROPERTY(rotation, CGFloat)
 RCT_EXPORT_VIEW_PROPERTY(distanceFilter, CLLocationDistance)
+RCT_EXPORT_VIEW_PROPERTY(userTrackingMode, MAUserTrackingMode)
 
 RCT_EXPORT_VIEW_PROPERTY(onPress, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onLongPress, RCTBubblingEventBlock)
@@ -115,6 +119,44 @@ RCT_EXPORT_METHOD(animateTo:(nonnull NSNumber *)reactTag params:(NSDictionary *)
 }
 
 - (MAOverlayRenderer *)mapView:(MAMapView *)mapView rendererForOverlay:(id <MAOverlay>)overlay {
+    if ([overlay isKindOfClass:[AMapPlanDrive class]]) {
+        _drive = (AMapPlanDrive *)overlay;
+        [_drive setMapView:(AMapView *)mapView];
+    }
+    if ([overlay isKindOfClass:[LineDashPolyline class]]) { // 划线
+        MAPolylineRenderer *polylineRenderer = [[MAPolylineRenderer alloc] initWithPolyline:((LineDashPolyline *)overlay).polyline];
+        polylineRenderer.lineWidth   = 8;
+        polylineRenderer.lineDash = YES;
+        polylineRenderer.lineCapType = kMALineCapRound;
+        polylineRenderer.lineJoinType = kMALineJoinRound;
+        
+        return polylineRenderer;
+    }
+    if ([overlay isKindOfClass:[MANaviPolyline class]])
+    {
+        MANaviPolyline *naviPolyline = (MANaviPolyline *)overlay;
+        MAPolylineRenderer *polylineRenderer = [[MAPolylineRenderer alloc] initWithPolyline:naviPolyline.polyline];
+        
+        polylineRenderer.lineWidth = 8;
+        polylineRenderer.strokeColor = [UIColor blueColor];
+        
+        return polylineRenderer;
+    }
+    if ([overlay isKindOfClass:[MAMultiPolyline class]])
+    {
+        if (_drive.showImgRoad) {
+            MAMultiTexturePolylineRenderer * polylineRenderer = [[MAMultiTexturePolylineRenderer alloc] initWithMultiPolyline:overlay];
+            polylineRenderer.lineWidth    = 18.f;
+            polylineRenderer.strokeTextureImages = [_drive.multiPolylineColors copy];
+            return polylineRenderer;
+        } else {
+            MAMultiColoredPolylineRenderer * polylineRenderer = [[MAMultiColoredPolylineRenderer alloc] initWithMultiPolyline:overlay];
+            polylineRenderer.lineWidth = 10;
+            polylineRenderer.strokeColors = [_drive.multiPolylineColors copy];
+            polylineRenderer.gradient = NO;
+            return polylineRenderer;
+        }
+    }
     if ([overlay isKindOfClass:[AMapModel class]]) {
         return ((AMapModel *)overlay).renderer;
     }

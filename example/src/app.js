@@ -16,6 +16,8 @@ import Offline from './examples/offline'
 import Navigation from './examples/navigation'
 import HeatMap from './examples/heat-map'
 import MultiPoint from './examples/multi-point'
+import BMTest from './examples/testBM'
+import BMLongPress from './examples/longPressDriveBM'
 
 export default StackNavigator({
   Examples: {screen: Examples},
@@ -34,6 +36,8 @@ export default StackNavigator({
   Navigation: {screen: Navigation},
   HeatMap: {screen: HeatMap},
   MultiPoint: {screen: MultiPoint},
+  BMTest: {screen: BMTest},
+  BMLongPress: {screen: BMLongPress}
 }, {
   navigationOptions: {
     headerTintColor: '#212121',

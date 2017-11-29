@@ -68,8 +68,8 @@ internal class AMapMarkerManager : ViewGroupManager<AMapMarker>() {
     @ReactProp(name = "coordinate")
     fun setCoordinate(view: AMapMarker, coordinate: ReadableMap) {
         view.position = LatLng(
-                coordinate.getDouble("latitude"),
-                coordinate.getDouble("longitude"))
+                39.91095,
+                116.37296)
     }
 
     @ReactProp(name = "flat")
