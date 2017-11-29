@@ -61,6 +61,10 @@ export default class Examples extends Component {
       </View>
       <View style={styles.group}>
         {this._renderItem('导航', 'Navigation')}
+        <View style={styles.separator}/>
+        {this._renderItem('宝马测试', 'BMTest')}
+        <View style={styles.separator}/>
+        {this._renderItem('宝马导航', 'BMLongPress')}
       </View>
     </ScrollView>
   }
