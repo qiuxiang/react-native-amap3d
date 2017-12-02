@@ -20,6 +20,7 @@ react-native 高德地图组件，使用最新 3D SDK，支持 Android + iOS，�
 - 热力图（HeatMap）
 - 海量点（MultiPoint）
 - 导航（驾车、步行、骑行）（待完善 🚧）
+- 离线地图模块
 
 <img src="http://upload-images.jianshu.io/upload_images/51256-f585098064a8d9de.png?imageView2/2/w/600" width="215"> <img src="http://upload-images.jianshu.io/upload_images/51256-a2b8b7fb93738f2e.png?imageView2/2/w/600" width="215"> <img src="http://upload-images.jianshu.io/upload_images/51256-85b17548888e2bd6.png?imageView2/2/w/600" width="215"> <img src="http://upload-images.jianshu.io/upload_images/51256-8c8b685f3cfbc350.png?imageView2/2/w/600" width="215">
 
@@ -38,7 +39,7 @@ $ react-native link react-native-amap3d
 ```
 
 #### iOS
-推荐使用 CocoaPods，在 `ios` 目录下新建文件 `Podfile`：
+推荐使用 CocoaPods，需要注意 iOS 项目不要 `react-native link react-native-amap3d`, 在 `ios` 目录下新建文件 `Podfile`：
 
 ```ruby
 platform :ios, '8.0'
@@ -54,7 +55,6 @@ end
 ```
 $ pod install
 ```
-需要注意的是，使用 CocoaPods 的 iOS 项目不需要也不能 `react-native link react-native-amap3d`。
 
 如果你不想使用 CocoaPods，手动配置请参考：[手动部署](http://lbs.amap.com/api/ios-sdk/guide/create-project/manual-configuration)。
 
@@ -157,11 +157,6 @@ import MapView from 'react-native-amap3d'
 - [HeatMap](https://github.com/qiuxiang/react-native-amap3d/tree/v0.7.3/components/maps/HeatMap.js#L6)
 - [MultiPoint](https://github.com/qiuxiang/react-native-amap3d/tree/v0.7.3/components/maps/MultiPoint.js#L5)
 
-
-## 常见问题
-
-- 由于 RN 经常改接口，该项目只能保证在最新 RN 下测试通过
-- 由于 3D 地图渲染需要硬件加速，部分 Android 模拟器会因为缺少硬件加速而导致运行崩溃
 
 ## 如何进行问题反馈
 进行问题反馈之前：
