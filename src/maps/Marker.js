@@ -48,7 +48,7 @@ export default class Marker extends BaseComponent {
     }),
 
     /**
-     * 自定义图标
+     * 自定义图标，慎用，目前存在一些已知的 bug
      */
     icon: PropTypes.func,
 
