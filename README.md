@@ -20,7 +20,7 @@ react-native 高德地图组件，使用最新 3D SDK，支持 Android + iOS，�
 - 热力图（HeatMap）
 - 海量点（MultiPoint）
 - 导航（驾车、步行、骑行）（待完善 🚧）
-- 离线地图模块
+- 离线地图
 
 <img src="http://upload-images.jianshu.io/upload_images/51256-f585098064a8d9de.png?imageView2/2/w/600" width="215"> <img src="http://upload-images.jianshu.io/upload_images/51256-a2b8b7fb93738f2e.png?imageView2/2/w/600" width="215"> <img src="http://upload-images.jianshu.io/upload_images/51256-85b17548888e2bd6.png?imageView2/2/w/600" width="215"> <img src="http://upload-images.jianshu.io/upload_images/51256-8c8b685f3cfbc350.png?imageView2/2/w/600" width="215">
 
@@ -39,14 +39,16 @@ $ react-native link react-native-amap3d
 ```
 
 #### iOS
-推荐使用 CocoaPods，需要注意 iOS 项目不要 `react-native link react-native-amap3d`, 在 `ios` 目录下新建文件 `Podfile`：
+推荐使用 CocoaPods，需要注意 iOS 项目不要 `react-native link react-native-amap3d`, 不然会引入错误的依赖，导致编译失败。在 `ios` 目录下新建文件 `Podfile`：
 
 ```ruby
 platform :ios, '8.0'
 
 target 'Your Target' do
   pod 'yoga', path: '../node_modules/react-native/ReactCommon/yoga/'
-  pod 'React', path: '../node_modules/react-native/'
+  pod 'React', path: '../node_modules/react-native/', :subspecs => [
+    'CxxBridge',
+  ]
   pod 'react-native-amap3d', path: '../node_modules/react-native-amap3d/ios/'
 end
 ```
