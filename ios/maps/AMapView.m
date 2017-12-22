@@ -6,6 +6,13 @@
 #pragma ide diagnostic ignored "OCUnusedMethodInspection"
 
 @implementation AMapView {
+    NSMutableDictionary *_markers;
+}
+
+- (instancetype)init {
+    _markers = [NSMutableDictionary new];
+    self = [super init];
+    return self;
 }
 
 - (void)setShowsTraffic:(BOOL)shows {
@@ -43,8 +50,10 @@
 
 - (void)didAddSubview:(UIView *)subview {
     if ([subview isKindOfClass:[AMapMarker class]]) {
-        ((AMapMarker *) subview).mapView = self;
-        [self addAnnotation:(id <MAAnnotation>) subview];
+        AMapMarker *marker = (AMapMarker *) subview;
+        marker.mapView = self;
+        _markers[[@(marker.annotation.hash) stringValue]] = marker;
+        [self addAnnotation:marker.annotation];
     }
     if ([subview isKindOfClass:[AMapModel class]]) {
         [self addOverlay:(id <MAOverlay>) subview];
@@ -54,11 +63,16 @@
 - (void)removeReactSubview:(id <RCTComponent>)subview {
     [super removeReactSubview:subview];
     if ([subview isKindOfClass:[AMapMarker class]]) {
-        [self removeAnnotation:(id <MAAnnotation>) subview];
+        AMapMarker *marker = (AMapMarker *) subview;
+        [self removeAnnotation:marker.annotation];
     }
     if ([subview isKindOfClass:[AMapModel class]]) {
         [self removeOverlay:(id <MAOverlay>) subview];
     }
+}
+
+- (AMapMarker *)getMarker:(id <MAAnnotation>)annotation {
+    return _markers[[@(annotation.hash) stringValue]];
 }
 
 @end

@@ -1,7 +1,7 @@
 #import "AMapView.h"
 #import "AMapInfoWindow.h"
 
-@interface AMapMarker : MAAnnotationView <MAAnnotation, AMapInfoWindowDelegate>
+@interface AMapMarker : UIView
 
 @property(nonatomic, copy) RCTBubblingEventBlock onPress;
 @property(nonatomic, copy) RCTBubblingEventBlock onInfoWindowPress;
@@ -9,10 +9,9 @@
 @property(nonatomic, copy) RCTBubblingEventBlock onDrag;
 @property(nonatomic, copy) RCTBubblingEventBlock onDragEnd;
 
-- (BOOL)active;
-- (void)setActive:(BOOL)active;
 - (MAAnnotationView *)annotationView;
+- (MAPointAnnotation *)annotation;
 - (void)setMapView:(AMapView *)mapView;
-- (void)updateActive;
+- (void)lockToScreen;
 
 @end

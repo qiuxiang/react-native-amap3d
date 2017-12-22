@@ -5,21 +5,20 @@
 
 @implementation AMapMarker {
     MAPointAnnotation *_annotation;
-    MAPinAnnotationView *_pinView;
-    MAPinAnnotationColor _pinColor;
+    MAAnnotationView *_annotationView;
     MACustomCalloutView *_calloutView;
-    UIImage *_image;
-    AMapInfoWindow *_callout;
+    UIView *_customView;
     AMapView *_mapView;
+    MAPinAnnotationColor _pinColor;
+    UIImage *_image;
+    BOOL _draggable;
+    CGPoint _centerOffset;
     BOOL _active;
 }
 
 - (instancetype)init {
     _annotation = [MAPointAnnotation new];
-    self = [super initWithAnnotation:_annotation reuseIdentifier:nil];
-    self.canShowCallout = YES;
-    [self addGestureRecognizer:[
-            [UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_handleTap:)]];
+    self = [super init];
     return self;
 }
 
@@ -41,14 +40,24 @@
 
 - (void)setColor:(MAPinAnnotationColor)color {
     _pinColor = color;
-    _pinView.pinColor = color;
+    ((MAPinAnnotationView *)_annotationView).pinColor = color;
+}
+
+- (void)setDraggable:(BOOL)draggable {
+    _draggable = draggable;
+    _annotationView.draggable = draggable;
+}
+
+- (void)setCenterOffset:(CGPoint)centerOffset {
+    _centerOffset = centerOffset;
+    _annotationView.centerOffset = centerOffset;
 }
 
 #pragma clang diagnostic ignored "-Woverriding-method-mismatch"
 - (void)setImage:(NSString *)name {
     _image = [UIImage imageNamed:name];
     if (_image != nil) {
-        _pinView.image = _image;
+        _annotationView.image = _image;
     }
 }
 
@@ -62,28 +71,23 @@
 
 - (void)setActive:(BOOL)active {
     _active = active;
-    _pinView.selected = active;
-    self.selected = active;
-    [self updateActive];
+    if (active) {
+        [_mapView selectAnnotation:_annotation animated:YES];
+    } else {
+        [_mapView deselectAnnotation:_annotation animated:YES];
+    }
 }
 
 - (void)setClickable:(BOOL)enabled {
-    self.enabled = enabled;
-}
-
-- (void)updateActive {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if (_active) {
-            [_mapView selectAnnotation:self animated:YES];
-        } else {
-            [_mapView deselectAnnotation:self animated:YES];
-        }
-    });
+    _annotationView.enabled = enabled;
 }
 
 - (void)setInfoWindowEnabled:(BOOL)enabled {
-    _pinView.canShowCallout = enabled;
-    self.canShowCallout = enabled;
+    _annotationView.canShowCallout = enabled;
+}
+
+- (MAPointAnnotation *)annotation {
+    return _annotation;
 }
 
 - (void)setMapView:(AMapView *)mapView {
@@ -91,55 +95,45 @@
 }
 
 - (void)_handleTap:(UITapGestureRecognizer *)recognizer {
-    _active = YES;
-    [self updateActive];
-}
-
-- (BOOL)active {
-    return _active;
+    [_mapView selectAnnotation:_annotation animated:YES];
 }
 
 - (MAAnnotationView *)annotationView {
-    if (self.reactSubviews.count == 0) {
-        if (_pinView == nil) {
-            _pinView = [[MAPinAnnotationView alloc] initWithAnnotation:_annotation reuseIdentifier:nil];
-            _pinView.canShowCallout = YES;
-            _pinView.draggable = self.draggable;
-            _pinView.pinColor = _pinColor;
-            _pinView.customCalloutView = _calloutView;
-            _pinView.centerOffset = self.centerOffset;
-            if (_image != nil) {
-                _pinView.image = _image;
-            }
+    if (_annotationView == nil) {
+        if (_customView) {
+            _annotationView = [[MAAnnotationView alloc] initWithAnnotation:_annotation reuseIdentifier:nil];
+            _annotationView.bounds = _customView.bounds;
+            [_annotationView addSubview:_customView];
+            [_annotationView addGestureRecognizer:[
+                    [UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_handleTap:)]];
+        } else {
+            _annotationView = [[MAPinAnnotationView alloc] initWithAnnotation:_annotation reuseIdentifier:nil];
+            ((MAPinAnnotationView *)_annotationView).pinColor = _pinColor;
         }
-        return _pinView;
-    } else {
-        return self;
+        _annotationView.canShowCallout = YES;
+        _annotationView.draggable = _draggable;
+        _annotationView.customCalloutView = _calloutView;
+        _annotationView.centerOffset = _centerOffset;
+        if (_image != nil) {
+            _annotationView.image = _image;
+        }
+        [self setActive:_active];
     }
+    return _annotationView;
 }
 
-- (void)insertReactSubview:(id <RCTComponent>)subview atIndex:(NSInteger)atIndex {
+- (void)didAddSubview:(UIView *)subview {
     if ([subview isKindOfClass:[AMapInfoWindow class]]) {
-        _callout = (AMapInfoWindow *) subview;
-        _callout.delegate = self;
-
-        UIButton *button = [UIButton new];
-        [button addSubview:_callout];
-
-        _calloutView = [[MACustomCalloutView alloc] initWithCustomView:button];
-        self.customCalloutView = _calloutView;
+        _calloutView = [[MACustomCalloutView alloc] initWithCustomView:subview];
+        _annotationView.customCalloutView = _calloutView;
     } else {
-        [super insertReactSubview:subview atIndex:atIndex];
+        _customView = subview;
     }
 }
 
-- (void)didUpdateReactSubviews {
-    [super didUpdateReactSubviews];
-    self.bounds = self.reactSubviews[0].bounds;
-}
-
-- (void)updateInfoWindow:(AMapInfoWindow *)overlay {
-    self.customCalloutView.bounds = overlay.bounds;
+- (void)lockToScreen {
+    _annotation.lockedToScreen = YES;
+    _annotation.lockedScreenPoint = CGPointMake(100, 100);
 }
 
 @end

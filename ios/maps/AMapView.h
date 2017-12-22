@@ -1,5 +1,7 @@
 #import <MAMapKit/MAMapKit.h>
 
+@class AMapMarker;
+
 @interface AMapView : MAMapView
 
 @property(nonatomic, copy) RCTBubblingEventBlock onLocation;
@@ -10,5 +12,7 @@
 
 @property(nonatomic) BOOL loaded;
 @property(nonatomic) MACoordinateRegion initialRegion;
+
+- (AMapMarker *)getMarker:(id <MAAnnotation>)annotation;
 
 @end
