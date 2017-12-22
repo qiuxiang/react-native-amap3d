@@ -1,4 +1,4 @@
-#import <React/RCTViewManager.h>
+#import <React/RCTUIManager.h>
 #import "AMapMarker.h"
 
 #pragma ide diagnostic ignored "OCUnusedClassInspection"
@@ -32,5 +32,12 @@ RCT_EXPORT_VIEW_PROPERTY(onInfoWindowPress, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onDragStart, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onDrag, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onDragEnd, RCTBubblingEventBlock)
+
+RCT_EXPORT_METHOD(lockToScreen:(nonnull NSNumber *)reactTag x:(int)x y:(int)y) {
+    [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, UIView *> *viewRegistry) {
+        AMapMarker *marker = (AMapMarker *) viewRegistry[reactTag];
+        [marker lockToScreen:x y:y];
+    }];
+}
 
 @end

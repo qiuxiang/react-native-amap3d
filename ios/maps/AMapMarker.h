@@ -12,6 +12,6 @@
 - (MAAnnotationView *)annotationView;
 - (MAPointAnnotation *)annotation;
 - (void)setMapView:(AMapView *)mapView;
-- (void)lockToScreen;
+- (void)lockToScreen:(int)x y:(int)y;
 
 @end

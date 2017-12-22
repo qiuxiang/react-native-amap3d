@@ -40,7 +40,7 @@
 
 - (void)setColor:(MAPinAnnotationColor)color {
     _pinColor = color;
-    ((MAPinAnnotationView *)_annotationView).pinColor = color;
+    ((MAPinAnnotationView *) _annotationView).pinColor = color;
 }
 
 - (void)setDraggable:(BOOL)draggable {
@@ -108,7 +108,7 @@
                     [UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_handleTap:)]];
         } else {
             _annotationView = [[MAPinAnnotationView alloc] initWithAnnotation:_annotation reuseIdentifier:nil];
-            ((MAPinAnnotationView *)_annotationView).pinColor = _pinColor;
+            ((MAPinAnnotationView *) _annotationView).pinColor = _pinColor;
         }
         _annotationView.canShowCallout = YES;
         _annotationView.draggable = _draggable;
@@ -131,9 +131,9 @@
     }
 }
 
-- (void)lockToScreen {
+- (void)lockToScreen:(int)x y:(int)y {
     _annotation.lockedToScreen = YES;
-    _annotation.lockedScreenPoint = CGPointMake(100, 100);
+    _annotation.lockedScreenPoint = CGPointMake(x, y);
 }
 
 @end

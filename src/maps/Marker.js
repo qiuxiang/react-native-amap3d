@@ -153,6 +153,10 @@ export default class Marker extends BaseComponent {
     this._sendCommand('active')
   }
 
+  lockToScreen(x, y) {
+    this._sendCommand('lockToScreen', [x, y])
+  }
+
   componentDidUpdate() {
     if (this._icon && Platform.OS === 'android') {
       setTimeout(() => this._sendCommand('update'), 0)
