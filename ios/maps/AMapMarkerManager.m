@@ -40,4 +40,11 @@ RCT_EXPORT_METHOD(lockToScreen:(nonnull NSNumber *)reactTag x:(int)x y:(int)y) {
     }];
 }
 
+RCT_EXPORT_METHOD(active:(nonnull NSNumber *)reactTag) {
+    [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, UIView *> *viewRegistry) {
+        AMapMarker *marker = (AMapMarker *) viewRegistry[reactTag];
+        [marker setActive: true];
+    }];
+}
+
 @end
