@@ -55,7 +55,7 @@
         _markers[[@(marker.annotation.hash) stringValue]] = marker;
         [self addAnnotation:marker.annotation];
     }
-    if ([subview isKindOfClass:[AMapModel class]]) {
+    if ([subview isKindOfClass:[AMapOverlay class]]) {
         [self addOverlay:(id <MAOverlay>) subview];
     }
 }
@@ -66,7 +66,7 @@
         AMapMarker *marker = (AMapMarker *) subview;
         [self removeAnnotation:marker.annotation];
     }
-    if ([subview isKindOfClass:[AMapModel class]]) {
+    if ([subview isKindOfClass:[AMapOverlay class]]) {
         [self removeOverlay:(id <MAOverlay>) subview];
     }
 }

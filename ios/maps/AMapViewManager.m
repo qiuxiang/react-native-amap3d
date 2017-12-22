@@ -1,7 +1,7 @@
 #import <React/RCTUIManager.h>
 #import "AMapView.h"
 #import "AMapMarker.h"
-#import "AMapModel.h"
+#import "AMapOverlay.h"
 
 #pragma ide diagnostic ignored "OCUnusedClassInspection"
 #pragma ide diagnostic ignored "-Woverriding-method-mismatch"
@@ -112,8 +112,8 @@ RCT_EXPORT_METHOD(animateTo:(nonnull NSNumber *)reactTag params:(NSDictionary *)
 }
 
 - (MAOverlayRenderer *)mapView:(MAMapView *)mapView rendererForOverlay:(id <MAOverlay>)overlay {
-    if ([overlay isKindOfClass:[AMapModel class]]) {
-        return ((AMapModel *) overlay).renderer;
+    if ([overlay isKindOfClass:[AMapOverlay class]]) {
+        return ((AMapOverlay *) overlay).renderer;
     }
     return nil;
 }

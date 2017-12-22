@@ -1,9 +1,9 @@
 #import <MAMapKit/MAMapKit.h>
-#import "AMapModel.h"
+#import "AMapOverlay.h"
 
 #pragma ide diagnostic ignored "OCUnusedPropertyInspection"
 
-@interface AMapPolyline : AMapModel
+@interface AMapPolyline : AMapOverlay
 
 @property(nonatomic, readonly) CLLocationCoordinate2D coordinate;
 @property(nonatomic, readonly) MAMapRect boundingMapRect;

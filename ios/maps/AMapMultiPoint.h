@@ -1,7 +1,7 @@
 #import <React/RCTComponent.h>
 #import <MAMapKit/MAMapKit.h>
-#import "AMapModel.h"
+#import "AMapOverlay.h"
 
-@interface AMapMultiPoint : AMapModel <MAMultiPointOverlayRendererDelegate>
+@interface AMapMultiPoint : AMapOverlay <MAMultiPointOverlayRendererDelegate>
 @property(nonatomic, copy) RCTBubblingEventBlock onItemPress;
 @end
