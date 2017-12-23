@@ -90,9 +90,9 @@ internal class AMapMarkerManager : ViewGroupManager<AMapMarker>() {
         marker.draggable = draggable
     }
 
-    @ReactProp(name = "clickable")
-    fun setClickable(marker: AMapMarker, clickable: Boolean) {
-        marker.clickable_ = clickable
+    @ReactProp(name = "disabled")
+    fun setDisabled(marker: AMapMarker, disabled: Boolean) {
+        marker.disabled = disabled
     }
 
     @ReactProp(name = "active")
@@ -108,11 +108,6 @@ internal class AMapMarkerManager : ViewGroupManager<AMapMarker>() {
     @ReactProp(name = "image")
     fun setImage(marker: AMapMarker, image: String) {
         marker.setImage(image)
-    }
-
-    @ReactProp(name = "infoWindowEnabled")
-    fun setEnabledInfoWindow(marker: AMapMarker, enabled: Boolean) {
-        marker.infoWindowEnabled = enabled
     }
 
     @ReactProp(name = "zIndex")

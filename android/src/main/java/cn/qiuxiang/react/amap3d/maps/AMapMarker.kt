@@ -32,12 +32,6 @@ class AMapMarker(context: Context) : ReactViewGroup(context), AMapOverlay {
     private var anchorV: Float = 1f
     var infoWindow: AMapInfoWindow? = null
 
-    var infoWindowEnabled: Boolean = true
-        set(value) {
-            field = value
-            marker?.isInfoWindowEnable = value
-        }
-
     var marker: Marker? = null
         private set
 
@@ -83,10 +77,10 @@ class AMapMarker(context: Context) : ReactViewGroup(context), AMapOverlay {
             marker?.isDraggable = value
         }
 
-    var clickable_: Boolean = true
+    var disabled: Boolean = false
         set(value) {
             field = value
-            marker?.isClickable = value
+            marker?.isClickable = !value
         }
 
     var active: Boolean = false
@@ -114,17 +108,12 @@ class AMapMarker(context: Context) : ReactViewGroup(context), AMapOverlay {
                 .position(position)
                 .anchor(anchorU, anchorV)
                 .title(title)
-                .infoWindowEnable(infoWindowEnabled)
+                .infoWindowEnable(true)
                 .snippet(snippet)
                 .zIndex(zIndex))
 
-        if (active) {
-            marker?.showInfoWindow()
-        } else {
-            marker?.hideInfoWindow()
-        }
-
-        marker?.isClickable = this.clickable_
+        this.active = active
+        this.disabled = this.disabled
     }
 
     override fun remove() {
