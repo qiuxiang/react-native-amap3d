@@ -162,8 +162,8 @@ class AMapMarker(context: Context) : ReactViewGroup(context), AMapOverlay {
 
     fun lockToScreen(args: ReadableArray?) {
         if (args != null) {
-            val x = args.getInt(0).toPx
-            val y = args.getInt(1).toPx
+            val x = args.getDouble(0).toFloat().toPx
+            val y = args.getDouble(1).toFloat().toPx
             marker?.setPositionByPixels(x, y)
         }
     }

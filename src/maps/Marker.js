@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {Platform, requireNativeComponent, StyleSheet, ViewPropTypes, View} from 'react-native'
-import InfoWindow from './InfoWindow'
 import {LatLng, Point} from '../PropTypes'
 import BaseComponent from '../BaseComponent'
 
@@ -174,6 +173,11 @@ export default class Marker extends BaseComponent {
 }
 
 const AMapMarker = requireNativeComponent('AMapMarker', Marker)
+const InfoWindow = requireNativeComponent('AMapInfoWindow', {
+  propTypes: {
+    ...ViewPropTypes,
+  }
+})
 
 const style = StyleSheet.create({
   overlay: {

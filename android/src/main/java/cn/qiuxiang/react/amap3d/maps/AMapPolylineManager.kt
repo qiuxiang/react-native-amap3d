@@ -1,5 +1,6 @@
 package cn.qiuxiang.react.amap3d.maps
 
+import cn.qiuxiang.react.amap3d.toPx
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.uimanager.SimpleViewManager
 import com.facebook.react.uimanager.ThemedReactContext
@@ -36,7 +37,7 @@ internal class AMapPolylineManager : SimpleViewManager<AMapPolyline>() {
 
     @ReactProp(name = "width")
     fun setWidth(polyline: AMapPolyline, width: Float) {
-        polyline.width = width
+        polyline.width = width.toPx.toFloat()
     }
 
     @ReactProp(name = "zIndex")
