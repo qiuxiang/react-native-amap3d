@@ -1,5 +1,6 @@
 package cn.qiuxiang.react.amap3d.maps
 
+import cn.qiuxiang.react.amap3d.toPx
 import com.amap.api.maps.model.LatLng
 import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.uimanager.SimpleViewManager
@@ -40,7 +41,7 @@ internal class AMapCircleManager : SimpleViewManager<AMapCircle>() {
 
     @ReactProp(name = "strokeWidth")
     fun setStrokeWidth(circle: AMapCircle, strokeWidth: Float) {
-        circle.strokeWidth = strokeWidth
+        circle.strokeWidth = strokeWidth.toPx.toFloat()
     }
 
     @ReactProp(name = "zIndex")

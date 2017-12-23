@@ -4,8 +4,10 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.view.View
+import cn.qiuxiang.react.amap3d.toPx
 import com.amap.api.maps.AMap
 import com.amap.api.maps.model.*
+import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.views.view.ReactViewGroup
 
 class AMapMarker(context: Context) : ReactViewGroup(context), AMapOverlay {
@@ -29,12 +31,6 @@ class AMapMarker(context: Context) : ReactViewGroup(context), AMapOverlay {
     private var anchorU: Float = 0.5f
     private var anchorV: Float = 1f
     var infoWindow: AMapInfoWindow? = null
-
-    var infoWindowEnabled: Boolean = true
-        set(value) {
-            field = value
-            marker?.isInfoWindowEnable = value
-        }
 
     var marker: Marker? = null
         private set
@@ -81,10 +77,10 @@ class AMapMarker(context: Context) : ReactViewGroup(context), AMapOverlay {
             marker?.isDraggable = value
         }
 
-    var clickable_: Boolean = true
+    var disabled: Boolean = false
         set(value) {
             field = value
-            marker?.isClickable = value
+            marker?.isClickable = !value
         }
 
     var active: Boolean = false
@@ -112,17 +108,12 @@ class AMapMarker(context: Context) : ReactViewGroup(context), AMapOverlay {
                 .position(position)
                 .anchor(anchorU, anchorV)
                 .title(title)
-                .infoWindowEnable(infoWindowEnabled)
+                .infoWindowEnable(true)
                 .snippet(snippet)
                 .zIndex(zIndex))
 
-        if (active) {
-            marker?.showInfoWindow()
-        } else {
-            marker?.hideInfoWindow()
-        }
-
-        marker?.isClickable = this.clickable_
+        this.active = active
+        this.disabled = this.disabled
     }
 
     override fun remove() {
@@ -156,5 +147,13 @@ class AMapMarker(context: Context) : ReactViewGroup(context), AMapOverlay {
         anchorU = x.toFloat()
         anchorV = y.toFloat()
         marker?.setAnchor(anchorU, anchorV)
+    }
+
+    fun lockToScreen(args: ReadableArray?) {
+        if (args != null) {
+            val x = args.getDouble(0).toFloat().toPx
+            val y = args.getDouble(1).toFloat().toPx
+            marker?.setPositionByPixels(x, y)
+        }
     }
 }

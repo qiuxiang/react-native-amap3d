@@ -1,5 +1,5 @@
 #import <MAMapKit/MAOverlayRenderer.h>
 
-@interface AMapModel : UIView <MAOverlay>
+@interface AMapOverlay : UIView <MAOverlay>
 - (MAOverlayRenderer *)renderer;
 @end

@@ -1,6 +1,6 @@
-#import "AMapModel.h"
+#import "AMapOverlay.h"
 
-@implementation AMapModel {
+@implementation AMapOverlay {
 }
 
 - (MAOverlayRenderer *)renderer {

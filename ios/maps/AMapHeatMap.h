@@ -1,5 +1,5 @@
 #import <MAMapKit/MAMapKit.h>
-#import "AMapModel.h"
+#import "AMapOverlay.h"
 
-@interface AMapHeatMap : AMapModel
+@interface AMapHeatMap : AMapOverlay
 @end

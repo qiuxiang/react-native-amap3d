@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react'
 import PropTypes from 'prop-types'
-import {requireNativeComponent, resolveAssetSource, ViewPropTypes} from 'react-native'
+import {requireNativeComponent, ViewPropTypes} from 'react-native'
 
 export default class MultiPoint extends PureComponent {
   static propTypes = {

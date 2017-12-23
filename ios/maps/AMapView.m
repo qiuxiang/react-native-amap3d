@@ -6,6 +6,13 @@
 #pragma ide diagnostic ignored "OCUnusedMethodInspection"
 
 @implementation AMapView {
+    NSMutableDictionary *_markers;
+}
+
+- (instancetype)init {
+    _markers = [NSMutableDictionary new];
+    self = [super init];
+    return self;
 }
 
 - (void)setShowsTraffic:(BOOL)shows {
@@ -41,29 +48,33 @@
     }
 }
 
-- (void)insertReactSubview:(id <RCTComponent>)subview atIndex:(NSInteger)atIndex {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if ([subview isKindOfClass:[AMapMarker class]]) {
-            ((AMapMarker *) subview).mapView = self;
-            [self addAnnotation:(id <MAAnnotation>) subview];
-        }
-        if ([subview isKindOfClass:[AMapModel class]]) {
-            [self addOverlay:(id <MAOverlay>) subview];
-        }
-        [super insertReactSubview:subview atIndex:atIndex];
-    });
+- (void)didAddSubview:(UIView *)subview {
+    if ([subview isKindOfClass:[AMapMarker class]]) {
+        AMapMarker *marker = (AMapMarker *) subview;
+        marker.mapView = self;
+        _markers[[@(marker.annotation.hash) stringValue]] = marker;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self addAnnotation:marker.annotation];
+        });
+    }
+    if ([subview isKindOfClass:[AMapOverlay class]]) {
+        [self addOverlay:(id <MAOverlay>) subview];
+    }
 }
 
 - (void)removeReactSubview:(id <RCTComponent>)subview {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if ([subview isKindOfClass:[AMapMarker class]]) {
-            [self removeAnnotation:(id <MAAnnotation>) subview];
-        }
-        if ([subview isKindOfClass:[AMapModel class]]) {
-            [self removeOverlay:(id <MAOverlay>) subview];
-        }
-        [super removeReactSubview:subview];
-    });
+    [super removeReactSubview:subview];
+    if ([subview isKindOfClass:[AMapMarker class]]) {
+        AMapMarker *marker = (AMapMarker *) subview;
+        [self removeAnnotation:marker.annotation];
+    }
+    if ([subview isKindOfClass:[AMapOverlay class]]) {
+        [self removeOverlay:(id <MAOverlay>) subview];
+    }
+}
+
+- (AMapMarker *)getMarker:(id <MAAnnotation>)annotation {
+    return _markers[[@(annotation.hash) stringValue]];
 }
 
 @end

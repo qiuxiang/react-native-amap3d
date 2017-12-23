@@ -43,8 +43,6 @@ export default class Examples extends Component {
         {this._renderItem('动画移动', 'Animated')}
         <View style={styles.separator}/>
         {this._renderItem('地图事件', 'Events')}
-        <View style={styles.separator}/>
-        {this._renderItem('离线地图', 'Offline')}
       </View>
       <View style={styles.group}>
         {this._renderItem('添加标记', 'Marker')}
@@ -61,6 +59,8 @@ export default class Examples extends Component {
       </View>
       <View style={styles.group}>
         {this._renderItem('导航', 'Navigation')}
+        <View style={styles.separator}/>
+        {this._renderItem('离线地图', 'Offline')}
       </View>
     </ScrollView>
   }

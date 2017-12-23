@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {Platform, requireNativeComponent, StyleSheet, ViewPropTypes, View} from 'react-native'
-import InfoWindow from './InfoWindow'
 import {LatLng, Point} from '../PropTypes'
 import BaseComponent from '../BaseComponent'
 
@@ -48,7 +47,7 @@ export default class Marker extends BaseComponent {
     }),
 
     /**
-     * 自定义图标
+     * 自定义图标，慎用，目前存在一些已知的 bug
      */
     icon: PropTypes.func,
 
@@ -66,11 +65,6 @@ export default class Marker extends BaseComponent {
      * 是否可拖拽
      */
     draggable: PropTypes.bool,
-
-    /**
-     * 是否可点击
-     */
-    clickable: PropTypes.bool,
 
     /**
      * 是否平贴地图
@@ -104,9 +98,9 @@ export default class Marker extends BaseComponent {
     active: PropTypes.bool,
 
     /**
-     * 是否启用信息窗体
+     * 是否禁用，禁用后不可点击
      */
-    infoWindowEnabled: PropTypes.bool,
+    disabled: PropTypes.bool,
 
     /**
      * 点击事件
@@ -153,6 +147,10 @@ export default class Marker extends BaseComponent {
     this._sendCommand('active')
   }
 
+  lockToScreen(x, y) {
+    this._sendCommand('lockToScreen', [x, y])
+  }
+
   componentDidUpdate() {
     if (this._icon && Platform.OS === 'android') {
       setTimeout(() => this._sendCommand('update'), 0)
@@ -170,6 +168,11 @@ export default class Marker extends BaseComponent {
 }
 
 const AMapMarker = requireNativeComponent('AMapMarker', Marker)
+const InfoWindow = requireNativeComponent('AMapInfoWindow', {
+  propTypes: {
+    ...ViewPropTypes,
+  }
+})
 
 const style = StyleSheet.create({
   overlay: {

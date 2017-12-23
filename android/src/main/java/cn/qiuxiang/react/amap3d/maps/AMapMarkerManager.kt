@@ -39,12 +39,14 @@ internal class AMapMarkerManager : ViewGroupManager<AMapMarker>() {
     companion object {
         val UPDATE = 1
         val ACTIVE = 2
+        val LOCK_TO_SCREEN = 3
     }
 
     override fun getCommandsMap(): Map<String, Int> {
         return mapOf(
                 "update" to UPDATE,
-                "active" to ACTIVE
+                "active" to ACTIVE,
+                "lockToScreen" to LOCK_TO_SCREEN
         )
     }
 
@@ -52,6 +54,7 @@ internal class AMapMarkerManager : ViewGroupManager<AMapMarker>() {
         when (commandId) {
             UPDATE -> marker.updateIcon()
             ACTIVE -> marker.active = true
+            LOCK_TO_SCREEN -> marker.lockToScreen(args)
         }
     }
 
@@ -87,9 +90,9 @@ internal class AMapMarkerManager : ViewGroupManager<AMapMarker>() {
         marker.draggable = draggable
     }
 
-    @ReactProp(name = "clickable")
-    fun setClickable(marker: AMapMarker, clickable: Boolean) {
-        marker.clickable_ = clickable
+    @ReactProp(name = "disabled")
+    fun setDisabled(marker: AMapMarker, disabled: Boolean) {
+        marker.disabled = disabled
     }
 
     @ReactProp(name = "active")
@@ -105,11 +108,6 @@ internal class AMapMarkerManager : ViewGroupManager<AMapMarker>() {
     @ReactProp(name = "image")
     fun setImage(marker: AMapMarker, image: String) {
         marker.setImage(image)
-    }
-
-    @ReactProp(name = "infoWindowEnabled")
-    fun setEnabledInfoWindow(marker: AMapMarker, enabled: Boolean) {
-        marker.infoWindowEnabled = enabled
     }
 
     @ReactProp(name = "zIndex")

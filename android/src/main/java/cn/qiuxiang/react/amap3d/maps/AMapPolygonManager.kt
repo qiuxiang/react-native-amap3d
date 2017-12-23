@@ -1,5 +1,6 @@
 package cn.qiuxiang.react.amap3d.maps
 
+import cn.qiuxiang.react.amap3d.toPx
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.uimanager.SimpleViewManager
 import com.facebook.react.uimanager.ThemedReactContext
@@ -32,11 +33,11 @@ internal class AMapPolygonManager : SimpleViewManager<AMapPolygon>() {
 
     @ReactProp(name = "strokeWidth")
     fun setStrokeWidth(polygon: AMapPolygon, strokeWidth: Float) {
-        polygon.strokeWidth = strokeWidth
+        polygon.strokeWidth = strokeWidth.toPx.toFloat()
     }
 
     @ReactProp(name = "zIndex")
-    fun setZIndex_(polygon: AMapPolygon, zIndex: Float) {
+    fun setZindex(polygon: AMapPolygon, zIndex: Float) {
         polygon.zIndex = zIndex
     }
 }
