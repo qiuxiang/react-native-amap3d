@@ -1,5 +1,6 @@
 package cn.qiuxiang.react.amap3d
 
+import android.content.res.Resources
 import com.amap.api.maps.AMapUtils
 import com.amap.api.maps.model.LatLng
 import com.facebook.react.bridge.Promise
@@ -18,3 +19,6 @@ class AMapUtilsModule(reactContext: ReactApplicationContext) : ReactContextBaseJ
         promise.resolve(AMapUtils.calculateLineDistance(LatLng(lat1, lng1), LatLng(lat2, lng2)))
     }
 }
+
+val Int.toPx: Int
+    get() = (this * Resources.getSystem().displayMetrics.density).toInt()

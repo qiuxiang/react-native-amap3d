@@ -4,8 +4,10 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.view.View
+import cn.qiuxiang.react.amap3d.toPx
 import com.amap.api.maps.AMap
 import com.amap.api.maps.model.*
+import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.views.view.ReactViewGroup
 
 class AMapMarker(context: Context) : ReactViewGroup(context), AMapOverlay {
@@ -156,5 +158,13 @@ class AMapMarker(context: Context) : ReactViewGroup(context), AMapOverlay {
         anchorU = x.toFloat()
         anchorV = y.toFloat()
         marker?.setAnchor(anchorU, anchorV)
+    }
+
+    fun lockToScreen(args: ReadableArray?) {
+        if (args != null) {
+            val x = args.getInt(0).toPx
+            val y = args.getInt(1).toPx
+            marker?.setPositionByPixels(x, y)
+        }
     }
 }
