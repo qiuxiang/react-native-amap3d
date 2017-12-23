@@ -53,7 +53,9 @@
         AMapMarker *marker = (AMapMarker *) subview;
         marker.mapView = self;
         _markers[[@(marker.annotation.hash) stringValue]] = marker;
-        [self addAnnotation:marker.annotation];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self addAnnotation:marker.annotation];
+        });
     }
     if ([subview isKindOfClass:[AMapOverlay class]]) {
         [self addOverlay:(id <MAOverlay>) subview];

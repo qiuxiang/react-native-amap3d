@@ -2,6 +2,7 @@
 #import "AMapMarker.h"
 
 #pragma ide diagnostic ignored "OCUnusedMethodInspection"
+#pragma clang diagnostic ignored "-Woverriding-method-mismatch"
 
 @implementation AMapMarker {
     MAPointAnnotation *_annotation;
@@ -11,9 +12,10 @@
     AMapView *_mapView;
     MAPinAnnotationColor _pinColor;
     UIImage *_image;
-    BOOL _draggable;
     CGPoint _centerOffset;
+    BOOL _draggable;
     BOOL _active;
+    BOOL _canShowCallout;
 }
 
 - (instancetype)init {
@@ -53,7 +55,6 @@
     _annotationView.centerOffset = centerOffset;
 }
 
-#pragma clang diagnostic ignored "-Woverriding-method-mismatch"
 - (void)setImage:(NSString *)name {
     _image = [UIImage imageNamed:name];
     if (_image != nil) {
@@ -83,6 +84,7 @@
 }
 
 - (void)setInfoWindowEnabled:(BOOL)enabled {
+    _canShowCallout = enabled;
     _annotationView.canShowCallout = enabled;
 }
 
@@ -101,6 +103,7 @@
 - (MAAnnotationView *)annotationView {
     if (_annotationView == nil) {
         if (_customView) {
+            _customView.hidden = NO;
             _annotationView = [[MAAnnotationView alloc] initWithAnnotation:_annotation reuseIdentifier:nil];
             _annotationView.bounds = _customView.bounds;
             [_annotationView addSubview:_customView];
@@ -110,7 +113,7 @@
             _annotationView = [[MAPinAnnotationView alloc] initWithAnnotation:_annotation reuseIdentifier:nil];
             ((MAPinAnnotationView *) _annotationView).pinColor = _pinColor;
         }
-        _annotationView.canShowCallout = YES;
+        _annotationView.canShowCallout = _canShowCallout;
         _annotationView.draggable = _draggable;
         _annotationView.customCalloutView = _calloutView;
         _annotationView.centerOffset = _centerOffset;
@@ -123,11 +126,12 @@
 }
 
 - (void)didAddSubview:(UIView *)subview {
-    if ([subview isKindOfClass:[AMapInfoWindow class]]) {
+    if ([subview isKindOfClass:[AMapCallout class]]) {
         _calloutView = [[MACustomCalloutView alloc] initWithCustomView:subview];
         _annotationView.customCalloutView = _calloutView;
     } else {
         _customView = subview;
+        _customView.hidden = YES;
     }
 }
 

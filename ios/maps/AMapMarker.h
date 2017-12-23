@@ -1,5 +1,5 @@
 #import "AMapView.h"
-#import "AMapInfoWindow.h"
+#import "AMapCallout.h"
 
 @interface AMapMarker : UIView
 
