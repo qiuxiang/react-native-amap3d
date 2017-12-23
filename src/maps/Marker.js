@@ -67,11 +67,6 @@ export default class Marker extends BaseComponent {
     draggable: PropTypes.bool,
 
     /**
-     * 是否可点击
-     */
-    clickable: PropTypes.bool,
-
-    /**
      * 是否平贴地图
      */
     flat: PropTypes.bool,
@@ -103,9 +98,9 @@ export default class Marker extends BaseComponent {
     active: PropTypes.bool,
 
     /**
-     * 是否启用信息窗体
+     * 是否禁用，禁用后不可点击
      */
-    infoWindowEnabled: PropTypes.bool,
+    disabled: PropTypes.bool,
 
     /**
      * 点击事件

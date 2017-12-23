@@ -21,8 +21,7 @@ RCT_EXPORT_VIEW_PROPERTY(title, NSString)
 RCT_EXPORT_VIEW_PROPERTY(description, NSString)
 RCT_EXPORT_VIEW_PROPERTY(active, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(draggable, BOOL)
-RCT_EXPORT_VIEW_PROPERTY(clickable, BOOL)
-RCT_EXPORT_VIEW_PROPERTY(infoWindowEnabled, BOOL)
+RCT_EXPORT_VIEW_PROPERTY(disabled, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(zIndex, NSInteger)
 RCT_EXPORT_VIEW_PROPERTY(color, MAPinAnnotationColor)
 RCT_EXPORT_VIEW_PROPERTY(image, NSString)
@@ -43,7 +42,7 @@ RCT_EXPORT_METHOD(lockToScreen:(nonnull NSNumber *)reactTag x:(int)x y:(int)y) {
 RCT_EXPORT_METHOD(active:(nonnull NSNumber *)reactTag) {
     [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, UIView *> *viewRegistry) {
         AMapMarker *marker = (AMapMarker *) viewRegistry[reactTag];
-        [marker setActive: true];
+        marker.active = YES;
     }];
 }
 

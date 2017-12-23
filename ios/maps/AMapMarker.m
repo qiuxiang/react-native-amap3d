@@ -20,6 +20,7 @@
 
 - (instancetype)init {
     _annotation = [MAPointAnnotation new];
+    _canShowCallout = YES;
     self = [super init];
     return self;
 }
@@ -79,13 +80,9 @@
     }
 }
 
-- (void)setClickable:(BOOL)enabled {
-    _annotationView.enabled = enabled;
-}
-
-- (void)setInfoWindowEnabled:(BOOL)enabled {
-    _canShowCallout = enabled;
-    _annotationView.canShowCallout = enabled;
+- (void)setDisabled:(BOOL)disabled {
+    _canShowCallout = !disabled;
+    _annotationView.canShowCallout = _canShowCallout;
 }
 
 - (MAPointAnnotation *)annotation {
