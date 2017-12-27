@@ -52,7 +52,7 @@ export default class MarkerExample extends Component {
       <Marker
         active
         draggable
-        title='一个可拖拽的标记 '
+        title='一个可拖拽的标记'
         description={this.state.time.toLocaleTimeString()}
         onDragEnd={this._onDragEvent}
         onInfoWindowPress={this._onInfoWindowPress}

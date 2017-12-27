@@ -1,2 +1,6 @@
 import {NativeModules} from 'react-native'
-export default NativeModules.AMapUtils
+const {AMapUtils} = NativeModules
+
+export default {
+  distance: (lat1, lng1, lat2, lng2) => AMapUtils.distance(lat1, lng1, lat2, lng2)
+}
