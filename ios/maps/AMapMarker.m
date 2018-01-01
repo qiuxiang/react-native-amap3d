@@ -16,10 +16,13 @@
     BOOL _draggable;
     BOOL _active;
     BOOL _canShowCallout;
+    BOOL _enabled;
+    NSInteger _zIndex;
 }
 
 - (instancetype)init {
     _annotation = [MAPointAnnotation new];
+    _enabled = YES;
     _canShowCallout = YES;
     self = [super init];
     return self;
@@ -80,9 +83,19 @@
     }
 }
 
-- (void)setDisabled:(BOOL)disabled {
+- (void)setInfoWindowDisabled:(BOOL)disabled {
     _canShowCallout = !disabled;
-    _annotationView.canShowCallout = _canShowCallout;
+    _annotationView.canShowCallout = !disabled;
+}
+
+- (void)setClickDisabled:(BOOL)disabled {
+    _enabled = !disabled;
+    _annotationView.enabled = !disabled;
+}
+
+- (void)setZIndex:(NSInteger)zIndex {
+    _zIndex = zIndex;
+    _annotationView.zIndex = zIndex;
 }
 
 - (MAPointAnnotation *)annotation {
@@ -110,13 +123,21 @@
             _annotationView = [[MAPinAnnotationView alloc] initWithAnnotation:_annotation reuseIdentifier:nil];
             ((MAPinAnnotationView *) _annotationView).pinColor = _pinColor;
         }
+
+        _annotationView.enabled = _enabled;
         _annotationView.canShowCallout = _canShowCallout;
         _annotationView.draggable = _draggable;
         _annotationView.customCalloutView = _calloutView;
         _annotationView.centerOffset = _centerOffset;
+
+        if (_zIndex) {
+            _annotationView.zIndex = _zIndex;
+        }
+
         if (_image != nil) {
             _annotationView.image = _image;
         }
+
         [self setActive:_active];
     }
     return _annotationView;

@@ -90,9 +90,14 @@ internal class AMapMarkerManager : ViewGroupManager<AMapMarker>() {
         marker.draggable = draggable
     }
 
-    @ReactProp(name = "disabled")
-    fun setDisabled(marker: AMapMarker, disabled: Boolean) {
-        marker.disabled = disabled
+    @ReactProp(name = "clickDisabled")
+    fun setClickDisabled(marker: AMapMarker, disabled: Boolean) {
+        marker.clickDisabled = disabled
+    }
+
+    @ReactProp(name = "infoWindowDisabled")
+    fun setInfoWindowDisabled(marker: AMapMarker, disabled: Boolean) {
+        marker.infoWindowDisabled = disabled
     }
 
     @ReactProp(name = "active")

@@ -98,9 +98,14 @@ export default class Marker extends BaseComponent {
     active: PropTypes.bool,
 
     /**
-     * 是否禁用，禁用后不可点击
+     * 是否禁用点击，默认不禁用
      */
-    disabled: PropTypes.bool,
+    clickDisabled: PropTypes.bool,
+
+    /**
+     * 是否禁用弹出窗口，默认不禁用
+     */
+    infoWindowDisabled: PropTypes.bool,
 
     /**
      * 点击事件

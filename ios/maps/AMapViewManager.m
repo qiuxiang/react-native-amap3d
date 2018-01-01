@@ -119,20 +119,16 @@ RCT_EXPORT_METHOD(animateTo:(nonnull NSNumber *)reactTag params:(NSDictionary *)
 }
 
 - (void)mapView:(AMapView *)mapView didSelectAnnotationView:(MAAnnotationView *)view {
-    if ([view.annotation isKindOfClass:[AMapMarker class]]) {
-        AMapMarker *marker = [mapView getMarker:view.annotation];
-        if (marker.onPress) {
-            marker.onPress(nil);
-        }
+    AMapMarker *marker = [mapView getMarker:view.annotation];
+    if (marker.onPress) {
+        marker.onPress(nil);
     }
 }
 
 - (void)mapView:(AMapView *)mapView didAnnotationViewCalloutTapped:(MAAnnotationView *)view {
-    if ([view.annotation isKindOfClass:[AMapMarker class]]) {
-        AMapMarker *marker = [mapView getMarker:view.annotation];
-        if (marker.onInfoWindowPress) {
-            marker.onInfoWindowPress(nil);
-        }
+    AMapMarker *marker = [mapView getMarker:view.annotation];
+    if (marker.onInfoWindowPress) {
+        marker.onInfoWindowPress(nil);
     }
 }
 
