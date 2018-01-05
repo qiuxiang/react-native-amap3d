@@ -132,13 +132,12 @@ import MapView from 'react-native-amap3d'
 
 ### 自定义标记图片及信息窗体
 ```jsx
-<Marker
-  image='flag'
-  coordinate={{
-    latitude: 39.706901,
-    longitude: 116.397972,
-  }}
->
+const coordinate = {
+  latitude: 39.706901,
+  longitude: 116.397972,
+}
+
+<Marker image='flag' coordinate={coordinate}>
   <View style={styles.customInfoWindow}>
     <Text>自定义信息窗体</Text>
   </View>
@@ -151,13 +150,13 @@ import MapView from 'react-native-amap3d'
 ## 接口
 
 请参考注释文档：
-- [MapView](https://github.com/qiuxiang/react-native-amap3d/tree/v0.7.3/components/maps/MapView.js#L15)
-- [Marker](https://github.com/qiuxiang/react-native-amap3d/tree/v0.7.3/components/maps/Marker.js#L8)
-- [Polyline](https://github.com/qiuxiang/react-native-amap3d/tree/v0.7.3/components/maps/Polyline.js#L6)
-- [Polygon](https://github.com/qiuxiang/react-native-amap3d/tree/v0.7.3/components/maps/Polygon.js#L6)
-- [Circle](https://github.com/qiuxiang/react-native-amap3d/tree/v0.7.3/components/maps/Circle.js#L6)
-- [HeatMap](https://github.com/qiuxiang/react-native-amap3d/tree/v0.7.3/components/maps/HeatMap.js#L6)
-- [MultiPoint](https://github.com/qiuxiang/react-native-amap3d/tree/v0.7.3/components/maps/MultiPoint.js#L5)
+- [MapView](https://github.com/qiuxiang/react-native-amap3d/tree/master/components/maps/MapView.js#L15)
+- [Marker](https://github.com/qiuxiang/react-native-amap3d/tree/master/components/maps/Marker.js#L8)
+- [Polyline](https://github.com/qiuxiang/react-native-amap3d/tree/master/components/maps/Polyline.js#L6)
+- [Polygon](https://github.com/qiuxiang/react-native-amap3d/tree/master/components/maps/Polygon.js#L6)
+- [Circle](https://github.com/qiuxiang/react-native-amap3d/tree/master/components/maps/Circle.js#L6)
+- [HeatMap](https://github.com/qiuxiang/react-native-amap3d/tree/master/components/maps/HeatMap.js#L6)
+- [MultiPoint](https://github.com/qiuxiang/react-native-amap3d/tree/master/components/maps/MultiPoint.js#L5)
 
 
 ## 关于问题反馈

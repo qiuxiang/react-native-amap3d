@@ -5,7 +5,7 @@ import { requireNativeComponent, ViewPropTypes } from 'react-native'
 import { LatLng, Region } from '../PropTypes'
 import Component from '../Component'
 
-type Target = {
+export type MapStatus = {
   zoomLevel?: number,
   coordinate?: LatLng,
   titl?: number,
@@ -159,16 +159,31 @@ export default class MapView extends Component<any> {
 
     /**
      * 点击事件
+     *
+     * @param {{ nativeEvent: LatLng }}
      */
     onPress: PropTypes.func,
 
     /**
      * 长按事件
+     *
+     * @param {{ nativeEvent: LatLng }}
      */
     onLongPress: PropTypes.func,
 
     /**
      * 定位事件
+     *
+     * @param {{
+     *   nativeEvent: {
+     *     timestamp: number,
+     *     speed: number,
+     *     accuracy: number,
+     *     altitude: number,
+     *     longitude: number,
+     *     latitude: number,
+     *   }
+     * }}
      */
     onLocation: PropTypes.func,
 
@@ -184,11 +199,33 @@ export default class MapView extends Component<any> {
 
     /**
      * 地图状态变化事件
+     *
+     * @param {{
+     *   nativeEvent: {
+     *     longitude: number,
+     *     latitude: number,
+     *     rotation: number,
+     *     zoomLevel: number,
+     *     tilt: number,
+     *   }
+     * }}
      */
     onStatusChange: PropTypes.func,
 
     /**
      * 地图状态变化完成事件
+     *
+     * @param {{
+     *   nativeEvent: {
+     *     longitude: number,
+     *     latitude: number,
+     *     longitudeDelta: number,
+     *     latitudeDelta: number,
+     *     rotation: number,
+     *     zoomLevel: number,
+     *     tilt: number,
+     *   }
+     * }}
      */
     onStatusChangeComplete: PropTypes.func,
   }
@@ -198,7 +235,7 @@ export default class MapView extends Component<any> {
   /**
    * 动画过渡到某个状态（坐标、缩放级别、倾斜度、旋转角度）
    */
-  animateTo(target: Target, duration?: number = 500) {
+  animateTo(target: MapStatus, duration?: number = 500) {
     this.sendCommand('animateTo', [target, duration])
   }
 

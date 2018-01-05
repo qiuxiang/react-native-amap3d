@@ -7,7 +7,7 @@ export default requireNativeComponent('AMapPolygon', {
     ...ViewPropTypes,
 
     /**
-     * 节点
+     * 节点坐标
      */
     coordinates: PropTypes.arrayOf(LatLng).isRequired,
 

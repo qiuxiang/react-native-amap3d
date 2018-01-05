@@ -1,4 +1,4 @@
-/* eslint-disable class-methods-use-this */
+// @flow
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Platform, requireNativeComponent, StyleSheet, ViewPropTypes, View } from 'react-native'
@@ -11,7 +11,7 @@ const style = StyleSheet.create({
   },
 })
 
-export default class Marker extends Component {
+export default class Marker extends Component<any> {
   static propTypes = {
     ...ViewPropTypes,
 
@@ -149,16 +149,17 @@ export default class Marker extends Component {
   }
 
   name = 'AMapMarker'
+  icon: View = null
 
   active() {
     this.sendCommand('active')
   }
 
-  lockToScreen(x, y) {
+  lockToScreen(x: number, y: number) {
     this.sendCommand('lockToScreen', [x, y])
   }
 
-  renderCustomMarker(icon) {
+  renderCustomMarker(icon: () => View) {
     if (icon) {
       this.icon = <View style={style.overlay}>{icon()}</View>
       return this.icon
@@ -166,7 +167,8 @@ export default class Marker extends Component {
     return null
   }
 
-  renderInfoWindow(view) {
+  /* eslint-disable class-methods-use-this */
+  renderInfoWindow(view: View) {
     if (view) {
       return <InfoWindow style={style.overlay}>{view}</InfoWindow>
     }

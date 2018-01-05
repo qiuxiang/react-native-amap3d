@@ -7,7 +7,7 @@ export default requireNativeComponent('AMapCircle', {
     ...ViewPropTypes,
 
     /**
-     * 圆点
+     * 圆点坐标
      */
     coordinate: LatLng.isRequired,
 

@@ -10,12 +10,12 @@ export default requireNativeComponent('AMapHeatMap', {
     ...ViewPropTypes,
 
     /**
-     * 节点
+     * 节点坐标
      */
     coordinates: PropTypes.arrayOf(LatLng).isRequired,
 
     /**
-     * 半径
+     * 半径（米）
      */
     radius: PropTypes.number,
 

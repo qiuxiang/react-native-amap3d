@@ -12,5 +12,5 @@ export default {
     lng1: number,
     lat2: number,
     lng2: number,
-  ) => AMapUtils.distance(lat1, lng1, lat2, lng2),
+  ): Promise<number> => AMapUtils.distance(lat1, lng1, lat2, lng2),
 }
