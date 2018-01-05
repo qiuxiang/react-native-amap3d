@@ -27,5 +27,5 @@ export {
   MultiPoint,
   Navigation,
   Utils,
-  Offline
+  Offline,
 }

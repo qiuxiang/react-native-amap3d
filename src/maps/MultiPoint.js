@@ -1,6 +1,6 @@
-import React, {PureComponent} from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import {requireNativeComponent, ViewPropTypes} from 'react-native'
+import { requireNativeComponent, ViewPropTypes } from 'react-native'
 
 export default class MultiPoint extends PureComponent {
   static propTypes = {
@@ -9,14 +9,12 @@ export default class MultiPoint extends PureComponent {
     /**
      * 节点
      */
-    points: PropTypes.arrayOf(
-      PropTypes.shape({
-        latitude: PropTypes.number.isRequired,
-        longitude: PropTypes.number.isRequired,
-        title: PropTypes.string,
-        subtitle: PropTypes.string,
-      })
-    ).isRequired,
+    points: PropTypes.arrayOf(PropTypes.shape({
+      latitude: PropTypes.number.isRequired,
+      longitude: PropTypes.number.isRequired,
+      title: PropTypes.string,
+      subtitle: PropTypes.string,
+    })).isRequired,
 
     /**
      * 图标
@@ -29,14 +27,14 @@ export default class MultiPoint extends PureComponent {
     onItemPress: PropTypes.func,
   }
 
-  _onItemPress = event => {
+  onItemPress = ({ nativeEvent }) => {
     if (this.props.onItemPress) {
-      this.props.onItemPress(this.props.points[event.nativeEvent.index])
+      this.props.onItemPress(this.props.points[nativeEvent.index])
     }
   }
 
   render() {
-    return <AMapMultiPoint {...this.props} onItemPress={this._onItemPress}/>
+    return <AMapMultiPoint {...this.props} onItemPress={this.onItemPress} />
   }
 }
 

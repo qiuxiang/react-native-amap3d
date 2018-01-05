@@ -17,5 +17,4 @@ const Point = PropTypes.shape({
   y: PropTypes.number.isRequired,
 })
 
-export {LatLng, Region, Point}
-
+export { LatLng, Region, Point }

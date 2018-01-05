@@ -1,6 +1,16 @@
-import {NativeModules} from 'react-native'
-const {AMapUtils} = NativeModules
+// @flow
+import { NativeModules } from 'react-native'
+
+const { AMapUtils } = NativeModules
 
 export default {
-  distance: (lat1, lng1, lat2, lng2) => AMapUtils.distance(lat1, lng1, lat2, lng2)
+  /**
+   * 计算两点距离
+   */
+  distance: (
+    lat1: number,
+    lng1: number,
+    lat2: number,
+    lng2: number,
+  ) => AMapUtils.distance(lat1, lng1, lat2, lng2),
 }

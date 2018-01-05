@@ -1,10 +1,17 @@
+/* eslint-disable class-methods-use-this */
 import React from 'react'
 import PropTypes from 'prop-types'
-import {Platform, requireNativeComponent, StyleSheet, ViewPropTypes, View} from 'react-native'
-import {LatLng, Point} from '../PropTypes'
-import BaseComponent from '../BaseComponent'
+import { Platform, requireNativeComponent, StyleSheet, ViewPropTypes, View } from 'react-native'
+import { LatLng, Point } from '../PropTypes'
+import Component from '../Component'
 
-export default class Marker extends BaseComponent {
+const style = StyleSheet.create({
+  overlay: {
+    position: 'absolute',
+  },
+})
+
+export default class Marker extends Component {
   static propTypes = {
     ...ViewPropTypes,
 
@@ -135,52 +142,50 @@ export default class Marker extends BaseComponent {
     onInfoWindowPress: PropTypes.func,
   }
 
-  _renderInfoWindow(view) {
-    if (view) {
-      return <InfoWindow style={style.overlay}>{view}</InfoWindow>
-    }
-  }
-
-  _renderCustomMarker(icon) {
-    if (icon) {
-      this._icon = <View style={style.overlay}>{icon()}</View>
-      return this._icon
-    }
-  }
-
-  active() {
-    this._sendCommand('active')
-  }
-
-  lockToScreen(x, y) {
-    this._sendCommand('lockToScreen', [x, y])
-  }
-
   componentDidUpdate() {
-    if (this._icon && Platform.OS === 'android') {
-      setTimeout(() => this._sendCommand('update'), 0)
+    if (this.icon && Platform.OS === 'android') {
+      setTimeout(() => this.sendCommand('update'), 0)
     }
-  }
-
-  render() {
-    return <AMapMarker {...this.props}>
-      {this._renderCustomMarker(this.props.icon)}
-      {this._renderInfoWindow(this.props.children)}
-    </AMapMarker>
   }
 
   name = 'AMapMarker'
+
+  active() {
+    this.sendCommand('active')
+  }
+
+  lockToScreen(x, y) {
+    this.sendCommand('lockToScreen', [x, y])
+  }
+
+  renderCustomMarker(icon) {
+    if (icon) {
+      this.icon = <View style={style.overlay}>{icon()}</View>
+      return this.icon
+    }
+    return null
+  }
+
+  renderInfoWindow(view) {
+    if (view) {
+      return <InfoWindow style={style.overlay}>{view}</InfoWindow>
+    }
+    return null
+  }
+
+  render() {
+    return (
+      <AMapMarker {...this.props}>
+        {this.renderCustomMarker(this.props.icon)}
+        {this.renderInfoWindow(this.props.children)}
+      </AMapMarker>
+    )
+  }
 }
 
 const AMapMarker = requireNativeComponent('AMapMarker', Marker)
 const InfoWindow = requireNativeComponent('AMapInfoWindow', {
   propTypes: {
     ...ViewPropTypes,
-  }
-})
-
-const style = StyleSheet.create({
-  overlay: {
-    position: 'absolute',
   },
 })

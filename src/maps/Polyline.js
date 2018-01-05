@@ -1,7 +1,7 @@
-import React, {PureComponent} from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import {ColorPropType, Platform, processColor, requireNativeComponent, ViewPropTypes} from 'react-native'
-import {LatLng} from '../PropTypes'
+import { ColorPropType, Platform, processColor, requireNativeComponent, ViewPropTypes } from 'react-native'
+import { LatLng } from '../PropTypes'
 
 export default class Polyline extends PureComponent {
   static propTypes = {
@@ -66,7 +66,7 @@ export default class Polyline extends PureComponent {
         },
       }),
     }
-    return <AMapPolyline {...props}/>
+    return <AMapPolyline {...props} />
   }
 }
 

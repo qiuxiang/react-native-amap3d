@@ -160,17 +160,17 @@ import MapView from 'react-native-amap3d'
 - [MultiPoint](https://github.com/qiuxiang/react-native-amap3d/tree/v0.7.3/components/maps/MultiPoint.js#L5)
 
 
-## 如何进行问题反馈
+## 关于问题反馈
 进行问题反馈之前：
-  - 提供你正在使用的版本，以及 RN 版本
-  - 提供详细的错误信息，也许你需要 android studio 或 xcode
-  - 编译相关的问题（尤其是 iOS）需要你对编译过程有足够的了解
+  - 提供你正在使用的版本、RN 版本、设备信息
+  - 请尽可能详细地描述问题
+  - 编译相关的问题需要你对编译过程有所了解
 
 以下情况 issue 会被 close：
   - 确定是环境配置的问题，且没有提供足够的信息
   - 问题不具备普遍性，且缺乏讨论
 
-问题被关闭，仍然可以继续反馈，我会尽量回复。
+问题被关闭，仍可继续讨论。
 
 [npm]: https://www.npmjs.com/package/react-native-amap3d
 [version-badge]: https://badge.fury.io/js/react-native-amap3d.svg

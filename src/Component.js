@@ -3,10 +3,13 @@
  *
  * @flow
  */
-import React, {PureComponent} from 'react'
-import {findNodeHandle, UIManager} from 'react-native'
+import { PureComponent } from 'react'
+import { findNodeHandle, UIManager } from 'react-native'
 
-export default class BaseComponent<T> extends PureComponent<T> {
+export default class Component<T> extends PureComponent<T> {
+  /**
+   * 原生组件名称
+   */
   name: string
 
   /**
@@ -14,7 +17,7 @@ export default class BaseComponent<T> extends PureComponent<T> {
    *
    * @private
    */
-  _sendCommand(command: string, params?: any[]) {
+  sendCommand(command: string, params?: any[]) {
     UIManager.dispatchViewManagerCommand(
       findNodeHandle(this),
       UIManager[this.name].Commands[command],

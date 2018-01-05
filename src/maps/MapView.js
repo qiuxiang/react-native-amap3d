@@ -1,9 +1,9 @@
 // @flow
 import React from 'react'
 import PropTypes from 'prop-types'
-import {requireNativeComponent, ViewPropTypes} from 'react-native'
-import {LatLng, Region} from '../PropTypes'
-import BaseComponent from '../BaseComponent'
+import { requireNativeComponent, ViewPropTypes } from 'react-native'
+import { LatLng, Region } from '../PropTypes'
+import Component from '../Component'
 
 type Target = {
   zoomLevel?: number,
@@ -12,7 +12,7 @@ type Target = {
   rotation?: number,
 }
 
-export default class MapView extends BaseComponent<any> {
+export default class MapView extends Component<any> {
   static propTypes = {
     ...ViewPropTypes,
 
@@ -193,18 +193,18 @@ export default class MapView extends BaseComponent<any> {
     onStatusChangeComplete: PropTypes.func,
   }
 
+  name = 'AMapView'
+
   /**
    * 动画过渡到某个状态（坐标、缩放级别、倾斜度、旋转角度）
    */
   animateTo(target: Target, duration?: number = 500) {
-    this._sendCommand('animateTo', [target, duration])
+    this.sendCommand('animateTo', [target, duration])
   }
 
   render() {
-    return <AMapView {...this.props}/>
+    return <AMapView {...this.props} />
   }
-
-  name = 'AMapView'
 }
 
 const AMapView = requireNativeComponent('AMapView', MapView)
