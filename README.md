@@ -159,18 +159,6 @@ const coordinate = {
 - [MultiPoint](https://github.com/qiuxiang/react-native-amap3d/blob/master/src/maps/MultiPoint.js)
 
 
-## 关于问题反馈
-- 提供你正在使用的版本、RN 版本、设备信息
-- 请尽可能详细地描述问题
-- 在提编译问题之前，请先检查最新的编译测试
-
-以下情况 issue 会被 close：
-  - 确定是环境配置的问题，且没有提供足够的信息
-  - 问题不具备普遍性，且缺乏讨论
-
-问题被关闭仍然欢迎继续讨论。
-
-
 ## 关于编译问题
 鉴于编译问题重复提得太多，且没有什么讨论价值，有必要单独做一些说明。
 

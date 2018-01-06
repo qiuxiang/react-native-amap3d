@@ -3,6 +3,7 @@
 #import <React/RCTConvert.h>
 #import <React/RCTConvert+CoreLocation.h>
 #import "Coordinate.h"
+#import "LocationStyle.h"
 
 @implementation RCTConvert (AMapView)
 
@@ -22,6 +23,15 @@ RCT_ENUM_CONVERTER(MAPinAnnotationColor, (@{
 
 + (Coordinate *)Coordinate:(id)json {
     return [[Coordinate alloc] initWithCoordinate:[self CLLocationCoordinate2D:json]];
+}
+
++ (LocationStyle *)LocationStyle:(id)json {
+    LocationStyle *locationStyle = [LocationStyle new];
+    locationStyle.fillColor = [self UIColor:json[@"fillColor"]];
+    locationStyle.stokeColor = [self UIColor:json[@"stokeColor"]];
+    locationStyle.stokeWidth = [self CGFloat:json[@"stokeWidth"]];
+    locationStyle.image = [UIImage imageNamed:[self NSString:json[@"image"]]];
+    return locationStyle;
 }
 
 + (MAHeatMapNode *)MAHeatMapNode:(id)json {

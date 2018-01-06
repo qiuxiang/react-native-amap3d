@@ -15,7 +15,7 @@ RCT_EXPORT_METHOD(distance:(double)lat1
                       lat2:(double)lat2
                       lng2:(double)lng2
                    resolve:(RCTPromiseResolveBlock)resolve
-                    reject:(RCTPromiseRejectBlock)reject ) {
+                    reject:(RCTPromiseRejectBlock)reject) {
     resolve(@(MAMetersBetweenMapPoints(
             MAMapPointForCoordinate(CLLocationCoordinate2DMake(lat1, lng1)),
             MAMapPointForCoordinate(CLLocationCoordinate2DMake(lat2, lng2))
