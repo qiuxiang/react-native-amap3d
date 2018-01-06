@@ -150,26 +150,35 @@ const coordinate = {
 ## 接口
 
 请参考注释文档：
-- [MapView](https://github.com/qiuxiang/react-native-amap3d/tree/master/components/maps/MapView.js#L15)
-- [Marker](https://github.com/qiuxiang/react-native-amap3d/tree/master/components/maps/Marker.js#L8)
-- [Polyline](https://github.com/qiuxiang/react-native-amap3d/tree/master/components/maps/Polyline.js#L6)
-- [Polygon](https://github.com/qiuxiang/react-native-amap3d/tree/master/components/maps/Polygon.js#L6)
-- [Circle](https://github.com/qiuxiang/react-native-amap3d/tree/master/components/maps/Circle.js#L6)
-- [HeatMap](https://github.com/qiuxiang/react-native-amap3d/tree/master/components/maps/HeatMap.js#L6)
-- [MultiPoint](https://github.com/qiuxiang/react-native-amap3d/tree/master/components/maps/MultiPoint.js#L5)
+- [MapView](https://github.com/qiuxiang/react-native-amap3d/blob/master/src/maps/MapView.js)
+- [Marker](https://github.com/qiuxiang/react-native-amap3d/blob/master/src/maps/Marker.js)
+- [Polyline](https://github.com/qiuxiang/react-native-amap3d/blob/master/src/maps/Polyline.js)
+- [Polygon](https://github.com/qiuxiang/react-native-amap3d/blob/master/src/maps/Polygon.js)
+- [Circle](https://github.com/qiuxiang/react-native-amap3d/blob/master/src/maps/Circle.js)
+- [HeatMap](https://github.com/qiuxiang/react-native-amap3d/blob/master/src/maps/HeatMap.js)
+- [MultiPoint](https://github.com/qiuxiang/react-native-amap3d/blob/master/src/maps/MultiPoint.js)
 
 
 ## 关于问题反馈
-进行问题反馈之前：
-  - 提供你正在使用的版本、RN 版本、设备信息
-  - 请尽可能详细地描述问题
-  - 编译相关的问题需要你对编译过程有所了解
+- 提供你正在使用的版本、RN 版本、设备信息
+- 请尽可能详细地描述问题
+- 在提编译问题之前，请先检查最新的编译测试
 
 以下情况 issue 会被 close：
   - 确定是环境配置的问题，且没有提供足够的信息
   - 问题不具备普遍性，且缺乏讨论
 
-问题被关闭，仍可继续讨论。
+问题被关闭仍然欢迎继续讨论。
+
+
+## 关于编译问题
+鉴于编译问题重复提得太多，且没有什么讨论价值，有必要单独做一些说明。
+
+为了方便排除问题，这个项目是有在持续集成里做编译测试的。
+其中在 master 分支做 example 的编译测试，在 release 分支做新项目的编译测试。
+在提编译问题之前，请先检查最新的编译测试。当然，如果你熟悉编译过程，
+并且发现这个项目的配置确实存在问题，欢迎提出、讨论。
+
 
 [npm]: https://www.npmjs.com/package/react-native-amap3d
 [version-badge]: https://badge.fury.io/js/react-native-amap3d.svg
