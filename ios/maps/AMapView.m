@@ -2,11 +2,13 @@
 #import "AMapView.h"
 #import "AMapMarker.h"
 #import "AMapPolyline.h"
+#import "LocationStyle.h"
 
 #pragma ide diagnostic ignored "OCUnusedMethodInspection"
 
 @implementation AMapView {
     NSMutableDictionary *_markers;
+    MAUserLocationRepresentation *_locationStyle;
 }
 
 - (instancetype)init {
@@ -27,8 +29,8 @@
     self.showsUserLocation = enabled;
 }
 
-- (void)setCoordinate:(CLLocationCoordinate2D)json {
-    self.centerCoordinate = json;
+- (void)setCoordinate:(CLLocationCoordinate2D)coordinate {
+    self.centerCoordinate = coordinate;
 }
 
 - (void)setTilt:(CGFloat)degree {
@@ -39,7 +41,18 @@
     self.rotationDegree = degree;
 }
 
-// 不能直接 setRegion，因为如果地图未加载 setRegion 是无效的
+- (void)setLocationStyle:(LocationStyle *)locationStyle {
+    if (!_locationStyle) {
+        _locationStyle = [MAUserLocationRepresentation new];
+    }
+    _locationStyle.fillColor = locationStyle.fillColor;
+    _locationStyle.strokeColor = locationStyle.stokeColor;
+    _locationStyle.lineWidth = locationStyle.stokeWidth;
+    _locationStyle.image = locationStyle.image;
+    [self updateUserLocationRepresentation:_locationStyle];
+}
+
+// 如果在地图未加载的时候调用改方法，需要先将 region 存起来，等地图加载完成再设置
 - (void)setRegion:(MACoordinateRegion)region {
     if (self.loaded) {
         super.region = region;

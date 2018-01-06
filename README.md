@@ -47,7 +47,7 @@ platform :ios, '8.0'
 target 'Your Target' do
   pod 'yoga', path: '../node_modules/react-native/ReactCommon/yoga/'
   pod 'React', path: '../node_modules/react-native/', :subspecs => [
-    'CxxBridge',
+    'BatchedBridge',
   ]
   pod 'react-native-amap3d', path: '../node_modules/react-native-amap3d/ios/'
 end
@@ -132,13 +132,12 @@ import MapView from 'react-native-amap3d'
 
 ### 自定义标记图片及信息窗体
 ```jsx
-<Marker
-  image='flag'
-  coordinate={{
-    latitude: 39.706901,
-    longitude: 116.397972,
-  }}
->
+const coordinate = {
+  latitude: 39.706901,
+  longitude: 116.397972,
+}
+
+<Marker image='flag' coordinate={coordinate}>
   <View style={styles.customInfoWindow}>
     <Text>自定义信息窗体</Text>
   </View>
@@ -151,26 +150,23 @@ import MapView from 'react-native-amap3d'
 ## 接口
 
 请参考注释文档：
-- [MapView](https://github.com/qiuxiang/react-native-amap3d/tree/v0.7.3/components/maps/MapView.js#L15)
-- [Marker](https://github.com/qiuxiang/react-native-amap3d/tree/v0.7.3/components/maps/Marker.js#L8)
-- [Polyline](https://github.com/qiuxiang/react-native-amap3d/tree/v0.7.3/components/maps/Polyline.js#L6)
-- [Polygon](https://github.com/qiuxiang/react-native-amap3d/tree/v0.7.3/components/maps/Polygon.js#L6)
-- [Circle](https://github.com/qiuxiang/react-native-amap3d/tree/v0.7.3/components/maps/Circle.js#L6)
-- [HeatMap](https://github.com/qiuxiang/react-native-amap3d/tree/v0.7.3/components/maps/HeatMap.js#L6)
-- [MultiPoint](https://github.com/qiuxiang/react-native-amap3d/tree/v0.7.3/components/maps/MultiPoint.js#L5)
+- [MapView](https://github.com/qiuxiang/react-native-amap3d/blob/master/src/maps/MapView.js)
+- [Marker](https://github.com/qiuxiang/react-native-amap3d/blob/master/src/maps/Marker.js)
+- [Polyline](https://github.com/qiuxiang/react-native-amap3d/blob/master/src/maps/Polyline.js)
+- [Polygon](https://github.com/qiuxiang/react-native-amap3d/blob/master/src/maps/Polygon.js)
+- [Circle](https://github.com/qiuxiang/react-native-amap3d/blob/master/src/maps/Circle.js)
+- [HeatMap](https://github.com/qiuxiang/react-native-amap3d/blob/master/src/maps/HeatMap.js)
+- [MultiPoint](https://github.com/qiuxiang/react-native-amap3d/blob/master/src/maps/MultiPoint.js)
 
 
-## 如何进行问题反馈
-进行问题反馈之前：
-  - 提供你正在使用的版本，以及 RN 版本
-  - 提供详细的错误信息，也许你需要 android studio 或 xcode
-  - 编译相关的问题（尤其是 iOS）需要你对编译过程有足够的了解
+## 关于编译问题
+鉴于编译问题重复提得太多，且没有什么讨论价值，有必要单独做一些说明。
 
-以下情况 issue 会被 close：
-  - 确定是环境配置的问题，且没有提供足够的信息
-  - 问题不具备普遍性，且缺乏讨论
+为了方便排除问题，这个项目是有在持续集成里做编译测试的。
+其中在 master 分支做 example 的编译测试，在 release 分支做新项目的编译测试。
+在提编译问题之前，请先检查最新的编译测试。当然，如果你熟悉编译过程，
+并且发现这个项目的配置确实存在问题，欢迎提出、讨论。
 
-问题被关闭，仍然可以继续反馈，我会尽量回复。
 
 [npm]: https://www.npmjs.com/package/react-native-amap3d
 [version-badge]: https://badge.fury.io/js/react-native-amap3d.svg

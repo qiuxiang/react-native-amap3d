@@ -189,4 +189,9 @@ internal class AMapViewManager : ViewGroupManager<AMapView>() {
     fun setLocationInterval(view: AMapView, interval: Int) {
         view.setLocationInterval(interval.toLong())
     }
+
+    @ReactProp(name = "locationStyle")
+    fun setLocationStyle(view: AMapView, style: ReadableMap) {
+        view.setLocationStyle(style)
+    }
 }

@@ -1,6 +1,6 @@
 {
   "name": "react-native-amap3d",
-  "version": "0.10.1",
+  "version": "0.11.0",
   "description": "react-native 高德地图组件",
   "author": "Qiu Xiang <i@7c00.cc>",
   "license": "MIT",
@@ -10,19 +10,30 @@
     "maps"
   ],
   "main": "src",
+  "files": [
+    "src",
+    "android/src",
+    "android/build.gradle",
+    "ios"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/qiuxiang/react-native-amap3d"
   },
   "scripts": {
-    "test": "flow"
+    "test": "eslint src && flow"
   },
   "peerDependencies": {
-    "react": ">=16",
     "react-native": ">=0.47"
   },
   "devDependencies": {
-    "flow-bin": "^0.57.3",
+    "babel-eslint": "^8.1.2",
+    "eslint": "^4.14.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.5.1",
+    "flow-bin": "^0.62.0",
     "prop-types": "^15.6.0"
   }
 }

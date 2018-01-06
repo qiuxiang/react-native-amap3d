@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types'
-import {ColorPropType, requireNativeComponent, ViewPropTypes} from 'react-native'
-import {LatLng} from '../PropTypes'
+import { ColorPropType, requireNativeComponent, ViewPropTypes } from 'react-native'
+import { LatLng } from '../PropTypes'
 
 export default requireNativeComponent('AMapCircle', {
   propTypes: {
     ...ViewPropTypes,
 
     /**
-     * 圆点
+     * 圆点坐标
      */
     coordinate: LatLng.isRequired,
 

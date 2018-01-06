@@ -15,7 +15,7 @@ RCT_EXPORT_MODULE()
 
 - (UIView *)view {
     AMapView *mapView = [AMapView new];
-    mapView.centerCoordinate = CLLocationCoordinate2DMake(39.9042, 116.4074);
+    mapView.centerCoordinate = CLLocationCoordinate2DMake(39.9242, 116.3979);
     mapView.zoomLevel = 10;
     mapView.delegate = self;
     return mapView;
@@ -42,6 +42,7 @@ RCT_EXPORT_VIEW_PROPERTY(region, MACoordinateRegion)
 RCT_EXPORT_VIEW_PROPERTY(tilt, CGFloat)
 RCT_EXPORT_VIEW_PROPERTY(rotation, CGFloat)
 RCT_EXPORT_VIEW_PROPERTY(distanceFilter, CLLocationDistance)
+RCT_EXPORT_VIEW_PROPERTY(locationStyle, LocationStyle)
 
 RCT_EXPORT_VIEW_PROPERTY(onPress, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onLongPress, RCTBubblingEventBlock)

@@ -1,14 +1,15 @@
-import React, {PureComponent} from 'react'
+// @flow
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import {ColorPropType, Platform, processColor, requireNativeComponent, ViewPropTypes} from 'react-native'
-import {LatLng} from '../PropTypes'
+import { ColorPropType, Platform, processColor, requireNativeComponent, ViewPropTypes } from 'react-native'
+import { LatLng } from '../PropTypes'
 
-export default class Polyline extends PureComponent {
+export default class Polyline extends PureComponent<any> {
   static propTypes = {
     ...ViewPropTypes,
 
     /**
-     * 节点
+     * 节点坐标
      */
     coordinates: PropTypes.arrayOf(LatLng).isRequired,
 
@@ -66,7 +67,7 @@ export default class Polyline extends PureComponent {
         },
       }),
     }
-    return <AMapPolyline {...props}/>
+    return <AMapPolyline {...props} />
   }
 }
 
