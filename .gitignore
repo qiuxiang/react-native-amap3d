@@ -3,6 +3,8 @@
 node_modules/
 build/
 xcuserdata/
+Pods/
 
 *.iml
+*.xcworkspace
 local.properties
