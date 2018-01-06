@@ -21,12 +21,12 @@ export default class Marker extends Component<any> {
     coordinate: LatLng.isRequired,
 
     /**
-     * 标题
+     * 标题，作为默认的选中弹出显示
      */
     title: PropTypes.string,
 
     /**
-     * 描述
+     * 描述，显示在标题下方
      */
     description: PropTypes.string,
 
@@ -54,12 +54,12 @@ export default class Marker extends Component<any> {
     }),
 
     /**
-     * 自定义图标，慎用，目前存在一些已知的 bug
+     * 自定义图标
      */
     icon: PropTypes.func,
 
     /**
-     * 自定义图片
+     * 自定义图片，对应原生图片名称
      */
     image: PropTypes.string,
 

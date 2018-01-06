@@ -16,11 +16,10 @@ import com.facebook.react.uimanager.events.RCTEventEmitter
 class AMapView(context: Context) : TextureMapView(context) {
     private val eventEmitter: RCTEventEmitter = (context as ThemedReactContext).getJSModule(RCTEventEmitter::class.java)
     private val markers = HashMap<String, AMapMarker>()
-    private val polylines = HashMap<String, AMapPolyline>()
-    private var locationType = MyLocationStyle.LOCATION_TYPE_FOLLOW_NO_CENTER
+    private val lines = HashMap<String, AMapPolyline>()
     private val locationStyle by lazy {
         val locationStyle = MyLocationStyle()
-        locationStyle.myLocationType(locationType)
+        locationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATION_ROTATE_NO_CENTER)
         locationStyle
     }
 
@@ -94,7 +93,7 @@ class AMapView(context: Context) : TextureMapView(context) {
         }
 
         map.setOnPolylineClickListener { polyline ->
-            emit(polylines[polyline.id]?.id, "onPress")
+            emit(lines[polyline.id]?.id, "onPress")
         }
 
         map.setOnMultiPointClickListener { item ->
@@ -137,7 +136,7 @@ class AMapView(context: Context) : TextureMapView(context) {
                 markers.put(child.marker?.id!!, child)
             }
             if (child is AMapPolyline) {
-                polylines.put(child.polyline?.id!!, child)
+                lines.put(child.polyline?.id!!, child)
             }
         }
     }
@@ -149,7 +148,7 @@ class AMapView(context: Context) : TextureMapView(context) {
                 markers.remove(child.marker?.id)
             }
             if (child is AMapPolyline) {
-                polylines.remove(child.polyline?.id)
+                lines.remove(child.polyline?.id)
             }
         }
     }
@@ -205,13 +204,12 @@ class AMapView(context: Context) : TextureMapView(context) {
     }
 
     fun setLocationEnabled(enabled: Boolean) {
-        map.myLocationStyle = locationStyle
         map.isMyLocationEnabled = enabled
+        map.myLocationStyle = locationStyle
     }
 
     fun setLocationInterval(interval: Long) {
         locationStyle.interval(interval)
-        map.myLocationStyle = locationStyle
     }
 
     private fun latLngBoundsFromReadableMap(region: ReadableMap): LatLngBounds {
@@ -223,5 +221,25 @@ class AMapView(context: Context) : TextureMapView(context) {
                 LatLng(latitude - latitudeDelta / 2, longitude - longitudeDelta / 2),
                 LatLng(latitude + latitudeDelta / 2, longitude + longitudeDelta / 2)
         )
+    }
+
+    fun setLocationStyle(style: ReadableMap) {
+        if (style.hasKey("fillColor")) {
+            locationStyle.radiusFillColor(style.getInt("fillColor"))
+        }
+
+        if (style.hasKey("stockColor")) {
+            locationStyle.strokeColor(style.getInt("stockColor"))
+        }
+
+        if (style.hasKey("stockWidth")) {
+            locationStyle.strokeWidth(style.getDouble("stockWidth").toFloat())
+        }
+
+        if (style.hasKey("image")) {
+            val drawable = context.resources.getIdentifier(
+                style.getString("image"), "drawable", context.packageName)
+            locationStyle.myLocationIcon(BitmapDescriptorFactory.fromResource(drawable))
+        }
     }
 }

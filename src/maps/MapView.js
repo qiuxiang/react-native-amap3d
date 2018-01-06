@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import PropTypes from 'prop-types'
-import { requireNativeComponent, ViewPropTypes } from 'react-native'
+import { processColor, requireNativeComponent, ViewPropTypes } from 'react-native'
 import { LatLng, Region } from '../PropTypes'
 import Component from '../Component'
 
@@ -11,6 +11,13 @@ export type MapStatus = {
   titl?: number,
   rotation?: number,
 }
+
+export const LocationStyle = PropTypes.shape({
+  image: PropTypes.string,
+  fillColor: PropTypes.string,
+  strokeColor: PropTypes.string,
+  strokeWidth: PropTypes.number,
+})
 
 export default class MapView extends Component<any> {
   static propTypes = {
@@ -26,6 +33,11 @@ export default class MapView extends Component<any> {
      * - bus: 公交地图
      */
     mapType: PropTypes.oneOf(['standard', 'satellite', 'navigation', 'night', 'bus']),
+
+    /**
+     * 设置定位图标的样式
+     */
+    locationStyle: LocationStyle,
 
     /**
      * 是否启用定位
@@ -240,7 +252,16 @@ export default class MapView extends Component<any> {
   }
 
   render() {
-    return <AMapView {...this.props} />
+    const props = { ...this.props }
+    if (props.locationStyle) {
+      if (props.locationStyle.strokeColor) {
+        props.locationStyle.strokeColor = processColor(props.locationStyle.strokeColor)
+      }
+      if (props.locationStyle.fillColor) {
+        props.locationStyle.fillColor = processColor(props.locationStyle.fillColor)
+      }
+    }
+    return <AMapView {...props} />
   }
 }
 
