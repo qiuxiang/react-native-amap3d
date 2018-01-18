@@ -5,4 +5,5 @@
 @property(nonatomic, strong) UIColor *fillColor;
 @property(nonatomic, strong) UIColor *stokeColor;
 @property(nonatomic, assign) CGFloat stokeWidth;
+@property(nonatomic, assign) bool isHiddenUserLocation;
 @end
