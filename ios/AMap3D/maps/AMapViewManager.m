@@ -9,7 +9,9 @@
 @interface AMapViewManager : RCTViewManager <MAMapViewDelegate>
 @end
 
-@implementation AMapViewManager
+@implementation AMapViewManager {
+    BOOL _isMapRotate;
+}
 
 RCT_EXPORT_MODULE()
 
@@ -49,6 +51,7 @@ RCT_EXPORT_VIEW_PROPERTY(onLongPress, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onLocation, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onStatusChange, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onStatusChangeComplete, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onChangeMapRotate, RCTBubblingEventBlock)
 
 RCT_EXPORT_METHOD(animateTo:(nonnull NSNumber *)reactTag params:(NSDictionary *)params duration:(NSInteger)duration) {
     [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, UIView *> *viewRegistry) {
@@ -73,6 +76,10 @@ RCT_EXPORT_METHOD(animateTo:(nonnull NSNumber *)reactTag params:(NSDictionary *)
     }];
 }
 
+RCT_EXPORT_METHOD(setMapRotate:(nonnull NSNumber *)reactTag isMapRotate:(BOOL)isMapRotate) {
+    _isMapRotate = isMapRotate;
+}
+
 - (void)mapView:(AMapView *)mapView didSingleTappedAtCoordinate:(CLLocationCoordinate2D)coordinate {
     if (mapView.onPress) {
         mapView.onPress(@{
@@ -91,7 +98,27 @@ RCT_EXPORT_METHOD(animateTo:(nonnull NSNumber *)reactTag params:(NSDictionary *)
     }
 }
 
+- (void)mapView:(AMapView *)mapView mapWillMoveByUser:(BOOL)wasUserAction {
+    _isMapRotate = NO;
+    if (mapView.onChangeMapRotate) {
+        mapView.onChangeMapRotate(@{@"isMapRotate" : @(_isMapRotate)});
+    }
+}
+
+- (void)mapView:(AMapView *)mapView mapWillZoomByUser:(BOOL)wasUserAction {
+    _isMapRotate = NO;
+    if (mapView.onChangeMapRotate) {
+        mapView.onChangeMapRotate(@{@"isMapRotate" : @(_isMapRotate)});
+    }
+}
+
 - (void)mapView:(AMapView *)mapView didUpdateUserLocation:(MAUserLocation *)userLocation updatingLocation:(BOOL)updatingLocation {
+    if (_isMapRotate) {
+        float heading = userLocation.heading.magneticHeading; //in degrees
+        mapView.rotationDegree = heading;
+        mapView.cameraDegree = 30.0;
+    }
+    
     if (mapView.onLocation) {
         mapView.onLocation(@{
                 @"latitude": @(userLocation.coordinate.latitude),
