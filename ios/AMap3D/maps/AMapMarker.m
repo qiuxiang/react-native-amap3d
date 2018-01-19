@@ -18,6 +18,7 @@
     BOOL _canShowCallout;
     BOOL _enabled;
     NSInteger _zIndex;
+    BOOL _isCustomUserPosition;
 }
 
 - (instancetype)init {
@@ -86,6 +87,10 @@
 - (void)setInfoWindowDisabled:(BOOL)disabled {
     _canShowCallout = !disabled;
     _annotationView.canShowCallout = !disabled;
+}
+
+- (void)setIsCustomUserPosition:(BOOL)isCustomUserPosition {
+    _isCustomUserPosition = isCustomUserPosition;
 }
 
 - (void)setClickDisabled:(BOOL)disabled {

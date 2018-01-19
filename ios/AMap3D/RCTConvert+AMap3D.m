@@ -31,6 +31,7 @@ RCT_ENUM_CONVERTER(MAPinAnnotationColor, (@{
     locationStyle.stokeColor = [self UIColor:json[@"stokeColor"]];
     locationStyle.stokeWidth = [self CGFloat:json[@"stokeWidth"]];
     locationStyle.image = [UIImage imageNamed:[self NSString:json[@"image"]]];
+    locationStyle.isHiddenUserLocation = [self BOOL:json[@"isHiddenUserLocation"]];
     return locationStyle;
 }
 

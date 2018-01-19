@@ -115,6 +115,12 @@ export default class Marker extends Component<any> {
     infoWindowDisabled: PropTypes.bool,
 
     /**
+     * isCustomUserPosition
+
+     */
+    isCustomUserPosition: PropTypes.bool,
+
+    /**
      * 点击事件
      */
     onPress: PropTypes.func,
@@ -142,9 +148,15 @@ export default class Marker extends Component<any> {
     onInfoWindowPress: PropTypes.func,
   }
 
+  componentDidMount() {
+    this.mounted = true;
+  }
+
   componentDidUpdate() {
     if (this.icon && Platform.OS === 'android') {
-      setTimeout(() => this.sendCommand('update'), 0)
+      setTimeout(() => {
+        if (this.mounted) this.sendCommand('update');
+      }, 0)
     }
   }
 
@@ -182,6 +194,10 @@ export default class Marker extends Component<any> {
         {this.renderInfoWindow(this.props.children)}
       </AMapMarker>
     )
+  }
+
+  componentWillUnmount() {
+    this.mounted = false;
   }
 }
 

@@ -240,6 +240,8 @@ export default class MapView extends Component<any> {
      * }}
      */
     onStatusChangeComplete: PropTypes.func,
+
+    onChangeMapRotate: PropTypes.func
   }
 
   name = 'AMapView'
@@ -249,6 +251,10 @@ export default class MapView extends Component<any> {
    */
   animateTo(target: MapStatus, duration?: number = 500) {
     this.sendCommand('animateTo', [target, duration])
+  }
+
+  setMapRotate(isRotate: boolean) {
+    this.sendCommand("setMapRotate", [isRotate]);
   }
 
   render() {

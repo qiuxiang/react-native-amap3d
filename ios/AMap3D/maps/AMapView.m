@@ -45,10 +45,20 @@
     if (!_locationStyle) {
         _locationStyle = [MAUserLocationRepresentation new];
     }
-    _locationStyle.fillColor = locationStyle.fillColor;
-    _locationStyle.strokeColor = locationStyle.stokeColor;
-    _locationStyle.lineWidth = locationStyle.stokeWidth;
-    _locationStyle.image = locationStyle.image;
+    if (locationStyle.isHiddenUserLocation) {
+        UIColor *transparentColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
+        _locationStyle.fillColor = transparentColor;
+        _locationStyle.strokeColor = transparentColor;
+        _locationStyle.locationDotBgColor = transparentColor;
+        _locationStyle.locationDotFillColor = transparentColor;
+        _locationStyle.lineWidth = 0;
+        _locationStyle.image = nil;
+    } else {
+        _locationStyle.fillColor = locationStyle.fillColor;
+        _locationStyle.strokeColor = locationStyle.stokeColor;
+        _locationStyle.lineWidth = locationStyle.stokeWidth;
+        _locationStyle.image = locationStyle.image;
+    }
     [self updateUserLocationRepresentation:_locationStyle];
 }
 
