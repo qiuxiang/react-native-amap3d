@@ -115,6 +115,12 @@ export default class Marker extends Component<any> {
     infoWindowDisabled: PropTypes.bool,
 
     /**
+     * isCustomUserPosition
+
+     */
+    isCustomUserPosition: PropTypes.bool,
+
+    /**
      * 点击事件
      */
     onPress: PropTypes.func,

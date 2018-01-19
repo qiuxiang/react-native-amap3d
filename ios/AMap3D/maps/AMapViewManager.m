@@ -102,11 +102,23 @@ RCT_EXPORT_METHOD(animateTo:(nonnull NSNumber *)reactTag params:(NSDictionary *)
                 @"timestamp": @(userLocation.location.timestamp.timeIntervalSince1970),
         });
     }
+    
+    if (!updatingLocation)
+    {
+        [UIView animateWithDuration:0.1 animations:^{
+            double degree = userLocation.heading.trueHeading - mapView.rotationDegree;
+            mapView.customUserPositionMarker.annotationView.transform = CGAffineTransformMakeRotation(degree * M_PI / 180.f );
+        }];
+    }
 }
 
 - (MAAnnotationView *)mapView:(AMapView *)mapView viewForAnnotation:(id <MAAnnotation>)annotation {
     if ([annotation isKindOfClass:[MAPointAnnotation class]]) {
         AMapMarker *marker = [mapView getMarker:annotation];
+        
+        if (marker.isCustomUserPosition) {
+            mapView.customUserPositionMarker = marker;
+        }
         return marker.annotationView;
     }
     return nil;

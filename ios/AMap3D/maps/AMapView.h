@@ -9,6 +9,7 @@
 @property(nonatomic, copy) RCTBubblingEventBlock onLongPress;
 @property(nonatomic, copy) RCTBubblingEventBlock onStatusChange;
 @property(nonatomic, copy) RCTBubblingEventBlock onStatusChangeComplete;
+@property(nonatomic) AMapMarker* customUserPositionMarker;
 
 @property(nonatomic) BOOL loaded;
 @property(nonatomic) MACoordinateRegion initialRegion;

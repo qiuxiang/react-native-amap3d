@@ -8,6 +8,7 @@
 @property(nonatomic, copy) RCTBubblingEventBlock onDragStart;
 @property(nonatomic, copy) RCTBubblingEventBlock onDrag;
 @property(nonatomic, copy) RCTBubblingEventBlock onDragEnd;
+@property(nonatomic) BOOL isCustomUserPosition;
 
 - (MAAnnotationView *)annotationView;
 - (MAPointAnnotation *)annotation;
