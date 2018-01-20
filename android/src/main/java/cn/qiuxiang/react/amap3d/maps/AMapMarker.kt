@@ -135,11 +135,13 @@ class AMapMarker(context: Context) : ReactViewGroup(context), AMapOverlay {
 
     fun updateIcon() {
         icon?.let {
-            val bitmap = Bitmap.createBitmap(
+            if (it.width != 0 && it.height != 0) {
+                val bitmap = Bitmap.createBitmap(
                     it.width, it.height, Bitmap.Config.ARGB_8888)
-            it.draw(Canvas(bitmap))
-            bitmapDescriptor = BitmapDescriptorFactory.fromBitmap(bitmap)
-            marker?.setIcon(bitmapDescriptor)
+                it.draw(Canvas(bitmap))
+                bitmapDescriptor = BitmapDescriptorFactory.fromBitmap(bitmap)
+                marker?.setIcon(bitmapDescriptor)
+            }
         }
     }
 
