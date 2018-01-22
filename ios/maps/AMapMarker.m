@@ -10,7 +10,7 @@
     MACustomCalloutView *_calloutView;
     UIImage *_image;
     AMapInfoWindow *_callout;
-    AMapView *_mapView;
+    __weak AMapView *_mapView;
     BOOL _active;
 }
 
