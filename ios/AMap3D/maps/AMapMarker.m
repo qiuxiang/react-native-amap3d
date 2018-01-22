@@ -9,7 +9,7 @@
     MAAnnotationView *_annotationView;
     MACustomCalloutView *_calloutView;
     UIView *_customView;
-    AMapView *_mapView;
+    __weak AMapView *_mapView;
     MAPinAnnotationColor _pinColor;
     UIImage *_image;
     CGPoint _centerOffset;
