@@ -3,6 +3,6 @@
 @interface LocationStyle : NSObject
 @property(nonatomic, strong) UIImage *image;
 @property(nonatomic, strong) UIColor *fillColor;
-@property(nonatomic, strong) UIColor *stokeColor;
-@property(nonatomic, assign) CGFloat stokeWidth;
+@property(nonatomic, strong) UIColor *strokeColor;
+@property(nonatomic, assign) CGFloat strokeWidth;
 @end

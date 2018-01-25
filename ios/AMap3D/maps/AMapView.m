@@ -46,8 +46,8 @@
         _locationStyle = [MAUserLocationRepresentation new];
     }
     _locationStyle.fillColor = locationStyle.fillColor;
-    _locationStyle.strokeColor = locationStyle.stokeColor;
-    _locationStyle.lineWidth = locationStyle.stokeWidth;
+    _locationStyle.strokeColor = locationStyle.strokeColor;
+    _locationStyle.lineWidth = locationStyle.strokeWidth;
     _locationStyle.image = locationStyle.image;
     [self updateUserLocationRepresentation:_locationStyle];
 }

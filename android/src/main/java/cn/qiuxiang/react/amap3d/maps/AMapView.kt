@@ -228,12 +228,12 @@ class AMapView(context: Context) : TextureMapView(context) {
             locationStyle.radiusFillColor(style.getInt("fillColor"))
         }
 
-        if (style.hasKey("stockColor")) {
-            locationStyle.strokeColor(style.getInt("stockColor"))
+        if (style.hasKey("strockeColor")) {
+            locationStyle.strokeColor(style.getInt("strockeColor"))
         }
 
-        if (style.hasKey("stockWidth")) {
-            locationStyle.strokeWidth(style.getDouble("stockWidth").toFloat())
+        if (style.hasKey("strockeWidth")) {
+            locationStyle.strokeWidth(style.getDouble("strockeWidth").toFloat())
         }
 
         if (style.hasKey("image")) {

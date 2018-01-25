@@ -28,8 +28,8 @@ RCT_ENUM_CONVERTER(MAPinAnnotationColor, (@{
 + (LocationStyle *)LocationStyle:(id)json {
     LocationStyle *locationStyle = [LocationStyle new];
     locationStyle.fillColor = [self UIColor:json[@"fillColor"]];
-    locationStyle.stokeColor = [self UIColor:json[@"stokeColor"]];
-    locationStyle.stokeWidth = [self CGFloat:json[@"stokeWidth"]];
+    locationStyle.strokeColor = [self UIColor:json[@"strokeColor"]];
+    locationStyle.strokeWidth = [self CGFloat:json[@"strokeWidth"]];
     locationStyle.image = [UIImage imageNamed:[self NSString:json[@"image"]]];
     return locationStyle;
 }
