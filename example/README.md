@@ -1,16 +1,14 @@
 ## 安装依赖
 
-推荐使用 npm@5+
-
 ```
-$ npm i
+$ yarn
 ```
 
 
 ## Android
 
 ```
-$ npm run android
+$ yarn run-android
 ```
 
 
@@ -18,7 +16,7 @@ $ npm run android
 
 ```
 $ cd ios && pod install && cd ..
-$ npm run ios
+$ yarn run-ios
 ```
 
 

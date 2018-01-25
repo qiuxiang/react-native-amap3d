@@ -3,14 +3,14 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "reload": "adb reverse tcp:8081 tcp:8081 && adb shell input text rr",
-    "android": "node node_modules/react-native/local-cli/cli.js run-android",
+    "run-android": "node node_modules/react-native/local-cli/cli.js run-android",
     "log-android": "node node_modules/react-native/local-cli/cli.js log-android",
-    "ios": "node node_modules/react-native/local-cli/cli.js run-ios"
+    "run-ios": "node node_modules/react-native/local-cli/cli.js run-ios"
   },
   "dependencies": {
-    "react": "16.0.0",
-    "react-native": "0.51.0",
-    "react-native-amap3d": "github:qiuxiang/react-native-amap3d",
+    "react": "^16.2.0",
+    "react-native": "^0.52.0",
+    "react-native-amap3d": "*",
     "react-navigation": "^1.0.0-beta.23"
   },
   "devDependencies": {
