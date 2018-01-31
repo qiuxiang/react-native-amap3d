@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { StyleSheet } from 'react-native'
-import { MapView, HeatMap } from 'react-native-amap3d'
+import { MapView } from 'react-native-amap3d'
 
 export default class HeatMapExample extends Component {
   static navigationOptions = {
@@ -15,7 +15,7 @@ export default class HeatMapExample extends Component {
   render() {
     return (
       <MapView zoomLevel={9} style={StyleSheet.absoluteFill}>
-        <HeatMap
+        <MapView.HeatMap
           opacity={0.8}
           radius={20}
           coordinates={this._coordinates}

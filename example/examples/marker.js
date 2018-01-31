@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { MapView, Marker } from 'react-native-amap3d'
+import { MapView } from 'react-native-amap3d'
 
 const styles = StyleSheet.create({
   customIcon: {
@@ -75,7 +75,7 @@ export default class MarkerExample extends Component {
   render() {
     return (
       <MapView style={StyleSheet.absoluteFill}>
-        <Marker
+        <MapView.Marker
           active
           draggable
           title="一个可拖拽的标记"
@@ -84,20 +84,20 @@ export default class MarkerExample extends Component {
           onInfoWindowPress={this._onInfoWindowPress}
           coordinate={this._coordinates[0]}
         />
-        <Marker color="green" coordinate={this._coordinates[1]} >
+        <MapView.Marker color="green" coordinate={this._coordinates[1]} >
           <TouchableOpacity activeOpacity={0.9} onPress={this._onCustomInfoWindowPress}>
             <View style={styles.customInfoWindow}>
               <Text>自定义信息窗口</Text>
               <Text>{this.state.time.toLocaleTimeString()}</Text>
             </View>
           </TouchableOpacity>
-        </Marker>
-        <Marker
+        </MapView.Marker>
+        <MapView.Marker
           image="flag"
           title="自定义图片"
           coordinate={this._coordinates[2]}
         />
-        <Marker
+        <MapView.Marker
           title="自定义 View"
           icon={() => (
             <View style={styles.customMarker}>

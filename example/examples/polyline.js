@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { StyleSheet, Alert } from 'react-native'
-import { MapView, Polyline } from 'react-native-amap3d'
+import { MapView } from 'react-native-amap3d'
 
 export default class PolylineExample extends Component {
   static navigationOptions = {
@@ -53,17 +53,17 @@ export default class PolylineExample extends Component {
   render() {
     return (
       <MapView style={StyleSheet.absoluteFill}>
-        <Polyline
+        <MapView.Polyline
           width={5}
           color="rgba(255, 0, 0, 0.5)"
           coordinates={this._line1}
         />
-        <Polyline
+        <MapView.Polyline
           dashed
           width={5}
           coordinates={this._line2}
         />
-        <Polyline
+        <MapView.Polyline
           gradient
           width={5}
           colors={['#f44336', '#2196f3', '#4caf50']}

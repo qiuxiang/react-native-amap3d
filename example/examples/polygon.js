@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { StyleSheet } from 'react-native'
-import { MapView, Polygon } from 'react-native-amap3d'
+import { MapView } from 'react-native-amap3d'
 
 export default class PolygonExample extends Component {
   static navigationOptions = {
@@ -25,7 +25,7 @@ export default class PolygonExample extends Component {
   render() {
     return (
       <MapView style={StyleSheet.absoluteFill}>
-        <Polygon
+        <MapView.Polygon
           strokeWidth={5}
           strokeColor="rgba(0, 0, 255, 0.5)"
           fillColor="rgba(255, 0, 0, 0.5)"

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, Text, Switch, Platform } from 'react-native'
-import MapView from 'react-native-amap3d'
+import { MapView } from 'react-native-amap3d'
 import commonStyles from '../styles'
 
 const styles = {

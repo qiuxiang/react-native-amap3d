@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   Dimensions,
 } from 'react-native'
-import MapView from 'react-native-amap3d'
+import { MapView } from 'react-native-amap3d'
 
 const styles = StyleSheet.create({
   body: {

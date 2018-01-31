@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { StyleSheet, Picker } from 'react-native'
-import MapView from 'react-native-amap3d'
+import { MapView } from 'react-native-amap3d'
 
 export default class MapTypesExample extends Component {
   static navigationOptions = ({ navigation }) => {

@@ -89,12 +89,6 @@ $ pod install
 ### 导入地图模块
 ```jsx
 import { MapView } from 'react-native-amap3d'
-
-const { Marker } = MapView
-
-<MapView>
-  <Marker .../>
-</MapView>
 ```
 
 ### 基本用法
@@ -119,7 +113,7 @@ const { Marker } = MapView
 ### 添加可拖拽的地图标记
 ```jsx
 <MapView>
-  <Marker
+  <MapView.Marker
     draggable
     title='这是一个可拖拽的标记'
     onDragEnd={({ nativeEvent }) =>
@@ -139,11 +133,11 @@ const coordinate = {
   longitude: 116.397972,
 }
 
-<Marker image='flag' coordinate={coordinate}>
+<MapView.Marker image='flag' coordinate={coordinate}>
   <View style={styles.customInfoWindow}>
     <Text>自定义信息窗体</Text>
   </View>
-</Marker>
+</MapView.Marker>
 ```
 
 [更多示例](https://github.com/qiuxiang/react-native-amap3d/tree/master/example/examples)。

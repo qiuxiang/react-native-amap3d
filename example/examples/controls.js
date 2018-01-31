@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { StyleSheet, Switch, Text, View } from 'react-native'
-import MapView from 'react-native-amap3d'
+import { MapView } from 'react-native-amap3d'
 import styles from '../styles'
 
 export default class ControlsExample extends Component {

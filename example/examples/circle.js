@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { StyleSheet } from 'react-native'
-import { MapView, Circle } from 'react-native-amap3d'
+import { MapView } from 'react-native-amap3d'
 
 export default class CircleExample extends Component {
   static navigationOptions = {
@@ -15,7 +15,7 @@ export default class CircleExample extends Component {
   render() {
     return (
       <MapView style={StyleSheet.absoluteFill}>
-        <Circle
+        <MapView.Circle
           strokeWidth={5}
           strokeColor="rgba(0, 0, 255, 0.5)"
           fillColor="rgba(255, 0, 0, 0.5)"
