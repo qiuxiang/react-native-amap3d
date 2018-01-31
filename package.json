@@ -1,39 +1,56 @@
 {
   "name": "react-native-amap3d",
-  "version": "0.11.1",
-  "description": "react-native 高德地图组件",
+  "version": "0.12.0",
+  "description": "react-native 高德地图组件，支持 Android + iOS",
   "author": "Qiu Xiang <i@7c00.cc>",
   "license": "MIT",
   "keywords": [
     "react-native",
     "amap",
-    "maps"
+    "maps",
+    "mapview"
   ],
-  "main": "src",
+  "main": "lib/js",
   "files": [
-    "src",
-    "android/src",
-    "android/build.gradle",
-    "ios"
+    "lib/js",
+    "lib/android/src",
+    "lib/android/build.gradle",
+    "lib/ios"
   ],
   "repository": {
     "type": "git",
     "url": "https://github.com/qiuxiang/react-native-amap3d"
   },
   "scripts": {
-    "test": "eslint src && flow"
+    "test": "eslint . && flow",
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "run-android": "node node_modules/react-native/local-cli/cli.js run-android",
+    "log-android": "node node_modules/react-native/local-cli/cli.js log-android",
+    "reload-android": "adb reverse tcp:8081 tcp:8081 && adb shell input text rr",
+    "run-ios": "node node_modules/react-native/local-cli/cli.js run-ios"
   },
   "peerDependencies": {
     "react-native": ">=0.47"
   },
   "devDependencies": {
     "babel-eslint": "^8.1.2",
+    "babel-preset-react-native": "^4.0.0",
     "eslint": "^4.14.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.5.1",
     "flow-bin": "^0.62.0",
-    "prop-types": "^15.6.0"
+    "react": "16.0.0",
+    "react-native": "0.51.0",
+    "react-navigation": "^1.0.0-beta.23"
+  },
+  "presets": [
+    "react-native"
+  ],
+  "rnpm": {
+    "android": {
+      "sourceDir": "lib/android"
+    }
   }
 }

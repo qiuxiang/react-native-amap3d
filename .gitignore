@@ -8,3 +8,4 @@ Pods/
 *.iml
 *.xcworkspace
 local.properties
+Podfile.lock

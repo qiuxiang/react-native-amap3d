@@ -5,41 +5,44 @@ aliases:
       - android-23
       - extra-android-m2repository
       - extra-android-support
-
-  - &init-example
-    |
-      nvm install node
-      cd example
-      npm i
+  
+  - &android-cache
+    directories:
+      - ~/.cache/yarn
+      - ~/.gradle/caches/modules-2
+      - ~/.gradle/wrappers
+  
+  - &ios-cache
+    directories:
+      - ~/.rncache
+      - ~/Library/Caches/Yarn
+      - ~/Library/Caches/CocoaPods
 
   - &init-new-project
     |
       nvm install node
-      npm i -g react-native-cli
+      yarn global add react-native-cli
       react-native init App
       cd App
-      npm i
-      npm i react-native-amap3d
+      yarn add react-native-amap3d
 
 jobs:
   include:
     - stage: "test js"
       language: node_js
       node_js: node
-      cache:
-        directories: [node_modules]
+      cache: yarn
 
     - stage: "build test for example"
       language: android
       jdk: oraclejdk8
       android: *android
-      cache:
-        directories:
-          - example/node_modules
-          - ~/.gradle/caches
-          - ~/.gradle/wrappers
+      before_cache:
+        - rm ~/.gradle/caches/modules-2/modules-2.lock
+      cache: *android-cache
       script:
-        - *init-example
+        - nvm install node
+        - yarn
         - cd android
         - ./gradlew build
         - ls -l app/build/outputs/apk
@@ -47,13 +50,12 @@ jobs:
     - stage: "build test for example"
       language: objective-c
       osx_image: xcode9.1
-      cache:
-        directories:
-          - example/node_modules
-          - ~/.rncache
-          - ~/Library/Caches/CocoaPods/Pods
+      cache: *ios-cache
+      before_install:
       script:
-        - *init-example
+        - nvm install node
+        - brew install yarn
+        - yarn
         - cd ios
         - pod install
         - xcodebuild -workspace RNAMap3D.xcworkspace -scheme RNAMap3D -sdk iphonesimulator -quiet
@@ -62,10 +64,9 @@ jobs:
       language: android
       jdk: oraclejdk8
       android: *android
-      cache:
-        directories:
-          - ~/.gradle/caches
-          - ~/.gradle/wrappers
+      before_cache:
+        - rm ~/.gradle/caches/modules-2/modules-2.lock
+      cache: *android-cache
       script:
         - *init-new-project
         - react-native link
@@ -76,15 +77,20 @@ jobs:
     - stage: "build test for new project"
       language: objective-c
       osx_image: xcode9.1
-      cache:
-        directories:
-          - ~/.rncache
-          - ~/Library/Caches/CocoaPods/Pods
+      cache: *ios-cache
       script:
+        - brew install yarn
         - *init-new-project
         - cd ios
         - |
-          echo -e "platform :ios, '8.0'\n\ntarget 'App' do\n  pod 'yoga', path: '../node_modules/react-native/ReactCommon/yoga/'\n  pod 'React', path: '../node_modules/react-native/'\n  pod 'react-native-amap3d', path: '../node_modules/react-native-amap3d/ios/'\nend" > Podfile
+          cat << EOF > Podfile
+            platform :ios, '8.0'
+            target 'App' do
+              pod 'React', path: '../node_modules/react-native/'
+              pod 'yoga', path: '../node_modules/react-native/ReactCommon/yoga/'
+              pod 'react-native-amap3d', path: '../node_modules/react-native-amap3d/ios/'
+            end
+          EOF
         - pod install
         - xcodebuild -workspace App.xcworkspace -scheme App -sdk iphonesimulator -quiet
 

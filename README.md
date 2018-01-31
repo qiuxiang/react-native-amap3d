@@ -19,7 +19,6 @@ react-native 高德地图组件，使用最新 3D SDK，支持 Android + iOS，�
 - 圆形绘制（Circle）
 - 热力图（HeatMap）
 - 海量点（MultiPoint）
-- 导航（驾车、步行、骑行）（待完善 🚧）
 - 离线地图
 
 <img src="http://upload-images.jianshu.io/upload_images/51256-f585098064a8d9de.png?imageView2/2/w/600" width="215"> <img src="http://upload-images.jianshu.io/upload_images/51256-a2b8b7fb93738f2e.png?imageView2/2/w/600" width="215"> <img src="http://upload-images.jianshu.io/upload_images/51256-85b17548888e2bd6.png?imageView2/2/w/600" width="215"> <img src="http://upload-images.jianshu.io/upload_images/51256-8c8b685f3cfbc350.png?imageView2/2/w/600" width="215">
@@ -30,6 +29,10 @@ react-native 高德地图组件，使用最新 3D SDK，支持 Android + iOS，�
 ### 安装依赖
 ```
 $ npm i react-native-amap3d
+```
+或
+```
+$ yarn add react-native-amap3d
 ```
 
 ### 项目配置
@@ -48,8 +51,9 @@ target 'Your Target' do
   pod 'yoga', path: '../node_modules/react-native/ReactCommon/yoga/'
   pod 'React', path: '../node_modules/react-native/', :subspecs => [
     'BatchedBridge',
+    'DevSupport',
   ]
-  pod 'react-native-amap3d', path: '../node_modules/react-native-amap3d/ios/'
+  pod 'react-native-amap3d', path: '../node_modules/react-native-amap3d/lib/ios/'
 end
 ```
 
@@ -67,10 +71,9 @@ $ pod install
 2. 编辑 Android 项目的 `AndroidManifest.xml`（一般在 `android\app\src\main\AndroidManifest.xml`），添加如下代码：
    ```xml
    <application>
-       <!-- 确保 meta-data 是直属 application 的子标签 -->
-       <meta-data
-         android:name="com.amap.api.v2.apikey"
-         android:value="你的高德 Key"/>
+     <meta-data
+       android:name="com.amap.api.v2.apikey"
+       android:value="你的高德 Key" />
    </application>
    ```
 
@@ -85,32 +88,30 @@ $ pod install
 
 ### 导入地图模块
 ```jsx
-import {MapView, Marker, Polyline} from 'react-native-amap3d'
+import { MapView } from 'react-native-amap3d'
+
+const { Marker } = MapView
+
 <MapView>
   <Marker .../>
-</MapView>
-```
-或者
-```jsx
-import MapView from 'react-native-amap3d'
-<MapView>
-  <MapView.Marker .../>
 </MapView>
 ```
 
 ### 基本用法
 ```jsx
-<MapView coordinate={{
-  latitude: 39.91095,
-  longitude: 116.37296,
-}}/>
+<MapView
+  coordinate={{
+    latitude: 39.91095,
+    longitude: 116.37296,
+  }}
+/>
 ```
 
 ### 启用定位并监听定位事件
 ```jsx
 <MapView
   locationEnabled
-  onLocation={({nativeEvent}) =>
+  onLocation={({ nativeEvent }) =>
     console.log(`${nativeEvent.latitude}, ${nativeEvent.longitude}`)}
 />
 ```
@@ -121,12 +122,13 @@ import MapView from 'react-native-amap3d'
   <Marker
     draggable
     title='这是一个可拖拽的标记'
-    onDragEnd={({nativeEvent}) =>
+    onDragEnd={({ nativeEvent }) =>
       console.log(`${nativeEvent.latitude}, ${nativeEvent.longitude}`)}
     coordinate={{
       latitude: 39.91095,
       longitude: 116.37296,
-    }}/>
+    }}
+  />
 </MapView>
 ```
 
@@ -144,19 +146,19 @@ const coordinate = {
 </Marker>
 ```
 
-更多示例请参考[示例项目](https://github.com/qiuxiang/react-native-amap3d/tree/master/example)。
+[更多示例](https://github.com/qiuxiang/react-native-amap3d/tree/master/example/examples)。
 
 
 ## 接口
 
 请参考注释文档：
-- [MapView](https://github.com/qiuxiang/react-native-amap3d/blob/master/src/maps/MapView.js)
-- [Marker](https://github.com/qiuxiang/react-native-amap3d/blob/master/src/maps/Marker.js)
-- [Polyline](https://github.com/qiuxiang/react-native-amap3d/blob/master/src/maps/Polyline.js)
-- [Polygon](https://github.com/qiuxiang/react-native-amap3d/blob/master/src/maps/Polygon.js)
-- [Circle](https://github.com/qiuxiang/react-native-amap3d/blob/master/src/maps/Circle.js)
-- [HeatMap](https://github.com/qiuxiang/react-native-amap3d/blob/master/src/maps/HeatMap.js)
-- [MultiPoint](https://github.com/qiuxiang/react-native-amap3d/blob/master/src/maps/MultiPoint.js)
+- [MapView](https://github.com/qiuxiang/react-native-amap3d/tree/master/lib/js/maps/MapView.js)
+- [Marker](https://github.com/qiuxiang/react-native-amap3d/tree/master/lib/js/maps/Marker.js)
+- [Polyline](https://github.com/qiuxiang/react-native-amap3d/tree/master/lib/js/maps/Polyline.js)
+- [Polygon](https://github.com/qiuxiang/react-native-amap3d/tree/master/lib/js/maps/Polygon.js)
+- [Circle](https://github.com/qiuxiang/react-native-amap3d/tree/master/lib/js/maps/Circle.js)
+- [HeatMap](https://github.com/qiuxiang/react-native-amap3d/tree/master/lib/js/maps/HeatMap.js)
+- [MultiPoint](https://github.com/qiuxiang/react-native-amap3d/tree/master/lib/js/maps/MultiPoint.js)
 
 
 ## 关于编译问题
