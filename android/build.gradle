@@ -1,31 +1,24 @@
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlin_version = '1.2.0'
-
     repositories {
         jcenter()
     }
-
     dependencies {
         classpath 'com.android.tools.build:gradle:2.2.3'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
     }
 }
 
-android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.1"
-
-    defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 22
+allprojects {
+    repositories {
+        mavenLocal()
+        jcenter()
+        maven {
+            // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
+            url "$rootDir/../node_modules/react-native/android"
+        }
     }
-}
-
-dependencies {
-    provided 'com.facebook.react:react-native:+'
-    compile 'com.amap.api:navi-3dmap:5.3.0_3dmap5.3.0'
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 }

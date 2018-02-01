@@ -1,3 +1,2 @@
 [ignore]
 .*/node_modules/react-native/*
-.*/example/.*
