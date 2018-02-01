@@ -76,11 +76,13 @@
 
 - (void)setActive:(BOOL)active {
     _active = active;
-    if (active) {
-        [_mapView selectAnnotation:_annotation animated:YES];
-    } else {
-        [_mapView deselectAnnotation:_annotation animated:YES];
-    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (active) {
+            [_mapView selectAnnotation:_annotation animated:YES];
+        } else {
+            [_mapView deselectAnnotation:_annotation animated:YES];
+        }
+    });
 }
 
 - (void)setInfoWindowDisabled:(BOOL)disabled {
