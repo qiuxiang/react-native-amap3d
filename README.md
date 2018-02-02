@@ -140,7 +140,20 @@ const coordinate = {
 </MapView.Marker>
 ```
 
-[更多示例](https://github.com/qiuxiang/react-native-amap3d/tree/master/example/examples)。
+### 更多示例
+[examples](https://github.com/qiuxiang/react-native-amap3d/tree/master/example/examples)
+#### Android
+```bash
+$ yarn
+$ yarn run-android
+```
+
+#### iOS 
+```bash
+$ yarn
+$ cd ios && pod install && cd ..
+$ yarn run-ios
+```
 
 
 ## 接口

@@ -68,9 +68,9 @@ export default class MarkerExample extends Component {
     },
   ]
 
-  _onInfoWindowPress = () => Alert.alert('信息窗口点击事件')
-  _onCustomInfoWindowPress = () => Alert.alert('自定义信息窗口点击事件')
-  _onDragEvent = ({ nativeEvent }) => Alert.alert(`新坐标：${nativeEvent.latitude}, ${nativeEvent.longitude}`)
+  _onMarkerPress = () => Alert.alert('onPress')
+  _onInfoWindowPress = () => Alert.alert('onInfoWindowPress')
+  _onDragEvent = ({ nativeEvent }) => Alert.alert(`${nativeEvent.latitude}, ${nativeEvent.longitude}`)
 
   render() {
     return (
@@ -85,7 +85,7 @@ export default class MarkerExample extends Component {
           coordinate={this._coordinates[0]}
         />
         <MapView.Marker color="green" coordinate={this._coordinates[1]} >
-          <TouchableOpacity activeOpacity={0.9} onPress={this._onCustomInfoWindowPress}>
+          <TouchableOpacity activeOpacity={0.9} onPress={this._onInfoWindowPress}>
             <View style={styles.customInfoWindow}>
               <Text>自定义信息窗口</Text>
               <Text>{this.state.time.toLocaleTimeString()}</Text>
@@ -95,6 +95,7 @@ export default class MarkerExample extends Component {
         <MapView.Marker
           image="flag"
           title="自定义图片"
+          onPress={this._onMarkerPress}
           coordinate={this._coordinates[2]}
         />
         <MapView.Marker
