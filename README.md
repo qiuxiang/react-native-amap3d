@@ -50,7 +50,6 @@ platform :ios, '8.0'
 target 'Your Target' do
   pod 'yoga', path: '../node_modules/react-native/ReactCommon/yoga/'
   pod 'React', path: '../node_modules/react-native/', :subspecs => [
-    'BatchedBridge',
     'DevSupport',
   ]
   pod 'react-native-amap3d', path: '../node_modules/react-native-amap3d/lib/ios/'
@@ -166,6 +165,13 @@ $ yarn run-ios
 - [Circle](https://github.com/qiuxiang/react-native-amap3d/tree/master/lib/js/maps/Circle.js)
 - [HeatMap](https://github.com/qiuxiang/react-native-amap3d/tree/master/lib/js/maps/HeatMap.js)
 - [MultiPoint](https://github.com/qiuxiang/react-native-amap3d/tree/master/lib/js/maps/MultiPoint.js)
+
+
+## 常见问题
+
+- RN v0.47 有个 [breaking change](https://github.com/facebook/react-native/commit/ce6fb337a146e6f261f2afb564aa19363774a7a8)，导致无法向后兼容。
+- 该项目不打算做数据接口，地理/逆地理编码、路径规划、搜索等功能请使用 [Web 服务](https://lbs.amap.com/api/webservice/summary)。
+- 尽量使用设备进行测试，在模拟器可能存在一些问题（常见的是 Android 模拟器因为缺少硬件加速而导致闪退）。
 
 
 ## 关于编译问题
