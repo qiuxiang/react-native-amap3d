@@ -2,6 +2,7 @@
 
 react-native 高德地图组件，使用最新 3D SDK，支持 Android + iOS，受 [react-native-maps](https://github.com/airbnb/react-native-maps) 启发，提供功能丰富且易用的接口。
 
+*注意：最新 RN v0.53 存在一些 bug（主要影响 iOS），建议使用 RN v0.52.2。*
 
 ## 功能
 
