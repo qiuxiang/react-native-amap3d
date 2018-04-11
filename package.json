@@ -25,6 +25,7 @@
     "test": "eslint . && flow",
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "run-android": "node node_modules/react-native/local-cli/cli.js run-android",
+    "release-android": "node node_modules/react-native/local-cli/cli.js run-android --variant=release",
     "log-android": "node node_modules/react-native/local-cli/cli.js log-android",
     "reload-android": "adb reverse tcp:8081 tcp:8081 && adb shell input text rr",
     "run-ios": "node node_modules/react-native/local-cli/cli.js run-ios"
