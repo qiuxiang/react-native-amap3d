@@ -4,7 +4,7 @@ react-native 高德地图组件，使用最新 3D SDK，支持 Android + iOS，�
 
 如果你需要百度地图，推荐使用 [react-native-baidumap-sdk](https://github.com/qiuxiang/react-native-baidumap-sdk)。
 
-*注意：RN v0.53 存在一些 bug（主要影响 iOS），建议使用 RN v0.52。*
+*注意：RN v0.53+ 存在一些 bug（主要影响 iOS 自定义 View），建议使用 RN v0.52。*
 
 ## 功能
 
@@ -48,16 +48,35 @@ $ react-native link react-native-amap3d
 推荐使用 CocoaPods，需要注意 iOS 项目不要 `react-native link react-native-amap3d`, 不然会引入错误的依赖，导致编译失败。在 `ios` 目录下新建文件 `Podfile`：
 
 ```ruby
+
 platform :ios, '8.0'
 
+# The target name is most likely the name of your project.
 target 'Your Target' do
-  pod 'yoga', path: '../node_modules/react-native/ReactCommon/yoga/'
-  pod 'React', path: '../node_modules/react-native/', :subspecs => [
-    'DevSupport',
+  # Your 'node_modules' directory is probably in the root of your project,
+  # but if not, adjust the `:path` accordingly
+  pod 'React', :path => '../node_modules/react-native', :subspecs => [
+    'Core',
+    'CxxBridge', # Include this for RN >= 0.47
+    'DevSupport', # Include this to enable In-App Devmenu if RN >= 0.43
+    'RCTText',
+    'RCTNetwork',
+    'RCTWebSocket', # needed for debugging
+    # Add any other subspecs you want to use in your project
   ]
-  pod 'react-native-amap3d', path: '../node_modules/react-native-amap3d/lib/ios/'
+  # Explicitly include Yoga if you are using RN >= 0.42.0
+  pod 'yoga', :path => '../node_modules/react-native/ReactCommon/yoga'
+
+  # Third party deps podspec link
+  pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
+  pod 'GLog', :podspec => '../node_modules/react-native/third-party-podspecs/GLog.podspec'
+  pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
+
+  pod 'react-native-amap3d', path: '../lib/ios/'
 end
 ```
+
+*注意：不同的 RN 版本，`Podfile` 可能需要稍作调整，具体参考 https://facebook.github.io/react-native/docs/0.52/integration-with-existing-apps.html 。*
 
 然后运行：
 ```

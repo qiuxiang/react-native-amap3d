@@ -22,7 +22,7 @@ aliases:
     |
       nvm install node
       yarn global add react-native-cli
-      react-native init App
+      react-native init App --version="0.52.3"
       cd App
       yarn add react-native-amap3d
 
@@ -86,10 +86,18 @@ jobs:
           cat << EOF > Podfile
             platform :ios, '8.0'
             target 'App' do
-              pod 'React', path: '../node_modules/react-native', :subspecs => [
+              pod 'React', :path => '../node_modules/react-native', :subspecs => [
+                'Core',
+                'CxxBridge',
                 'DevSupport',
+                'RCTText',
+                'RCTNetwork',
+                'RCTWebSocket',
               ]
-              pod 'yoga', path: '../node_modules/react-native/ReactCommon/yoga'
+              pod 'yoga', :path => '../node_modules/react-native/ReactCommon/yoga'
+              pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
+              pod 'GLog', :podspec => '../node_modules/react-native/third-party-podspecs/GLog.podspec'
+              pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
               pod 'react-native-amap3d', path: '../node_modules/react-native-amap3d/lib/ios'
             end
           EOF

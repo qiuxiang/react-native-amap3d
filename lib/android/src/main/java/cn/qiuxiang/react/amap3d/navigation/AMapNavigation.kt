@@ -133,9 +133,6 @@ abstract class AMapNavigation(context: ThemedReactContext) :
     override fun OnUpdateTrafficFacility(p0: TrafficFacilityInfo?) {
     }
 
-    override fun showLaneInfo(p0: Array<out AMapLaneInfo>?, p1: ByteArray?, p2: ByteArray?) {
-    }
-
     override fun onNaviInfoUpdate(p0: NaviInfo?) {
     }
 
@@ -165,5 +162,20 @@ abstract class AMapNavigation(context: ThemedReactContext) :
     }
 
     override fun onNaviCancel() {
+    }
+
+    override fun updateIntervalCameraInfo(p0: AMapNaviCameraInfo?, p1: AMapNaviCameraInfo?, p2: Int) {
+    }
+
+    override fun showModeCross(p0: AMapModelCross?) {
+    }
+
+    override fun hideModeCross() {
+    }
+
+    override fun showLaneInfo(p0: Array<out AMapLaneInfo>?, p1: ByteArray?, p2: ByteArray?) {
+    }
+
+    override fun showLaneInfo(p0: AMapLaneInfo?) {
     }
 }

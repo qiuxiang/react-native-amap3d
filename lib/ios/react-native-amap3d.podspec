@@ -16,5 +16,5 @@ Pod::Spec.new do |s|
   s.source_files = '**/*.{h,m}'
 
   s.dependency 'React'
-  s.dependency 'AMapNavi'
+  s.dependency 'AMapNavi', "~> 6.0.0"
 end
