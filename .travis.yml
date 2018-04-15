@@ -57,8 +57,7 @@ jobs:
         - brew install yarn
         - yarn
         - cd ios
-        - pod repo update
-        - pod install
+        - pod install --repo-update
         - xcodebuild -workspace RNAMap3D.xcworkspace -scheme RNAMap3D -sdk iphonesimulator -quiet
 
     - stage: "build test for new project"
@@ -102,8 +101,7 @@ jobs:
               pod 'react-native-amap3d', path: '../node_modules/react-native-amap3d/lib/ios'
             end
           EOF
-        - pod repo update
-        - pod install
+        - pod install --repo-update
         - xcodebuild -workspace App.xcworkspace -scheme App -sdk iphonesimulator -quiet
 
 stages:

@@ -1,5 +1,4 @@
 #import <MAMapKit/MAMapView.h>
-#import <AMapNaviKit/AMapNaviCommonObj.h>
 #import <React/RCTConvert.h>
 #import <React/RCTConvert+CoreLocation.h>
 #import "Coordinate.h"
@@ -55,15 +54,8 @@ RCT_ENUM_CONVERTER(MAPinAnnotationColor, (@{
                     [self CLLocationDegrees:json[@"longitudeDelta"]]));
 }
 
-+ (AMapNaviPoint *)AMapNaviPoint:(id)json {
-    return [AMapNaviPoint
-            locationWithLatitude:[self CGFloat:json[@"latitude"]]
-                       longitude:[self CGFloat:json[@"longitude"]]];
-}
-
 RCT_ARRAY_CONVERTER(Coordinate)
 RCT_ARRAY_CONVERTER(MAHeatMapNode)
 RCT_ARRAY_CONVERTER(MAMultiPointItem)
-RCT_ARRAY_CONVERTER(AMapNaviPoint)
 
 @end

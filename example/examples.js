@@ -88,9 +88,6 @@ export default class Examples extends Component {
           <View style={styles.separator} />
           {this._renderItem('海量点', 'MultiPoint')}
         </View>
-        <View style={styles.group}>
-          {this._renderItem('导航', 'Navigation')}
-        </View>
       </ScrollView>
     )
   }

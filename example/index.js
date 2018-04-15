@@ -13,7 +13,6 @@ import Polygon from './examples/polygon'
 import Circle from './examples/circle'
 import Events from './examples/events'
 import Offline from './examples/offline'
-import Navigation from './examples/navigation'
 import HeatMap from './examples/heat-map'
 import MultiPoint from './examples/multi-point'
 
@@ -31,7 +30,6 @@ export default StackNavigator({
   Circle: { screen: Circle },
   Events: { screen: Events },
   Offline: { screen: Offline },
-  Navigation: { screen: Navigation },
   HeatMap: { screen: HeatMap },
   MultiPoint: { screen: MultiPoint },
 }, {

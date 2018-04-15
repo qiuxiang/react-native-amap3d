@@ -196,15 +196,6 @@ $ yarn run-ios
 - 尽量使用设备进行测试，在模拟器可能存在一些问题（常见的是 Android 模拟器因为缺少硬件加速而导致闪退）。
 
 
-## 关于编译问题
-鉴于编译问题重复提得太多，且没有什么讨论价值，有必要单独做一些说明。
-
-为了方便排除问题，这个项目是有在持续集成里做编译测试的。
-其中在 master 分支做 example 的编译测试，在 release 分支做新项目的编译测试。
-在提编译问题之前，请先检查最新的编译测试。当然，如果你熟悉编译过程，
-并且发现这个项目的配置确实存在问题，欢迎提出、讨论。
-
-
 [npm]: https://www.npmjs.com/package/react-native-amap3d
 [version-badge]: https://badge.fury.io/js/react-native-amap3d.svg
 [build-badge]: https://travis-ci.org/qiuxiang/react-native-amap3d.svg?branch=master

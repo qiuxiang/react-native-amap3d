@@ -44,7 +44,6 @@ export default class EventsExample extends Component {
   _logPressEvent = ({ nativeEvent }) => this._log('onPress', nativeEvent)
   _logLongPressEvent = ({ nativeEvent }) => this._log('onLongPress', nativeEvent)
   _logLocationEvent = ({ nativeEvent }) => this._log('onLocation', nativeEvent)
-  _logStatusChangeEvent = ({ nativeEvent }) => this._log('onStatusChange', nativeEvent)
   _logStatusChangeCompleteEvent = ({ nativeEvent }) => this._log('onStatusChangeComplete', nativeEvent)
 
   _renderItem = ({ item }) =>
@@ -60,7 +59,6 @@ export default class EventsExample extends Component {
           onPress={this._logPressEvent}
           onLongPress={this._logLongPressEvent}
           onLocation={this._logLocationEvent}
-          onStatusChange={this._logStatusChangeEvent}
           onStatusChangeComplete={this._logStatusChangeCompleteEvent}
           style={styles.body}
         />
