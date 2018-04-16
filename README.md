@@ -72,7 +72,7 @@ target 'Your Target' do
   pod 'GLog', :podspec => '../node_modules/react-native/third-party-podspecs/GLog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
-  pod 'react-native-amap3d', path: '../lib/ios/'
+  pod 'react-native-amap3d', path: '../node_modules/react-native-amap3d/lib/ios'
 end
 ```
 
