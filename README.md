@@ -31,24 +31,19 @@ react-native 高德地图组件，使用最新 3D SDK，支持 Android + iOS，�
 
 ### 安装依赖
 ```
-$ npm i react-native-amap3d
-```
-或
-```
-$ yarn add react-native-amap3d
+npm i react-native-amap3d
 ```
 
 ### 项目配置
 #### Android
 ```
-$ react-native link react-native-amap3d
+react-native link react-native-amap3d
 ```
 
 #### iOS
-推荐使用 CocoaPods，需要注意 iOS 项目不要 `react-native link react-native-amap3d`, 不然会引入错误的依赖，导致编译失败。在 `ios` 目录下新建文件 `Podfile`：
+你需要使用 CocoaPods，在 `ios` 目录下新建文件 `Podfile`：
 
 ```ruby
-
 platform :ios, '8.0'
 
 # The target name is most likely the name of your project.
@@ -80,10 +75,8 @@ end
 
 然后运行：
 ```
-$ pod install
+pod install
 ```
-
-如果你不想使用 CocoaPods，手动配置请参考：[手动部署](http://lbs.amap.com/api/ios-sdk/guide/create-project/manual-configuration)。
 
 ### 添加高德 Key
 #### Android
@@ -165,15 +158,13 @@ const coordinate = {
 [examples](https://github.com/qiuxiang/react-native-amap3d/tree/master/example/examples)
 #### Android
 ```bash
-$ yarn
-$ yarn run-android
+yarn run-android
 ```
 
 #### iOS 
 ```bash
-$ yarn
-$ cd ios && pod install && cd ..
-$ yarn run-ios
+cd ios && pod install && cd ..
+yarn run-ios
 ```
 
 
