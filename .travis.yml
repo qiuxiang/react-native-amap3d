@@ -10,7 +10,7 @@ aliases:
     directories:
       - ~/.cache/yarn
       - ~/.gradle/caches/modules-2
-      - ~/.gradle/wrappers
+      - ~/.gradle/wrapper
   
   - &ios-cache
     directories:
@@ -49,7 +49,7 @@ jobs:
 
     - stage: "build test for example"
       language: objective-c
-      osx_image: xcode9.1
+      osx_image: xcode9.3
       cache: *ios-cache
       before_install:
       script:
@@ -59,6 +59,7 @@ jobs:
         - cd ios
         - pod install --repo-update
         - xcodebuild -workspace RNAMap3D.xcworkspace -scheme RNAMap3D -sdk iphonesimulator -quiet
+        - ls -l build/Build/Products/Debug-iphonesimulator/
 
     - stage: "build test for new project"
       language: android
@@ -72,11 +73,11 @@ jobs:
         - react-native link
         - cd android
         - ./gradlew build
-        - ls -l app/build/outputs/apk
+        - ls -l app/build/outputs/apk/
 
     - stage: "build test for new project"
       language: objective-c
-      osx_image: xcode9.1
+      osx_image: xcode9.3
       cache: *ios-cache
       script:
         - brew install yarn
@@ -103,6 +104,7 @@ jobs:
           EOF
         - pod install --repo-update
         - xcodebuild -workspace App.xcworkspace -scheme App -sdk iphonesimulator -quiet
+        - ls -l build/Build/Products/Debug-iphonesimulator/
 
 stages:
   - "test js"
