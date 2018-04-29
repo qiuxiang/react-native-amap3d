@@ -1,6 +1,7 @@
 package cn.qiuxiang.react.amap3d.maps
 
 import android.view.View
+import cn.qiuxiang.react.amap3d.toLatLng
 import com.amap.api.maps.model.LatLng
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.ReadableMap
@@ -70,9 +71,7 @@ internal class AMapMarkerManager : ViewGroupManager<AMapMarker>() {
 
     @ReactProp(name = "coordinate")
     fun setCoordinate(view: AMapMarker, coordinate: ReadableMap) {
-        view.position = LatLng(
-                coordinate.getDouble("latitude"),
-                coordinate.getDouble("longitude"))
+        view.position = coordinate.toLatLng()
     }
 
     @ReactProp(name = "flat")
@@ -116,14 +115,12 @@ internal class AMapMarkerManager : ViewGroupManager<AMapMarker>() {
     }
 
     @ReactProp(name = "zIndex")
-    fun setZInex(marker: AMapMarker, zIndex: Float) {
+    fun setZIndez(marker: AMapMarker, zIndex: Float) {
         marker.zIndex = zIndex
     }
 
     @ReactProp(name = "anchor")
     fun setAnchor(view: AMapMarker, coordinate: ReadableMap) {
-        view.setAnchor(
-                coordinate.getDouble("x"),
-                coordinate.getDouble("y"))
+        view.setAnchor(coordinate.getDouble("x"), coordinate.getDouble("y"))
     }
 }

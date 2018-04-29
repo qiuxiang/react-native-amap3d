@@ -1,6 +1,7 @@
 package cn.qiuxiang.react.amap3d.maps
 
 import android.content.Context
+import cn.qiuxiang.react.amap3d.toLatLngList
 import com.amap.api.maps.AMap
 import com.amap.api.maps.model.HeatmapTileProvider
 import com.amap.api.maps.model.LatLng
@@ -17,9 +18,7 @@ class AMapHeatMap(context: Context) : ReactViewGroup(context), AMapOverlay {
     var radius: Int = 12
 
     fun setCoordinates(coordinates: ReadableArray) {
-        this.coordinates = ArrayList((0 until coordinates.size())
-                .map { coordinates.getMap(it) }
-                .map { LatLng(it.getDouble("latitude"), it.getDouble("longitude")) })
+        this.coordinates = coordinates.toLatLngList()
     }
 
     override fun add(map: AMap) {

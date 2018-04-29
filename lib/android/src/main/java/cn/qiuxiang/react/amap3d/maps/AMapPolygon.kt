@@ -2,6 +2,7 @@ package cn.qiuxiang.react.amap3d.maps
 
 import android.content.Context
 import android.graphics.Color
+import cn.qiuxiang.react.amap3d.toLatLngList
 import com.amap.api.maps.AMap
 import com.amap.api.maps.model.LatLng
 import com.amap.api.maps.model.Polygon
@@ -38,10 +39,7 @@ class AMapPolygon(context: Context) : ReactViewGroup(context), AMapOverlay {
         }
 
     fun setCoordinates(coordinates: ReadableArray) {
-        this.coordinates = ArrayList((0 until coordinates.size())
-                .map { coordinates.getMap(it) }
-                .map { LatLng(it.getDouble("latitude"), it.getDouble("longitude")) })
-
+        this.coordinates = coordinates.toLatLngList()
         polygon?.points = this.coordinates
     }
 

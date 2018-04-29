@@ -2,10 +2,16 @@ package cn.qiuxiang.react.amap3d.maps
 
 import android.content.Context
 import android.view.View
+import cn.qiuxiang.react.amap3d.toLatLng
+import cn.qiuxiang.react.amap3d.toLatLngBounds
+import cn.qiuxiang.react.amap3d.toWritableMap
 import com.amap.api.maps.AMap
 import com.amap.api.maps.CameraUpdateFactory
 import com.amap.api.maps.TextureMapView
-import com.amap.api.maps.model.*
+import com.amap.api.maps.model.BitmapDescriptorFactory
+import com.amap.api.maps.model.CameraPosition
+import com.amap.api.maps.model.Marker
+import com.amap.api.maps.model.MyLocationStyle
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.ReadableMap
@@ -31,17 +37,11 @@ class AMapView(context: Context) : TextureMapView(context) {
                 marker.active = false
             }
 
-            val event = Arguments.createMap()
-            event.putDouble("latitude", latLng.latitude)
-            event.putDouble("longitude", latLng.longitude)
-            emit(id, "onPress", event)
+            emit(id, "onPress", latLng.toWritableMap())
         }
 
         map.setOnMapLongClickListener { latLng ->
-            val event = Arguments.createMap()
-            event.putDouble("latitude", latLng.latitude)
-            event.putDouble("longitude", latLng.longitude)
-            emit(id, "onLongPress", event)
+            emit(id, "onLongPress", latLng.toWritableMap())
         }
 
         map.setOnMyLocationChangeListener { location ->
@@ -73,11 +73,7 @@ class AMapView(context: Context) : TextureMapView(context) {
             }
 
             override fun onMarkerDragEnd(marker: Marker) {
-                val position = marker.position
-                val data = Arguments.createMap()
-                data.putDouble("latitude", position.latitude)
-                data.putDouble("longitude", position.longitude)
-                emit(markers[marker.id]?.id, "onDragEnd", data)
+                emit(markers[marker.id]?.id, "onDragEnd", marker.position.toWritableMap())
             }
         })
 
@@ -112,12 +108,10 @@ class AMapView(context: Context) : TextureMapView(context) {
 
     fun emitCameraChangeEvent(event: String, position: CameraPosition?) {
         position?.let {
-            val data = Arguments.createMap()
+            val data = it.target.toWritableMap()
             data.putDouble("zoomLevel", it.zoom.toDouble())
             data.putDouble("tilt", it.tilt.toDouble())
             data.putDouble("rotation", it.bearing.toDouble())
-            data.putDouble("latitude", it.target.latitude)
-            data.putDouble("longitude", it.target.longitude)
             if (event == "onStatusChangeComplete") {
                 val southwest = map.projection.visibleRegion.latLngBounds.southwest
                 val northeast = map.projection.visibleRegion.latLngBounds.northeast
@@ -136,10 +130,10 @@ class AMapView(context: Context) : TextureMapView(context) {
         if (child is AMapOverlay) {
             child.add(map)
             if (child is AMapMarker) {
-                markers.put(child.marker?.id!!, child)
+                markers[child.marker?.id!!] = child
             }
             if (child is AMapPolyline) {
-                lines.put(child.polyline?.id!!, child)
+                lines[child.polyline?.id!!] = child
             }
         }
     }
@@ -177,8 +171,7 @@ class AMapView(context: Context) : TextureMapView(context) {
         var rotation = currentCameraPosition.bearing
 
         if (target.hasKey("coordinate")) {
-            val json = target.getMap("coordinate")
-            coordinate = LatLng(json.getDouble("latitude"), json.getDouble("longitude"))
+            coordinate = target.getMap("coordinate").toLatLng()
         }
 
         if (target.hasKey("zoomLevel")) {
@@ -199,11 +192,11 @@ class AMapView(context: Context) : TextureMapView(context) {
     }
 
     fun setRegion(region: ReadableMap) {
-        map.moveCamera(CameraUpdateFactory.newLatLngBounds(latLngBoundsFromReadableMap(region), 0))
+        map.moveCamera(CameraUpdateFactory.newLatLngBounds(region.toLatLngBounds(), 0))
     }
 
     fun setLimitRegion(region: ReadableMap) {
-        map.setMapStatusLimits(latLngBoundsFromReadableMap(region))
+        map.setMapStatusLimits(region.toLatLngBounds())
     }
 
     fun setLocationEnabled(enabled: Boolean) {
@@ -213,17 +206,6 @@ class AMapView(context: Context) : TextureMapView(context) {
 
     fun setLocationInterval(interval: Long) {
         locationStyle.interval(interval)
-    }
-
-    private fun latLngBoundsFromReadableMap(region: ReadableMap): LatLngBounds {
-        val latitude = region.getDouble("latitude")
-        val longitude = region.getDouble("longitude")
-        val latitudeDelta = region.getDouble("latitudeDelta")
-        val longitudeDelta = region.getDouble("longitudeDelta")
-        return LatLngBounds(
-                LatLng(latitude - latitudeDelta / 2, longitude - longitudeDelta / 2),
-                LatLng(latitude + latitudeDelta / 2, longitude + longitudeDelta / 2)
-        )
     }
 
     fun setLocationStyle(style: ReadableMap) {

@@ -1,7 +1,7 @@
 package cn.qiuxiang.react.amap3d.maps
 
+import cn.qiuxiang.react.amap3d.toLatLng
 import cn.qiuxiang.react.amap3d.toPx
-import com.amap.api.maps.model.LatLng
 import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.uimanager.SimpleViewManager
 import com.facebook.react.uimanager.ThemedReactContext
@@ -19,9 +19,7 @@ internal class AMapCircleManager : SimpleViewManager<AMapCircle>() {
 
     @ReactProp(name = "coordinate")
     fun setCoordinate(circle: AMapCircle, coordinate: ReadableMap) {
-        circle.center = LatLng(
-                coordinate.getDouble("latitude"),
-                coordinate.getDouble("longitude"))
+        circle.center = coordinate.toLatLng()
     }
 
     @ReactProp(name = "radius")
@@ -41,11 +39,11 @@ internal class AMapCircleManager : SimpleViewManager<AMapCircle>() {
 
     @ReactProp(name = "strokeWidth")
     fun setStrokeWidth(circle: AMapCircle, strokeWidth: Float) {
-        circle.strokeWidth = strokeWidth.toPx.toFloat()
+        circle.strokeWidth = strokeWidth.toPx().toFloat()
     }
 
     @ReactProp(name = "zIndex")
-    fun setZIndex_(circle: AMapCircle, zIndex: Float) {
+    fun setZIndez(circle: AMapCircle, zIndex: Float) {
         circle.zIndex = zIndex
     }
 }

@@ -33,7 +33,7 @@ internal class AMapPolygonManager : SimpleViewManager<AMapPolygon>() {
 
     @ReactProp(name = "strokeWidth")
     fun setStrokeWidth(polygon: AMapPolygon, strokeWidth: Float) {
-        polygon.strokeWidth = strokeWidth.toPx.toFloat()
+        polygon.strokeWidth = strokeWidth.toPx().toFloat()
     }
 
     @ReactProp(name = "zIndex")

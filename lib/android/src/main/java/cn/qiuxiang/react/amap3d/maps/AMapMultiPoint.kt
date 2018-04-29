@@ -1,6 +1,7 @@
 package cn.qiuxiang.react.amap3d.maps
 
 import android.content.Context
+import cn.qiuxiang.react.amap3d.toLatLng
 import com.amap.api.maps.AMap
 import com.amap.api.maps.model.*
 import com.facebook.react.bridge.ReadableArray
@@ -15,9 +16,7 @@ class AMapMultiPoint(context: Context) : ReactViewGroup(context), AMapOverlay {
         items = ArrayList((0 until points.size())
                 .map {
                     val data = points.getMap(it)
-                    val item = MultiPointItem(LatLng(
-                            data.getDouble("latitude"),
-                            data.getDouble("longitude")))
+                    val item = MultiPointItem(data.toLatLng())
                     if (data.hasKey("title")) {
                         item.title = data.getString("title")
                     }

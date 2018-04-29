@@ -37,7 +37,7 @@ internal class AMapPolylineManager : SimpleViewManager<AMapPolyline>() {
 
     @ReactProp(name = "width")
     fun setWidth(polyline: AMapPolyline, width: Float) {
-        polyline.width = width.toPx.toFloat()
+        polyline.width = width.toPx().toFloat()
     }
 
     @ReactProp(name = "zIndex")
