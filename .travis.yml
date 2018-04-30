@@ -59,7 +59,6 @@ jobs:
         - cd ios
         - pod install --repo-update
         - xcodebuild -workspace RNAMap3D.xcworkspace -scheme RNAMap3D -sdk iphonesimulator -quiet
-        - ls -l build/Build/Products/Debug-iphonesimulator/
 
     - stage: "build test for new project"
       language: android
@@ -104,7 +103,6 @@ jobs:
           EOF
         - pod install --repo-update
         - xcodebuild -workspace App.xcworkspace -scheme App -sdk iphonesimulator -quiet
-        - ls -l build/Build/Products/Debug-iphonesimulator/
 
 stages:
   - "test js"
