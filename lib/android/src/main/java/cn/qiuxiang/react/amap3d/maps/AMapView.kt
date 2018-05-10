@@ -230,5 +230,6 @@ class AMapView(context: Context) : TextureMapView(context) {
 
     fun setLocationType(type: Int) {
         locationStyle.myLocationType(type)
+        map.myLocationStyle = locationStyle
     }
 }
