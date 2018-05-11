@@ -227,4 +227,9 @@ class AMapView(context: Context) : TextureMapView(context) {
             locationStyle.myLocationIcon(BitmapDescriptorFactory.fromResource(drawable))
         }
     }
+
+    fun setLocationType(type: Int) {
+        locationStyle.myLocationType(type)
+        map.myLocationStyle = locationStyle
+    }
 }

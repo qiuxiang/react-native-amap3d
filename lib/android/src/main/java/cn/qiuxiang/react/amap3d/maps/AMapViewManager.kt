@@ -4,6 +4,7 @@ import android.view.View
 import com.amap.api.maps.AMap
 import com.amap.api.maps.CameraUpdateFactory
 import com.amap.api.maps.model.LatLng
+import com.amap.api.maps.model.MyLocationStyle
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.common.MapBuilder
@@ -193,5 +194,19 @@ internal class AMapViewManager : ViewGroupManager<AMapView>() {
     @ReactProp(name = "locationStyle")
     fun setLocationStyle(view: AMapView, style: ReadableMap) {
         view.setLocationStyle(style)
+    }
+
+    @ReactProp(name = "locationType")
+    fun setLocationStyle(view: AMapView, type: String) {
+        when (type) {
+            "show" -> view.setLocationType(MyLocationStyle.LOCATION_TYPE_SHOW)
+            "locate" -> view.setLocationType(MyLocationStyle.LOCATION_TYPE_LOCATE)
+            "follow" -> view.setLocationType(MyLocationStyle.LOCATION_TYPE_FOLLOW)
+            "map_rotate" -> view.setLocationType(MyLocationStyle.LOCATION_TYPE_MAP_ROTATE)
+            "location_rotate" -> view.setLocationType(MyLocationStyle.LOCATION_TYPE_LOCATION_ROTATE)
+            "location_rotate_no_center" -> view.setLocationType(MyLocationStyle.LOCATION_TYPE_LOCATION_ROTATE_NO_CENTER)
+            "follow_no_center" -> view.setLocationType(MyLocationStyle.LOCATION_TYPE_FOLLOW_NO_CENTER)
+            "map_rotate_no_center" -> view.setLocationType(MyLocationStyle.LOCATION_TYPE_MAP_ROTATE_NO_CENTER)
+        }
     }
 }
