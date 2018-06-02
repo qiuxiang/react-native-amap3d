@@ -29,6 +29,10 @@
     self.showsUserLocation = enabled;
 }
 
+- (void)setShowCompass:(BOOL)enabled {
+    self.showsCompass = enabled;
+}
+
 - (void)setCoordinate:(CLLocationCoordinate2D)coordinate {
     self.centerCoordinate = coordinate;
 }
