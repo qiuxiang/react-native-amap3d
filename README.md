@@ -26,7 +26,7 @@ react-native 高德地图组件，使用最新 3D SDK，支持 Android + iOS，�
 - 海量点（MultiPoint）
 - 离线地图
 
-<img src="http://upload-images.jianshu.io/upload_images/51256-f585098064a8d9de.png?imageView2/2/w/600" width="215"> <img src="http://upload-images.jianshu.io/upload_images/51256-a2b8b7fb93738f2e.png?imageView2/2/w/600" width="215"> <img src="http://upload-images.jianshu.io/upload_images/51256-85b17548888e2bd6.png?imageView2/2/w/600" width="215"> <img src="http://upload-images.jianshu.io/upload_images/51256-8c8b685f3cfbc350.png?imageView2/2/w/600" width="215">
+<img src="https://user-images.githubusercontent.com/1709072/40894475-907865ea-67dc-11e8-83f3-09ac73c95434.jpg" width="215"> <img src="https://user-images.githubusercontent.com/1709072/40894476-90ac38d4-67dc-11e8-9667-a4c36ef897bc.jpg" width="215"> <img src="https://user-images.githubusercontent.com/1709072/40894477-90dd258e-67dc-11e8-8809-e8f4e3198cee.jpg" width="215"> <img src="https://user-images.githubusercontent.com/1709072/40894478-91a87720-67dc-11e8-9135-c64680ad70eb.jpg" width="215">
 
 
 ## 安装
@@ -157,7 +157,7 @@ const coordinate = {
 ```
 
 ### 更多示例
-[examples](https://github.com/qiuxiang/react-native-amap3d/tree/master/example/examples)
+参考 [examples](https://github.com/qiuxiang/react-native-amap3d/tree/master/example/examples)，或直接下载安装 [example.apk](https://github.com/qiuxiang/react-native-amap3d/releases/download/v1.0.0-beta.1/example.apk)。
 #### Android
 ```bash
 yarn run-android
