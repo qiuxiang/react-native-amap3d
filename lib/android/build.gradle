@@ -26,6 +26,6 @@ android {
 
 dependencies {
     provided 'com.facebook.react:react-native:+'
-    compile 'com.amap.api:3dmap:6.3.0'
+    compile 'com.amap.api:3dmap:6.4.0'
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
