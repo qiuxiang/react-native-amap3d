@@ -23,3 +23,11 @@ target 'RNAMap3D' do
 
   pod 'react-native-amap3d', path: '../lib/ios/'
 end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    if target.name == "React"
+      target.remove_from_project
+    end
+  end
+end

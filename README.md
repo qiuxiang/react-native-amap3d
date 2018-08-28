@@ -71,6 +71,14 @@ target 'Your Target' do
 
   pod 'react-native-amap3d', path: '../node_modules/react-native-amap3d/lib/ios'
 end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    if target.name == "React"
+      target.remove_from_project
+    end
+  end
+end
 ```
 
 *注意：不同的 RN 版本，`Podfile` 可能需要稍作调整，具体参考 https://facebook.github.io/react-native/docs/0.52/integration-with-existing-apps.html 。*

@@ -100,6 +100,13 @@ jobs:
               pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
               pod 'react-native-amap3d', path: '../node_modules/react-native-amap3d/lib/ios'
             end
+            post_install do |installer|
+              installer.pods_project.targets.each do |target|
+                if target.name == "React"
+                  target.remove_from_project
+                end
+              end
+            end
           EOF
         - pod install --repo-update
         - xcodebuild -workspace App.xcworkspace -scheme App -sdk iphonesimulator -quiet
