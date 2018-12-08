@@ -42,9 +42,9 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.7.0",
     "flow-bin": "^0.69.0",
-    "react": "16.2.0",
-    "react-native": "0.52.3",
-    "react-navigation": "^1.5.11"
+    "react": "16.6.1",
+    "react-native": "0.57.7",
+    "react-navigation": "^2.18.0"
   },
   "presets": [
     "react-native"

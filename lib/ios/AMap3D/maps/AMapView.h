@@ -2,7 +2,9 @@
 
 @class AMapMarker;
 
-@interface AMapView : MAMapView
+@interface AMapView : UIView <MAMapViewDelegate>
+
+@property(nonatomic) MAMapView *mapView;
 
 @property(nonatomic, copy) RCTBubblingEventBlock onLocation;
 @property(nonatomic, copy) RCTBubblingEventBlock onPress;
