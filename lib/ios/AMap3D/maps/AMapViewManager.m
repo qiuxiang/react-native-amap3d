@@ -73,6 +73,14 @@ RCT_EXPORT_METHOD(animateTo:(nonnull NSNumber *)reactTag params:(NSDictionary *)
     }];
 }
 
+
+RCT_EXPORT_METHOD(changeLanguage:(nonnull NSNumber *)reactTag language:(NSInteger)language) {
+    [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, UIView *> *viewRegistry) {
+        AMapView *mapView = (AMapView *) viewRegistry[reactTag];
+        [mapView performSelector:NSSelectorFromString(@"setMapLanguage:") withObject:@(language)];
+    }]
+}
+
 - (void)mapView:(AMapView *)mapView didSingleTappedAtCoordinate:(CLLocationCoordinate2D)coordinate {
     if (mapView.onPress) {
         mapView.onPress(@{
