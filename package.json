@@ -22,7 +22,6 @@
     "url": "https://github.com/qiuxiang/react-native-amap3d"
   },
   "scripts": {
-    "test": "eslint . && flow",
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "run-android": "node node_modules/react-native/local-cli/cli.js run-android",
     "release-android": "node node_modules/react-native/local-cli/cli.js run-android --variant=release",
@@ -34,24 +33,17 @@
     "react-native": ">=0.47"
   },
   "devDependencies": {
-    "babel-eslint": "^8.2.3",
-    "babel-preset-react-native": "^4.0.0",
-    "eslint": "^4.19.1",
-    "eslint-config-airbnb": "^16.1.0",
-    "eslint-plugin-import": "^2.11.0",
-    "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-react": "^7.7.0",
-    "flow-bin": "^0.69.0",
-    "react": "16.2.0",
-    "react-native": "0.52.3",
+    "metro-react-native-babel-preset": "0.51.0",
+    "react": "16.6.3",
+    "react-native": "0.57.8",
     "react-navigation": "^1.5.11"
   },
-  "presets": [
-    "react-native"
-  ],
   "rnpm": {
     "android": {
       "sourceDir": "lib/android"
     }
+  },
+  "prettier": {
+    "printWidth": 100
   }
 }

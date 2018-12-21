@@ -1,8 +1,8 @@
 aliases:
   - &android
     components:
-      - build-tools-23.0.1
-      - android-23
+      - build-tools-27.0.3
+      - android-27
       - extra-android-m2repository
       - extra-android-support
   
@@ -32,6 +32,9 @@ jobs:
       language: node_js
       node_js: node
       cache: yarn
+      script:
+        - node node_modules/react-native/local-cli/cli.js bundle --entry-file index.js --bundle-output bundle.js
+        - ls -lh bundle.*
 
     - stage: "build test for example"
       language: android

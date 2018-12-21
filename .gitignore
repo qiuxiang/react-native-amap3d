@@ -9,3 +9,5 @@ Pods/
 *.xcworkspace
 local.properties
 Podfile.lock
+package-lock.json
+yarn.lock
