@@ -78,9 +78,9 @@
     _active = active;
     dispatch_async(dispatch_get_main_queue(), ^{
         if (active) {
-            [_mapView selectAnnotation:_annotation animated:YES];
+            [_mapView.mapView selectAnnotation:_annotation animated:YES];
         } else {
-            [_mapView deselectAnnotation:_annotation animated:YES];
+            [_mapView.mapView deselectAnnotation:_annotation animated:YES];
         }
     });
 }
@@ -109,7 +109,7 @@
 }
 
 - (void)_handleTap:(UITapGestureRecognizer *)recognizer {
-    [_mapView selectAnnotation:_annotation animated:YES];
+    [_mapView.mapView selectAnnotation:_annotation animated:YES];
 }
 
 - (MAAnnotationView *)annotationView {
