@@ -2,8 +2,6 @@
 
 react-native 高德地图组件，使用最新 3D SDK，支持 Android + iOS，受 [react-native-maps](https://github.com/airbnb/react-native-maps) 启发，提供功能丰富且易用的接口。
 
-*注意：RN v0.53+ 存在一些 bug（主要影响 iOS 自定义 View），建议使用 RN v0.52。*
-
 相关项目推荐：
 - [react-native-baidumap-sdk（百度地图 SDK）](https://github.com/qiuxiang/react-native-baidumap-sdk)
 - [react-native-amap-geolocation（高德地图定位模块）](https://github.com/qiuxiang/react-native-amap-geolocation)
@@ -46,7 +44,7 @@ react-native link react-native-amap3d
 你需要使用 CocoaPods，在 `ios` 目录下新建文件 `Podfile`：
 
 ```ruby
-platform :ios, '8.0'
+platform :ios, '9.0'
 
 # The target name is most likely the name of your project.
 target 'Your Target' do
@@ -66,7 +64,7 @@ target 'Your Target' do
 
   # Third party deps podspec link
   pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
-  pod 'GLog', :podspec => '../node_modules/react-native/third-party-podspecs/GLog.podspec'
+  pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
   pod 'react-native-amap3d', path: '../node_modules/react-native-amap3d/lib/ios'
@@ -81,7 +79,7 @@ post_install do |installer|
 end
 ```
 
-*注意：不同的 RN 版本，`Podfile` 可能需要稍作调整，具体参考 https://facebook.github.io/react-native/docs/0.52/integration-with-existing-apps.html 。*
+*注意：不同的 RN 版本，`Podfile` 可能需要稍作调整，具体参考 https://facebook.github.io/react-native/docs/integration-with-existing-apps#configuring-cocoapods-dependencies 。*
 
 然后运行：
 ```
@@ -192,7 +190,6 @@ yarn run-ios
 
 ## 常见问题
 
-- RN v0.47 有个 [breaking change](https://github.com/facebook/react-native/commit/ce6fb337a146e6f261f2afb564aa19363774a7a8)，导致无法向后兼容。
 - 该项目不打算做数据接口，地理/逆地理编码、路径规划、搜索等功能请使用 [Web 服务](https://lbs.amap.com/api/webservice/summary)。
 - 尽量使用设备进行测试，在模拟器可能存在一些问题（常见的是 Android 模拟器因为缺少硬件加速而导致闪退）。
 
