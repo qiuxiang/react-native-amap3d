@@ -24,7 +24,7 @@ aliases:
       yarn global add react-native-cli
       react-native init App --version="0.58.4"
       cd App
-      yarn add react-native-amap3d@beta
+      yarn add react-native-amap3d@next
 
 jobs:
   include:
