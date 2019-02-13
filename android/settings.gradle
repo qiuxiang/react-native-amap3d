@@ -1,4 +1,4 @@
-rootProject.name = 'RNAMap3D'
+rootProject.name = 'rn-amap3d'
 include ':react-native-amap3d'
 project(':react-native-amap3d').projectDir = new File(rootProject.projectDir, '../lib/android')
 

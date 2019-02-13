@@ -1,6 +1,6 @@
 {
   "name": "react-native-amap3d",
-  "version": "1.0.2",
+  "version": "1.0.3-0",
   "description": "react-native 高德地图组件，支持 Android + iOS",
   "author": "Qiu Xiang <i@7c00.cc>",
   "license": "MIT",
@@ -29,13 +29,10 @@
     "reload": "adb reverse tcp:8081 tcp:8081 && adb shell input text rr",
     "run-ios": "node node_modules/react-native/local-cli/cli.js run-ios"
   },
-  "peerDependencies": {
-    "react-native": ">=0.47"
-  },
   "devDependencies": {
-    "metro-react-native-babel-preset": "0.51.0",
+    "metro-react-native-babel-preset": "0.51.1",
     "react": "16.6.3",
-    "react-native": "0.57.8",
+    "react-native": "0.58.4",
     "react-navigation": "^1.5.11"
   },
   "rnpm": {

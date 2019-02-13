@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { FlatList, StyleSheet, Text, View } from 'react-native'
 import { MapView } from 'react-native-amap3d'
+import { requestLocationPermission } from '../utils'
 
 const styles = StyleSheet.create({
   body: {
@@ -8,6 +9,7 @@ const styles = StyleSheet.create({
   },
   logs: {
     elevation: 8,
+    flex: 1,
     backgroundColor: '#fff',
   },
   logText: {
@@ -27,11 +29,15 @@ export default class EventsExample extends Component {
     logs: [],
   }
 
+  componentDidMount() {
+    requestLocationPermission()
+  }
+
   _log(event, data) {
     this.setState({
       logs: [
         {
-          key: Date.now(),
+          key: Date.now().toString(),
           time: new Date().toLocaleString(),
           event,
           data: JSON.stringify(data, null, 2),

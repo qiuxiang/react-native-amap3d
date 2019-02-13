@@ -1,8 +1,8 @@
 aliases:
   - &android
     components:
-      - build-tools-27.0.3
-      - android-27
+      - build-tools-28.0.3
+      - android-28
       - extra-android-m2repository
       - extra-android-support
   
@@ -22,9 +22,9 @@ aliases:
     |
       nvm install node
       yarn global add react-native-cli
-      react-native init App --version="0.52.3"
+      react-native init App --version="0.58.4"
       cd App
-      yarn add react-native-amap3d
+      yarn add react-native-amap3d@beta
 
 jobs:
   include:
@@ -48,11 +48,11 @@ jobs:
         - yarn
         - cd android
         - ./gradlew build
-        - ls -l app/build/outputs/apk
+        - ls -lh app/build/outputs/apk
 
     - stage: "build test for example"
       language: objective-c
-      osx_image: xcode9.3
+      osx_image: xcode10.1
       cache: *ios-cache
       before_install:
       script:
@@ -75,11 +75,11 @@ jobs:
         - react-native link
         - cd android
         - ./gradlew build
-        - ls -l app/build/outputs/apk/
+        - ls -lh app/build/outputs/apk/
 
     - stage: "build test for new project"
       language: objective-c
-      osx_image: xcode9.3
+      osx_image: xcode10.1
       cache: *ios-cache
       script:
         - brew install yarn
@@ -87,7 +87,7 @@ jobs:
         - cd ios
         - |
           cat << EOF > Podfile
-            platform :ios, '8.0'
+            platform :ios, '9.0'
             target 'App' do
               pod 'React', :path => '../node_modules/react-native', :subspecs => [
                 'Core',
@@ -99,7 +99,7 @@ jobs:
               ]
               pod 'yoga', :path => '../node_modules/react-native/ReactCommon/yoga'
               pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
-              pod 'GLog', :podspec => '../node_modules/react-native/third-party-podspecs/GLog.podspec'
+              pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
               pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
               pod 'react-native-amap3d', path: '../node_modules/react-native-amap3d/lib/ios'
             end

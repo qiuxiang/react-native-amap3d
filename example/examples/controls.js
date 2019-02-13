@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { StyleSheet, Switch, Text, View } from 'react-native'
 import { MapView } from 'react-native-amap3d'
+import { requestLocationPermission } from '../utils'
 import styles from '../styles'
 
 export default class ControlsExample extends Component {
@@ -13,6 +14,10 @@ export default class ControlsExample extends Component {
     showsScale: true,
     showsZoomControls: true,
     showsLocationButton: false,
+  }
+
+  componentDidMount() {
+    requestLocationPermission()
   }
 
   render() {
