@@ -19,7 +19,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/qiuxiang/react-native-amap3d"
+    "url": "https://github.com/obzone/react-native-amap3d.git"
   },
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
