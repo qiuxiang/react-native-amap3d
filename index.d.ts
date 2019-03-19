@@ -227,14 +227,14 @@ declare module "react-native-amap3d" {
          *
          * @param {{ nativeEvent: LatLng }}
          */
-        onPress?: Function
+        onPress?: (nativeEvent: LatLng) => void
 
         /**
          * 长按事件
          *
          * @param {{ nativeEvent: LatLng }}
          */
-        onLongPress?: Function
+        onLongPress?: (nativeEvent: LatLng) => void
 
         /**
          * 定位事件
@@ -250,7 +250,7 @@ declare module "react-native-amap3d" {
          *   }
          * }}
          */
-        onLocation?: Function
+        onLocation?: (nativeEvent: {timestamp: number, speed: number, accuracy: number,altitude: number,longitude: number,latitude: number}) => void
 
         /**
          * 动画完成事件
@@ -275,7 +275,7 @@ declare module "react-native-amap3d" {
          *   }
          * }}
          */
-        onStatusChange?: Function
+        onStatusChange?: (nativeEvent: {longitude: number,latitude: number,rotation: number,zoomLevel: number,tilt: number}) => void
 
         /**
          * 地图状态变化完成事件
@@ -292,7 +292,7 @@ declare module "react-native-amap3d" {
          *   }
          * }}
          */
-        onStatusChangeComplete?: Function
+        onStatusChangeComplete?: (nativeEvent: {longitude: number,latitude: number,longitudeDelta: number,latitudeDelta: number,rotation: number,zoomLevel: number,tilt: number}) => void
     }> {}
 
 
@@ -429,7 +429,7 @@ declare module "react-native-amap3d" {
          *
          * @param {Point}
          */
-        onItemPress?: Function
+        onItemPress?: (point: Point) => void
     }> {}
 
     export class Polygon extends React.PureComponent<{
