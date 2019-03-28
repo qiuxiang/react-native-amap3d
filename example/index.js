@@ -15,6 +15,7 @@ import Events from './examples/events'
 import Offline from './examples/offline'
 import HeatMap from './examples/heat-map'
 import MultiPoint from './examples/multi-point'
+import PolygonSearch from './examples/poi/polygonSearch'
 
 export default StackNavigator({
   Examples: { screen: Examples },
@@ -32,6 +33,7 @@ export default StackNavigator({
   Offline: { screen: Offline },
   HeatMap: { screen: HeatMap },
   MultiPoint: { screen: MultiPoint },
+  PolygonSearch: { screen: PolygonSearch }
 }, {
   navigationOptions: {
     headerTintColor: '#212121',

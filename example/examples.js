@@ -87,6 +87,8 @@ export default class Examples extends Component {
           {this._renderItem('热力图', 'HeatMap')}
           <View style={styles.separator} />
           {this._renderItem('海量点', 'MultiPoint')}
+          <View style={styles.separator} />
+          {this._renderItem('POI 多边形搜索', 'PolygonSearch')}
         </View>
       </ScrollView>
     )
