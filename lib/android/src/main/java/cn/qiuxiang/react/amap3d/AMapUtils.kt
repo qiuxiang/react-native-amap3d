@@ -17,7 +17,7 @@ fun ReadableMap.toLatLng(): LatLng {
 }
 
 fun ReadableArray.toLatLngList(): ArrayList<LatLng> {
-    return ArrayList((0..(this.size() - 1)).map { this.getMap(it).toLatLng() })
+    return ArrayList((0..(this.size() - 1)).map { this.getMap(it)!!.toLatLng() })
 }
 
 fun LatLng.toWritableMap(): WritableMap {
