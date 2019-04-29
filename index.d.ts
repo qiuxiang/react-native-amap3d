@@ -227,14 +227,14 @@ declare module "react-native-amap3d" {
          *
          * @param {{ nativeEvent: LatLng }}
          */
-        onPress?: (nativeEvent: LatLng) => void
+        onPress?: ({nativeEvent}: {nativeEvent: LatLng}) => void
 
         /**
          * 长按事件
          *
          * @param {{ nativeEvent: LatLng }}
          */
-        onLongPress?: (nativeEvent: LatLng) => void
+        onLongPress?: ({nativeEvent}: {nativeEvent: LatLng}) => void
 
         /**
          * 定位事件
@@ -250,7 +250,7 @@ declare module "react-native-amap3d" {
          *   }
          * }}
          */
-        onLocation?: (nativeEvent: {timestamp: number, speed: number, accuracy: number,altitude: number,longitude: number,latitude: number}) => void
+        onLocation?: ({ nativeEvent }: {nativeEvent: {timestamp: number, speed: number, accuracy: number,altitude: number,longitude: number,latitude: number}}) => void
 
         /**
          * 动画完成事件
@@ -275,7 +275,7 @@ declare module "react-native-amap3d" {
          *   }
          * }}
          */
-        onStatusChange?: (nativeEvent: {longitude: number,latitude: number,rotation: number,zoomLevel: number,tilt: number}) => void
+        onStatusChange?: ({nativeEvent}: {nativeEvent: {longitude: number,latitude: number,rotation: number,zoomLevel: number,tilt: number}}) => void
 
         /**
          * 地图状态变化完成事件
@@ -292,7 +292,7 @@ declare module "react-native-amap3d" {
          *   }
          * }}
          */
-        onStatusChangeComplete?: (nativeEvent: {longitude: number,latitude: number,longitudeDelta: number,latitudeDelta: number,rotation: number,zoomLevel: number,tilt: number}) => void
+        onStatusChangeComplete?: ({nativeEvent}: {nativeEvent: {longitude: number,latitude: number,longitudeDelta: number,latitudeDelta: number,rotation: number,zoomLevel: number,tilt: number}}) => void
     }> {}
 
 
