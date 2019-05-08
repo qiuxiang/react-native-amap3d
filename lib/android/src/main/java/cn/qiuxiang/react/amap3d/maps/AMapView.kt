@@ -3,7 +3,6 @@ package cn.qiuxiang.react.amap3d.maps
 import android.content.Context
 import android.view.View
 import cn.qiuxiang.react.amap3d.toLatLng
-import cn.qiuxiang.react.amap3d.toLatLngBounds
 import cn.qiuxiang.react.amap3d.toWritableMap
 import com.amap.api.maps.AMap
 import com.amap.api.maps.CameraUpdateFactory
@@ -44,17 +43,6 @@ class AMapView(context: Context) : TextureMapView(context) {
             emit(id, "onLongPress", latLng.toWritableMap())
         }
 
-        map.setOnMyLocationChangeListener { location ->
-            val event = Arguments.createMap()
-            event.putDouble("latitude", location.latitude)
-            event.putDouble("longitude", location.longitude)
-            event.putDouble("accuracy", location.accuracy.toDouble())
-            event.putDouble("altitude", location.altitude)
-            event.putDouble("speed", location.speed.toDouble())
-            event.putInt("timestamp", location.time.toInt())
-            emit(id, "onLocation", event)
-        }
-
         map.setOnMarkerClickListener { marker ->
             markers[marker.id]?.let {
                 it.active = true
@@ -79,16 +67,15 @@ class AMapView(context: Context) : TextureMapView(context) {
 
         map.setOnCameraChangeListener(object : AMap.OnCameraChangeListener {
             override fun onCameraChangeFinish(position: CameraPosition?) {
-                emitCameraChangeEvent("onStatusChangeComplete", position)
+                emitCameraChangeEvent("onStatusChange", position)
             }
 
             override fun onCameraChange(position: CameraPosition?) {
-                emitCameraChangeEvent("onStatusChange", position)
             }
         })
 
         map.setOnInfoWindowClickListener { marker ->
-            emit(markers[marker.id]?.id, "onInfoWindowPress")
+            emit(markers[marker.id]?.id, "onCalloutPress")
         }
 
         map.setOnPolylineClickListener { polyline ->
@@ -112,12 +99,10 @@ class AMapView(context: Context) : TextureMapView(context) {
             data.putDouble("zoomLevel", it.zoom.toDouble())
             data.putDouble("tilt", it.tilt.toDouble())
             data.putDouble("rotation", it.bearing.toDouble())
-            if (event == "onStatusChangeComplete") {
-                val southwest = map.projection.visibleRegion.latLngBounds.southwest
-                val northeast = map.projection.visibleRegion.latLngBounds.northeast
-                data.putDouble("latitudeDelta", Math.abs(southwest.latitude - northeast.latitude))
-                data.putDouble("longitudeDelta", Math.abs(southwest.longitude - northeast.longitude))
-            }
+            val southwest = map.projection.visibleRegion.latLngBounds.southwest
+            val northeast = map.projection.visibleRegion.latLngBounds.northeast
+            data.putDouble("latitudeDelta", Math.abs(southwest.latitude - northeast.latitude))
+            data.putDouble("longitudeDelta", Math.abs(southwest.longitude - northeast.longitude))
             emit(id, event, data)
         }
     }
@@ -182,8 +167,8 @@ class AMapView(context: Context) : TextureMapView(context) {
             tilt = target.getDouble("tilt").toFloat()
         }
 
-        if (target.hasKey("rotation")) {
-            rotation = target.getDouble("rotation").toFloat()
+        if (target.hasKey("heading")) {
+            rotation = target.getDouble("heading").toFloat()
         }
 
         val cameraUpdate = CameraUpdateFactory.newCameraPosition(
@@ -191,21 +176,9 @@ class AMapView(context: Context) : TextureMapView(context) {
         map.animateCamera(cameraUpdate, duration.toLong(), animateCallback)
     }
 
-    fun setRegion(region: ReadableMap) {
-        map.moveCamera(CameraUpdateFactory.newLatLngBounds(region.toLatLngBounds(), 0))
-    }
-
-    fun setLimitRegion(region: ReadableMap) {
-        map.setMapStatusLimits(region.toLatLngBounds())
-    }
-
     fun setLocationEnabled(enabled: Boolean) {
         map.isMyLocationEnabled = enabled
         map.myLocationStyle = locationStyle
-    }
-
-    fun setLocationInterval(interval: Long) {
-        locationStyle.interval(interval)
     }
 
     fun setLocationStyle(style: ReadableMap) {

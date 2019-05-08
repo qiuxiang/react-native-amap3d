@@ -4,6 +4,8 @@ node_modules/
 build/
 xcuserdata/
 Pods/
+lib/js/
+docs/
 
 *.iml
 *.xcworkspace
