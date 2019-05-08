@@ -28,14 +28,6 @@ aliases:
 
 jobs:
   include:
-    - stage: "test js"
-      language: node_js
-      node_js: node
-      cache: yarn
-      script:
-        - node node_modules/react-native/local-cli/cli.js bundle --entry-file index.js --bundle-output bundle.js
-        - ls -lh bundle.*
-
     - stage: "build test for example"
       language: android
       jdk: oraclejdk8
@@ -46,77 +38,26 @@ jobs:
       script:
         - nvm install node
         - yarn
+        - yarn build
         - cd android
-        - ./gradlew build
-        - ls -lh app/build/outputs/apk
+        - TERM=dumb ./gradlew build
+        - ls -lh app/build/outputs/apk/debug
+        - ls -lh app/build/outputs/apk/release
 
-    - stage: "build test for example"
-      language: objective-c
-      osx_image: xcode10.1
-      cache: *ios-cache
-      before_install:
-      script:
-        - nvm install node
-        - brew install yarn
-        - yarn
-        - cd ios
-        - pod install --repo-update
-        - xcodebuild -workspace RNAMap3D.xcworkspace -scheme RNAMap3D -sdk iphonesimulator -quiet
-
-    - stage: "build test for new project"
-      language: android
-      jdk: oraclejdk8
-      android: *android
-      before_cache:
-        - rm ~/.gradle/caches/modules-2/modules-2.lock
-      cache: *android-cache
-      script:
-        - *init-new-project
-        - react-native link
-        - cd android
-        - ./gradlew build
-        - ls -lh app/build/outputs/apk/
-
-    - stage: "build test for new project"
-      language: objective-c
-      osx_image: xcode10.1
-      cache: *ios-cache
-      script:
-        - brew install yarn
-        - *init-new-project
-        - cd ios
-        - |
-          cat << EOF > Podfile
-            platform :ios, '9.0'
-            target 'App' do
-              pod 'React', :path => '../node_modules/react-native', :subspecs => [
-                'Core',
-                'CxxBridge',
-                'DevSupport',
-                'RCTText',
-                'RCTNetwork',
-                'RCTWebSocket',
-              ]
-              pod 'yoga', :path => '../node_modules/react-native/ReactCommon/yoga'
-              pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
-              pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
-              pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
-              pod 'react-native-amap3d', path: '../node_modules/react-native-amap3d/lib/ios'
-            end
-            post_install do |installer|
-              installer.pods_project.targets.each do |target|
-                if target.name == "React"
-                  target.remove_from_project
-                end
-              end
-            end
-          EOF
-        - pod install --repo-update
-        - xcodebuild -workspace App.xcworkspace -scheme App -sdk iphonesimulator -quiet
+#    - stage: "build test for example"
+#      language: objective-c
+#      osx_image: xcode10.1
+#      cache: *ios-cache
+#      script:
+#        - nvm install node
+#        - brew install yarn
+#        - yarn
+#        - cd ios
+#        - pod install --repo-update
+#        - xcodebuild -workspace RNAMap3D.xcworkspace -scheme RNAMap3D -sdk iphonesimulator -quiet
 
 stages:
-  - "test js"
   - name: "build test for example"
-    if: branch = master
+#    if: branch = master
   - name: "build test for new project"
     if: branch = release
