@@ -398,7 +398,7 @@ declare module "react-native-amap3d" {
         /**
          * 拖放结束事件，最终坐标将传入参数
          */
-        onDragEnd?: Function
+        onDragEnd?: ({nativeEvent}: {nativeEvent: LatLng}) => void
 
         /**
          * 信息窗体点击事件
