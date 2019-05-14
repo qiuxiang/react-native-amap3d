@@ -1,4 +1,4 @@
-import { number, func, shape } from "prop-types";
+import { number, func, shape, string } from "prop-types";
 
 export const LatLngPropType = shape({
   latitude: number.isRequired,
@@ -15,6 +15,13 @@ export const RegionPropType = shape({
 export const PointPropType = shape({
   x: number.isRequired,
   y: number.isRequired
+});
+
+export const LocationStylePropType = shape({
+  image: string,
+  fillColor: string,
+  strokeColor: string,
+  strokeWidth: number
 });
 
 export const mapEventsPropType = events =>

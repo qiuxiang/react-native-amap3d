@@ -1,59 +1,64 @@
-import React, { Component } from 'react'
-import { FlatList, StyleSheet, Text, View } from 'react-native'
-import { MapView } from 'react-native-amap3d'
-import { requestLocationPermission } from '../utils'
+import React, { Component } from "react";
+import { FlatList, StyleSheet, Text, View, PermissionsAndroid, Platform } from "react-native";
+import { MapView } from "react-native-amap3d";
 
 const styles = StyleSheet.create({
   body: {
-    flex: 1,
+    flex: 1
   },
   logs: {
     elevation: 8,
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff"
   },
   logText: {
+    fontFamily: Platform.OS === "ios" ? "menlo" : "monospace",
+    fontSize: 12,
     paddingLeft: 15,
     paddingRight: 15,
     paddingTop: 10,
-    paddingBottom: 10,
-  },
-})
+    paddingBottom: 10
+  }
+});
 
 export default class EventsExample extends Component {
   static navigationOptions = {
-    title: '地图事件',
-  }
+    title: "地图事件"
+  };
 
   state = {
-    logs: [],
-  }
+    logs: []
+  };
 
   componentDidMount() {
-    requestLocationPermission()
+    PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION);
   }
 
   _log(event, data) {
+    console.log(data);
     this.setState({
       logs: [
         {
           key: Date.now().toString(),
           time: new Date().toLocaleString(),
           event,
-          data: JSON.stringify(data, null, 2),
+          data: JSON.stringify(data, null, 2)
         },
-        ...this.state.logs,
-      ],
-    })
+        ...this.state.logs
+      ]
+    });
   }
 
-  _logPressEvent = ({ nativeEvent }) => this._log('onPress', nativeEvent)
-  _logLongPressEvent = ({ nativeEvent }) => this._log('onLongPress', nativeEvent)
-  _logLocationEvent = ({ nativeEvent }) => this._log('onLocation', nativeEvent)
-  _logStatusChangeCompleteEvent = ({ nativeEvent }) => this._log('onStatusChangeComplete', nativeEvent)
+  _logClickEvent = data => this._log("onClick", data);
+  _logLongClickEvent = data => this._log("onLongClick", data);
+  _logLocationEvent = data => this._log("onLocation", data);
+  _logStatusChangeCompleteEvent = data => this._log("onStatusChangeComplete", data);
 
-  _renderItem = ({ item }) =>
-    <Text style={styles.logText}>{item.time} {item.event}: {item.data}</Text>
+  _renderItem = ({ item }) => (
+    <Text style={styles.logText}>
+      {item.time} {item.event}: {item.data}
+    </Text>
+  );
 
   render() {
     return (
@@ -62,18 +67,14 @@ export default class EventsExample extends Component {
           locationEnabled
           locationInterval={10000}
           distanceFilter={10}
-          onPress={this._logPressEvent}
-          onLongPress={this._logLongPressEvent}
+          onClick={this._logClickEvent}
+          onLongClick={this._logLongClickEvent}
           onLocation={this._logLocationEvent}
           onStatusChangeComplete={this._logStatusChangeCompleteEvent}
           style={styles.body}
         />
-        <FlatList
-          style={styles.logs}
-          data={this.state.logs}
-          renderItem={this._renderItem}
-        />
+        <FlatList style={styles.logs} data={this.state.logs} renderItem={this._renderItem} />
       </View>
-    )
+    );
   }
 }

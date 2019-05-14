@@ -41,7 +41,7 @@ export interface Region extends LatLng {
  */
 export interface MapStatus {
   /**
-   * 中心
+   * 中心坐标
    */
   center: LatLng;
 
@@ -53,7 +53,7 @@ export interface MapStatus {
   /**
    * 朝向、旋转角度
    */
-  heading: number;
+  rotation: number;
 
   /**
    * 倾斜角度
@@ -73,12 +73,22 @@ export interface Location extends LatLng {
   /**
    * 精度
    */
-  accuracy?: number;
+  accuracy: number;
 
   /**
    * 朝向
    */
   heading: number;
+
+  /**
+   * 海拔
+   */
+  altitude: number;
+
+  /**
+   * 运动速度
+   */
+  speed: number
 }
 
 /**

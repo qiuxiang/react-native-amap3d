@@ -1,22 +1,16 @@
-import React, { Component } from 'react'
-import {
-  StyleSheet,
-  View,
-  Text,
-  TouchableOpacity,
-  Dimensions,
-} from 'react-native'
-import { MapView } from 'react-native-amap3d'
+import React, { Component } from "react";
+import { StyleSheet, View, Text, TouchableOpacity, Dimensions } from "react-native";
+import { MapView } from "react-native-amap3d";
 
 const styles = StyleSheet.create({
   body: {
-    flex: 1,
+    flex: 1
   },
   buttons: {
-    width: Dimensions.get('window').width,
-    position: 'absolute',
-    flexDirection: 'row',
-    justifyContent: 'center',
+    width: Dimensions.get("window").width,
+    position: "absolute",
+    flexDirection: "row",
+    justifyContent: "center"
   },
   button: {
     padding: 10,
@@ -24,46 +18,50 @@ const styles = StyleSheet.create({
     paddingRight: 20,
     margin: 10,
     borderRadius: 50,
-    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    backgroundColor: "rgba(255, 255, 255, 0.9)"
   },
   text: {
-    fontSize: 16,
-  },
-})
+    fontSize: 16
+  }
+});
 
 export default class AnimatedExample extends Component {
-  static navigationOptions = {
-    title: '动画移动',
-  }
+  static navigationOptions = { title: "动画移动" };
 
   _animatedToZGC = () => {
-    this.mapView.animateTo({
-      tilt: 45,
-      rotation: 90,
-      zoomLevel: 18,
-      coordinate: {
-        latitude: 39.97837,
-        longitude: 116.31363,
+    this.mapView.setStatus(
+      {
+        tilt: 45,
+        rotation: 90,
+        zoomLevel: 18,
+        center: {
+          latitude: 39.97837,
+          longitude: 116.31363
+        }
       },
-    })
-  }
+      1000
+    );
+  };
 
   _animatedToTAM = () => {
-    this.mapView.animateTo({
-      tilt: 0,
-      rotation: 0,
-      zoomLevel: 16,
-      coordinate: {
-        latitude: 39.90864,
-        longitude: 116.39745,
+    this.mapView.setStatus(
+      {
+        tilt: 0,
+        rotation: 0,
+        zoomLevel: 16,
+        center: {
+          latitude: 39.90864,
+          longitude: 116.39745
+        }
       },
-    })
-  }
+      1000
+    );
+  };
 
   render() {
     return (
       <View style={styles.body}>
-        <MapView ref={ref => this.mapView = ref} style={styles.body} />
+        <MapView ref={ref => (this.mapView = ref)} style={styles.body} />
         <View style={styles.buttons}>
           <View style={styles.button}>
             <TouchableOpacity onPress={this._animatedToZGC}>
@@ -77,6 +75,6 @@ export default class AnimatedExample extends Component {
           </View>
         </View>
       </View>
-    )
+    );
   }
 }

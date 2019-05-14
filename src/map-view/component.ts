@@ -5,7 +5,7 @@ import { PureComponent } from "react";
 import { findNodeHandle, UIManager } from "react-native";
 
 /**
- * @hidden
+ * @ignore
  */
 export default class Component<P> extends PureComponent<P> {
   protected props: P;
@@ -21,7 +21,7 @@ export default class Component<P> extends PureComponent<P> {
   protected call(command: string, params?: any[]) {
     UIManager.dispatchViewManagerCommand(
       findNodeHandle(this),
-      UIManager[this.nativeComponent].Commands[command],
+      UIManager.getViewManagerConfig(this.nativeComponent).Commands[command],
       params
     );
   }

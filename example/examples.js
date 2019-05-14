@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 import {
   Platform,
   ScrollView,
@@ -6,46 +6,46 @@ import {
   Text,
   TouchableHighlight,
   TouchableNativeFeedback,
-  View,
-} from 'react-native'
+  View
+} from "react-native";
 
 const styles = StyleSheet.create({
   scrollView: {
     ...Platform.select({
       android: {
-        backgroundColor: '#f5f5f5',
-      },
-    }),
+        backgroundColor: "#f5f5f5"
+      }
+    })
   },
   container: {
-    paddingBottom: 15,
+    paddingBottom: 15
   },
   group: {
-    marginTop: 15,
+    marginTop: 15
   },
   item: {
     padding: 15,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff"
   },
   separator: {
     height: StyleSheet.hairlineWidth,
-    backgroundColor: '#eee',
+    backgroundColor: "#eee"
   },
   itemText: {
     fontSize: 16,
-    color: '#424242',
-  },
-})
+    color: "#424242"
+  }
+});
 
-let Touchable = TouchableHighlight
-if (Platform.OS === 'android') {
-  Touchable = TouchableNativeFeedback
+let Touchable = TouchableHighlight;
+if (Platform.OS === "android") {
+  Touchable = TouchableNativeFeedback;
 }
 
 export default class Examples extends Component {
   static navigationOptions = {
-    title: 'Examples',
-  }
+    title: "Examples"
+  };
 
   _renderItem(title, route) {
     return (
@@ -54,41 +54,41 @@ export default class Examples extends Component {
           <Text style={styles.itemText}>{title}</Text>
         </View>
       </Touchable>
-    )
+    );
   }
 
   render() {
     return (
       <ScrollView style={styles.scrollView} contentContainerStyle={styles.container}>
         <View style={styles.group}>
-          {this._renderItem('地图模式', 'MapTypes')}
+          {this._renderItem("地图模式", "MapTypes")}
           <View style={styles.separator} />
-          {this._renderItem('基本图层', 'Layers')}
+          {this._renderItem("基本图层", "Layers")}
           <View style={styles.separator} />
-          {this._renderItem('室内地图', 'Indoor')}
+          {this._renderItem("室内地图", "Indoor")}
           <View style={styles.separator} />
-          {this._renderItem('地图控件', 'Controls')}
+          {this._renderItem("地图控件", "Controls")}
           <View style={styles.separator} />
-          {this._renderItem('手势交互', 'Gestures')}
+          {this._renderItem("手势交互", "Gestures")}
           <View style={styles.separator} />
-          {this._renderItem('动画移动', 'Animated')}
+          {this._renderItem("动画移动", "Animated")}
           <View style={styles.separator} />
-          {this._renderItem('地图事件', 'Events')}
+          {this._renderItem("地图事件", "Events")}
         </View>
         <View style={styles.group}>
-          {this._renderItem('添加标记', 'Marker')}
+          {this._renderItem("添加标记", "Marker")}
           <View style={styles.separator} />
-          {this._renderItem('绘制折线', 'Polyline')}
+          {this._renderItem("绘制折线", "Polyline")}
           <View style={styles.separator} />
-          {this._renderItem('绘制多边形', 'Polygon')}
+          {this._renderItem("绘制多边形", "Polygon")}
           <View style={styles.separator} />
-          {this._renderItem('绘制圆形', 'Circle')}
+          {this._renderItem("绘制圆形", "Circle")}
           <View style={styles.separator} />
-          {this._renderItem('热力图', 'HeatMap')}
+          {this._renderItem("热力图", "HeatMap")}
           <View style={styles.separator} />
-          {this._renderItem('海量点', 'MultiPoint')}
+          {this._renderItem("海量点", "MultiPoint")}
         </View>
       </ScrollView>
-    )
+    );
   }
 }
