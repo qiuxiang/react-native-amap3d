@@ -1,4 +1,3 @@
-
 declare module "react-native-amap3d" {
     import React, { CSSProperties } from 'react'
 
@@ -45,12 +44,12 @@ declare module "react-native-amap3d" {
         /**
          * 边线颜色
          */
-        strokeColor?: React.Validator<string>
+        strokeColor?: string
 
         /**
          * 填充颜色
          */
-        fillColor?: React.Validator<string>
+        fillColor?: string
 
         /**
          * 层级
@@ -446,17 +445,64 @@ declare module "react-native-amap3d" {
         /**
          * 边线颜色
          */
-        strokeColor?: React.Validator<string>
+        strokeColor?: string
 
         /**
          * 填充颜色
          */
-        fillColor?: React.Validator<string>
+        fillColor?: string
 
         /**
          * 层级
          */
         zIndex?: Number
+    }> {}
+
+    export class PolyLine extends React.PureComponent<{
+        /**
+     * 节点坐标
+     */
+    coordinates: Array<LatLng>
+
+    /**
+     * 线段宽度
+     */
+    width: number
+
+    /**
+     * 线段颜色
+     */
+    color: string
+
+    /**
+     * 层级
+     */
+    zIndex: number
+
+    /**
+     * 多段颜色
+     */
+    colors: Array<string>
+
+    /**
+     * 是否使用颜色渐变
+     */
+    gradient: boolean
+
+    /**
+     * 是否绘制大地线
+     */
+    geodesic: boolean
+
+    /**
+     * 是否绘制虚线
+     */
+    dashed: boolean
+
+    /**
+     * 点击事件
+     */
+    onPress: Function
     }> {}
 
     export class Offline {
