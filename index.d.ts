@@ -467,42 +467,42 @@ declare module "react-native-amap3d" {
     /**
      * 线段宽度
      */
-    width: number
+    width?: number
 
     /**
      * 线段颜色
      */
-    color: string
+    color?: string
 
     /**
      * 层级
      */
-    zIndex: number
+    zIndex?: number
 
     /**
      * 多段颜色
      */
-    colors: Array<string>
+    colors?: Array<string>
 
     /**
      * 是否使用颜色渐变
      */
-    gradient: boolean
+    gradient?: boolean
 
     /**
      * 是否绘制大地线
      */
-    geodesic: boolean
+    geodesic?: boolean
 
     /**
      * 是否绘制虚线
      */
-    dashed: boolean
+    dashed?: boolean
 
     /**
      * 点击事件
      */
-    onPress: Function
+    onPress?: Function
     }> {}
 
     export class Offline {
