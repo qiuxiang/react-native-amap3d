@@ -84,6 +84,7 @@
         marker.mapView = self;
         _markers[[@(marker.annotation.hash) stringValue]] = marker;
         dispatch_async(dispatch_get_main_queue(), ^{
+            marker.hidden = YES;
             [self addAnnotation:marker.annotation];
         });
     }

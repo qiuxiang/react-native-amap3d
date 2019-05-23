@@ -115,6 +115,7 @@
 - (MAAnnotationView *)annotationView {
     if (_annotationView == nil) {
         if (_customView) {
+            self.hidden = NO;
             _customView.hidden = NO;
             _annotationView = [[MAAnnotationView alloc] initWithAnnotation:_annotation reuseIdentifier:nil];
             _annotationView.bounds = _customView.bounds;

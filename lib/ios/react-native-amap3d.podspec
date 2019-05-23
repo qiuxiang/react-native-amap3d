@@ -17,4 +17,5 @@ Pod::Spec.new do |s|
 
   s.dependency 'React'
   s.dependency 'AMap3DMap', "~> 6.6.0"
+  s.dependency 'AMapSearch', "~> 6.5.0"
 end
