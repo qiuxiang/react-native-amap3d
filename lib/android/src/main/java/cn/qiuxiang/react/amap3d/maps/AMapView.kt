@@ -171,7 +171,7 @@ class AMapView(context: Context) : TextureMapView(context) {
         var rotation = currentCameraPosition.bearing
 
         if (target.hasKey("coordinate")) {
-            coordinate = target.getMap("coordinate").toLatLng()
+            coordinate = target.getMap("coordinate")!!.toLatLng()
         }
 
         if (target.hasKey("zoomLevel")) {

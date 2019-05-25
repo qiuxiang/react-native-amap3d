@@ -46,8 +46,6 @@ RCT_EXPORT_METHOD(onPOISearch:(NSDictionary *)options)
 
     if (options[@"keywords"]) {
         request.keywords = options[@"keywords"];
-    } else {
-        return;
     }
     
     if (options[@"types"]) {
@@ -59,9 +57,8 @@ RCT_EXPORT_METHOD(onPOISearch:(NSDictionary *)options)
     }
     
     if (options[@"pageNum"]) {
-        pageNum = request.page = [options[@"page"] intValue];
+        pageNum = request.page = [options[@"pageNum"] intValue];
     }
-    
 
     if (options[@"requireExtension"]) {
         request.requireExtension = options[@"requireExtension"];

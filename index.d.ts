@@ -506,15 +506,15 @@ declare module "react-native-amap3d" {
 	}> {}
 
 	export interface POIPolygonSearchOptions {
-		keywords: string
-		polygon: Array<LatLng>
-		types: string
-		pageSize: string
-		pageNum: string
-		requireExtension: boolean
+		keywords?: string
+		coordinates: Array<LatLng>
+		types?: string
+		pageSize?: number
+		pageNum?: number
+		requireExtension?: boolean
 	}
 
-	export interface POISearchResponse {
+	export interface POI {
 		uid: string
 		name: string
 		type: string
@@ -532,10 +532,19 @@ declare module "react-native-amap3d" {
 		adName: string
 	}
 
+	export interface POISearchResponse {
+		status: string, 
+		error?: string, 
+		pois?: Array<POI>, 
+		pageCount?: number, 
+		pageSize?: number, 
+		pageNum?: number
+	}
+
 	export class AMapPOIPolygonSearch {
 		static init: () => void
 		static onPOISearch: (option: POIPolygonSearchOptions) => void
-		static addPOISearchListener: (listener: (poi: POISearchResponse) => void) => void
+		static addPOISearchListener: (listener: (pois: POISearchResponse) => void) => void
 	}
 
 	export class Offline {

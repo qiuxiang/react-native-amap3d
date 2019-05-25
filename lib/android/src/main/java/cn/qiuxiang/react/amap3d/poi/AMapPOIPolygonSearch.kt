@@ -36,19 +36,17 @@ class AMapPOIPolygonSearch internal constructor(private val reactContext: ReactA
     fun onPOISearch(options: ReadableMap) {
         var keywords = ""
         if (options.hasKey("keywords")) {
-            keywords = options.getString("keywords")
-        } else {
-            return
+            keywords = options.getString("keywords")!!
         }
 
         var types = ""
         if (options.hasKey("types")) {
-            types = options.getString("types")
+            types = options.getString("types")!!
         }
 
         var cityCode = ""
         if (options.hasKey(("cityCode"))) {
-            cityCode = options.getString("cityCode")
+            cityCode = options.getString("cityCode")!!
         }
 
         query = PoiSearch.Query(keywords, types, cityCode)
@@ -65,7 +63,7 @@ class AMapPOIPolygonSearch internal constructor(private val reactContext: ReactA
 
         val points = ArrayList<LatLonPoint>()
         if (options.hasKey("coordinates")) {
-            val coordinates: ReadableArray = options.getArray("coordinates")
+            val coordinates: ReadableArray = options.getArray("coordinates")!!
 
             for (i in 0..(coordinates.size() - 1)) {
                 val point: ReadableMap? = coordinates.getMap(i)
