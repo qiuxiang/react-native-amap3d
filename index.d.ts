@@ -530,6 +530,7 @@ declare module "react-native-amap3d" {
 		provinceName: string
 		adCode: string
 		adName: string
+		source?: string
 	}
 
 	export interface POISearchResponse {
