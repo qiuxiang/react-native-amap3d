@@ -118,7 +118,7 @@ class AMapView(context: Context) : TextureMapView(context) {
                 data.putDouble("latitudeDelta", Math.abs(southwest.latitude - northeast.latitude))
                 data.putDouble("longitudeDelta", Math.abs(southwest.longitude - northeast.longitude))
                 data.putMap("farLeft", map.projection.visibleRegion.farLeft.toWritableMap())
-                data.putMap("farLeft", map.projection.visibleRegion.farRight.toWritableMap())
+                data.putMap("farRight", map.projection.visibleRegion.farRight.toWritableMap())
                 data.putMap("nearLeft", map.projection.visibleRegion.nearLeft.toWritableMap())
                 data.putMap("nearRight", map.projection.visibleRegion.nearRight.toWritableMap())
             }
