@@ -117,6 +117,10 @@ class AMapView(context: Context) : TextureMapView(context) {
                 val northeast = map.projection.visibleRegion.latLngBounds.northeast
                 data.putDouble("latitudeDelta", Math.abs(southwest.latitude - northeast.latitude))
                 data.putDouble("longitudeDelta", Math.abs(southwest.longitude - northeast.longitude))
+                data.putMap("farLeft", map.projection.visibleRegion.farLeft.toWritableMap())
+                data.putMap("farLeft", map.projection.visibleRegion.farRight.toWritableMap())
+                data.putMap("nearLeft", map.projection.visibleRegion.nearLeft.toWritableMap())
+                data.putMap("nearRight", map.projection.visibleRegion.nearRight.toWritableMap())
             }
             emit(id, event, data)
         }
