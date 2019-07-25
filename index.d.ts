@@ -1,5 +1,6 @@
 declare module "react-native-amap3d" {
 	import React, { CSSProperties } from 'react'
+	import { EmitterSubscription } from 'react-native';
 
 	export interface LocationStyle {
 		image?: String,
@@ -545,7 +546,7 @@ declare module "react-native-amap3d" {
 	export class AMapPOIPolygonSearch {
 		static init: () => void
 		static onPOISearch: (option: POIPolygonSearchOptions) => void
-		static addPOISearchListener: (listener: (pois: POISearchResponse) => void) => void
+		static addPOISearchListener: (listener: (pois: POISearchResponse) => void) => EmitterSubscription
 	}
 
 	export class Offline {
