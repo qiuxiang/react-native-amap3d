@@ -107,7 +107,7 @@ internal class AMapViewManager : ViewGroupManager<AMapView>() {
     fun setLanguage(view: AMapView, mapLanguage:Int) {
         view.map.setMapLanguage(if(mapLanguage == 1) {"en"} else {"zh_cn"})
     }
-
+    
     @ReactProp(name = "showsLocationButton")
     fun setMyLocationButtonEnabled(view: AMapView, enabled: Boolean) {
         view.map.uiSettings.isMyLocationButtonEnabled = enabled
@@ -202,7 +202,7 @@ internal class AMapViewManager : ViewGroupManager<AMapView>() {
     }
 
     @ReactProp(name = "locationType")
-    fun setLocationStyle(view: AMapView, type: String) {
+    fun setLocationType(view: AMapView, type: String) {
         when (type) {
             "show" -> view.setLocationType(MyLocationStyle.LOCATION_TYPE_SHOW)
             "locate" -> view.setLocationType(MyLocationStyle.LOCATION_TYPE_LOCATE)

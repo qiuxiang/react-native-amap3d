@@ -164,4 +164,9 @@ class AMapMarker(context: Context) : ReactViewGroup(context), AMapOverlay {
             marker?.setPositionByPixels(x, y)
         }
     }
+    fun rotateAngle(args: ReadableArray?){
+        if (args != null) {
+            marker?.setRotateAngle(args.getDouble(0).toFloat())
+        }
+    }
 }
