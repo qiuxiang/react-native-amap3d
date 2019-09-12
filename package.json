@@ -35,11 +35,6 @@
     "react-native": "0.58.4",
     "react-navigation": "^1.5.11"
   },
-  "rnpm": {
-    "android": {
-      "sourceDir": "lib/android"
-    }
-  },
   "prettier": {
     "printWidth": 100
   }
