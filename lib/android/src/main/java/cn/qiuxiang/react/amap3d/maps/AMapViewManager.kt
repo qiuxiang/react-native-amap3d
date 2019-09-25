@@ -1,8 +1,10 @@
 package cn.qiuxiang.react.amap3d.maps
 
+import android.util.Log
 import android.view.View
 import com.amap.api.maps.AMap
 import com.amap.api.maps.CameraUpdateFactory
+import com.amap.api.maps.model.CameraPosition
 import com.amap.api.maps.model.LatLng
 import com.amap.api.maps.model.MyLocationStyle
 import com.facebook.react.bridge.ReadableArray
@@ -52,7 +54,7 @@ internal class AMapViewManager : ViewGroupManager<AMapView>() {
     }
 
     override fun getExportedCustomDirectEventTypeConstants(): Map<String, Any> {
-        return MapBuilder.of(
+        var map =  MapBuilder.of(
                 "onPress", MapBuilder.of("registrationName", "onPress"),
                 "onLongPress", MapBuilder.of("registrationName", "onLongPress"),
                 "onAnimateCancel", MapBuilder.of("registrationName", "onAnimateCancel"),
@@ -61,11 +63,16 @@ internal class AMapViewManager : ViewGroupManager<AMapView>() {
                 "onStatusChangeComplete", MapBuilder.of("registrationName", "onStatusChangeComplete"),
                 "onLocation", MapBuilder.of("registrationName", "onLocation")
         )
+
+        map.put("onAreaQueryComplete",MapBuilder.of("registrationName", "onAreaQueryComplete"))
+        return map
+
     }
 
     @ReactProp(name = "locationEnabled")
     fun setMyLocationEnabled(view: AMapView, enabled: Boolean) {
         view.setLocationEnabled(enabled)
+
     }
 
     @ReactProp(name = "showsIndoorMap")
@@ -101,11 +108,6 @@ internal class AMapViewManager : ViewGroupManager<AMapView>() {
     @ReactProp(name = "showsScale")
     fun setScaleControlsEnabled(view: AMapView, enabled: Boolean) {
         view.map.uiSettings.isScaleControlsEnabled = enabled
-    }
-
-    @ReactProp(name = "mapLanguage")
-    fun setLanguage(view: AMapView, mapLanguage:Int) {
-        view.map.setMapLanguage(if(mapLanguage == 1) {"en"} else {"zh_cn"})
     }
 
     @ReactProp(name = "showsLocationButton")
@@ -166,9 +168,15 @@ internal class AMapViewManager : ViewGroupManager<AMapView>() {
 
     @ReactProp(name = "coordinate")
     fun moveToCoordinate(view: AMapView, coordinate: ReadableMap) {
-        view.map.moveCamera(CameraUpdateFactory.changeLatLng(LatLng(
-                coordinate.getDouble("latitude"),
-                coordinate.getDouble("longitude"))))
+
+        Log.e(
+                "moveToCoordinate",
+                coordinate.getDouble("latitude").toString() + "====" + coordinate.getDouble("longitude")
+        )
+
+        var latLng = LatLng(coordinate.getDouble("latitude"), coordinate.getDouble("longitude"))
+        var cameraUpdateFactory = CameraUpdateFactory.newCameraPosition(CameraPosition(latLng, 12f, 0f, 30f))
+        view.map.moveCamera(cameraUpdateFactory)
     }
 
     @ReactProp(name = "region")

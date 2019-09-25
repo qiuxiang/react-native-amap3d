@@ -12,15 +12,30 @@ import com.amap.api.maps.model.BitmapDescriptorFactory
 import com.amap.api.maps.model.CameraPosition
 import com.amap.api.maps.model.Marker
 import com.amap.api.maps.model.MyLocationStyle
+import com.amap.api.services.geocoder.GeocodeResult
+import com.amap.api.services.geocoder.GeocodeSearch
+import com.amap.api.services.geocoder.RegeocodeResult
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.bridge.WritableMap
 import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.events.RCTEventEmitter
+import com.amap.api.services.geocoder.RegeocodeQuery
+import sun.jvm.hotspot.utilities.IntArray
+import cn.qiuxiang.react.amap3d.maps.AMapPolyline
+import cn.qiuxiang.react.amap3d.maps.AMapMarker
+import com.amap.api.services.core.LatLonPoint
+import sun.jvm.hotspot.utilities.IntArray
+import cn.qiuxiang.react.amap3d.maps.AMapPolyline
+import cn.qiuxiang.react.amap3d.maps.AMapMarker
+
+
+
 
 class AMapView(context: Context) : TextureMapView(context) {
-    private val eventEmitter: RCTEventEmitter = (context as ThemedReactContext).getJSModule(RCTEventEmitter::class.java)
+    private val eventEmitter: RCTEventEmitter =
+            (context as ThemedReactContext).getJSModule(RCTEventEmitter::class.java)
     private val markers = HashMap<String, AMapMarker>()
     private val lines = HashMap<String, AMapPolyline>()
     private val locationStyle by lazy {
@@ -51,7 +66,7 @@ class AMapView(context: Context) : TextureMapView(context) {
             event.putDouble("accuracy", location.accuracy.toDouble())
             event.putDouble("altitude", location.altitude)
             event.putDouble("speed", location.speed.toDouble())
-            event.putDouble("timestamp", location.time.toDouble())
+            event.putInt("timestamp", location.time.toInt())
             emit(id, "onLocation", event)
         }
 
@@ -79,6 +94,7 @@ class AMapView(context: Context) : TextureMapView(context) {
 
         map.setOnCameraChangeListener(object : AMap.OnCameraChangeListener {
             override fun onCameraChangeFinish(position: CameraPosition?) {
+
                 emitCameraChangeEvent("onStatusChangeComplete", position)
             }
 
@@ -116,7 +132,37 @@ class AMapView(context: Context) : TextureMapView(context) {
                 val southwest = map.projection.visibleRegion.latLngBounds.southwest
                 val northeast = map.projection.visibleRegion.latLngBounds.northeast
                 data.putDouble("latitudeDelta", Math.abs(southwest.latitude - northeast.latitude))
-                data.putDouble("longitudeDelta", Math.abs(southwest.longitude - northeast.longitude))
+                data.putDouble(
+                        "longitudeDelta",
+                        Math.abs(southwest.longitude - northeast.longitude)
+                )
+                var geocoderSearch = GeocodeSearch(context);
+                geocoderSearch.setOnGeocodeSearchListener(object :
+                        GeocodeSearch.OnGeocodeSearchListener {
+                    override fun onRegeocodeSearched(p0: RegeocodeResult?, p1: Int) {
+                        //解析result获取地址描述信息
+//                        val areaName =
+//                            `\${nativeEvent.province} \${nativeEvent.city} \${nativeEvent.district}`
+                        data.putString("province", p0?.regeocodeAddress?.province)
+
+                        data.putString("city", p0?.regeocodeAddress?.city)
+                        data.putString("district", p0?.regeocodeAddress?.district)
+
+                        emit(id, "onAreaQueryComplete", data)
+                    }
+
+                    override fun onGeocodeSearched(p0: GeocodeResult?, p1: Int) {
+                        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                    }
+
+                })
+                val query = RegeocodeQuery(
+                        LatLonPoint(position.target.latitude, position.target.longitude),
+                        200f,
+                        GeocodeSearch.AMAP
+                )
+                geocoderSearch.getFromLocationAsyn(query)
+
             }
             emit(id, event, data)
         }
@@ -187,7 +233,8 @@ class AMapView(context: Context) : TextureMapView(context) {
         }
 
         val cameraUpdate = CameraUpdateFactory.newCameraPosition(
-                CameraPosition(coordinate, zoomLevel, tilt, rotation))
+                CameraPosition(coordinate, zoomLevel, tilt, rotation)
+        )
         map.animateCamera(cameraUpdate, duration.toLong(), animateCallback)
     }
 
@@ -223,7 +270,8 @@ class AMapView(context: Context) : TextureMapView(context) {
 
         if (style.hasKey("image")) {
             val drawable = context.resources.getIdentifier(
-                    style.getString("image"), "drawable", context.packageName)
+                    style.getString("image"), "drawable", context.packageName
+            )
             locationStyle.myLocationIcon(BitmapDescriptorFactory.fromResource(drawable))
         }
     }
