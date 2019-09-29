@@ -10,8 +10,22 @@
     CGFloat _opacity;
 }
 
-- (void)setCoordinates:(NSArray<MAHeatMapNode *> *)coordinates {
-    _data = coordinates;
+- (void)setCoordinates:(NSArray<NSDictionary *> *)heatMapNodes {
+    NSMutableArray *_coordinates = [NSMutableArray array];
+    for (NSDictionary *heatMapNode in heatMapNodes) {
+        float intensity = [RCTConvert float:heatMapNode[@"intensity"]];
+        
+        NSDictionary *coordinate2D = [RCTConvert NSDictionary:heatMapNode[@"coordinate"]];
+        CLLocationDegrees latitude = [RCTConvert double:coordinate2D[@"latitude"]];
+        CLLocationDegrees longitude = [RCTConvert double:coordinate2D[@"longitude"]];
+        
+        CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(latitude, longitude);
+        MAHeatMapNode *node = [MAHeatMapNode new];
+        node.intensity = intensity;
+        node.coordinate = coordinate;
+        [_coordinates addObject:node];
+    }
+    _data = _coordinates;
 }
 
 - (void)setRadius:(NSInteger)radius {

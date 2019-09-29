@@ -16,7 +16,7 @@ RCT_EXPORT_MODULE()
     return [AMapHeatMap new];
 }
 
-RCT_EXPORT_VIEW_PROPERTY(coordinates, MAHeatMapNodeArray)
+RCT_EXPORT_VIEW_PROPERTY(coordinates, NSArray<NSDictionary *> *)
 RCT_EXPORT_VIEW_PROPERTY(radius, NSInteger)
 RCT_EXPORT_VIEW_PROPERTY(opacity, CGFloat)
 
