@@ -15,6 +15,8 @@ Pod::Spec.new do |s|
   s.source       = { :git => package['repository']['url'] }
   s.source_files = '**/*.{h,m}'
 
+  s.static_framework = true
+
   s.dependency 'React'
   s.dependency 'AMap3DMap'
   s.dependency 'AMapSearch', "~> 6.5.0"

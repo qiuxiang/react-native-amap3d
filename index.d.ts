@@ -58,11 +58,16 @@ declare module "react-native-amap3d" {
 		zIndex?: Number
 	}> {}
 
+	interface HeatMapNode {
+		coordinate: LatLng,
+		intensity: number
+	}
+
 	export class HeatMap extends React.PureComponent<{
 		/**
 		 * 节点坐标
 		 */
-		coordinates: Array<LatLng>
+		coordinates: Array<HeatMapNode>
 
 		/**
 		 * 半径（米）
