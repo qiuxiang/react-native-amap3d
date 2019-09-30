@@ -58,7 +58,7 @@ declare module "react-native-amap3d" {
 		zIndex?: Number
 	}> {}
 
-	interface HeatMapNode {
+	export interface HeatMapNode {
 		coordinate: LatLng,
 		intensity: number
 	}
