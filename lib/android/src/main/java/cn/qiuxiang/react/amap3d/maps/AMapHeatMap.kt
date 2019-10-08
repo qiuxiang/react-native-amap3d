@@ -18,7 +18,16 @@ class AMapHeatMap(context: Context) : ReactViewGroup(context), AMapOverlay {
     var radius: Int = 12
 
     fun setCoordinates(coordinates: ReadableArray) {
-        this.coordinates = coordinates.toLatLngList()
+        val _coordinates = ArrayList<LatLng>();
+        coordinates.toArrayList().forEach({
+            val _coordinate = (it as HashMap<String, HashMap<String, Double>>)["coordinate"]!!
+            val _intensity = (it as HashMap<String, Int>)["intensity"]!!
+            val latLng = LatLng(_coordinate["longitude"]!!, _coordinate["latitude"]!!)
+            (1.._intensity).forEach() {
+                _coordinates.add(latLng)
+            }
+        })
+        this.coordinates = _coordinates
     }
 
     override fun add(map: AMap) {
