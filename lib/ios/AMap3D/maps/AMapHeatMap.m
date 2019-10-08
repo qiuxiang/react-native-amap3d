@@ -1,4 +1,5 @@
 #import "AMapHeatMap.h"
+#import <React/RCTConvert.h>
 
 #pragma ide diagnostic ignored "OCUnusedMethodInspection"
 
