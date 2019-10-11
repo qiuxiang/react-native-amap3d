@@ -22,7 +22,7 @@ class AMapHeatMap(context: Context) : ReactViewGroup(context), AMapOverlay {
         coordinates.toArrayList().forEach({
             val _coordinate = (it as HashMap<String, HashMap<String, Double>>)["coordinate"]!!
             val _intensity = (it as HashMap<String, Int>)["intensity"]!!
-            val latLng = LatLng(_coordinate["longitude"]!!, _coordinate["latitude"]!!)
+            val latLng = LatLng(_coordinate["latitude"]!!, _coordinate["longitude"]!!)
             (1.._intensity).forEach() {
                 _coordinates.add(latLng)
             }
