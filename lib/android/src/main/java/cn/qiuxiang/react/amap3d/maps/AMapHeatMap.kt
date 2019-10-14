@@ -34,6 +34,7 @@ class AMapHeatMap(context: Context) : ReactViewGroup(context), AMapOverlay {
         overlay = map.addTileOverlay(TileOverlayOptions().tileProvider(
                 HeatmapTileProvider.Builder()
                         .data(coordinates)
+                        .gradient(Gradient(intArrayOf(Color.rgb(0, 0, 255), Color.rgb(0, 255, 0), Color.rgb(255, 0, 0)), floatArrayOf(0.2f, 0.5f, 0.9f)))
                         .radius(radius)
                         .transparency(opacity)
                         .build()))
