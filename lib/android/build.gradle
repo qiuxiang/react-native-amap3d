@@ -25,6 +25,6 @@ android {
 
 dependencies {
     implementation 'com.facebook.react:react-native:+'
-    implementation 'com.amap.api:navi-3dmap:latest.integration'
+    api 'com.amap.api:navi-3dmap:latest.integration'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
