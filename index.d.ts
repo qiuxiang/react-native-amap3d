@@ -554,6 +554,17 @@ declare module "react-native-amap3d" {
 		static addPOISearchListener: (listener: (pois: POISearchResponse) => void) => EmitterSubscription
 	}
 
+	export class AMapPOIKeywordsSearch {
+		static keywordsSearchWithOptions: (options: {
+			keywords: string,
+			city?: string,
+			types?: string,
+			requireExtension?: boolean,
+			cityLimit?: boolean,
+			requireSubPOIs?: boolean
+		}) => Promise<object>
+	}
+
 	export class Offline {
 		static getProvinces: () => any
 		static getCities: () => any
