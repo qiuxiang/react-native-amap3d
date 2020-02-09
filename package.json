@@ -1,6 +1,6 @@
 {
   "name": "react-native-amap3d",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "react-native 高德地图组件，支持 Android + iOS",
   "author": "7c00 <i@7c00.cc>",
   "license": "MIT",
@@ -38,11 +38,6 @@
     "react-native-gesture-handler": "^1.2.1",
     "react-navigation": "^3.9.1",
     "typescript": "^3.4.5"
-  },
-  "rnpm": {
-    "android": {
-      "sourceDir": "lib/android"
-    }
   },
   "prettier": {
     "printWidth": 100

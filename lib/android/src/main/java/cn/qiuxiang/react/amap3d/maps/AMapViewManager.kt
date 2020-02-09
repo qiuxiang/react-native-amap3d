@@ -102,6 +102,11 @@ internal class AMapViewManager : ViewGroupManager<AMapView>() {
         view.map.uiSettings.isScaleControlsEnabled = enabled
     }
 
+    @ReactProp(name = "mapLanguage")
+    fun setLanguage(view: AMapView, mapLanguage:Int) {
+        view.map.setMapLanguage(if(mapLanguage == 1) {"en"} else {"zh_cn"})
+    }
+
     @ReactProp(name = "showsLocationButton")
     fun setMyLocationButtonEnabled(view: AMapView, enabled: Boolean) {
         view.map.uiSettings.isMyLocationButtonEnabled = enabled
