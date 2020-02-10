@@ -17,7 +17,7 @@ class AMapPOIKeywordsSearch internal constructor(private val reactContext: React
     private var poiSearch: PoiSearch? = null
 
     override fun getName(): String {
-        return "AMapPOIPolygonSearchManager"
+        return "AMapPOIKeywordsSearchManager"
     }
 
     @ReactMethod

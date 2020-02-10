@@ -11,7 +11,8 @@ class AMap3DPackage : ReactPackage {
     override fun createNativeModules(reactContext: ReactApplicationContext): List<NativeModule> {
         return listOf(
                 AMapOfflineModule(reactContext),
-                AMapPOIPolygonSearch(reactContext)
+                AMapPOIPolygonSearch(reactContext),
+                AMapPOIKeywordsSearch(reactContext)
         )
     }
 
