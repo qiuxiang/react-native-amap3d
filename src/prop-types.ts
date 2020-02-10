@@ -26,6 +26,6 @@ export const LocationStylePropType = shape({
 
 export const mapEventsPropType = events =>
   events.reduce((props, event) => {
-    props[event.replace(/^on/, "onBaiduMap")] = func;
+    props[event.replace(/^on/, "onAMap")] = func;
     return props;
   }, {});

@@ -104,22 +104,22 @@ export interface MapViewProps extends ViewProps, MapStatus {
   /**
    * 是否启用缩放手势，用于放大缩小
    */
-  zoomEnabled: bool;
+  zoomEnabled: boolean;
 
   /**
    * 是否启用滑动手势，用于平移
    */
-  scrollEnabled: bool;
+  scrollEnabled: boolean;
 
   /**
    * 是否启用旋转手势，用于调整方向
    */
-  rotateEnabled: bool;
+  rotateEnabled: boolean;
 
   /**
    * 是否启用倾斜手势，用于改变视角
    */
-  tiltEnabled: bool;
+  tiltEnabled: boolean;
 }
 
 const events = [
@@ -133,7 +133,7 @@ const events = [
 ];
 
 export default class MapView extends Component<MapViewProps> {
-  private static propTypes = {
+  static propTypes = {
     ...ViewPropTypes,
     ...mapEventsPropType(events),
     mapType: number,
@@ -164,15 +164,7 @@ export default class MapView extends Component<MapViewProps> {
     tiltEnabled: bool
   };
 
-  protected nativeComponent = "AMapView";
-
-  /**
-   * @deprecated
-   * @ignore
-   */
-  animateTo(target, duration = 500) {
-    this.setStatus(target, duration);
-  }
+  nativeComponent = "AMapView";
 
   /**
    * 设置地图状态（坐标、缩放级别、倾斜度、旋转角度），支持动画过度
@@ -180,11 +172,11 @@ export default class MapView extends Component<MapViewProps> {
    * @param status
    * @param duration
    */
-  setStatus(status, duration = 0) {
+  setStatus(status: MapStatus, duration = 0) {
     this.call("setStatus", [status, duration]);
   }
 
-  private render() {
+  render() {
     const props = {
       ...this.props,
       ...this.handlers(events)
@@ -193,4 +185,5 @@ export default class MapView extends Component<MapViewProps> {
   }
 }
 
+// @ts-ignore
 const AMapView = requireNativeComponent("AMapView", MapView);

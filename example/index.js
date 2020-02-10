@@ -1,37 +1,18 @@
-import { Platform } from "react-native";
-import { createAppContainer, createStackNavigator } from "react-navigation";
-import Examples from "./examples";
-import MapTypes from "./examples/map-types";
-import Layers from "./examples/layers";
-import Indoor from "./examples/indoor";
-import Animated from "./examples/animated";
-import Controls from "./examples/controls";
-import Gestures from "./examples/gestures";
-import Marker from "./examples/marker";
-import Polyline from "./examples/polyline";
-import Polygon from "./examples/polygon";
-import Circle from "./examples/circle";
-import Events from "./examples/events";
-import Offline from "./examples/offline";
-import HeatMap from "./examples/heat-map";
-import MultiPoint from "./examples/multi-point";
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import Home from "./home";
+import examples from "./examples";
 
-export default createAppContainer(
-  createStackNavigator({
-    Examples: { screen: Examples },
-    MapTypes: { screen: MapTypes },
-    Layers: { screen: Layers },
-    Indoor: { screen: Indoor },
-    Animated: { screen: Animated },
-    Controls: { screen: Controls },
-    Gestures: { screen: Gestures },
-    Marker: { screen: Marker },
-    Polyline: { screen: Polyline },
-    Polygon: { screen: Polygon },
-    Circle: { screen: Circle },
-    Events: { screen: Events },
-    Offline: { screen: Offline },
-    HeatMap: { screen: HeatMap },
-    MultiPoint: { screen: MultiPoint }
-  })
+const Stack = createStackNavigator();
+
+export default () => (
+  <NavigationContainer>
+    <Stack.Navigator>
+      <Stack.Screen name="Home" component={Home} />
+      {Object.keys(examples).map(name => (
+        <Stack.Screen key={name} name={name} component={examples[name]} />
+      ))}
+    </Stack.Navigator>
+  </NavigationContainer>
 );
