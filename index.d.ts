@@ -562,7 +562,7 @@ declare module "react-native-amap3d" {
 			requireExtension?: boolean,
 			cityLimit?: boolean,
 			requireSubPOIs?: boolean
-		}) => Promise<object>
+		}) => Promise<object[]>
 	}
 
 	export class Offline {
