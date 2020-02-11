@@ -3,6 +3,7 @@ package cn.qiuxiang.react.amap3d.maps
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.os.Handler
 import android.view.View
 import cn.qiuxiang.react.amap3d.toPx
 import com.amap.api.maps.AMap
@@ -146,9 +147,11 @@ class AMapMarker(context: Context) : ReactViewGroup(context), AMapOverlay {
     }
 
     fun setImage(name: String) {
-        val drawable = context.resources.getIdentifier(name, "drawable", context.packageName)
-        bitmapDescriptor = BitmapDescriptorFactory.fromResource(drawable)
-        marker?.setIcon(bitmapDescriptor)
+        Handler().postDelayed({
+            val drawable = context.resources.getIdentifier(name, "drawable", context.packageName)
+            bitmapDescriptor = BitmapDescriptorFactory.fromResource(drawable)
+            marker?.setIcon(bitmapDescriptor)
+        }, 0)
     }
 
     fun setAnchor(x: Double, y: Double) {
