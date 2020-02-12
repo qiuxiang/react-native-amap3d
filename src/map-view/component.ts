@@ -8,28 +8,28 @@ import { findNodeHandle, UIManager } from "react-native";
  * @ignore
  */
 export default class Component<P> extends PureComponent<P> {
-  protected props: P;
+  props: P;
 
   /**
    * Must be defined in subclass if need to call native component method
    */
-  protected nativeComponent: string;
+  nativeComponent: string;
 
   /**
    * Call native method
    */
-  protected call(command: string, params?: any[]) {
-    UIManager.dispatchViewManagerCommand(
-      findNodeHandle(this),
-      UIManager.getViewManagerConfig(this.nativeComponent).Commands[command],
-      params
-    );
+  call(name: string, params?: any[]) {
+    const handle = findNodeHandle(this);
+    const command = UIManager.getViewManagerConfig(this.nativeComponent).Commands[name];
+    if (handle && command) {
+      UIManager.dispatchViewManagerCommand(handle, command, params);
+    }
   }
 
   /**
    * Generate event handlers
    */
-  protected handlers = (events: string[]) =>
+  handlers = (events: string[]) =>
     events.reduce((handlers, name) => {
       const handler = this.props[name];
       if (handler) {

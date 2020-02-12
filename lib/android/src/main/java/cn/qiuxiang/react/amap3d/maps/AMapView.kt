@@ -96,7 +96,7 @@ class AMapView(context: Context) : TextureMapView(context) {
         })
 
         map.setOnInfoWindowClickListener { marker ->
-            emit(markers[marker.id]?.id, "onInfoWindowClick")
+            emit(markers[marker.id]?.id, "onInfoWindowPress")
         }
 
         map.setOnPolylineClickListener { polyline ->

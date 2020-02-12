@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "declaration": true,
-    "lib": ["es2015", "dom"],
+    "lib": ["es2015"],
     "jsx": "react-native",
     "outDir": "lib/js"
   },

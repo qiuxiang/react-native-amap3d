@@ -2,7 +2,6 @@ package cn.qiuxiang.react.amap3d.maps
 
 import android.view.View
 import cn.qiuxiang.react.amap3d.toLatLng
-import com.amap.api.maps.model.LatLng
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.common.MapBuilder
@@ -29,18 +28,18 @@ internal class AMapMarkerManager : ViewGroupManager<AMapMarker>() {
 
     override fun getExportedCustomDirectEventTypeConstants(): Map<String, Any>? {
         return MapBuilder.of(
-                "onPress", MapBuilder.of("registrationName", "onPress"),
-                "onDragStart", MapBuilder.of("registrationName", "onDragStart"),
-                "onDrag", MapBuilder.of("registrationName", "onDrag"),
-                "onDragEnd", MapBuilder.of("registrationName", "onDragEnd"),
-                "onInfoWindowPress", MapBuilder.of("registrationName", "onInfoWindowPress")
+                "onPress", MapBuilder.of("registrationName", "onAMapPress"),
+                "onDragStart", MapBuilder.of("registrationName", "onAMapDragStart"),
+                "onDrag", MapBuilder.of("registrationName", "onAMapDrag"),
+                "onDragEnd", MapBuilder.of("registrationName", "onAMapDragEnd"),
+                "onInfoWindowPress", MapBuilder.of("registrationName", "onAMapInfoWindowPress")
         )
     }
 
     companion object {
-        val UPDATE = 1
-        val ACTIVE = 2
-        val LOCK_TO_SCREEN = 3
+        const val UPDATE = 1
+        const val ACTIVE = 2
+        const val LOCK_TO_SCREEN = 3
     }
 
     override fun getCommandsMap(): Map<String, Int> {

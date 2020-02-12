@@ -1,6 +1,6 @@
 import * as React from "react";
 import { bool, number } from "prop-types";
-import { requireNativeComponent, ViewProps, ViewPropTypes } from "react-native";
+import { requireNativeComponent, ViewPropTypes } from "react-native";
 import {
   LatLngPropType,
   LocationStylePropType,
@@ -9,8 +9,9 @@ import {
 } from "../prop-types";
 import { MapStatus, MapType, Region } from "../types";
 import Component from "./component";
+import Marker from "./marker";
 
-export interface MapViewProps extends ViewProps, MapStatus {
+export interface MapViewProps {
   /**
    * 地图类型
    */
@@ -132,6 +133,9 @@ const events = [
   "onAnimateFinished"
 ];
 
+/**
+ * @ignore
+ */
 export default class MapView extends Component<MapViewProps> {
   static propTypes = {
     ...ViewPropTypes,
@@ -176,6 +180,7 @@ export default class MapView extends Component<MapViewProps> {
     this.call("setStatus", [status, duration]);
   }
 
+  // @ignore
   render() {
     const props = {
       ...this.props,
@@ -183,6 +188,8 @@ export default class MapView extends Component<MapViewProps> {
     };
     return <AMapView {...props} />;
   }
+
+  static Marker = Marker;
 }
 
 // @ts-ignore
