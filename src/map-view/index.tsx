@@ -10,6 +10,11 @@ import {
 import { MapStatus, MapType, Region } from "../types";
 import Component from "./component";
 import Marker from "./marker";
+import Polyline from "./polyline";
+import Polygon from "./polygon";
+import Circle from "./circle";
+import HeatMap from "./heat-map";
+import MultiPoint from "./multi-point";
 
 export interface MapViewProps {
   /**
@@ -190,6 +195,11 @@ export default class MapView extends Component<MapViewProps> {
   }
 
   static Marker = Marker;
+  static Polyline = Polyline;
+  static Polygon = Polygon;
+  static Circle = Circle;
+  static HeatMap = HeatMap;
+  static MultiPoint = MultiPoint;
 }
 
 // @ts-ignore
