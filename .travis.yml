@@ -1,8 +1,8 @@
 aliases:
   - &android
     components:
-      - build-tools-29.0.2
-      - android-29
+      - build-tools-28.0.3
+      - android-28
       - extra-android-m2repository
       - extra-android-support
   
@@ -37,8 +37,9 @@ jobs:
       cache: *android-cache
       script:
         - nvm install node
-        - yarn
-        - yarn build
+        - npm i
+        - npm i typescript
+        - npm run build
         - cd android
         - TERM=dumb ./gradlew build
         - ls -lh app/build/outputs/apk/debug
