@@ -1,8 +1,8 @@
 aliases:
   - &android
     components:
-      - build-tools-28.0.3
-      - android-28
+      - build-tools-29.0.2
+      - android-29
       - extra-android-m2repository
       - extra-android-support
   
@@ -58,6 +58,6 @@ jobs:
 
 stages:
   - name: "build test for example"
-#    if: branch = master
+    if: branch = master
   - name: "build test for new project"
     if: branch = release
