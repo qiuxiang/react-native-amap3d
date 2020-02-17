@@ -7,7 +7,7 @@ import {
   RegionPropType,
   mapEventsPropType
 } from "../prop-types";
-import { MapStatus, MapType, Region } from "../types";
+import { MapStatus, MapType, Region, LatLng, Location } from "../types";
 import Component from "./component";
 import Marker from "./marker";
 import Polyline from "./polyline";
@@ -126,6 +126,36 @@ export interface MapViewProps {
    * 是否启用倾斜手势，用于改变视角
    */
   tiltEnabled: boolean;
+
+  /**
+   * 点击事件
+   */
+  onClick: (coordnate: LatLng) => void;
+
+  /**
+   * 长按事件
+   */
+  onLongClick: (coordnate: LatLng) => void;
+
+  /**
+   * 地图状态改变事件，在动画结束后触发
+   */
+  onStatusChangeComplete: (status: MapStatus) => void;
+
+  /**
+   * 定位事件
+   */
+  onLocation: (location: Location) => void;
+
+  /**
+   * 动画取消事件
+   */
+  onAnimateCancel: () => void;
+
+  /**
+   * 动画完成事件
+   */
+  onAnimateFinished: () => void;
 }
 
 const events = [

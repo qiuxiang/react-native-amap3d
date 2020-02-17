@@ -7,12 +7,59 @@ import {
   requireNativeComponent,
   ViewPropTypes
 } from "react-native";
+import { LatLng } from "../types";
 import { LatLngPropType } from "../prop-types";
 
-interface PolylineProps {
+export interface PolylineProps {
+  /**
+   * 节点坐标
+   */
+  coordinates: LatLng[];
+
+  /**
+   * 线段宽度
+   */
+  width?: number;
+
+  /**
+   * 线段颜色
+   */
+  color?: string;
+
+  /**
+   * 层级
+   */
+  zIndex?: number;
+
+  /**
+   * 多段颜色
+   */
   colors?: string[];
+
+  /**
+   * 是否使用颜色渐变
+   */
+  gradient?: boolean;
+
+  /**
+   * 是否绘制大地线
+   */
+  geodesic?: boolean;
+
+  /**
+   * 是否绘制虚线
+   */
+  dashed?: boolean;
+
+  /**
+   * 点击事件
+   */
+  onPress?: () => void;
 }
 
+/**
+ * @ignore
+ */
 export default class Polyline extends React.PureComponent<PolylineProps> {
   static propTypes = {
     ...ViewPropTypes,

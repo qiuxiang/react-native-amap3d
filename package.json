@@ -24,7 +24,7 @@
   "scripts": {
     "dev": "tsc -w",
     "build": "tsc",
-    "build-docs": "typedoc --out docs/api --ignoreCompilerErrors --excludeNotExported --excludePrivate --excludeProtected --exclude src/prop-types.ts --module commonjs --mode file src",
+    "build-docs": "typedoc --out docs/api --excludeNotExported --excludePrivate --excludeProtected --exclude src/prop-types.ts --module commonjs --mode file src",
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "run-android": "node node_modules/react-native/local-cli/cli.js run-android",
     "release-android": "node node_modules/react-native/local-cli/cli.js run-android --variant=release",
