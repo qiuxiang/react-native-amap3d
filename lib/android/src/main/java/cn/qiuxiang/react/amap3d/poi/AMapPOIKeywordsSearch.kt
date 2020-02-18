@@ -23,6 +23,10 @@ class AMapPOIKeywordsSearch internal constructor(private val reactContext: React
                 promise.reject("", "keywords is empty")
                 return
             }
+            if(keywords.isEmpty()){
+                promise.resolve(createArray())
+                return
+            }
 
             var types = ""
             if (options.hasKey("types")) {
@@ -34,7 +38,7 @@ class AMapPOIKeywordsSearch internal constructor(private val reactContext: React
                 cityCode = options.getString("cityCode")!!
             }
 
-            var query = AMapPOIKeyWordsSearchReq(keywords, types, cityCode)
+            var query = AMapPOIKeyWordsSearchReq(keywords, types, "")
 
 
             if (options.hasKey("pageSize")) {
@@ -44,7 +48,6 @@ class AMapPOIKeywordsSearch internal constructor(private val reactContext: React
             if (options.hasKey("pageNum")) {
                 query.pageNum = options.getInt("pageNum")
             }
-
             poiSearch = PoiSearch(this.reactContext, query)
             val result = poiSearch!!.searchPOI()
             if (result != null) {
