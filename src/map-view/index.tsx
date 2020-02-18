@@ -20,142 +20,167 @@ export interface MapViewProps {
   /**
    * 地图类型
    */
-  mapType: MapType;
+  mapType?: MapType;
+
+  /**
+   * 地图中心
+   */
+  center?: LatLng;
+
+  /**
+   * 地图显示区域
+   */
+  region?: Region;
+
+  /**
+   * 缩放级别
+   */
+  zoomLevel?: number;
+
+  /**
+   * 倾斜角度，取值范围 [0, 60]
+   */
+  rotation?: number;
+
+  /**
+   * 倾斜角度
+   */
+  tilt?: number;
 
   /**
    * 是否启用定位
    */
-  locationEnabled: boolean;
+  locationEnabled?: boolean;
 
   /**
    * 定位间隔(ms)，默认 2000
    *
    * @platform android
    */
-  locationInterval: number;
+  locationInterval?: number;
 
   /**
    * 定位的最小更新距离
    *
    * @platform ios
    */
-  distanceFilter: number;
+  distanceFilter?: number;
 
   /**
    * 是否显示室内地图
    */
-  showsIndoorMap: boolean;
+  showsIndoorMap?: boolean;
 
   /**
    * 是否显示室内地图楼层切换控件
    *
    * TODO: 似乎并不能正常显示
    */
-  showsIndoorSwitch: boolean;
+  showsIndoorSwitch?: boolean;
 
   /**
    * 是否显示3D建筑
    */
-  showsBuildings: boolean;
+  showsBuildings?: boolean;
 
   /**
    * 是否显示文本标签
    */
-  showsLabels: boolean;
+  showsLabels?: boolean;
 
   /**
    * 是否显示指南针
    */
-  showsCompass: boolean;
+  showsCompass?: boolean;
 
   /**
    * 是否显示放大缩小按钮
    *
    * @platform android
    */
-  showsZoomControls: boolean;
+  showsZoomControls?: boolean;
 
   /**
    * 是否显示比例尺
    */
-  showsScale: boolean;
+  showsScale?: boolean;
 
   /**
    * 是否显示定位按钮
    *
    * @platform android
    */
-  showsLocationButton: boolean;
+  showsLocationButton?: boolean;
 
   /**
    * 是否显示路况
    */
-  showsTraffic: boolean;
+  showsTraffic?: boolean;
 
   /**
    * 最大缩放级别
    */
-  maxZoomLevel: number;
+  maxZoomLevel?: number;
 
   /**
    * 最小缩放级别
    */
-  minZoomLevel: number;
+  minZoomLevel?: number;
 
   /**
    * 限制地图只能显示某个矩形区域
    */
-  limitRegion: Region;
+  limitRegion?: Region;
 
   /**
    * 是否启用缩放手势，用于放大缩小
    */
-  zoomEnabled: boolean;
+  zoomEnabled?: boolean;
 
   /**
    * 是否启用滑动手势，用于平移
    */
-  scrollEnabled: boolean;
+  scrollEnabled?: boolean;
 
   /**
    * 是否启用旋转手势，用于调整方向
    */
-  rotateEnabled: boolean;
+  rotateEnabled?: boolean;
 
   /**
    * 是否启用倾斜手势，用于改变视角
    */
-  tiltEnabled: boolean;
+  tiltEnabled?: boolean;
 
   /**
    * 点击事件
    */
-  onClick: (coordnate: LatLng) => void;
+  onClick?: (coordnate: LatLng) => void;
 
   /**
    * 长按事件
    */
-  onLongClick: (coordnate: LatLng) => void;
+  onLongClick?: (coordnate: LatLng) => void;
 
   /**
    * 地图状态改变事件，在动画结束后触发
    */
-  onStatusChangeComplete: (status: MapStatus) => void;
+  onStatusChangeComplete?: (status: MapStatus) => void;
 
   /**
    * 定位事件
    */
-  onLocation: (location: Location) => void;
+  onLocation?: (location: Location) => void;
 
   /**
    * 动画取消事件
    */
-  onAnimateCancel: () => void;
+  onAnimateCancel?: () => void;
 
   /**
    * 动画完成事件
    */
-  onAnimateFinished: () => void;
+  onAnimateFinished?: () => void;
 }
 
 const events = [

@@ -45,20 +45,21 @@ jobs:
         - ls -lh app/build/outputs/apk/debug
         - ls -lh app/build/outputs/apk/release
 
-#    - stage: "build test for example"
-#      language: objective-c
-#      osx_image: xcode10.1
-#      cache: *ios-cache
-#      script:
-#        - nvm install node
-#        - brew install yarn
-#        - yarn
-#        - cd ios
-#        - pod install --repo-update
-#        - xcodebuild -workspace RNAMap3D.xcworkspace -scheme RNAMap3D -sdk iphonesimulator -quiet
+    - stage: "build test for example"
+      language: objective-c
+      os: osx
+      osx_image: xcode11.3
+      cache: *ios-cache
+      script:
+        - nvm install node
+        - npm i
+        - npm i typescript
+        - npm run build
+        - cd ios && pod install && cd ..
+        - npm run run-ios
 
 stages:
   - name: "build test for example"
-    if: branch = master
+    #if: branch = master
   - name: "build test for new project"
     if: branch = release

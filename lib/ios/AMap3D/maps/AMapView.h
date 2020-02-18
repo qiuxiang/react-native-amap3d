@@ -5,8 +5,8 @@
 @interface AMapView : MAMapView
 
 @property(nonatomic, copy) RCTBubblingEventBlock onLocation;
-@property(nonatomic, copy) RCTBubblingEventBlock onPress;
-@property(nonatomic, copy) RCTBubblingEventBlock onLongPress;
+@property(nonatomic, copy) RCTBubblingEventBlock onClick;
+@property(nonatomic, copy) RCTBubblingEventBlock onLongClick;
 @property(nonatomic, copy) RCTBubblingEventBlock onStatusChange;
 @property(nonatomic, copy) RCTBubblingEventBlock onStatusChangeComplete;
 

@@ -2,7 +2,7 @@
  * Base component, contains some utils
  */
 import { PureComponent } from "react";
-import { findNodeHandle, UIManager } from "react-native";
+import { findNodeHandle, UIManager, Platform } from "react-native";
 
 /**
  * @ignore
@@ -20,8 +20,8 @@ export default class Component<P> extends PureComponent<P> {
    */
   call(name: string, params?: any[]) {
     const handle = findNodeHandle(this);
-    const command = UIManager.getViewManagerConfig(this.nativeComponent).Commands[name];
-    if (handle && command) {
+    if (handle) {
+      const command = UIManager.getViewManagerConfig(this.nativeComponent).Commands[name];
       UIManager.dispatchViewManagerCommand(handle, command, params);
     }
   }
@@ -33,7 +33,10 @@ export default class Component<P> extends PureComponent<P> {
     events.reduce((handlers, name) => {
       const handler = this.props[name];
       if (handler) {
-        handlers[name.replace(/^on/, "onAMap")] = event => handler(event.nativeEvent);
+        if (Platform.OS === "android") {
+          name = name.replace(/^on/, "onAMap");
+        }
+        handlers[name] = event => handler(event.nativeEvent);
       }
       return handlers;
     }, {});

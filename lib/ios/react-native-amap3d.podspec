@@ -10,11 +10,11 @@ Pod::Spec.new do |s|
   s.authors      = { "Qiu Xiang" => "i@7c00.cc" }
   s.homepage     = package['repository']['url']
   s.license      = package['license']
-  s.platform     = :ios, "8.0"
+  s.platform     = :ios, "9.0"
 
   s.source       = { :git => package['repository']['url'] }
   s.source_files = '**/*.{h,m}'
 
   s.dependency 'React'
-  s.dependency 'AMap3DMap', "~> 6.6.0"
+  s.dependency 'AMap3DMap', "~> 7.2.0"
 end

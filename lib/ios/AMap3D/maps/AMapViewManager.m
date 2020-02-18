@@ -45,21 +45,21 @@ RCT_EXPORT_VIEW_PROPERTY(distanceFilter, CLLocationDistance)
 RCT_EXPORT_VIEW_PROPERTY(locationStyle, LocationStyle)
 RCT_EXPORT_VIEW_PROPERTY(mapLanguage, NSNumber)
 
-RCT_EXPORT_VIEW_PROPERTY(onPress, RCTBubblingEventBlock)
-RCT_EXPORT_VIEW_PROPERTY(onLongPress, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onClick, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onLongClick, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onLocation, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onStatusChange, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onStatusChangeComplete, RCTBubblingEventBlock)
 
-RCT_EXPORT_METHOD(animateTo:(nonnull NSNumber *)reactTag params:(NSDictionary *)params duration:(NSInteger)duration) {
+RCT_EXPORT_METHOD(setStatus:(nonnull NSNumber *)reactTag params:(NSDictionary *)params duration:(NSInteger)duration) {
     [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, UIView *> *viewRegistry) {
         AMapView *mapView = (AMapView *) viewRegistry[reactTag];
         MAMapStatus *mapStatus = mapView.getMapStatus;
         if (params[@"zoomLevel"]) {
             mapStatus.zoomLevel = [params[@"zoomLevel"] floatValue];
         }
-        if (params[@"coordinate"]) {
-            NSDictionary *coordinate = params[@"coordinate"];
+        if (params[@"center"]) {
+            NSDictionary *coordinate = params[@"center"];
             mapStatus.centerCoordinate = CLLocationCoordinate2DMake(
                     [coordinate[@"latitude"] doubleValue],
                     [coordinate[@"longitude"] doubleValue]);
@@ -75,8 +75,8 @@ RCT_EXPORT_METHOD(animateTo:(nonnull NSNumber *)reactTag params:(NSDictionary *)
 }
 
 - (void)mapView:(AMapView *)mapView didSingleTappedAtCoordinate:(CLLocationCoordinate2D)coordinate {
-    if (mapView.onPress) {
-        mapView.onPress(@{
+    if (mapView.onClick) {
+        mapView.onClick(@{
                 @"latitude": @(coordinate.latitude),
                 @"longitude": @(coordinate.longitude),
         });
@@ -84,8 +84,8 @@ RCT_EXPORT_METHOD(animateTo:(nonnull NSNumber *)reactTag params:(NSDictionary *)
 }
 
 - (void)mapView:(AMapView *)mapView didLongPressedAtCoordinate:(CLLocationCoordinate2D)coordinate {
-    if (mapView.onLongPress) {
-        mapView.onLongPress(@{
+    if (mapView.onLongClick) {
+        mapView.onLongClick(@{
                 @"latitude": @(coordinate.latitude),
                 @"longitude": @(coordinate.longitude),
         });
