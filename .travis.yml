@@ -8,14 +8,14 @@ aliases:
   
   - &android-cache
     directories:
-      - ~/.cache/yarn
+      - ~/.npm
       - ~/.gradle/caches/modules-2
       - ~/.gradle/wrapper
   
   - &ios-cache
     directories:
       - ~/.rncache
-      - ~/Library/Caches/Yarn
+      - ~/.npm
       - ~/Library/Caches/CocoaPods
 
   - &init-new-project
@@ -30,7 +30,6 @@ jobs:
   include:
     - stage: "build test for example"
       language: android
-      jdk: oraclejdk8
       android: *android
       before_cache:
         - rm ~/.gradle/caches/modules-2/modules-2.lock
@@ -51,7 +50,6 @@ jobs:
       osx_image: xcode11.3
       cache: *ios-cache
       script:
-        - nvm install node
         - npm i
         - npm i typescript
         - npm run build
@@ -60,6 +58,6 @@ jobs:
 
 stages:
   - name: "build test for example"
-    #if: branch = master
+    if: branch = master
   - name: "build test for new project"
     if: branch = release
