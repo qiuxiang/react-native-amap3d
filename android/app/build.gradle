@@ -189,8 +189,6 @@ dependencies {
     } else {
         implementation jscFlavor
     }
-
-    implementation project(":react-native-amap3d")
 }
 
 // Run this once to be able to run the application with BUCK

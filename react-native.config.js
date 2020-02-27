@@ -7,7 +7,15 @@ module.exports = {
   },
   dependencies: {
     "react-native-amap3d": {
-      platforms: { ios: { podspecPath: __dirname + "/lib/ios/react-native-amap3d.podspec" } }
+      root: __dirname,
+      platforms: {
+        ios: { podspecPath: __dirname + "/lib/ios/react-native-amap3d.podspec" },
+        android: {
+          sourceDir: __dirname + "/lib/android",
+          packageImportPath: "import cn.qiuxiang.react.amap3d.AMap3DPackage;",
+          packageInstance: "new AMap3DPackage()"
+        }
+      }
     }
   }
 };
