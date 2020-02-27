@@ -18,14 +18,6 @@ aliases:
       - ~/.npm
       - ~/Library/Caches/CocoaPods
 
-  - &init-new-project
-    |
-      nvm install node
-      yarn global add react-native-cli
-      react-native init App --version="0.58.4"
-      cd App
-      yarn add react-native-amap3d@next
-
 jobs:
   include:
     - stage: "build test for example"
@@ -56,8 +48,22 @@ jobs:
         - cd ios && pod install && cd ..
         - npm run run-ios
 
+    - stage: "build test for new project"
+      language: android
+      android: *android
+      before_cache:
+        - rm ~/.gradle/caches/modules-2/modules-2.lock
+      cache: *android-cache
+      script:
+        - nvm install node
+        - npx react-native init app && cd app
+        - npm i react-native-amap3d@next
+        - npx react-native run-android
+        - ls -lh app/build/outputs/apk/debug
+        - ls -lh app/build/outputs/apk/release
+
 stages:
   - name: "build test for example"
     if: branch = master
   - name: "build test for new project"
-    if: branch = release
+    #if: branch = release
