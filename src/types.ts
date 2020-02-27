@@ -88,7 +88,7 @@ export interface Location extends LatLng {
   /**
    * 运动速度
    */
-  speed: number
+  speed: number;
 }
 
 /**
@@ -98,7 +98,7 @@ export enum MapType {
   /**
    * 标准地图
    */
-  Standard = 1,
+  Standard,
 
   /**
    * 卫星地图

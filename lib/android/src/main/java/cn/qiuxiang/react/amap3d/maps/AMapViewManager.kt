@@ -134,7 +134,7 @@ internal class AMapViewManager : ViewGroupManager<AMapView>() {
 
     @ReactProp(name = "mapType")
     fun setMapType(view: AMapView, mapType: Int) {
-        view.map.mapType = mapType
+        view.map.mapType = mapType + 1
     }
 
     @ReactProp(name = "zoomEnabled")
