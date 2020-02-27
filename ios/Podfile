@@ -34,8 +34,6 @@ target 'RNAMap3D' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
-  pod 'react-native-amap3d', :path => '../lib/ios'
-
   target 'RNAMap3DTests' do
     inherit! :search_paths
     # Pods for testing
