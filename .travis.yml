@@ -74,4 +74,4 @@ stages:
   - name: "build test for example"
     if: branch = master
   - name: "build test for new project"
-    #if: branch = release
+    # if: branch = release
