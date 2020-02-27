@@ -28,11 +28,9 @@ jobs:
       cache: *android-cache
       script:
         - nvm install node
-        - npm i
-        - npm i typescript
+        - npm i && npm i typescript
         - npm run build
-        - cd android
-        - TERM=dumb ./gradlew build
+        - cd android && TERM=dumb ./gradlew build
         - ls -lh app/build/outputs/apk/debug
         - ls -lh app/build/outputs/apk/release
 
@@ -42,8 +40,7 @@ jobs:
       osx_image: xcode11.3
       cache: *ios-cache
       script:
-        - npm i
-        - npm i typescript
+        - npm i && npm i typescript
         - npm run build
         - cd ios && pod install && cd ..
         - npm run run-ios
@@ -58,7 +55,7 @@ jobs:
         - nvm install node
         - npx react-native init app && cd app
         - npm i react-native-amap3d@next
-        - npx react-native run-android
+        - cd android && TERM=dumb ./gradlew build
         - ls -lh app/build/outputs/apk/debug
         - ls -lh app/build/outputs/apk/release
 
