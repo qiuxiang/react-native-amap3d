@@ -240,7 +240,6 @@ export default class MapView extends Component<MapViewProps> {
     this.call("setStatus", [status, duration]);
   }
 
-  // @ignore
   render() {
     const props = {
       ...this.props,
