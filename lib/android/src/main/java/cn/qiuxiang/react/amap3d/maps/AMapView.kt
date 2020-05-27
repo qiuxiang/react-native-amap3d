@@ -59,7 +59,7 @@ class AMapView(context: Context) : TextureMapView(context) {
         map.setOnMarkerClickListener { marker ->
             markers[marker.id]?.let {
                 it.active = true
-                emit(it.id, "onClick")
+                emit(it.id, "onPress")
             }
             true
         }
@@ -100,7 +100,7 @@ class AMapView(context: Context) : TextureMapView(context) {
         }
 
         map.setOnPolylineClickListener { polyline ->
-            emit(lines[polyline.id]?.id, "onClick")
+            emit(lines[polyline.id]?.id, "onPress")
         }
 
         map.setOnMultiPointClickListener { item ->
