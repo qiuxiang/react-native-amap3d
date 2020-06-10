@@ -1,6 +1,6 @@
 {
   "name": "react-native-amap3d",
-  "version": "2.0.1-0",
+  "version": "2.0.1",
   "description": "react-native 高德地图组件，支持 Android + iOS",
   "author": "7c00 <i@7c00.cc>",
   "license": "MIT",
@@ -23,15 +23,14 @@
     "url": "https://github.com/qiuxiang/react-native-amap3d"
   },
   "scripts": {
-    "dev": "tsc -w",
-    "build": "tsc",
-    "build-docs": "typedoc --out docs/api --excludeNotExported --excludePrivate --excludeProtected --exclude src/prop-types.ts --module commonjs --mode file src",
-    "start": "node node_modules/react-native/local-cli/cli.js start",
-    "run-android": "node node_modules/react-native/local-cli/cli.js run-android",
-    "release-android": "node node_modules/react-native/local-cli/cli.js run-android --variant=release",
-    "log-android": "node node_modules/react-native/local-cli/cli.js log-android",
+    "dev": "npx typescript -w",
+    "build": "npx typescript",
+    "build-docs": "npx typedoc --out docs/api --excludeNotExported --excludePrivate --excludeProtected --exclude src/prop-types.ts --module commonjs --mode file src",
+    "start": "npx react-native start",
+    "run-android": "npx react-native  run-android",
+    "release-android": "npx react-native run-android --variant=release",
     "reload": "adb reverse tcp:8081 tcp:8081 && adb shell input text rr",
-    "run-ios": "node node_modules/react-native/local-cli/cli.js run-ios"
+    "run-ios": "npx react-native run-ios"
   },
   "devDependencies": {
     "@react-native-community/masked-view": "^0.1.6",
