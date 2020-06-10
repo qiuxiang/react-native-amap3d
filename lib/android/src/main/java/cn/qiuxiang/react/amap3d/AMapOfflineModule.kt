@@ -31,11 +31,11 @@ class AMapOfflineModule(private val reactContext: ReactApplicationContext) : Rea
 
     @ReactMethod
     fun download(name: String) {
-        manager.offlineMapProvinceList.forEach {
-            if (it.provinceName == name) {
+        manager.offlineMapProvinceList.forEach { province ->
+          if (province.provinceName == name) {
                 return manager.downloadByProvinceName(name)
             }
-            it.cityList.forEach {
+            province.cityList.forEach {
                 if (it.city == name) {
                     return manager.downloadByCityName(name)
                 }

@@ -122,7 +122,7 @@ class AMapView(context: Context) : TextureMapView(context) {
             data.putDouble("tilt", it.tilt.toDouble())
             data.putDouble("rotation", it.bearing.toDouble())
             if (event == "onStatusChangeComplete") {
-                data.putMap("region", map.projection.visibleRegion.latLngBounds.toWritableMap());
+                data.putMap("region", map.projection.visibleRegion.latLngBounds.toWritableMap())
             }
             emit(id, event, data)
         }

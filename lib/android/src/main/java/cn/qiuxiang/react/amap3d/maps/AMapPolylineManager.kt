@@ -41,7 +41,7 @@ internal class AMapPolylineManager : SimpleViewManager<AMapPolyline>() {
     }
 
     @ReactProp(name = "zIndex")
-    fun setZIndex_(polyline: AMapPolyline, zIndex: Float) {
+    fun setZIndez(polyline: AMapPolyline, zIndex: Float) {
         polyline.zIndex = zIndex
     }
 

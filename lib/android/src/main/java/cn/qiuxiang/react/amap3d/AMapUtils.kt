@@ -7,6 +7,7 @@ import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.bridge.WritableMap
+import kotlin.math.abs
 
 fun Float.toPx(): Int {
     return (this * Resources.getSystem().displayMetrics.density).toInt()
@@ -17,7 +18,7 @@ fun ReadableMap.toLatLng(): LatLng {
 }
 
 fun ReadableArray.toLatLngList(): ArrayList<LatLng> {
-    return ArrayList((0..(size() - 1)).map { getMap(it)!!.toLatLng() })
+    return ArrayList((0 until size()).map { getMap(it)!!.toLatLng() })
 }
 
 fun LatLng.toWritableMap(): WritableMap {
@@ -29,10 +30,10 @@ fun LatLng.toWritableMap(): WritableMap {
 
 fun LatLngBounds.toWritableMap(): WritableMap {
     val map = Arguments.createMap()
-    map.putDouble("latitude", Math.abs((southwest.latitude + northeast.latitude) / 2))
-    map.putDouble("longitude", Math.abs((southwest.longitude + northeast.longitude) / 2))
-    map.putDouble("latitudeDelta", Math.abs(southwest.latitude - northeast.latitude))
-    map.putDouble("longitudeDelta", Math.abs(southwest.longitude - northeast.longitude))
+    map.putDouble("latitude", abs((southwest.latitude + northeast.latitude) / 2))
+    map.putDouble("longitude", abs((southwest.longitude + northeast.longitude) / 2))
+    map.putDouble("latitudeDelta", abs(southwest.latitude - northeast.latitude))
+    map.putDouble("longitudeDelta", abs(southwest.longitude - northeast.longitude))
     return map
 }
 

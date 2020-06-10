@@ -17,11 +17,11 @@ class AMapMultiPoint(context: Context) : ReactViewGroup(context), AMapOverlay {
                 .map {
                     val data = points.getMap(it)
                     val item = MultiPointItem(data!!.toLatLng())
-                    if (data!!.hasKey("title")) {
-                        item.title = data!!.getString("title")
+                    if (data.hasKey("title")) {
+                        item.title = data.getString("title")
                     }
-                    if (data!!.hasKey("subtitle")) {
-                        item.snippet = data!!.getString("subtitle")
+                    if (data.hasKey("subtitle")) {
+                        item.snippet = data.getString("subtitle")
                     }
                     item.customerId = id.toString() + "_" + it
                     item

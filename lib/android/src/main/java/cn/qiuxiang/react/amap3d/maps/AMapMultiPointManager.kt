@@ -29,6 +29,6 @@ internal class AMapMultiPointManager : SimpleViewManager<AMapMultiPoint>() {
 
     @ReactProp(name = "image")
     fun setImage(multiPoint: AMapMultiPoint, image: String) {
-        multiPoint.setImage(image);
+        multiPoint.setImage(image)
     }
 }

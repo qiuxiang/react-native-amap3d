@@ -12,7 +12,7 @@ class AMapInfoWindowAdapter(
         private val context: Context,
         private val markers: HashMap<String, AMapMarker>
 ) : InfoWindowAdapter {
-    val paddingTop = context.resources.displayMetrics.density
+    private val paddingTop = context.resources.displayMetrics.density
 
     override fun getInfoWindow(marker: Marker): View? {
         return markers[marker.id]?.infoWindow
@@ -28,7 +28,7 @@ class AMapInfoWindowAdapter(
         layout.addView(titleView)
 
         val snippet = marker.snippet
-        if (!snippet.isEmpty()) {
+        if (snippet.isNotEmpty()) {
             val snippetView = TextView(context)
             snippetView.text = snippet
             snippetView.maxEms = 12
