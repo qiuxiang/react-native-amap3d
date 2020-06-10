@@ -126,7 +126,7 @@ const coordinate = {
 
 ### 更多示例
 
-参考 [examples](https://github.com/qiuxiang/react-native-amap3d/tree/master/example/examples)，或直接下载安装 [example.apk](https://github.com/qiuxiang/react-native-amap3d/releases/download/v1.0.0-beta.1/example.apk)。
+参考 [examples](https://github.com/qiuxiang/react-native-amap3d/tree/master/example/examples)，或直接下载安装[示例 app](https://github.com/qiuxiang/react-native-amap3d/releases/download/v2.0.1/app-release.apk)。
 
 #### Android
 
