@@ -34,16 +34,16 @@ jobs:
         - ls -lh app/build/outputs/apk/debug
         - ls -lh app/build/outputs/apk/release
 
-    - stage: "build test for example"
-      language: objective-c
-      os: osx
-      osx_image: xcode11.3
-      cache: *ios-cache
-      script:
-        - npm i && npm i typescript
-        - npm run build
-        - cd ios && pod install && cd ..
-        - npm run run-ios
+#    - stage: "build test for example"
+#      language: objective-c
+#      os: osx
+#      osx_image: xcode11.3
+#      cache: *ios-cache
+#      script:
+#        - npm i && npm i typescript
+#        - npm run build
+#        - cd ios && pod install && cd ..
+#        - npm run run-ios
 
     - stage: "build test for new project"
       language: android

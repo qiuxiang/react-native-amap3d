@@ -7,7 +7,7 @@ const PointPropType = PropTypes.shape({
   latitude: PropTypes.number.isRequired,
   longitude: PropTypes.number.isRequired,
   title: PropTypes.string,
-  subtitle: PropTypes.string
+  subtitle: PropTypes.string,
 });
 
 export interface MultiPointProps {
@@ -35,7 +35,7 @@ export default class MultiPoint extends React.PureComponent<MultiPointProps> {
     ...ViewPropTypes,
     points: PropTypes.arrayOf(PointPropType).isRequired,
     image: PropTypes.string,
-    onItemPress: PropTypes.func
+    onItemPress: PropTypes.func,
   };
 
   onItemPress = ({ nativeEvent }) => {
@@ -45,6 +45,7 @@ export default class MultiPoint extends React.PureComponent<MultiPointProps> {
   };
 
   render() {
+    // @ts-ignore
     return <AMapMultiPoint {...this.props} onItemPress={this.onItemPress} />;
   }
 }

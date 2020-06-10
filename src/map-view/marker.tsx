@@ -7,8 +7,8 @@ import Component from "./component";
 
 const style = StyleSheet.create({
   overlay: {
-    position: "absolute"
-  }
+    position: "absolute",
+  },
 });
 
 export interface MarkerProps {
@@ -149,9 +149,9 @@ export default class Marker extends Component<MarkerProps> {
         "red",
         "rose",
         "violet",
-        "yellow"
+        "yellow",
       ]),
-      ios: PropTypes.oneOf(["red", "green", "purple"])
+      ios: PropTypes.oneOf(["red", "green", "purple"]),
     }),
     icon: PropTypes.func,
     image: PropTypes.string,
@@ -163,7 +163,7 @@ export default class Marker extends Component<MarkerProps> {
     centerOffset: PointPropType,
     active: PropTypes.bool,
     clickDisabled: PropTypes.bool,
-    infoWindowDisabled: PropTypes.bool
+    infoWindowDisabled: PropTypes.bool,
   };
 
   nativeComponent = "AMapMarker";
@@ -198,6 +198,7 @@ export default class Marker extends Component<MarkerProps> {
   /* eslint-disable class-methods-use-this */
   renderInfoWindow(view: React.ReactChild) {
     if (view) {
+      // @ts-ignore
       return <InfoWindow style={style.overlay}>{view}</InfoWindow>;
     }
     return null;
@@ -206,7 +207,7 @@ export default class Marker extends Component<MarkerProps> {
   render() {
     const props = {
       ...this.props,
-      ...this.handlers(events)
+      ...this.handlers(events),
     };
     return (
       <AMapMarker {...props}>
