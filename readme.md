@@ -75,7 +75,7 @@ import { MapView } from "react-native-amap3d";
 
 ```jsx
 <MapView
-  coordinate={{
+  center={{
     latitude: 39.91095,
     longitude: 116.37296
   }}

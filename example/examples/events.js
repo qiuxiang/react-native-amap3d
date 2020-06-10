@@ -30,8 +30,11 @@ export default class EventsExample extends Component {
     logs: []
   };
 
-  componentDidMount() {
-    PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION);
+  async componentDidMount() {
+    await PermissionsAndroid.requestMultiple([
+      PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+      PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION,
+    ]);
   }
 
   _log(event, data) {
