@@ -27,10 +27,10 @@
     "build": "npx typescript",
     "build-docs": "npx typedoc --out docs/api --excludeNotExported --excludePrivate --excludeProtected --exclude src/prop-types.ts --module commonjs --mode file src",
     "start": "npx react-native start",
-    "run-android": "npx react-native  run-android",
+    "android": "npx react-native  run-android",
     "release-android": "npx react-native run-android --variant=release",
     "reload": "adb reverse tcp:8081 tcp:8081 && adb shell input text rr",
-    "run-ios": "npx react-native run-ios"
+    "ios": "npx react-native run-ios"
   },
   "devDependencies": {
     "@react-native-community/masked-view": "^0.1.6",
