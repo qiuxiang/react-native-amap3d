@@ -9,7 +9,7 @@ export default class IndoorExample extends Component {
     return (
       <MapView
         style={StyleSheet.absoluteFill}
-        coordinate={{ latitude: 39.9098, longitude: 116.37296 }}
+        center={{ latitude: 39.9098, longitude: 116.37296 }}
         zoomLevel={18}
         tilt={45}
         showsIndoorMap
