@@ -1,4 +1,4 @@
-import { number, func, shape, string } from "prop-types";
+import { number, func, shape, string, bool, arrayOf } from "prop-types";
 
 export const LatLngPropType = shape({
   latitude: number.isRequired,
@@ -21,7 +21,14 @@ export const LocationStylePropType = shape({
   image: string,
   fillColor: string,
   strokeColor: string,
-  strokeWidth: number
+  strokeWidth: number,
+  showLocation: bool, // Android only
+  anchor: arrayOf(number), // Android only
+  locationDotBgColor: string, // iOS only
+  locationDotFillColor: string, // iOS only
+  enablePulseAnnimation: bool, // iOS only
+  showsHeadingIndicator: bool, // iOS only
+  showsAccuracyRing: bool, // iOS only
 });
 
 export const mapEventsPropType = events =>

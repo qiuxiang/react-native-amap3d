@@ -212,6 +212,7 @@ class AMapView(context: Context) : TextureMapView(context) {
 
     fun setLocationInterval(interval: Long) {
         locationStyle.interval(interval)
+        map.myLocationStyle = locationStyle
     }
 
     fun setLocationStyle(style: ReadableMap) {
@@ -232,6 +233,17 @@ class AMapView(context: Context) : TextureMapView(context) {
                     style.getString("image"), "drawable", context.packageName)
             locationStyle.myLocationIcon(BitmapDescriptorFactory.fromResource(drawable))
         }
+
+        if (style.hasKey("showLocation")) {
+            locationStyle.showMyLocation(style.getBoolean("showLocation"))
+        }
+
+        if (style.hasKey("anchor")) {
+            val anchor = style.getArray("anchor");
+            locationStyle.anchor(anchor!!.getDouble(0).toFloat(), anchor.getDouble(1).toFloat())
+        }
+
+        map.myLocationStyle = locationStyle
     }
 
     fun setLocationType(type: Int) {
