@@ -107,7 +107,7 @@ class AMapView(context: Context) : TextureMapView(context) {
             val slice = item.customerId.split("_")
             val data = Arguments.createMap()
             data.putInt("index", slice[1].toInt())
-            emit(slice[0].toInt(), "onItemClick", data)
+            emit(slice[0].toInt(), "onItemPress", data)
             false
         }
 
