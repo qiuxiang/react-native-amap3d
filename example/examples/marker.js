@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Alert, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Alert, StyleSheet, Text, TouchableOpacity, View, Pressable } from "react-native";
 import { MapView } from "react-native-amap3d";
 
 const styles = StyleSheet.create({
@@ -33,16 +33,17 @@ export default class MarkerExample extends Component {
   };
 
   state = {
-    time: new Date()
+    time: new Date(),
+    show: false,
   };
 
   componentDidMount() {
     this.mounted = true;
-    setInterval(() => {
-      if (this.mounted) {
-        this.setState({ time: new Date() });
-      }
-    }, 1000);
+    // setInterval(() => {
+    //   if (this.mounted) {
+    //     this.setState({ time: new Date() });
+    //   }
+    // }, 1000);
   }
 
   componentWillUnmount() {
@@ -69,13 +70,21 @@ export default class MarkerExample extends Component {
   ];
 
   _onMarkerPress = () => Alert.alert("onPress");
-  _onInfoWindowPress = () => Alert.alert("onInfoWindowPress");
+  _onInfoWindowPress = () => {
+    this.setState({
+      show: true
+    });
+  }
   _onDragEvent = ({ latitude, longitude }) => Alert.alert(`${latitude}, ${longitude}`);
 
+ 
+
   render() {
+    // Alert.alert("test", this.state.show + '');
     return (
       <MapView style={StyleSheet.absoluteFill}>
-        <MapView.Marker
+        {
+          this.state.show ? <MapView.Marker
           active
           draggable
           title="一个可拖拽的标记"
@@ -83,16 +92,29 @@ export default class MarkerExample extends Component {
           onDragEnd={this._onDragEvent}
           onInfoWindowPress={this._onInfoWindowPress}
           coordinate={this._coordinates[0]}
-        />
-        <MapView.Marker color="green" coordinate={this._coordinates[1]}>
-          <TouchableOpacity activeOpacity={0.9} onPress={this._onInfoWindowPress}>
-            <View style={styles.customInfoWindow}>
+          onPress = {()=> {
+            
+          }}
+        /> : null
+        }
+        
+        <MapView.Marker color="green" coordinate={this._coordinates[1]} >
+          <Pressable 
+          activeOpacity={0.5}
+          hitSlop = {500}
+          onPress={()=> {
+            this.setState({
+              show: true
+            })
+            Alert.alert("tesssst", "tsc")
+          }}>
+            <View style={styles.customInfoWindow} >
               <Text>自定义信息窗口</Text>
               <Text>{this.state.time.toLocaleTimeString()}</Text>
             </View>
-          </TouchableOpacity>
+          </Pressable>
         </MapView.Marker>
-        <MapView.Marker
+        {/* <MapView.Marker
           image="flag"
           title="自定义图片"
           onPress={this._onMarkerPress}
@@ -100,13 +122,14 @@ export default class MarkerExample extends Component {
         />
         <MapView.Marker
           title="自定义 View"
+          onInfoWindowPress = {this._onInfoWindowPress}
           icon={() => (
             <View style={styles.customMarker}>
               <Text style={styles.markerText}>{this.state.time.toLocaleTimeString()}</Text>
             </View>
           )}
           coordinate={this._coordinates[3]}
-        />
+        /> */}
       </MapView>
     );
   }

@@ -80,6 +80,8 @@ export default ({ navigation }) => {
         {renderItem("热力图")}
         <View style={style.separator} />
         {renderItem("海量点")}
+        <View style={style.separator} />
+        {renderItem("点聚合")}
       </View>
     </ScrollView>
   );

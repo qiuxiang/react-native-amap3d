@@ -121,6 +121,7 @@
             [_annotationView addSubview:_customView];
             [_annotationView addGestureRecognizer:[
                     [UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_handleTap:)]];
+
         } else {
             _annotationView = [[MAPinAnnotationView alloc] initWithAnnotation:_annotation reuseIdentifier:nil];
             ((MAPinAnnotationView *) _annotationView).pinColor = _pinColor;
@@ -145,13 +146,28 @@
     return _annotationView;
 }
 
-- (void)didAddSubview:(UIView *)subview {
+- (void) setCustomeViewSize:(CGRect)frame bounds:(CGRect) bounds{
+    _calloutView.frame = frame;
+    _calloutView.bounds = bounds;
+    _annotationView.customCalloutView = _calloutView;
+}
+
+- (void)insertReactSubview:(UIView *)subview atIndex:(NSInteger)atIndex {
     if ([subview isKindOfClass:[AMapCallout class]]) {
+        [(AMapCallout *)subview setMarker: self];
         _calloutView = [[MACustomCalloutView alloc] initWithCustomView:subview];
-        _annotationView.customCalloutView = _calloutView;
     } else {
         _customView = subview;
         _customView.hidden = YES;
+    }
+}
+
+- (void)removeReactSubview:(UIView *)subview {
+    [super removeReactSubview:subview];
+    if ([subview isKindOfClass:[AMapCallout class]]) {
+        _calloutView = [[MACustomCalloutView alloc] initWithCustomView:subview];
+        _annotationView.customCalloutView = _calloutView;
+        [_mapView removeAnnotation: _annotation];
     }
 }
 
