@@ -2,14 +2,17 @@
 #import "AMapView.h"
 #import "AMapMarker.h"
 #import "AMapOverlay.h"
+#import <objc/message.h>
 
 #pragma ide diagnostic ignored "OCUnusedClassInspection"
 #pragma ide diagnostic ignored "-Woverriding-method-mismatch"
 
 @interface AMapViewManager : RCTViewManager <MAMapViewDelegate>
+
 @end
 
-@implementation AMapViewManager
+@implementation AMapViewManager{
+}
 
 RCT_EXPORT_MODULE()
 
@@ -132,6 +135,10 @@ RCT_EXPORT_METHOD(setStatus:(nonnull NSNumber *)reactTag params:(NSDictionary *)
     if (marker.onInfoWindowPress) {
         marker.onInfoWindowPress(nil);
     }
+}
+
+- (void)mapView:(MAMapView *)mapView didAnnotationViewTapped:(MAAnnotationView *)view {
+    NSLog(@"didAnnotationViewTapped");
 }
 
 - (void)mapView:(AMapView *)mapView annotationView:(MAAnnotationView *)view didChangeDragState:(MAAnnotationViewDragState)newState

@@ -4,7 +4,8 @@ import Indoor from "./indoor";
 import Animated from "./animated";
 import Controls from "./controls";
 import Gestures from "./gestures";
-import Marker from "./marker";
+// import Marker from "./marker";
+import {  MyMarker } from './marker_';
 import Polyline from "./polyline";
 import Polygon from "./polygon";
 import Circle from "./circle";
@@ -12,6 +13,7 @@ import Events from "./events";
 import HeatMap from "./heat-map";
 import MultiPoint from "./multi-point";
 import Offline from "./offline";
+import Cluster from "./cluster";
 
 export default {
   地图模式: MapTypes,
@@ -21,11 +23,12 @@ export default {
   手势交互: Gestures,
   动画移动: Animated,
   地图事件: Events,
-  添加标记: Marker,
+  添加标记: MyMarker,
   绘制折线: Polyline,
   绘制多边形: Polygon,
   绘制圆形: Circle,
   热力图: HeatMap,
-  海量点: MultiPoint
+  海量点: MultiPoint,
+  点聚合: Cluster
   // 离线地图: Offline
 };

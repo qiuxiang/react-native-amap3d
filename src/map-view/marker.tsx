@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as PropTypes from "prop-types";
-import { Platform, requireNativeComponent, StyleSheet, ViewPropTypes, View } from "react-native";
+import { Platform, requireNativeComponent, StyleSheet, ViewPropTypes, View, Alert } from "react-native";
 import { LatLng, Point } from "../types";
 import { LatLngPropType, PointPropType, mapEventsPropType } from "../prop-types";
 import Component from "./component";

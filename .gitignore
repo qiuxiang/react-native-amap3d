@@ -12,3 +12,4 @@ local.properties
 Podfile.lock
 package-lock.json
 yarn.lock
+.DS_Store
