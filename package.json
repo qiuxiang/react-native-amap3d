@@ -1,6 +1,6 @@
 {
   "name": "react-native-amap3d",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "react-native 高德地图组件，支持 Android + iOS",
   "author": "7c00 <i@7c00.cc>",
   "license": "MIT",
@@ -23,8 +23,8 @@
     "url": "https://github.com/qiuxiang/react-native-amap3d"
   },
   "scripts": {
-    "dev": "npx typescript -w",
-    "build": "npx typescript",
+    "dev": "tsc -w",
+    "build": "tsc",
     "build-docs": "npx typedoc --out docs/api --excludeNotExported --excludePrivate --excludeProtected --exclude src/prop-types.ts --module commonjs --mode file src",
     "start": "npx react-native start",
     "android": "npx react-native  run-android",

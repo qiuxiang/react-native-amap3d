@@ -16,5 +16,5 @@ Pod::Spec.new do |s|
   s.source_files = '**/*.{h,m}'
 
   s.dependency 'React'
-  s.dependency 'AMap3DMap', "~> 7.5.0"
+  s.dependency 'AMap3DMap', "~> 7.9.0"
 end

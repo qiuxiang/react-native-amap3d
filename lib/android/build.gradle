@@ -19,7 +19,7 @@ buildscript {
 
 android {
     compileSdkVersion getExt('compileSdkVersion', 29)
-    buildToolsVersion getExt('buildToolsVersion', '29.0.2')
+    buildToolsVersion getExt('buildToolsVersion', '29.0.3')
 
     defaultConfig {
         minSdkVersion getExt('minSdkVersion', 16)
@@ -29,6 +29,6 @@ android {
 
 dependencies {
     implementation 'com.facebook.react:react-native:+'
-    implementation 'com.amap.api:3dmap:7.2.0'
+    implementation 'com.amap.api:3dmap:7.9.1'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
