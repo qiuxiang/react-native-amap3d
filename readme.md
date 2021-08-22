@@ -1,5 +1,7 @@
 # react-native-amap3d [![npm version][version-badge]][npm] [![build status][build-badge]][build]
 
+**注意：该项目处于消极维护的状态，作者暂停新功能开发、Bug 修复，仅进行 PR review&merge，[具体说明](https://github.com/qiuxiang/react-native-amap3d/issues/691)。**
+
 react-native 高德地图组件，使用最新 3D SDK，支持 Android + iOS，受 [react-native-maps](https://github.com/airbnb/react-native-maps) 启发，提供功能丰富且易用的接口。
 
 相关项目推荐：
