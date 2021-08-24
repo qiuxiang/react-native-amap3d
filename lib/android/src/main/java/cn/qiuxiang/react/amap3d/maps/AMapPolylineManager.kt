@@ -17,7 +17,7 @@ internal class AMapPolylineManager : SimpleViewManager<AMapPolyline>() {
     }
 
     override fun getExportedCustomDirectEventTypeConstants(): Map<String, Any> {
-        return mapOf("onPress" to mapOf("registrationName" to "onPress"))
+        return mapOf("onPress" to mapOf("registrationName" to "onAMapPress"))
     }
 
     @ReactProp(name = "coordinates")

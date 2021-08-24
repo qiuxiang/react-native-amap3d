@@ -54,7 +54,7 @@ export interface PolylineProps {
   /**
    * 点击事件
    */
-  onPress?: () => void;
+  onAMapPress?: () => void;
 }
 
 /**
@@ -71,7 +71,7 @@ export default class Polyline extends React.PureComponent<PolylineProps> {
     gradient: PropTypes.bool,
     geodesic: PropTypes.bool,
     dashed: PropTypes.bool,
-    onPress: PropTypes.func
+    onAMapPress: PropTypes.func
   };
 
   static defaultProps = {
