@@ -25,23 +25,22 @@
   "scripts": {
     "dev": "tsc -w",
     "build": "tsc",
-    "build-docs": "npx typedoc --out docs/api --excludeNotExported --excludePrivate --excludeProtected --exclude src/prop-types.ts --module commonjs --mode file src",
-    "start": "npx react-native start",
-    "android": "npx react-native  run-android",
-    "release-android": "npx react-native run-android --variant=release",
+    "build-docs": "typedoc --out docs/api --excludeNotExported --excludePrivate --excludeProtected --exclude src/prop-types.ts --module commonjs --mode file src",
+    "start": "react-native start",
+    "android": "react-native run-android",
+    "release-android": "react-native run-android --variant=release",
     "reload": "adb reverse tcp:8081 tcp:8081 && adb shell input text rr",
-    "ios": "npx react-native run-ios"
+    "ios": "react-native run-ios"
   },
   "devDependencies": {
-    "@react-native-community/masked-view": "^0.1.10",
-    "@react-navigation/native": "^5.5.0",
-    "@react-navigation/stack": "^5.4.1",
-    "@types/react-native": "^0.63.1",
-    "react": "16.13.1",
-    "react-native": "^0.63.1",
-    "react-native-gesture-handler": "^1.6.1",
-    "react-native-safe-area-context": "^3.1.1",
-    "react-native-screens": "^2.9.0"
+    "@react-native-picker/picker": "^2.1.0",
+    "@react-navigation/native": "^6.0.6",
+    "@react-navigation/native-stack": "^6.0.11",
+    "@types/react-native": "^0.65.8",
+    "react": "17.0.2",
+    "react-native": "^0.66.1",
+    "react-native-safe-area-context": "^3.3.2",
+    "react-native-screens": "^3.8.0"
   },
   "prettier": {
     "printWidth": 100

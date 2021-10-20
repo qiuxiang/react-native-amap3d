@@ -168,17 +168,18 @@ export default class Marker extends Component<MarkerProps> {
 
   nativeComponent = "AMapMarker";
   icon = null;
+  mounted = false;
 
   componentDidMount() {
-	this._ismounted = true;
+    this.mounted = true;
   }
-  
+
   componentWillUnmount() {
-	this._ismounted = false;  
+    this.mounted = false;
   }
   componentDidUpdate() {
     if (this.icon && Platform.OS === "android") {
-      setTimeout(() => _this._ismounted && this.call("update"), 0);
+      setTimeout(() => this.mounted && this.call("update"), 0);
     }
   }
 

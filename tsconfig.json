@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
     "declaration": true,
-    "lib": ["es2015"],
+    "lib": ["esnext"],
     "jsx": "react-native",
+    "types": ["react-native"],
     "outDir": "lib/js"
   },
   "files": ["src/index.ts"]

@@ -1,6 +1,7 @@
+import { Picker } from "@react-native-picker/picker";
 import React from "react";
-import { StyleSheet, Picker } from "react-native";
-import { MapView, MapType } from "react-native-amap3d";
+import { StyleSheet } from "react-native";
+import { MapType, MapView } from "react-native-amap3d";
 
 export default ({ navigation, route }) => {
   const { params = { mapType: MapType.Standard } } = route;
@@ -9,7 +10,7 @@ export default ({ navigation, route }) => {
     mode: "dropdown",
     style: { width: 100 },
     selectedValue: mapType,
-    onValueChange: mapType => navigation.setParams({ mapType })
+    onValueChange: (mapType) => navigation.setParams({ mapType }),
   };
   const headerRight = () => (
     <Picker {...props}>
