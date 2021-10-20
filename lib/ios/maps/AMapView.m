@@ -66,11 +66,11 @@
     _locationStyle.strokeColor = locationStyle.strokeColor;
     _locationStyle.lineWidth = locationStyle.strokeWidth;
     _locationStyle.image = locationStyle.image;
-    _locationStyle.locationDotBgColor = locationStyle.locationDotBgColor;
-    _locationStyle.locationDotFillColor = locationStyle.locationDotFillColor;
-    _locationStyle.enablePulseAnnimation = locationStyle.enablePulseAnnimation;
-    _locationStyle.showsHeadingIndicator = locationStyle.showsHeadingIndicator;
-    _locationStyle.showsAccuracyRing = locationStyle.showsAccuracyRing;
+//    _locationStyle.locationDotBgColor = locationStyle.locationDotBgColor;
+//    _locationStyle.locationDotFillColor = locationStyle.locationDotFillColor;
+//    _locationStyle.enablePulseAnnimation = locationStyle.enablePulseAnnimation;
+//    _locationStyle.showsHeadingIndicator = locationStyle.showsHeadingIndicator;
+//    _locationStyle.showsAccuracyRing = locationStyle.showsAccuracyRing;
 
     [self updateUserLocationRepresentation:_locationStyle];
 }
