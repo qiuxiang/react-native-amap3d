@@ -1,16 +1,14 @@
-import React, { Component } from "react";
-import { StyleSheet, View, Text, Switch } from "react-native";
+import * as React from "react";
+import { StyleSheet, Switch, Text, View } from "react-native";
 import { MapView } from "react-native-amap3d";
 import styles from "../styles";
 
-export default class GesturesExample extends Component {
-  static navigationOptions = { title: "手势交互" };
-
+export default class extends React.Component {
   state = {
     zoomEnabled: true,
     scrollEnabled: true,
     rotateEnabled: true,
-    tiltEnabled: true
+    tiltEnabled: true,
   };
 
   render() {
@@ -27,7 +25,7 @@ export default class GesturesExample extends Component {
           <View style={styles.control}>
             <Switch
               style={styles.switch}
-              onValueChange={rotateEnabled => this.setState({ rotateEnabled })}
+              onValueChange={(rotateEnabled) => this.setState({ rotateEnabled })}
               value={this.state.rotateEnabled}
             />
             <Text>旋转</Text>
@@ -35,7 +33,7 @@ export default class GesturesExample extends Component {
           <View style={styles.control}>
             <Switch
               style={styles.switch}
-              onValueChange={scrollEnabled => this.setState({ scrollEnabled })}
+              onValueChange={(scrollEnabled) => this.setState({ scrollEnabled })}
               value={this.state.scrollEnabled}
             />
             <Text>滑动</Text>
@@ -43,7 +41,7 @@ export default class GesturesExample extends Component {
           <View style={styles.control}>
             <Switch
               style={styles.switch}
-              onValueChange={zoomEnabled => this.setState({ zoomEnabled })}
+              onValueChange={(zoomEnabled) => this.setState({ zoomEnabled })}
               value={this.state.zoomEnabled}
             />
             <Text>缩放</Text>
@@ -51,7 +49,7 @@ export default class GesturesExample extends Component {
           <View style={styles.control}>
             <Switch
               style={styles.switch}
-              onValueChange={tiltEnabled => this.setState({ tiltEnabled })}
+              onValueChange={(tiltEnabled) => this.setState({ tiltEnabled })}
               value={this.state.tiltEnabled}
             />
             <Text>倾斜</Text>

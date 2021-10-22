@@ -1,16 +1,11 @@
 import { requireNativeComponent } from "react-native";
-import { LatLng } from "../types";
+import { LatLng } from "./types";
 
-export interface CircleProps {
+export interface Polygon {
   /**
-   * 圆点坐标
+   * 节点坐标
    */
-  coordinate: LatLng;
-
-  /**
-   * 半径（米）
-   */
-  radius: number;
+  coordinates: LatLng[];
 
   /**
    * 边线宽度
@@ -33,4 +28,4 @@ export interface CircleProps {
   zIndex?: number;
 }
 
-export default requireNativeComponent<CircleProps>("AMapCircle");
+export default requireNativeComponent<Polygon>("AMapPolygon");

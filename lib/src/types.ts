@@ -43,27 +43,27 @@ export interface MapStatus {
   /**
    * 中心坐标
    */
-  center: LatLng;
+  center?: LatLng;
 
   /**
    * 缩放级别
    */
-  zoomLevel: number;
+  zoomLevel?: number;
 
   /**
    * 朝向、旋转角度
    */
-  rotation: number;
+  rotation?: number;
 
   /**
    * 倾斜角度
    */
-  tilt: number;
+  tilt?: number;
 
   /**
    * 显示区域
    */
-  region: Region;
+  region?: Region;
 }
 
 /**
@@ -118,5 +118,5 @@ export enum MapType {
   /**
    * 公交地图
    */
-  Bus
+  Bus,
 }

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Platform, requireNativeComponent, StyleSheet, View, ViewProps } from "react-native";
-import { LatLng, Point } from "../types";
 import Component from "./component";
+import { LatLng, Point } from "./types";
 
 const style = StyleSheet.create({
   overlay: {

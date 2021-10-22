@@ -1,17 +1,16 @@
-import MapTypes from "./map-types";
-import Layers from "./layers";
-import Indoor from "./indoor";
 import Animated from "./animated";
-import Controls from "./controls";
-import Gestures from "./gestures";
-import Marker from "./marker";
-import Polyline from "./polyline";
-import Polygon from "./polygon";
 import Circle from "./circle";
+import Controls from "./controls";
 import Events from "./events";
+import Gestures from "./gestures";
 import HeatMap from "./heat-map";
+import Indoor from "./indoor";
+import Layers from "./layers";
+import MapTypes from "./map-types";
+import Marker from "./marker";
 import MultiPoint from "./multi-point";
-import Offline from "./offline";
+import Polygon from "./polygon";
+import Polyline from "./polyline";
 
 export default {
   地图模式: MapTypes,
@@ -26,6 +25,5 @@ export default {
   绘制多边形: Polygon,
   绘制圆形: Circle,
   热力图: HeatMap,
-  海量点: MultiPoint
-  // 离线地图: Offline
+  海量点: MultiPoint,
 };

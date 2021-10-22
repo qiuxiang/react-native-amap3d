@@ -1,18 +1,14 @@
-import React, { Component } from "react";
+import * as React from "react";
 import { PermissionsAndroid, StyleSheet, Switch, Text, View } from "react-native";
 import { MapView } from "react-native-amap3d";
 import styles from "../styles";
 
-export default class ControlsExample extends Component {
-  static navigationOptions = {
-    title: "地图控件"
-  };
-
+export default class extends React.Component {
   state = {
     showsCompass: false,
     showsScale: true,
     showsZoomControls: true,
-    showsLocationButton: false
+    showsLocationButton: false,
   };
 
   componentDidMount() {
@@ -34,7 +30,7 @@ export default class ControlsExample extends Component {
           <View style={styles.control}>
             <Switch
               style={styles.switch}
-              onValueChange={showsCompass => this.setState({ showsCompass })}
+              onValueChange={(showsCompass) => this.setState({ showsCompass })}
               value={this.state.showsCompass}
             />
             <Text>指南针</Text>
@@ -42,7 +38,7 @@ export default class ControlsExample extends Component {
           <View style={styles.control}>
             <Switch
               style={styles.switch}
-              onValueChange={showsScale => this.setState({ showsScale })}
+              onValueChange={(showsScale) => this.setState({ showsScale })}
               value={this.state.showsScale}
             />
             <Text>比例尺</Text>
@@ -50,7 +46,7 @@ export default class ControlsExample extends Component {
           <View style={styles.control}>
             <Switch
               style={styles.switch}
-              onValueChange={showsLocationButton => this.setState({ showsLocationButton })}
+              onValueChange={(showsLocationButton) => this.setState({ showsLocationButton })}
               value={this.state.showsLocationButton}
             />
             <Text>定位</Text>
@@ -58,7 +54,7 @@ export default class ControlsExample extends Component {
           <View style={styles.control}>
             <Switch
               style={styles.switch}
-              onValueChange={showsZoomControls => this.setState({ showsZoomControls })}
+              onValueChange={(showsZoomControls) => this.setState({ showsZoomControls })}
               value={this.state.showsZoomControls}
             />
             <Text>缩放</Text>

@@ -1,6 +1,5 @@
 import * as React from "react";
-import { requireNativeComponent } from "react-native";
-import { LatLng, Location, MapStatus, MapType, Region } from "../types";
+import { requireNativeComponent, ViewProps } from "react-native";
 import Circle from "./circle";
 import Component from "./component";
 import HeatMap from "./heat-map";
@@ -8,8 +7,9 @@ import Marker from "./marker";
 import MultiPoint from "./multi-point";
 import Polygon from "./polygon";
 import Polyline from "./polyline";
+import { LatLng, Location, MapStatus, MapType, Region } from "./types";
 
-export interface MapViewProps {
+export interface MapViewProps extends ViewProps {
   /**
    * 地图类型
    */

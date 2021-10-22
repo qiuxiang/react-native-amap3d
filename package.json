@@ -12,7 +12,7 @@
   ],
   "main": "lib/src",
   "files": [
-    "lib/js",
+    "lib/src",
     "lib/android/src",
     "lib/android/build.gradle",
     "lib/ios",
@@ -23,7 +23,6 @@
     "url": "https://github.com/qiuxiang/react-native-amap3d"
   },
   "scripts": {
-    "build-docs": "typedoc --out docs/api --excludeNotExported --excludePrivate --excludeProtected --exclude src/prop-types.ts --module commonjs --mode file src",
     "start": "react-native start",
     "android": "react-native run-android",
     "release-android": "react-native run-android --variant=release",

@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
     "strict": true,
-    "jsx": "react-native"
+    "jsx": "react-native",
+    "baseUrl": ".",
+    "paths": {
+      "react-native-amap3d": ["lib/src"]
+    }
   }
 }

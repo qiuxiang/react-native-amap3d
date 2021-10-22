@@ -2,7 +2,7 @@
  * Base component, contains some utils
  */
 import { PureComponent } from "react";
-import { findNodeHandle, UIManager, Platform, View, NativeSyntheticEvent } from "react-native";
+import { findNodeHandle, NativeSyntheticEvent, Platform, UIManager, View } from "react-native";
 
 /**
  * @ignore

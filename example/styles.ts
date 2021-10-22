@@ -3,11 +3,7 @@ import { StyleSheet, Platform } from "react-native";
 export default StyleSheet.create({
   map: {
     flex: 1,
-    ...Platform.select({
-      ios: {
-        marginBottom: 72
-      }
-    })
+    ...Platform.select({ ios: { marginBottom: 72 } }),
   },
   controls: {
     height: 72,
@@ -24,15 +20,10 @@ export default StyleSheet.create({
         bottom: 0,
         borderTopColor: "#e0e0e0",
         borderTopWidth: StyleSheet.hairlineWidth,
-        zIndex: 1
-      }
-    })
+        zIndex: 1,
+      },
+    }),
   },
-  control: {
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  switch: {
-    marginBottom: 5
-  }
+  control: { alignItems: "center", justifyContent: "center" },
+  switch: { marginBottom: 5 },
 });

@@ -1,5 +1,5 @@
 import { requireNativeComponent } from "react-native";
-import { LatLng } from "../types";
+import { LatLng } from "./types";
 
 export interface HeatMapProps {
   /**

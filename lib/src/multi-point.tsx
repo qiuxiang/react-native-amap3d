@@ -1,12 +1,12 @@
 import * as React from "react";
 import { NativeSyntheticEvent, requireNativeComponent } from "react-native";
-import { Point } from "../types";
+import { LatLng } from "./types";
 
 export interface MultiPointProps {
   /**
    * 节点
    */
-  points?: Point[];
+  points?: LatLng[];
 
   /**
    * 图标，只接受原生图片名字
@@ -16,7 +16,7 @@ export interface MultiPointProps {
   /**
    * 点击事件
    */
-  onItemPress?: (item: Point) => void;
+  onItemPress?: (item: LatLng) => void;
 }
 
 interface MultiPointEvent {

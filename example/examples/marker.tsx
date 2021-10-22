@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import * as React from "react";
 import { Alert, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { MapView } from "react-native-amap3d";
+import { LatLng, MapView } from "react-native-amap3d";
 
 const styles = StyleSheet.create({
   customIcon: {
     width: 40,
-    height: 40
+    height: 40,
   },
   customInfoWindow: {
     backgroundColor: "#8bc34a",
@@ -14,27 +14,22 @@ const styles = StyleSheet.create({
     elevation: 4,
     borderWidth: 2,
     borderColor: "#689F38",
-    marginBottom: 5
+    marginBottom: 5,
   },
   customMarker: {
     backgroundColor: "#009688",
     alignItems: "center",
     borderRadius: 5,
-    padding: 5
+    padding: 5,
   },
   markerText: {
-    color: "#fff"
-  }
+    color: "#fff",
+  },
 });
 
-export default class MarkerExample extends Component {
-  static navigationOptions = {
-    title: "添加标记"
-  };
-
-  state = {
-    time: new Date()
-  };
+export default class extends React.Component {
+  state = { time: new Date() };
+  mounted = false;
 
   componentDidMount() {
     this.mounted = true;
@@ -52,25 +47,25 @@ export default class MarkerExample extends Component {
   _coordinates = [
     {
       latitude: 39.806901,
-      longitude: 116.397972
+      longitude: 116.397972,
     },
     {
       latitude: 39.806901,
-      longitude: 116.297972
+      longitude: 116.297972,
     },
     {
       latitude: 39.906901,
-      longitude: 116.397972
+      longitude: 116.397972,
     },
     {
       latitude: 39.706901,
-      longitude: 116.397972
-    }
+      longitude: 116.397972,
+    },
   ];
 
   _onMarkerPress = () => Alert.alert("onPress");
   _onInfoWindowPress = () => Alert.alert("onInfoWindowPress");
-  _onDragEvent = ({ latitude, longitude }) => Alert.alert(`${latitude}, ${longitude}`);
+  _onDragEvent = ({ latitude, longitude }: LatLng) => Alert.alert(`${latitude}, ${longitude}`);
 
   render() {
     return (
