@@ -1,8 +1,6 @@
 import * as React from "react";
-import * as PropTypes from "prop-types";
-import { Platform, requireNativeComponent, StyleSheet, ViewPropTypes, View } from "react-native";
+import { Platform, requireNativeComponent, StyleSheet, View, ViewProps } from "react-native";
 import { LatLng, Point } from "../types";
-import { LatLngPropType, PointPropType, mapEventsPropType } from "../prop-types";
 import Component from "./component";
 
 const style = StyleSheet.create({
@@ -96,7 +94,7 @@ export interface MarkerProps {
   /**
    * 自定义 InfoWindow
    */
-  children?: React.ReactChild;
+  children?: React.ReactNode;
 
   /**
    * 点击事件
@@ -128,46 +126,9 @@ export interface MarkerProps {
 
 const events = ["onInfoWindowPress", "onPress", "onDrag", "onDragEnd", "onDragStart"];
 
-/**
- * @ignore
- */
 export default class Marker extends Component<MarkerProps> {
-  static propTypes = {
-    ...ViewPropTypes,
-    ...mapEventsPropType(events),
-    coordinate: LatLngPropType.isRequired,
-    title: PropTypes.string,
-    description: PropTypes.string,
-    color: Platform.select({
-      android: PropTypes.oneOf([
-        "azure",
-        "blue",
-        "cyan",
-        "green",
-        "magenta",
-        "orange",
-        "red",
-        "rose",
-        "violet",
-        "yellow",
-      ]),
-      ios: PropTypes.oneOf(["red", "green", "purple"]),
-    }),
-    icon: PropTypes.func,
-    image: PropTypes.string,
-    opacity: PropTypes.number,
-    draggable: PropTypes.bool,
-    flat: PropTypes.bool,
-    zIndex: PropTypes.number,
-    anchor: PointPropType,
-    centerOffset: PointPropType,
-    active: PropTypes.bool,
-    clickDisabled: PropTypes.bool,
-    infoWindowDisabled: PropTypes.bool,
-  };
-
-  nativeComponent = "AMapMarker";
-  icon = null;
+  nativeComponent: string = "AMapMarker";
+  icon?: React.ReactElement;
   mounted = false;
 
   componentDidMount() {
@@ -195,7 +156,7 @@ export default class Marker extends Component<MarkerProps> {
     this.call("lockToScreen", [x, y]);
   }
 
-  renderCustomMarker(icon: () => React.ReactElement) {
+  renderCustomMarker(icon?: () => React.ReactElement) {
     if (icon) {
       this.icon = <View style={style.overlay}>{icon()}</View>;
       return this.icon;
@@ -203,10 +164,8 @@ export default class Marker extends Component<MarkerProps> {
     return null;
   }
 
-  /* eslint-disable class-methods-use-this */
-  renderInfoWindow(view: React.ReactChild) {
+  renderInfoWindow(view?: React.ReactNode) {
     if (view) {
-      // @ts-ignore
       return <InfoWindow style={style.overlay}>{view}</InfoWindow>;
     }
     return null;
@@ -226,7 +185,5 @@ export default class Marker extends Component<MarkerProps> {
   }
 }
 
-// @ts-ignore
-const AMapMarker = requireNativeComponent("AMapMarker", Marker);
-// @ts-ignore
-const InfoWindow = requireNativeComponent("AMapInfoWindow", { propTypes: { ...ViewPropTypes } });
+const AMapMarker = requireNativeComponent<MarkerProps>("AMapMarker");
+const InfoWindow = requireNativeComponent<ViewProps>("AMapInfoWindow");

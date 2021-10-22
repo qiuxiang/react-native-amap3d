@@ -79,7 +79,7 @@ import { MapView } from "react-native-amap3d";
 <MapView
   center={{
     latitude: 39.91095,
-    longitude: 116.37296
+    longitude: 116.37296,
   }}
 />
 ```
@@ -105,7 +105,7 @@ import { MapView } from "react-native-amap3d";
     }
     coordinate={{
       latitude: 39.91095,
-      longitude: 116.37296
+      longitude: 116.37296,
     }}
   />
 </MapView>
@@ -117,13 +117,13 @@ import { MapView } from "react-native-amap3d";
 const coordinate = {
   latitude: 39.706901,
   longitude: 116.397972,
-}
+};
 
-<MapView.Marker image='flag' coordinate={coordinate}>
+<MapView.Marker image="flag" coordinate={coordinate}>
   <View style={styles.customInfoWindow}>
     <Text>自定义信息窗体</Text>
   </View>
-</MapView.Marker>
+</MapView.Marker>;
 ```
 
 ### 更多示例

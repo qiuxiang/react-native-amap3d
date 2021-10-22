@@ -1,10 +1,6 @@
 {
   "compilerOptions": {
-    "declaration": true,
-    "lib": ["esnext"],
-    "jsx": "react-native",
-    "types": ["react-native"],
-    "outDir": "lib/js"
-  },
-  "files": ["src/index.ts"]
+    "strict": true,
+    "jsx": "react-native"
+  }
 }

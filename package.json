@@ -10,7 +10,7 @@
     "maps",
     "mapview"
   ],
-  "main": "lib/js",
+  "main": "lib/src",
   "files": [
     "lib/js",
     "lib/android/src",
@@ -23,8 +23,6 @@
     "url": "https://github.com/qiuxiang/react-native-amap3d"
   },
   "scripts": {
-    "dev": "tsc -w",
-    "build": "tsc",
     "build-docs": "typedoc --out docs/api --excludeNotExported --excludePrivate --excludeProtected --exclude src/prop-types.ts --module commonjs --mode file src",
     "start": "react-native start",
     "android": "react-native run-android",

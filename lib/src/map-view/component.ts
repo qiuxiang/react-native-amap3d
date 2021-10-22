@@ -2,18 +2,16 @@
  * Base component, contains some utils
  */
 import { PureComponent } from "react";
-import { findNodeHandle, UIManager, Platform } from "react-native";
+import { findNodeHandle, UIManager, Platform, View, NativeSyntheticEvent } from "react-native";
 
 /**
  * @ignore
  */
 export default class Component<P> extends PureComponent<P> {
-  props: P;
-
   /**
    * Must be defined in subclass if need to call native component method
    */
-  nativeComponent: string;
+  nativeComponent = "";
 
   /**
    * Call native method
@@ -31,12 +29,15 @@ export default class Component<P> extends PureComponent<P> {
    */
   handlers = (events: string[]) =>
     events.reduce((handlers, name) => {
-      const handler = this.props[name];
+      View;
+      const handler = Reflect.get(this.props, name);
       if (handler) {
         if (Platform.OS === "android") {
           name = name.replace(/^on/, "onAMap");
         }
-        handlers[name] = event => handler(event.nativeEvent);
+        Reflect.set(handlers, name, (event: NativeSyntheticEvent<any>) =>
+          handler(event.nativeEvent)
+        );
       }
       return handlers;
     }, {});

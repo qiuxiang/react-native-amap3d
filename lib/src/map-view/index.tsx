@@ -1,20 +1,13 @@
 import * as React from "react";
-import { bool, number } from "prop-types";
-import { requireNativeComponent, ViewPropTypes } from "react-native";
-import {
-  LatLngPropType,
-  LocationStylePropType,
-  RegionPropType,
-  mapEventsPropType
-} from "../prop-types";
-import { MapStatus, MapType, Region, LatLng, Location } from "../types";
-import Component from "./component";
-import Marker from "./marker";
-import Polyline from "./polyline";
-import Polygon from "./polygon";
+import { requireNativeComponent } from "react-native";
+import { LatLng, Location, MapStatus, MapType, Region } from "../types";
 import Circle from "./circle";
+import Component from "./component";
 import HeatMap from "./heat-map";
+import Marker from "./marker";
 import MultiPoint from "./multi-point";
+import Polygon from "./polygon";
+import Polyline from "./polyline";
 
 export interface MapViewProps {
   /**
@@ -190,44 +183,13 @@ const events = [
   "onStatusChangeComplete",
   "onLocation",
   "onAnimateCancel",
-  "onAnimateFinish"
+  "onAnimateFinish",
 ];
 
 /**
  * @ignore
  */
 export default class MapView extends Component<MapViewProps> {
-  static propTypes = {
-    ...ViewPropTypes,
-    ...mapEventsPropType(events),
-    mapType: number,
-    locationEnabled: bool,
-    locationInterval: number,
-    locationStyle: LocationStylePropType,
-    distanceFilter: number,
-    showsIndoorMap: bool,
-    showsIndoorSwitch: bool,
-    showsBuildings: bool,
-    showsLabels: bool,
-    showsCompass: bool,
-    showsZoomControls: bool,
-    showsScale: bool,
-    showsLocationButton: bool,
-    showsTraffic: bool,
-    maxZoomLevel: number,
-    minZoomLevel: number,
-    zoomLevel: number,
-    center: LatLngPropType,
-    region: RegionPropType,
-    limitRegion: RegionPropType,
-    tilt: number,
-    rotation: number,
-    zoomEnabled: bool,
-    scrollEnabled: bool,
-    rotateEnabled: bool,
-    tiltEnabled: bool
-  };
-
   nativeComponent = "AMapView";
 
   /**
@@ -243,7 +205,7 @@ export default class MapView extends Component<MapViewProps> {
   render() {
     const props = {
       ...this.props,
-      ...this.handlers(events)
+      ...this.handlers(events),
     };
     return <AMapView {...props} />;
   }
@@ -256,5 +218,4 @@ export default class MapView extends Component<MapViewProps> {
   static MultiPoint = MultiPoint;
 }
 
-// @ts-ignore
-const AMapView = requireNativeComponent("AMapView", MapView);
+const AMapView = requireNativeComponent<MapViewProps>("AMapView");
