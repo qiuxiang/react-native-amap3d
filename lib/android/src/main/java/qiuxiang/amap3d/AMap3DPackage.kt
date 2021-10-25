@@ -1,6 +1,6 @@
-package cn.qiuxiang.react.amap3d
+package qiuxiang.amap3d
 
-import cn.qiuxiang.react.amap3d.maps.*
+import qiuxiang.amap3d.map_view.*
 import com.facebook.react.ReactPackage
 import com.facebook.react.bridge.NativeModule
 import com.facebook.react.bridge.ReactApplicationContext
@@ -9,20 +9,20 @@ import com.facebook.react.uimanager.ViewManager
 class AMap3DPackage : ReactPackage {
   override fun createNativeModules(reactContext: ReactApplicationContext): List<NativeModule> {
     return listOf(
-      AMapOfflineModule(reactContext)
+      OfflineModule(reactContext)
     )
   }
 
   override fun createViewManagers(reactContext: ReactApplicationContext): List<ViewManager<*, *>> {
     return listOf(
-      AMapViewManager(),
-      AMapMarkerManager(),
-      AMapInfoWindowManager(),
-      AMapPolylineManager(),
-      AMapPolygonManager(),
-      AMapCircleManager(),
-      AMapHeatMapManager(),
-      AMapMultiPointManager()
+      MapViewManager(),
+      MapMarkerManager(),
+      MapInfoWindowManager(),
+      MapPolylineManager(),
+      MapPolygonManager(),
+      MapCircleManager(),
+      MapHeatMapManager(),
+      MapMultiPointManager()
     )
   }
 }

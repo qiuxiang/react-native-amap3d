@@ -180,9 +180,9 @@ export interface MapViewProps extends ViewProps {
 
 export default (props: MapViewProps) => {
   let { style } = props;
-  const [isLoad, setIsLoad] = useState(false);
+  const [loaded, setLoaded] = useState(false);
   const ref = useRef<Component<MapViewProps> & NativeMethods>(null);
-  if (Platform.OS === "android" && !isLoad) {
+  if (Platform.OS === "android" && !loaded) {
     style = [props.style, { width: 1, height: 1 }];
   }
   return (
@@ -192,7 +192,7 @@ export default (props: MapViewProps) => {
       style={style}
       onLoad={(event) => {
         // 部分控件不显示的问题在重新 layout 之后会恢复正常。
-        setIsLoad(true);
+        setLoaded(true);
         props.onLoad?.call(props, event);
       }}
     />

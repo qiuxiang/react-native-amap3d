@@ -1,10 +1,7 @@
-package cn.qiuxiang.react.amap3d.maps
+package qiuxiang.amap3d.map_view
 
 import android.content.Context
 import android.view.View
-import cn.qiuxiang.react.amap3d.toLatLng
-import cn.qiuxiang.react.amap3d.toLatLngBounds
-import cn.qiuxiang.react.amap3d.toWritableMap
 import com.amap.api.maps.AMap
 import com.amap.api.maps.CameraUpdateFactory
 import com.amap.api.maps.TextureMapView
@@ -18,12 +15,15 @@ import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.bridge.WritableMap
 import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.events.RCTEventEmitter
+import qiuxiang.amap3d.toLatLng
+import qiuxiang.amap3d.toLatLngBounds
+import qiuxiang.amap3d.toWritableMap
 
-class AMapView(context: Context) : TextureMapView(context) {
+class MapView(context: Context) : TextureMapView(context) {
   private val eventEmitter: RCTEventEmitter =
     (context as ThemedReactContext).getJSModule(RCTEventEmitter::class.java)
-  private val markers = HashMap<String, AMapMarker>()
-  private val lines = HashMap<String, AMapPolyline>()
+  private val markers = HashMap<String, MapMarker>()
+  private val lines = HashMap<String, MapPolyline>()
   private val locationStyle by lazy {
     val locationStyle = MyLocationStyle()
     locationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATION_ROTATE_NO_CENTER)
@@ -114,7 +114,7 @@ class AMapView(context: Context) : TextureMapView(context) {
       false
     }
 
-    map.setInfoWindowAdapter(AMapInfoWindowAdapter(context, markers))
+    map.setInfoWindowAdapter(MapInfoWindowAdapter(context, markers))
   }
 
   fun emitCameraChangeEvent(event: String, position: CameraPosition?) {
@@ -136,24 +136,24 @@ class AMapView(context: Context) : TextureMapView(context) {
   }
 
   fun add(child: View) {
-    if (child is AMapOverlay) {
+    if (child is MapOverlay) {
       child.add(map)
-      if (child is AMapMarker) {
+      if (child is MapMarker) {
         markers[child.marker?.id!!] = child
       }
-      if (child is AMapPolyline) {
+      if (child is MapPolyline) {
         lines[child.polyline?.id!!] = child
       }
     }
   }
 
   fun remove(child: View) {
-    if (child is AMapOverlay) {
+    if (child is MapOverlay) {
       child.remove()
-      if (child is AMapMarker) {
+      if (child is MapMarker) {
         markers.remove(child.marker?.id)
       }
-      if (child is AMapPolyline) {
+      if (child is MapPolyline) {
         lines.remove(child.polyline?.id)
       }
     }
@@ -244,7 +244,7 @@ class AMapView(context: Context) : TextureMapView(context) {
     }
 
     if (style.hasKey("anchor")) {
-      val anchor = style.getArray("anchor");
+      val anchor = style.getArray("anchor")
       locationStyle.anchor(anchor!!.getDouble(0).toFloat(), anchor.getDouble(1).toFloat())
     }
 

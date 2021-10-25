@@ -1,4 +1,4 @@
-package cn.qiuxiang.react.amap3d
+package qiuxiang.amap3d
 
 import com.amap.api.maps.offlinemap.OfflineMapCity
 import com.amap.api.maps.offlinemap.OfflineMapManager
@@ -8,7 +8,7 @@ import com.facebook.react.bridge.*
 import com.facebook.react.modules.core.DeviceEventManagerModule
 
 @Suppress("unused")
-class AMapOfflineModule(private val reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext), OfflineMapManager.OfflineMapDownloadListener {
+class OfflineModule(private val reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext), OfflineMapManager.OfflineMapDownloadListener {
   private val manager = OfflineMapManager(reactContext, this)
 
   override fun getName(): String {
