@@ -1,12 +1,12 @@
 import * as React from "react";
-import { requireNativeComponent, ViewProps } from "react-native";
-import Circle from "./circle";
-import Component from "./component";
-import HeatMap from "./heat-map";
-import Marker from "./marker";
-import MultiPoint from "./multi-point";
-import Polygon from "./polygon";
-import Polyline from "./polyline";
+import { Component, useRef, useState } from "react";
+import {
+  NativeMethods,
+  NativeSyntheticEvent,
+  Platform,
+  requireNativeComponent,
+  ViewProps,
+} from "react-native";
 import { LatLng, Location, MapStatus, MapType, Region } from "./types";
 
 export interface MapViewProps extends ViewProps {
@@ -174,48 +174,29 @@ export interface MapViewProps extends ViewProps {
    * 动画完成事件
    */
   onAnimateFinish?: () => void;
+
+  onLoad?: (event: NativeSyntheticEvent<void>) => void;
 }
 
-const events = [
-  "onClick",
-  "onLongClick",
-  "onStatusChange",
-  "onStatusChangeComplete",
-  "onLocation",
-  "onAnimateCancel",
-  "onAnimateFinish",
-];
-
-/**
- * @ignore
- */
-export default class MapView extends Component<MapViewProps> {
-  nativeComponent = "AMapView";
-
-  /**
-   * 设置地图状态（坐标、缩放级别、倾斜度、旋转角度），支持动画过度
-   *
-   * @param status
-   * @param duration
-   */
-  setStatus(status: MapStatus, duration = 0) {
-    this.call("setStatus", [status, duration]);
+export default (props: MapViewProps) => {
+  let { style } = props;
+  const [isLoad, setIsLoad] = useState(false);
+  const ref = useRef<Component<MapViewProps> & NativeMethods>(null);
+  if (Platform.OS === "android" && !isLoad) {
+    style = [props.style, { width: 1, height: 1 }];
   }
-
-  render() {
-    const props = {
-      ...this.props,
-      ...this.handlers(events),
-    };
-    return <AMapView {...props} />;
-  }
-
-  static Marker = Marker;
-  static Polyline = Polyline;
-  static Polygon = Polygon;
-  static Circle = Circle;
-  static HeatMap = HeatMap;
-  static MultiPoint = MultiPoint;
-}
+  return (
+    <AMapView
+      {...props}
+      ref={ref}
+      style={style}
+      onLoad={(event) => {
+        // 部分控件不显示的问题在重新 layout 之后会恢复正常。
+        setIsLoad(true);
+        props.onLoad?.call(props, event);
+      }}
+    />
+  );
+};
 
 const AMapView = requireNativeComponent<MapViewProps>("AMapView");
