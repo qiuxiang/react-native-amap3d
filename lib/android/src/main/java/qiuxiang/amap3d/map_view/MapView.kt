@@ -1,137 +1,87 @@
 package qiuxiang.amap3d.map_view
 
-import android.content.Context
+import android.annotation.SuppressLint
 import android.view.View
 import com.amap.api.maps.AMap
 import com.amap.api.maps.CameraUpdateFactory
 import com.amap.api.maps.TextureMapView
-import com.amap.api.maps.model.BitmapDescriptorFactory
 import com.amap.api.maps.model.CameraPosition
 import com.amap.api.maps.model.Marker
-import com.amap.api.maps.model.MyLocationStyle
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.bridge.WritableMap
 import com.facebook.react.uimanager.ThemedReactContext
-import com.facebook.react.uimanager.events.RCTEventEmitter
+import qiuxiang.amap3d.getFloat
+import qiuxiang.amap3d.toJson
 import qiuxiang.amap3d.toLatLng
-import qiuxiang.amap3d.toLatLngBounds
-import qiuxiang.amap3d.toWritableMap
 
-class MapView(context: Context) : TextureMapView(context) {
-  private val eventEmitter: RCTEventEmitter =
-    (context as ThemedReactContext).getJSModule(RCTEventEmitter::class.java)
-  private val markers = HashMap<String, MapMarker>()
-  private val lines = HashMap<String, MapPolyline>()
-  private val locationStyle by lazy {
-    val locationStyle = MyLocationStyle()
-    locationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATION_ROTATE_NO_CENTER)
-    locationStyle
-  }
+@SuppressLint("ViewConstructor")
+class MapView(context: ThemedReactContext) : TextureMapView(context) {
+  @Suppress("Deprecation")
+  private val eventEmitter =
+    context.getJSModule(com.facebook.react.uimanager.events.RCTEventEmitter::class.java)
+  private val markerMap = HashMap<String, MapMarker>()
+  private val polylineMap = HashMap<String, MapPolyline>()
+  private var initialCameraPosition: ReadableMap? = null
 
   init {
     super.onCreate(null)
 
     map.setOnMapLoadedListener { emit(id, "onLoad") }
-
-    map.setOnMapClickListener { latLng ->
-      for (marker in markers.values) {
-        marker.active = false
-      }
-
-      emit(id, "onClick", latLng.toWritableMap())
-    }
-
-    map.setOnMapLongClickListener { latLng ->
-      emit(id, "onLongClick", latLng.toWritableMap())
-    }
-
-    map.setOnMyLocationChangeListener { location ->
-      val event = Arguments.createMap()
-      event.putDouble("latitude", location.latitude)
-      event.putDouble("longitude", location.longitude)
-      event.putDouble("accuracy", location.accuracy.toDouble())
-      event.putDouble("altitude", location.altitude)
-      event.putDouble("heading", location.bearing.toDouble())
-      event.putDouble("speed", location.speed.toDouble())
-      event.putDouble("timestamp", location.time.toDouble())
-      emit(id, "onLocation", event)
-    }
+    map.setOnMapClickListener { latLng -> emit(id, "onTap", latLng.toJson()) }
+    map.setOnPOIClickListener { poi -> emit(id, "onTapPoi", poi.toJson()) }
+    map.setOnMapLongClickListener { latLng -> emit(id, "onLongPress", latLng.toJson()) }
 
     map.setOnMarkerClickListener { marker ->
-      markers[marker.id]?.let {
+      markerMap[marker.id]?.let {
         it.active = true
         emit(it.id, "onPress")
       }
       true
     }
 
-    map.setOnPOIClickListener { poi ->
-      val data = poi.coordinate.toWritableMap()
-      data.putString("id", poi.poiId)
-      data.putString("name", poi.name)
-      emit(id, "onClick", data)
-    }
 
     map.setOnMarkerDragListener(object : AMap.OnMarkerDragListener {
       override fun onMarkerDragStart(marker: Marker) {
-        emit(markers[marker.id]?.id, "onDragStart")
+        emit(markerMap[marker.id]?.id, "onDragStart")
       }
 
       override fun onMarkerDrag(marker: Marker) {
-        emit(markers[marker.id]?.id, "onDrag")
+        emit(markerMap[marker.id]?.id, "onDrag")
       }
 
       override fun onMarkerDragEnd(marker: Marker) {
-        emit(markers[marker.id]?.id, "onDragEnd", marker.position.toWritableMap())
+        emit(markerMap[marker.id]?.id, "onDragEnd", marker.position.toJson())
       }
     })
 
     map.setOnCameraChangeListener(object : AMap.OnCameraChangeListener {
-      override fun onCameraChangeFinish(position: CameraPosition?) {
-        emitCameraChangeEvent("onStatusChangeComplete", position)
+      override fun onCameraChangeFinish(position: CameraPosition) {
+        emit(id, "onCameraIdle", position.toJson())
       }
 
-      override fun onCameraChange(position: CameraPosition?) {
-        emitCameraChangeEvent("onStatusChange", position)
+      override fun onCameraChange(position: CameraPosition) {
+        emit(id, "onCameraMove", position.toJson())
       }
     })
 
-    map.setOnInfoWindowClickListener { marker ->
-      emit(markers[marker.id]?.id, "onInfoWindowPress")
-    }
-
-    map.setOnPolylineClickListener { polyline ->
-      emit(lines[polyline.id]?.id, "onPress")
-    }
+    map.setOnPolylineClickListener { polyline -> emit(polylineMap[polyline.id]?.id, "onPress") }
 
     map.setOnMultiPointClickListener { item ->
-      val slice = item.customerId.split("_")
-      val data = Arguments.createMap()
-      data.putInt("index", slice[1].toInt())
-      emit(slice[0].toInt(), "onItemPress", data)
-      false
-    }
-
-    map.setInfoWindowAdapter(MapInfoWindowAdapter(context, markers))
-  }
-
-  fun emitCameraChangeEvent(event: String, position: CameraPosition?) {
-    position?.let {
-      val data = Arguments.createMap()
-      data.putMap("center", it.target.toWritableMap())
-      data.putDouble("zoomLevel", it.zoom.toDouble())
-      data.putDouble("tilt", it.tilt.toDouble())
-      data.putDouble("rotation", it.bearing.toDouble())
-      if (event == "onStatusChangeComplete") {
-        data.putMap("region", map.projection.visibleRegion.latLngBounds.toWritableMap())
+      item.customerId.split("_").let {
+        emit(
+          it[0].toInt(),
+          "onPress",
+          Arguments.createMap().apply { putInt("index", it[1].toInt()) },
+        )
       }
-      emit(id, event, data)
+      false
     }
   }
 
   fun emit(id: Int?, event: String, data: WritableMap = Arguments.createMap()) {
+    @Suppress("Deprecation")
     id?.let { eventEmitter.receiveEvent(it, event, data) }
   }
 
@@ -139,10 +89,10 @@ class MapView(context: Context) : TextureMapView(context) {
     if (child is MapOverlay) {
       child.add(map)
       if (child is MapMarker) {
-        markers[child.marker?.id!!] = child
+        markerMap[child.marker?.id!!] = child
       }
       if (child is MapPolyline) {
-        lines[child.polyline?.id!!] = child
+        polylineMap[child.polyline?.id!!] = child
       }
     }
   }
@@ -151,108 +101,39 @@ class MapView(context: Context) : TextureMapView(context) {
     if (child is MapOverlay) {
       child.remove()
       if (child is MapMarker) {
-        markers.remove(child.marker?.id)
+        markerMap.remove(child.marker?.id)
       }
       if (child is MapPolyline) {
-        lines.remove(child.polyline?.id)
+        polylineMap.remove(child.polyline?.id)
       }
     }
   }
 
   private val animateCallback = object : AMap.CancelableCallback {
-    override fun onCancel() {
-      emit(id, "onAnimateCancel")
-    }
-
-    override fun onFinish() {
-      emit(id, "onAnimateFinish")
-    }
+    override fun onCancel() {}
+    override fun onFinish() {}
   }
 
-  fun animateTo(args: ReadableArray?) {
-    val currentCameraPosition = map.cameraPosition
-    val status = args?.getMap(0)!!
-    val duration = args.getInt(1)
-
-    var center = currentCameraPosition.target
-    var zoomLevel = currentCameraPosition.zoom
-    var tilt = currentCameraPosition.tilt
-    var rotation = currentCameraPosition.bearing
-
-    if (status.hasKey("center")) {
-      center = status.getMap("center")!!.toLatLng()
-    }
-
-    if (status.hasKey("zoomLevel")) {
-      zoomLevel = status.getDouble("zoomLevel").toFloat()
-    }
-
-    if (status.hasKey("tilt")) {
-      tilt = status.getDouble("tilt").toFloat()
-    }
-
-    if (status.hasKey("rotation")) {
-      rotation = status.getDouble("rotation").toFloat()
-    }
-
+  fun moveCamera(args: ReadableArray?) {
+    val data = args?.getMap(0)!!
+    val duration = args.getInt(1).toLong()
+    val target = data.getMap("target")?.toLatLng()
+    val zoom = data.getFloat("zoom") ?: map.cameraPosition.zoom
+    val tilt = data.getFloat("tilt") ?: map.cameraPosition.tilt
+    val bearing = data.getFloat("bearing") ?: map.cameraPosition.bearing
     val cameraUpdate = CameraUpdateFactory.newCameraPosition(
-      CameraPosition(center, zoomLevel, tilt, rotation)
+      CameraPosition(target, zoom, tilt, bearing)
     )
-    map.animateCamera(cameraUpdate, duration.toLong(), animateCallback)
+    map.animateCamera(cameraUpdate, duration, animateCallback)
   }
 
-  fun setRegion(region: ReadableMap) {
-    map.moveCamera(CameraUpdateFactory.newLatLngBounds(region.toLatLngBounds(), 0))
-  }
-
-  fun setLimitRegion(region: ReadableMap) {
-    map.setMapStatusLimits(region.toLatLngBounds())
-  }
-
-  fun setLocationEnabled(enabled: Boolean) {
-    map.isMyLocationEnabled = enabled
-    map.myLocationStyle = locationStyle
-  }
-
-  fun setLocationInterval(interval: Long) {
-    locationStyle.interval(interval)
-    map.myLocationStyle = locationStyle
-  }
-
-  fun setLocationStyle(style: ReadableMap) {
-    if (style.hasKey("fillColor")) {
-      locationStyle.radiusFillColor(style.getInt("fillColor"))
+  fun setInitialCameraPosition(position: ReadableMap) {
+    if (initialCameraPosition == null) {
+      initialCameraPosition = position
+      moveCamera(Arguments.createArray().apply {
+        pushMap(Arguments.createMap().apply { merge(position) })
+        pushInt(0)
+      })
     }
-
-    if (style.hasKey("strokeColor")) {
-      locationStyle.strokeColor(style.getInt("strokeColor"))
-    }
-
-    if (style.hasKey("strokeWidth")) {
-      locationStyle.strokeWidth(style.getDouble("strokeWidth").toFloat())
-    }
-
-    if (style.hasKey("image")) {
-      val drawable = context.resources.getIdentifier(
-        style.getString("image"), "drawable", context.packageName
-      )
-      locationStyle.myLocationIcon(BitmapDescriptorFactory.fromResource(drawable))
-    }
-
-    if (style.hasKey("showLocation")) {
-      locationStyle.showMyLocation(style.getBoolean("showLocation"))
-    }
-
-    if (style.hasKey("anchor")) {
-      val anchor = style.getArray("anchor")
-      locationStyle.anchor(anchor!!.getDouble(0).toFloat(), anchor.getDouble(1).toFloat())
-    }
-
-    map.myLocationStyle = locationStyle
-  }
-
-  fun setLocationType(type: Int) {
-    locationStyle.myLocationType(type)
-    map.myLocationStyle = locationStyle
   }
 }

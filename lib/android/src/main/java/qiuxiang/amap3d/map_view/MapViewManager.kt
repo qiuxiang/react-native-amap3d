@@ -1,21 +1,22 @@
 package qiuxiang.amap3d.map_view
 
 import android.view.View
-import qiuxiang.amap3d.toLatLng
 import com.amap.api.maps.CameraUpdateFactory
-import com.amap.api.maps.model.MyLocationStyle
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.ViewGroupManager
 import com.facebook.react.uimanager.annotations.ReactProp
+import qiuxiang.amap3d.getEventTypeConstants
+import qiuxiang.amap3d.toLatLng
+
+@Suppress("EnumEntryName")
+enum class Commands {
+  moveCamera
+}
 
 @Suppress("unused")
 internal class MapViewManager : ViewGroupManager<MapView>() {
-  companion object {
-    const val SET_STATUS = 1
-  }
-
   override fun getName(): String {
     return "AMapView"
   }
@@ -30,12 +31,12 @@ internal class MapViewManager : ViewGroupManager<MapView>() {
   }
 
   override fun getCommandsMap(): Map<String, Int> {
-    return mapOf("setStatus" to SET_STATUS)
+    return Commands.values().map { it.name to it.ordinal }.toMap()
   }
 
-  override fun receiveCommand(overlay: MapView, commandId: Int, args: ReadableArray?) {
-    when (commandId) {
-      SET_STATUS -> overlay.animateTo(args)
+  override fun receiveCommand(view: MapView, command: Int, args: ReadableArray?) {
+    when (command) {
+      Commands.moveCamera.ordinal -> view.moveCamera(args)
     }
   }
 
@@ -50,92 +51,74 @@ internal class MapViewManager : ViewGroupManager<MapView>() {
   }
 
   override fun getExportedCustomBubblingEventTypeConstants(): Map<String, Any> {
-    return listOf(
+    return getEventTypeConstants(
       "onLoad",
-      "onClick",
-      "onLongClick",
-      "onLocation",
-      "onAnimateCancel",
-      "onAnimateFinish",
-      "onStatusChange",
-      "onStatusChangeComplete",
-    ).map { it to mapOf("phasedRegistrationNames" to mapOf("bubbled" to it)) }.toMap()
+      "onTap",
+      "onTapPoi",
+      "onLongPress",
+      "onCameraMove",
+      "onCameraIdle",
+    )
   }
 
-  @ReactProp(name = "locationEnabled")
+  @ReactProp(name = "initialCameraPosition")
+  fun setInitialCameraPosition(view: MapView, position: ReadableMap) {
+    view.setInitialCameraPosition(position)
+  }
+
+  @ReactProp(name = "myLocationEnabled")
   fun setMyLocationEnabled(view: MapView, enabled: Boolean) {
-    view.setLocationEnabled(enabled)
+    view.map.isMyLocationEnabled = enabled
   }
 
-  @ReactProp(name = "showsIndoorMap")
-  fun showIndoorMap(view: MapView, show: Boolean) {
-    view.map.showIndoorMap(show)
+  @ReactProp(name = "indoorViewEnabled")
+  fun showIndoorViewEnabled(view: MapView, enabled: Boolean) {
+    view.map.showIndoorMap(enabled)
   }
 
-  @ReactProp(name = "showsIndoorSwitch")
-  fun setIndoorSwitchEnabled(view: MapView, show: Boolean) {
-    view.map.uiSettings.isIndoorSwitchEnabled = show
+  @ReactProp(name = "buildingsEnabled")
+  fun buildingsEnabled(view: MapView, enabled: Boolean) {
+    view.map.showBuildings(enabled)
   }
 
-  @ReactProp(name = "showsBuildings")
-  fun showBuildings(view: MapView, show: Boolean) {
-    view.map.showBuildings(show)
-  }
-
-  @ReactProp(name = "showsLabels")
-  fun showMapText(view: MapView, show: Boolean) {
-    view.map.showMapText(show)
-  }
-
-  @ReactProp(name = "showsCompass")
+  @ReactProp(name = "compassEnabled")
   fun setCompassEnabled(view: MapView, show: Boolean) {
     view.map.uiSettings.isCompassEnabled = show
   }
 
-  @ReactProp(name = "showsZoomControls")
+  @ReactProp(name = "zoomControlsEnabled")
   fun setZoomControlsEnabled(view: MapView, enabled: Boolean) {
     view.map.uiSettings.isZoomControlsEnabled = enabled
   }
 
-  @ReactProp(name = "showsScale")
+  @ReactProp(name = "scaleControlsEnabled")
   fun setScaleControlsEnabled(view: MapView, enabled: Boolean) {
     view.map.uiSettings.isScaleControlsEnabled = enabled
   }
 
-  @ReactProp(name = "mapLanguage")
-  fun setLanguage(view: MapView, mapLanguage: Int) {
-    view.map.setMapLanguage(
-      if (mapLanguage == 1) {
-        "en"
-      } else {
-        "zh_cn"
-      }
-    )
+  @ReactProp(name = "language")
+  fun setLanguage(view: MapView, language: String) {
+    view.map.setMapLanguage(language)
   }
 
-  @ReactProp(name = "showsLocationButton")
+  @ReactProp(name = "myLocationButtonEnabled")
   fun setMyLocationButtonEnabled(view: MapView, enabled: Boolean) {
     view.map.uiSettings.isMyLocationButtonEnabled = enabled
   }
 
-  @ReactProp(name = "showsTraffic")
+  @ReactProp(name = "trafficEnabled")
   fun setTrafficEnabled(view: MapView, enabled: Boolean) {
     view.map.isTrafficEnabled = enabled
   }
 
-  @ReactProp(name = "maxZoomLevel")
-  fun setMaxZoomLevel(view: MapView, zoomLevel: Float) {
+  @ReactProp(name = "maxZoom")
+  fun setMaxZoom(view: MapView, zoomLevel: Float) {
     view.map.maxZoomLevel = zoomLevel
   }
 
-  @ReactProp(name = "minZoomLevel")
-  fun setMinZoomLevel(view: MapView, zoomLevel: Float) {
+  @ReactProp(name = "minZoom")
+  fun setMinZoom(view: MapView, zoomLevel: Float) {
     view.map.minZoomLevel = zoomLevel
-  }
-
-  @ReactProp(name = "zoomLevel")
-  fun setZoomLevel(view: MapView, zoomLevel: Float) {
-    view.map.moveCamera(CameraUpdateFactory.zoomTo(zoomLevel))
   }
 
   @ReactProp(name = "mapType")
@@ -143,72 +126,28 @@ internal class MapViewManager : ViewGroupManager<MapView>() {
     view.map.mapType = mapType + 1
   }
 
-  @ReactProp(name = "zoomEnabled")
+  @ReactProp(name = "zoomGesturesEnabled")
   fun setZoomGesturesEnabled(view: MapView, enabled: Boolean) {
     view.map.uiSettings.isZoomGesturesEnabled = enabled
   }
 
-  @ReactProp(name = "scrollEnabled")
+  @ReactProp(name = "scrollGesturesEnabled")
   fun setScrollGesturesEnabled(view: MapView, enabled: Boolean) {
     view.map.uiSettings.isScrollGesturesEnabled = enabled
   }
 
-  @ReactProp(name = "rotateEnabled")
+  @ReactProp(name = "rotateGesturesEnabled")
   fun setRotateGesturesEnabled(view: MapView, enabled: Boolean) {
     view.map.uiSettings.isRotateGesturesEnabled = enabled
   }
 
-  @ReactProp(name = "tiltEnabled")
+  @ReactProp(name = "tiltGesturesEnabled")
   fun setTiltGesturesEnabled(view: MapView, enabled: Boolean) {
     view.map.uiSettings.isTiltGesturesEnabled = enabled
   }
 
-  @ReactProp(name = "center")
-  fun setCenter(view: MapView, center: ReadableMap) {
+  @ReactProp(name = "cameraPosition")
+  fun setCameraPosition(view: MapView, center: ReadableMap) {
     view.map.moveCamera(CameraUpdateFactory.changeLatLng(center.toLatLng()))
-  }
-
-  @ReactProp(name = "region")
-  fun setRegion(view: MapView, region: ReadableMap) {
-    view.setRegion(region)
-  }
-
-  @ReactProp(name = "limitRegion")
-  fun setLimitRegion(view: MapView, limitRegion: ReadableMap) {
-    view.setLimitRegion(limitRegion)
-  }
-
-  @ReactProp(name = "tilt")
-  fun changeTilt(view: MapView, tilt: Float) {
-    view.map.moveCamera(CameraUpdateFactory.changeTilt(tilt))
-  }
-
-  @ReactProp(name = "rotation")
-  fun changeRotation(view: MapView, rotation: Float) {
-    view.map.moveCamera(CameraUpdateFactory.changeBearing(rotation))
-  }
-
-  @ReactProp(name = "locationInterval")
-  fun setLocationInterval(view: MapView, interval: Int) {
-    view.setLocationInterval(interval.toLong())
-  }
-
-  @ReactProp(name = "locationStyle")
-  fun setLocationStyle(view: MapView, style: ReadableMap) {
-    view.setLocationStyle(style)
-  }
-
-  @ReactProp(name = "locationType")
-  fun setLocationStyle(view: MapView, type: String) {
-    when (type) {
-      "show" -> view.setLocationType(MyLocationStyle.LOCATION_TYPE_SHOW)
-      "locate" -> view.setLocationType(MyLocationStyle.LOCATION_TYPE_LOCATE)
-      "follow" -> view.setLocationType(MyLocationStyle.LOCATION_TYPE_FOLLOW)
-      "map_rotate" -> view.setLocationType(MyLocationStyle.LOCATION_TYPE_MAP_ROTATE)
-      "location_rotate" -> view.setLocationType(MyLocationStyle.LOCATION_TYPE_LOCATION_ROTATE)
-      "location_rotate_no_center" -> view.setLocationType(MyLocationStyle.LOCATION_TYPE_LOCATION_ROTATE_NO_CENTER)
-      "follow_no_center" -> view.setLocationType(MyLocationStyle.LOCATION_TYPE_FOLLOW_NO_CENTER)
-      "map_rotate_no_center" -> view.setLocationType(MyLocationStyle.LOCATION_TYPE_MAP_ROTATE_NO_CENTER)
-    }
   }
 }

@@ -11,12 +11,12 @@ export default () => (
       <View style={style.button}>
         <TouchableOpacity
           onPress={() => {
-            mapView?.setStatus(
+            mapView?.moveCamera(
               {
                 tilt: 45,
-                rotation: 90,
-                zoomLevel: 18,
-                center: { latitude: 39.97837, longitude: 116.31363 },
+                bearing: 90,
+                zoom: 18,
+                target: { latitude: 39.97837, longitude: 116.31363 },
               },
               1000
             );
@@ -28,12 +28,12 @@ export default () => (
       <View style={style.button}>
         <TouchableOpacity
           onPress={() => {
-            mapView?.setStatus(
+            mapView?.moveCamera(
               {
                 tilt: 0,
-                rotation: 0,
-                zoomLevel: 16,
-                center: { latitude: 39.90864, longitude: 116.39745 },
+                bearing: 0,
+                zoom: 16,
+                target: { latitude: 39.90864, longitude: 116.39745 },
               },
               1000
             );

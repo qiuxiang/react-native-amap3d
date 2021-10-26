@@ -9,34 +9,24 @@ import qiuxiang.amap3d.toLatLng
 
 class MapMultiPoint(context: Context) : ReactViewGroup(context), MapOverlay {
   private var overlay: MultiPointOverlay? = null
-  private var items: ArrayList<MultiPointItem> = ArrayList()
+  private var items: List<MultiPointItem> = emptyList()
   private var icon: BitmapDescriptor? = null
-
-  fun setPoints(points: ReadableArray) {
-    items = ArrayList((0 until points.size())
-      .map {
-        val data = points.getMap(it)
-        val item = MultiPointItem(data!!.toLatLng())
-        if (data.hasKey("title")) {
-          item.title = data.getString("title")
-        }
-        if (data.hasKey("subtitle")) {
-          item.snippet = data.getString("subtitle")
-        }
-        item.customerId = id.toString() + "_" + it
-        item
-      })
-    overlay?.setItems(items)
-  }
 
   override fun add(map: AMap) {
     overlay = map.addMultiPointOverlay(MultiPointOverlayOptions().icon(icon))
-    overlay?.setItems(items)
-    overlay?.setEnable(true)
+    overlay?.items = items
   }
 
   override fun remove() {
     overlay?.destroy()
+  }
+
+  fun setPoints(points: ReadableArray) {
+    items = (0 until points.size())
+      .map { item ->
+        MultiPointItem(points.getMap(item).toLatLng()).apply { customerId = "${id}_$item" }
+      }
+    overlay?.items = items
   }
 
   fun setImage(image: String) {

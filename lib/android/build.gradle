@@ -6,10 +6,10 @@ def getExt(prop, fallback) {
 }
 
 buildscript {
-    ext.kotlin_version = '1.5.10'
+    ext.kotlin_version = '1.5.31'
 
     repositories {
-        jcenter()
+        mavenCentral()
     }
 
     dependencies {

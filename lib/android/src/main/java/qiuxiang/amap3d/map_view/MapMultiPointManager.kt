@@ -5,6 +5,7 @@ import com.facebook.react.common.MapBuilder
 import com.facebook.react.uimanager.SimpleViewManager
 import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.annotations.ReactProp
+import qiuxiang.amap3d.getEventTypeConstants
 
 @Suppress("unused")
 internal class MapMultiPointManager : SimpleViewManager<MapMultiPoint>() {
@@ -16,10 +17,8 @@ internal class MapMultiPointManager : SimpleViewManager<MapMultiPoint>() {
     return MapMultiPoint(reactContext)
   }
 
-  override fun getExportedCustomDirectEventTypeConstants(): Map<String, Any>? {
-    return MapBuilder.of(
-      "onItemPress", MapBuilder.of("registrationName", "onItemPress")
-    )
+  override fun getExportedCustomBubblingEventTypeConstants(): Map<String, Any> {
+    return getEventTypeConstants("onPress")
   }
 
   @ReactProp(name = "points")

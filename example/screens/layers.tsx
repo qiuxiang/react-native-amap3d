@@ -3,11 +3,11 @@ import { Platform, StyleProp, StyleSheet, Switch, Text, View, ViewStyle } from "
 import { MapView } from "react-native-amap3d";
 import commonStyles from "../styles";
 
-export default class Layers extends React.Component {
+export default class extends React.Component {
   state = {
-    showsLabels: true,
-    showsTraffic: false,
-    showsBuildings: false,
+    indoorViewEnabled: true,
+    trafficEnabled: false,
+    buildingsEnabled: false,
   };
 
   render() {
@@ -15,33 +15,34 @@ export default class Layers extends React.Component {
     return (
       <View style={StyleSheet.absoluteFill}>
         <MapView
-          zoomLevel={17}
-          tilt={60}
-          showsLabels={this.state.showsLabels}
-          showsTraffic={this.state.showsTraffic}
-          showsBuildings={this.state.showsBuildings}
+          {...this.state}
+          initialCameraPosition={{
+            target: { latitude: 39.9098, longitude: 116.37296 },
+            zoom: 18,
+            tilt: 45,
+          }}
           style={style.map}
         />
         <View style={style.controls}>
           <View style={controlStyle}>
             <Text style={style.label}>建筑</Text>
             <Switch
-              onValueChange={(showsBuildings) => this.setState({ showsBuildings })}
-              value={this.state.showsBuildings}
+              onValueChange={(buildingsEnabled) => this.setState({ buildingsEnabled })}
+              value={this.state.buildingsEnabled}
             />
           </View>
           <View style={controlStyle}>
             <Text style={style.label}>路况</Text>
             <Switch
-              onValueChange={(showsTraffic) => this.setState({ showsTraffic })}
-              value={this.state.showsTraffic}
+              onValueChange={(trafficEnabled) => this.setState({ trafficEnabled })}
+              value={this.state.trafficEnabled}
             />
           </View>
           <View style={controlStyle}>
-            <Text style={style.label}>标签</Text>
+            <Text style={style.label}>室内地图</Text>
             <Switch
-              onValueChange={(showsLabels) => this.setState({ showsLabels })}
-              value={this.state.showsLabels}
+              onValueChange={(indoorViewEnabled) => this.setState({ indoorViewEnabled })}
+              value={this.state.indoorViewEnabled}
             />
           </View>
         </View>

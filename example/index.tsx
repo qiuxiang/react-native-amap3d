@@ -2,7 +2,7 @@ import { DarkTheme, DefaultTheme, NavigationContainer } from "@react-navigation/
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
 import { useColorScheme } from "react-native";
-import examples from "./examples";
+import screens from "./screens";
 import Home from "./home";
 
 const Stack = createNativeStackNavigator();
@@ -13,9 +13,9 @@ export default () => {
     <NavigationContainer theme={scheme === "dark" ? DarkTheme : DefaultTheme}>
       <Stack.Navigator>
         <Stack.Screen name="示例" component={Home} />
-        {Object.keys(examples).map((name) => (
+        {Object.keys(screens).map((name) => (
           // @ts-ignore
-          <Stack.Screen key={name} name={name} component={examples[name]} />
+          <Stack.Screen key={name} name={name} component={screens[name]} />
         ))}
       </Stack.Navigator>
     </NavigationContainer>

@@ -1,5 +1,5 @@
 /**
- * 点座标
+ * 点坐标
  */
 export interface Point {
   x: number;
@@ -7,7 +7,7 @@ export interface Point {
 }
 
 /**
- * 地理座标
+ * 地理坐标
  */
 export interface LatLng {
   /**
@@ -39,21 +39,21 @@ export interface Region extends LatLng {
 /**
  * 地图状态
  */
-export interface MapStatus {
+export interface CameraPosition {
   /**
    * 中心坐标
    */
-  center?: LatLng;
+  target?: LatLng;
 
   /**
    * 缩放级别
    */
-  zoomLevel?: number;
+  zoom?: number;
 
   /**
    * 朝向、旋转角度
    */
-  rotation?: number;
+  bearing?: number;
 
   /**
    * 倾斜角度

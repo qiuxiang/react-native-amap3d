@@ -1,13 +1,14 @@
 package qiuxiang.amap3d
 
 import android.content.res.Resources
+import com.amap.api.maps.model.CameraPosition
 import com.amap.api.maps.model.LatLng
 import com.amap.api.maps.model.LatLngBounds
+import com.amap.api.maps.model.Poi
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.bridge.WritableMap
-import kotlin.math.abs
 
 fun Float.toPx(): Int {
   return (this * Resources.getSystem().displayMetrics.density).toInt()
@@ -18,32 +19,49 @@ fun ReadableMap.toLatLng(): LatLng {
 }
 
 fun ReadableArray.toLatLngList(): ArrayList<LatLng> {
-  return ArrayList((0 until size()).map { getMap(it)!!.toLatLng() })
+  return ArrayList((0 until size()).map { getMap(it).toLatLng() })
 }
 
-fun LatLng.toWritableMap(): WritableMap {
-  val map = Arguments.createMap()
-  map.putDouble("latitude", latitude)
-  map.putDouble("longitude", longitude)
-  return map
+fun LatLng.toJson(): WritableMap {
+  return Arguments.createMap().apply {
+    putDouble("latitude", latitude)
+    putDouble("longitude", longitude)
+  }
 }
 
-fun LatLngBounds.toWritableMap(): WritableMap {
-  val map = Arguments.createMap()
-  map.putDouble("latitude", abs((southwest.latitude + northeast.latitude) / 2))
-  map.putDouble("longitude", abs((southwest.longitude + northeast.longitude) / 2))
-  map.putDouble("latitudeDelta", abs(southwest.latitude - northeast.latitude))
-  map.putDouble("longitudeDelta", abs(southwest.longitude - northeast.longitude))
-  return map
+fun Poi.toJson(): WritableMap {
+  return Arguments.createMap().apply {
+    putMap("position", coordinate.toJson())
+    putString("id", poiId)
+    putString("name", name)
+  }
+}
+
+fun CameraPosition.toJson(): WritableMap {
+  return Arguments.createMap().apply {
+    putMap("target", target.toJson())
+    putDouble("zoom", zoom.toDouble())
+    putDouble("tilt", tilt.toDouble())
+    putDouble("bearing", bearing.toDouble())
+  }
+}
+
+fun LatLngBounds.toJson(): WritableMap {
+  return Arguments.createMap().apply {
+    putMap("southwest", southwest.toJson())
+    putMap("northeast", northeast.toJson())
+  }
 }
 
 fun ReadableMap.toLatLngBounds(): LatLngBounds {
-  val latitude = getDouble("latitude")
-  val longitude = getDouble("longitude")
-  val latitudeDelta = getDouble("latitudeDelta")
-  val longitudeDelta = getDouble("longitudeDelta")
-  return LatLngBounds(
-    LatLng(latitude - latitudeDelta / 2, longitude - longitudeDelta / 2),
-    LatLng(latitude + latitudeDelta / 2, longitude + longitudeDelta / 2)
-  )
+  return LatLngBounds(getMap("southwest")?.toLatLng(), getMap("northeast")?.toLatLng())
+}
+
+fun ReadableMap.getFloat(key: String): Float? {
+  if (hasKey(key)) return getDouble(key).toFloat()
+  return null
+}
+
+fun getEventTypeConstants(vararg list: String): Map<String, Any> {
+  return list.map { it to mapOf("phasedRegistrationNames" to mapOf("bubbled" to it)) }.toMap()
 }

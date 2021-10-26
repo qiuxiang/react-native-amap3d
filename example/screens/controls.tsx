@@ -5,10 +5,10 @@ import styles from "../styles";
 
 export default class extends React.Component {
   state = {
-    showsCompass: false,
-    showsScale: true,
-    showsZoomControls: true,
-    showsLocationButton: false,
+    compassEnabled: false,
+    scaleControlsEnabled: true,
+    zoomControlsEnabled: true,
+    myLocationButtonEnabled: false,
   };
 
   componentDidMount() {
@@ -19,45 +19,47 @@ export default class extends React.Component {
     return (
       <View style={StyleSheet.absoluteFill}>
         <MapView
-          locationEnabled={this.state.showsLocationButton}
-          showsCompass={this.state.showsCompass}
-          showsScale={this.state.showsScale}
-          showsLocationButton={this.state.showsLocationButton}
-          showsZoomControls={this.state.showsZoomControls}
+          compassEnabled={this.state.compassEnabled}
+          scaleControlsEnabled={this.state.scaleControlsEnabled}
+          myLocationEnabled={this.state.myLocationButtonEnabled}
+          myLocationButtonEnabled={this.state.myLocationButtonEnabled}
+          zoomControlsEnabled={this.state.zoomControlsEnabled}
           style={styles.map}
         />
         <View style={styles.controls}>
           <View style={styles.control}>
             <Switch
               style={styles.switch}
-              onValueChange={(showsCompass) => this.setState({ showsCompass })}
-              value={this.state.showsCompass}
+              onValueChange={(compassEnabled) => this.setState({ compassEnabled })}
+              value={this.state.compassEnabled}
             />
             <Text>指南针</Text>
           </View>
           <View style={styles.control}>
             <Switch
               style={styles.switch}
-              onValueChange={(showsScale) => this.setState({ showsScale })}
-              value={this.state.showsScale}
+              onValueChange={(scaleControlsEnabled) => this.setState({ scaleControlsEnabled })}
+              value={this.state.scaleControlsEnabled}
             />
             <Text>比例尺</Text>
           </View>
           <View style={styles.control}>
             <Switch
               style={styles.switch}
-              onValueChange={(showsLocationButton) => this.setState({ showsLocationButton })}
-              value={this.state.showsLocationButton}
+              onValueChange={(myLocationButtonEnabled) =>
+                this.setState({ myLocationButtonEnabled })
+              }
+              value={this.state.myLocationButtonEnabled}
             />
-            <Text>定位</Text>
+            <Text>定位按钮</Text>
           </View>
           <View style={styles.control}>
             <Switch
               style={styles.switch}
-              onValueChange={(showsZoomControls) => this.setState({ showsZoomControls })}
-              value={this.state.showsZoomControls}
+              onValueChange={(zoomControlsEnabled) => this.setState({ zoomControlsEnabled })}
+              value={this.state.zoomControlsEnabled}
             />
-            <Text>缩放</Text>
+            <Text>缩放按钮</Text>
           </View>
         </View>
       </View>
