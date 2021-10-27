@@ -2,6 +2,7 @@ import * as React from "react";
 import {
   FlatList,
   ListRenderItemInfo,
+  NativeSyntheticEvent,
   PermissionsAndroid,
   Platform,
   StyleSheet,
@@ -20,7 +21,7 @@ export default class extends React.Component {
     ]);
   }
 
-  _log(event: string, data: any) {
+  log(event: string, data: any) {
     console.log(data);
     this.setState({
       logs: [
@@ -35,40 +36,33 @@ export default class extends React.Component {
     });
   }
 
-  _logClickEvent = (data: any) => this._log("onClick", data);
-  _logLongClickEvent = (data: any) => this._log("onLongClick", data);
-  _logLocationEvent = (data: any) => this._log("onLocation", data);
-  _logStatusChangeCompleteEvent = (data: any) => this._log("onStatusChangeComplete", data);
+  logger(name: string) {
+    return ({ nativeEvent }: NativeSyntheticEvent<any>) => this.log(name, nativeEvent);
+  }
 
-  _renderItem = ({ item }: ListRenderItemInfo<any>) => (
+  renderItem = ({ item }: ListRenderItemInfo<any>) => (
     <Text style={style.logText}>
       {item.time} {item.event}: {item.data}
     </Text>
   );
 
   render() {
+    const events = ["onLoad", "onPress", "onPressPoi", "onLongPress", "onCameraIdle"];
     return (
       <View style={style.body}>
         <MapView
-          locationEnabled
-          locationInterval={10000}
-          distanceFilter={10}
-          onClick={this._logClickEvent}
-          onLongClick={this._logLongClickEvent}
-          onLocation={this._logLocationEvent}
-          onStatusChangeComplete={this._logStatusChangeCompleteEvent}
+          {...Object.fromEntries(events.map((i) => [i, this.logger(i)]))}
+          myLocationEnabled
           style={style.body}
         />
-        <FlatList style={style.logs} data={this.state.logs} renderItem={this._renderItem} />
+        <FlatList style={style.logs} data={this.state.logs} renderItem={this.renderItem} />
       </View>
     );
   }
 }
 
 const style = StyleSheet.create({
-  body: {
-    flex: 1,
-  },
+  body: { flex: 1 },
   logs: {
     elevation: 8,
     flex: 1,

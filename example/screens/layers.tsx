@@ -5,9 +5,9 @@ import commonStyles from "../styles";
 
 export default class extends React.Component {
   state = {
-    indoorViewEnabled: true,
+    buildingsEnabled: true,
     trafficEnabled: false,
-    buildingsEnabled: false,
+    indoorViewEnabled: false,
   };
 
   render() {

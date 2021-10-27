@@ -29,9 +29,10 @@ class MapView(context: ThemedReactContext) : TextureMapView(context) {
     super.onCreate(null)
 
     map.setOnMapLoadedListener { emit(id, "onLoad") }
-    map.setOnMapClickListener { latLng -> emit(id, "onTap", latLng.toJson()) }
-    map.setOnPOIClickListener { poi -> emit(id, "onTapPoi", poi.toJson()) }
+    map.setOnMapClickListener { latLng -> emit(id, "onPress", latLng.toJson()) }
+    map.setOnPOIClickListener { poi -> emit(id, "onPressPoi", poi.toJson()) }
     map.setOnMapLongClickListener { latLng -> emit(id, "onLongPress", latLng.toJson()) }
+    map.setOnPolylineClickListener { polyline -> emit(polylineMap[polyline.id]?.id, "onPress") }
 
     map.setOnMarkerClickListener { marker ->
       markerMap[marker.id]?.let {
@@ -65,8 +66,6 @@ class MapView(context: ThemedReactContext) : TextureMapView(context) {
         emit(id, "onCameraMove", position.toJson())
       }
     })
-
-    map.setOnPolylineClickListener { polyline -> emit(polylineMap[polyline.id]?.id, "onPress") }
 
     map.setOnMultiPointClickListener { item ->
       item.customerId.split("_").let {
@@ -115,16 +114,16 @@ class MapView(context: ThemedReactContext) : TextureMapView(context) {
   }
 
   fun moveCamera(args: ReadableArray?) {
-    val data = args?.getMap(0)!!
-    val duration = args.getInt(1).toLong()
-    val target = data.getMap("target")?.toLatLng()
-    val zoom = data.getFloat("zoom") ?: map.cameraPosition.zoom
-    val tilt = data.getFloat("tilt") ?: map.cameraPosition.tilt
-    val bearing = data.getFloat("bearing") ?: map.cameraPosition.bearing
+    val current = map.cameraPosition
+    val position = args?.getMap(0)!!
+    val target = position.getMap("target")?.toLatLng() ?: current.target
+    val zoom = position.getFloat("zoom") ?: current.zoom
+    val tilt = position.getFloat("tilt") ?: current.tilt
+    val bearing = position.getFloat("bearing") ?: current.bearing
     val cameraUpdate = CameraUpdateFactory.newCameraPosition(
       CameraPosition(target, zoom, tilt, bearing)
     )
-    map.animateCamera(cameraUpdate, duration, animateCallback)
+    map.animateCamera(cameraUpdate, args.getInt(1).toLong(), animateCallback)
   }
 
   fun setInitialCameraPosition(position: ReadableMap) {

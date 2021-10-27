@@ -1,19 +1,21 @@
 import * as React from "react";
-import { NativeSyntheticEvent, requireNativeComponent } from "react-native";
+import { ImageSourcePropType, NativeSyntheticEvent, requireNativeComponent } from "react-native";
+// @ts-ignore
+import resolveAssetSource from "react-native/Libraries/Image/resolveAssetSource";
 import { LatLng } from "./types";
 
 const AMapMultiPoint = requireNativeComponent<MultiPointProps>("AMapMultiPoint");
 
 export interface MultiPointProps {
   /**
-   * 节点
+   * 坐标点集合
    */
-  points?: LatLng[];
+  items?: LatLng[];
 
   /**
-   * 图标，只接受原生图片名字
+   * 图标
    */
-  image?: string;
+  image?: ImageSourcePropType;
 
   /**
    * 点击事件
@@ -21,4 +23,6 @@ export interface MultiPointProps {
   onPress?: (event: NativeSyntheticEvent<{ index: number }>) => void;
 }
 
-export default (props: MultiPointProps) => <AMapMultiPoint {...props} />;
+export default (props: MultiPointProps) => {
+  return <AMapMultiPoint {...props} image={resolveAssetSource(props.image)} />;
+};

@@ -4,6 +4,7 @@ import android.view.View
 import com.amap.api.maps.CameraUpdateFactory
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.ReadableMap
+import com.facebook.react.common.MapBuilder
 import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.ViewGroupManager
 import com.facebook.react.uimanager.annotations.ReactProp
@@ -53,8 +54,8 @@ internal class MapViewManager : ViewGroupManager<MapView>() {
   override fun getExportedCustomBubblingEventTypeConstants(): Map<String, Any> {
     return getEventTypeConstants(
       "onLoad",
-      "onTap",
-      "onTapPoi",
+      "onPress",
+      "onPressPoi",
       "onLongPress",
       "onCameraMove",
       "onCameraIdle",
@@ -72,12 +73,12 @@ internal class MapViewManager : ViewGroupManager<MapView>() {
   }
 
   @ReactProp(name = "indoorViewEnabled")
-  fun showIndoorViewEnabled(view: MapView, enabled: Boolean) {
+  fun setIndoorViewEnabled(view: MapView, enabled: Boolean) {
     view.map.showIndoorMap(enabled)
   }
 
   @ReactProp(name = "buildingsEnabled")
-  fun buildingsEnabled(view: MapView, enabled: Boolean) {
+  fun setBuildingsEnabled(view: MapView, enabled: Boolean) {
     view.map.showBuildings(enabled)
   }
 

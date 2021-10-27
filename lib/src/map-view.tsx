@@ -102,7 +102,7 @@ export interface MapViewProps extends ViewProps {
   /**
    * 点击事件
    */
-  onTap?: (latLng: LatLng) => void;
+  onPress?: (latLng: LatLng) => void;
 
   /**
    * 长按事件

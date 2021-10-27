@@ -5,52 +5,52 @@ import styles from "../styles";
 
 export default class extends React.Component {
   state = {
-    zoomEnabled: true,
-    scrollEnabled: true,
-    rotateEnabled: true,
-    tiltEnabled: true,
+    zoomGesturesEnabled: false,
+    scrollGesturesEnabled: false,
+    rotateGesturesEnabled: false,
+    tiltGesturesEnabled: false,
   };
 
   render() {
     return (
       <View style={StyleSheet.absoluteFill}>
         <MapView
-          zoomEnabled={this.state.zoomEnabled}
-          scrollEnabled={this.state.scrollEnabled}
-          rotateEnabled={this.state.rotateEnabled}
-          tiltEnabled={this.state.tiltEnabled}
+          zoomGesturesEnabled={this.state.zoomGesturesEnabled}
+          scrollGesturesEnabled={this.state.scrollGesturesEnabled}
+          rotateGesturesEnabled={this.state.rotateGesturesEnabled}
+          tiltGesturesEnabled={this.state.tiltGesturesEnabled}
           style={styles.map}
         />
         <View style={styles.controls}>
           <View style={styles.control}>
             <Switch
               style={styles.switch}
-              onValueChange={(rotateEnabled) => this.setState({ rotateEnabled })}
-              value={this.state.rotateEnabled}
+              onValueChange={(rotateGesturesEnabled) => this.setState({ rotateGesturesEnabled })}
+              value={this.state.rotateGesturesEnabled}
             />
             <Text>旋转</Text>
           </View>
           <View style={styles.control}>
             <Switch
               style={styles.switch}
-              onValueChange={(scrollEnabled) => this.setState({ scrollEnabled })}
-              value={this.state.scrollEnabled}
+              onValueChange={(scrollGesturesEnabled) => this.setState({ scrollGesturesEnabled })}
+              value={this.state.scrollGesturesEnabled}
             />
             <Text>滑动</Text>
           </View>
           <View style={styles.control}>
             <Switch
               style={styles.switch}
-              onValueChange={(zoomEnabled) => this.setState({ zoomEnabled })}
-              value={this.state.zoomEnabled}
+              onValueChange={(zoomGesturesEnabled) => this.setState({ zoomGesturesEnabled })}
+              value={this.state.zoomGesturesEnabled}
             />
             <Text>缩放</Text>
           </View>
           <View style={styles.control}>
             <Switch
               style={styles.switch}
-              onValueChange={(tiltEnabled) => this.setState({ tiltEnabled })}
-              value={this.state.tiltEnabled}
+              onValueChange={(tiltGesturesEnabled) => this.setState({ tiltGesturesEnabled })}
+              value={this.state.tiltGesturesEnabled}
             />
             <Text>倾斜</Text>
           </View>
