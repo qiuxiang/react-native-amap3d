@@ -5,7 +5,7 @@ export interface CircleProps {
   /**
    * 圆点坐标
    */
-  coordinate: LatLng;
+  center: LatLng;
 
   /**
    * 半径（米）

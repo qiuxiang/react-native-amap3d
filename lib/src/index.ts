@@ -1,3 +1,4 @@
+export { default as Circle } from "./circle";
 export { default as HeatMap } from "./heat-map";
 export { default as MapView } from "./map-view";
 export { default as Marker } from "./marker";

@@ -17,9 +17,9 @@ internal class MapCircleManager : SimpleViewManager<MapCircle>() {
     return MapCircle(reactContext)
   }
 
-  @ReactProp(name = "coordinate")
-  fun setCoordinate(circle: MapCircle, coordinate: ReadableMap) {
-    circle.center = coordinate.toLatLng()
+  @ReactProp(name = "center")
+  fun setCenter(circle: MapCircle, center: ReadableMap) {
+    circle.center = center.toLatLng()
   }
 
   @ReactProp(name = "radius")
@@ -43,7 +43,7 @@ internal class MapCircleManager : SimpleViewManager<MapCircle>() {
   }
 
   @ReactProp(name = "zIndex")
-  fun setZIndez(circle: MapCircle, zIndex: Float) {
+  fun setIndex(circle: MapCircle, zIndex: Float) {
     circle.zIndex = zIndex
   }
 }
