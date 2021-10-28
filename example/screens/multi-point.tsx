@@ -12,7 +12,7 @@ const points = Array(1000)
 export default () => (
   <MapView initialCameraPosition={{ zoom: 12 }} style={StyleSheet.absoluteFill}>
     <MultiPoint
-      image={require("../images/point.png")}
+      icon={require("../images/point.png")}
       items={points}
       onPress={({ nativeEvent }) => alert(nativeEvent.index)}
     />

@@ -15,7 +15,7 @@ export interface MultiPointProps {
   /**
    * 图标
    */
-  image?: ImageSourcePropType;
+  icon?: ImageSourcePropType;
 
   /**
    * 点击事件
@@ -24,5 +24,5 @@ export interface MultiPointProps {
 }
 
 export default (props: MultiPointProps) => {
-  return <AMapMultiPoint {...props} image={resolveAssetSource(props.image)} />;
+  return <AMapMultiPoint {...props} icon={resolveAssetSource(props.icon)} />;
 };

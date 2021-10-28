@@ -1,16 +1,15 @@
 package qiuxiang.amap3d.map_view
 
 import android.content.Context
-import android.graphics.Bitmap
 import com.amap.api.maps.AMap
-import com.amap.api.maps.model.*
-import com.facebook.drawee.backends.pipeline.Fresco.getImagePipeline
-import com.facebook.imagepipeline.request.BasePostprocessor
-import com.facebook.imagepipeline.request.ImageRequestBuilder.newBuilderWithSource
+import com.amap.api.maps.model.BitmapDescriptor
+import com.amap.api.maps.model.MultiPointItem
+import com.amap.api.maps.model.MultiPointOverlay
+import com.amap.api.maps.model.MultiPointOverlayOptions
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.ReadableMap
-import com.facebook.react.views.imagehelper.ImageSource
 import com.facebook.react.views.view.ReactViewGroup
+import qiuxiang.amap3d.fetchImage
 import qiuxiang.amap3d.toLatLng
 
 class MapMultiPoint(context: Context) : ReactViewGroup(context), MapOverlay {
@@ -44,17 +43,10 @@ class MapMultiPoint(context: Context) : ReactViewGroup(context), MapOverlay {
     overlay?.items = items
   }
 
-  fun setImage(source: ReadableMap) {
-    val uri = ImageSource(context, source.getString("uri")).uri
-    val request = newBuilderWithSource(uri).let {
-      it.postprocessor = object : BasePostprocessor() {
-        override fun process(bitmap: Bitmap) {
-          icon = BitmapDescriptorFactory.fromBitmap(bitmap)
-          addToMap()
-        }
-      }
-      it.build()
+  fun setIcon(source: ReadableMap) {
+    fetchImage(source) {
+      icon = it
+      addToMap()
     }
-    getImagePipeline().fetchDecodedImage(request, this)
   }
 }

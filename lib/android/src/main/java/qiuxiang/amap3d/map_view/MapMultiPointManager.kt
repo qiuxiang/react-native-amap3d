@@ -26,8 +26,8 @@ internal class MapMultiPointManager : SimpleViewManager<MapMultiPoint>() {
     multiPoint.setItems(items)
   }
 
-  @ReactProp(name = "image")
-  fun setImage(multiPoint: MapMultiPoint, image: ReadableMap) {
-    multiPoint.setImage(image)
+  @ReactProp(name = "icon")
+  fun setIcon(multiPoint: MapMultiPoint, icon: ReadableMap?) {
+    icon?.let { multiPoint.setIcon(it) }
   }
 }

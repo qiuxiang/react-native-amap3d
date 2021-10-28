@@ -1,5 +1,12 @@
 import * as React from "react";
-import { NativeSyntheticEvent, Platform, requireNativeComponent } from "react-native";
+import {
+  ImageSourcePropType,
+  NativeSyntheticEvent,
+  Platform,
+  requireNativeComponent,
+} from "react-native";
+// @ts-ignore
+import resolveAssetSource from "react-native/Libraries/Image/resolveAssetSource";
 import Component from "./component";
 import { LatLng, Point } from "./types";
 
@@ -10,9 +17,9 @@ export interface MarkerProps {
   position: LatLng;
 
   /**
-   * 自定义图标
+   * 图标
    */
-  icon?: () => React.ReactElement;
+  icon?: ImageSourcePropType;
 
   /**
    * 透明度 [0, 1]
@@ -79,20 +86,23 @@ export interface MarkerProps {
 export default class extends Component<MarkerProps> {
   name: string = "AMapMarker";
 
+  /**
+   * 触发自定义 View 更新
+   */
+  update = () => this.invoke("update");
+
   componentDidUpdate() {
     if (this.props.children && Platform.OS === "android") {
       setTimeout(() => this.invoke("update"), 0);
     }
   }
 
-  update = () => this.invoke("update");
-
   render() {
     const props = { ...this.props };
     Reflect.set(props, "latLng", props.position);
     // @ts-ignore
     delete props.position;
-    return <AMapMarker {...props} />;
+    return <AMapMarker {...props} icon={resolveAssetSource(props.icon)} />;
   }
 }
 

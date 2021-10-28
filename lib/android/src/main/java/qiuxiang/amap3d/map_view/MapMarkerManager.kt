@@ -70,4 +70,9 @@ internal class MapMarkerManager : ViewGroupManager<MapMarker>() {
   fun setAnchor(view: MapMarker, anchor: ReadableMap) {
     view.setAnchor(anchor.getDouble("x"), anchor.getDouble("y"))
   }
+
+  @ReactProp(name = "icon")
+  fun setIcon(view: MapMarker, icon: ReadableMap?) {
+    icon?.let { view.setIcon(it) }
+  }
 }

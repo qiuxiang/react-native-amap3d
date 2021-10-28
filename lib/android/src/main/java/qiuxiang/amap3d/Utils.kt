@@ -1,14 +1,17 @@
 package qiuxiang.amap3d
 
 import android.content.res.Resources
-import com.amap.api.maps.model.CameraPosition
-import com.amap.api.maps.model.LatLng
-import com.amap.api.maps.model.LatLngBounds
-import com.amap.api.maps.model.Poi
+import android.graphics.Bitmap
+import android.view.View
+import com.amap.api.maps.model.*
+import com.facebook.drawee.backends.pipeline.Fresco
+import com.facebook.imagepipeline.request.BasePostprocessor
+import com.facebook.imagepipeline.request.ImageRequestBuilder
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.bridge.WritableMap
+import com.facebook.react.views.imagehelper.ImageSource
 
 fun Float.toPx(): Int {
   return (this * Resources.getSystem().displayMetrics.density).toInt()
@@ -64,4 +67,17 @@ fun ReadableMap.getFloat(key: String): Float? {
 
 fun getEventTypeConstants(vararg list: String): Map<String, Any> {
   return list.map { it to mapOf("phasedRegistrationNames" to mapOf("bubbled" to it)) }.toMap()
+}
+
+fun View.fetchImage(source: ReadableMap, callback: (BitmapDescriptor) -> Unit) {
+  val uri = ImageSource(context, source.getString("uri")).uri
+  val request = ImageRequestBuilder.newBuilderWithSource(uri).let {
+    it.postprocessor = object : BasePostprocessor() {
+      override fun process(bitmap: Bitmap) {
+        callback(BitmapDescriptorFactory.fromBitmap(bitmap))
+      }
+    }
+    it.build()
+  }
+  Fresco.getImagePipeline().fetchDecodedImage(request, this)
 }

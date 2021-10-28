@@ -6,7 +6,9 @@ import android.graphics.Canvas
 import android.view.View
 import com.amap.api.maps.AMap
 import com.amap.api.maps.model.*
+import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.views.view.ReactViewGroup
+import qiuxiang.amap3d.fetchImage
 
 class MapMarker(context: Context) : ReactViewGroup(context), MapOverlay {
   private var view: View? = null
@@ -66,6 +68,13 @@ class MapMarker(context: Context) : ReactViewGroup(context), MapOverlay {
     super.addView(child, index)
     view = child
     view?.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ -> updateIcon() }
+  }
+
+  fun setIcon(source: ReadableMap) {
+    fetchImage(source) {
+      icon = it
+      marker?.setIcon(it)
+    }
   }
 
   override fun add(map: AMap) {

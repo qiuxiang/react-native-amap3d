@@ -7,6 +7,7 @@ import HeatMap from "./heat-map";
 import Layers from "./layers";
 import MapTypes from "./map-types";
 import Marker from "./marker";
+import MarkerIcon from "./marker-icon";
 import MultiPoint from "./multi-point";
 import Polygon from "./polygon";
 import Polyline from "./polyline";
@@ -19,6 +20,7 @@ export default {
   动画移动: Animated,
   地图事件: Events,
   "添加标记，支持拖拽": Marker,
+  自定义标记图标: MarkerIcon,
   绘制折线: Polyline,
   绘制多边形: Polygon,
   绘制圆形: Circle,
