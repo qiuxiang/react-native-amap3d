@@ -9,6 +9,6 @@ const coordinates = new Array(200).fill(0).map(() => ({
 
 export default () => (
   <MapView initialCameraPosition={{ zoom: 9 }} style={StyleSheet.absoluteFill}>
-    <HeatMap opacity={0.8} radius={20} coordinates={coordinates} />
+    <HeatMap opacity={0.8} radius={20} data={coordinates} />
   </MapView>
 );

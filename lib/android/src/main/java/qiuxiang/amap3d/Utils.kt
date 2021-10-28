@@ -18,8 +18,8 @@ fun ReadableMap.toLatLng(): LatLng {
   return LatLng(getDouble("latitude"), getDouble("longitude"))
 }
 
-fun ReadableArray.toLatLngList(): ArrayList<LatLng> {
-  return ArrayList((0 until size()).map { getMap(it).toLatLng() })
+fun ReadableArray.toLatLngList(): List<LatLng> {
+  return (0 until size()).map { getMap(it).toLatLng() }
 }
 
 fun LatLng.toJson(): WritableMap {

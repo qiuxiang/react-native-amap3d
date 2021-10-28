@@ -4,6 +4,7 @@ import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.uimanager.SimpleViewManager
 import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.annotations.ReactProp
+import qiuxiang.amap3d.toLatLngList
 
 @Suppress("unused")
 internal class MapHeatMapManager : SimpleViewManager<MapHeatMap>() {
@@ -15,9 +16,9 @@ internal class MapHeatMapManager : SimpleViewManager<MapHeatMap>() {
     return MapHeatMap(reactContext)
   }
 
-  @ReactProp(name = "coordinates")
-  fun setCoordinate(heatMap: MapHeatMap, coordinates: ReadableArray) {
-    heatMap.setCoordinates(coordinates)
+  @ReactProp(name = "data")
+  fun setData(heatMap: MapHeatMap, data: ReadableArray) {
+    heatMap.data = data.toLatLngList()
   }
 
   @ReactProp(name = "radius")

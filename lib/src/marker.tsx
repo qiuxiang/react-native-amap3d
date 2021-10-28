@@ -1,44 +1,18 @@
 import * as React from "react";
-import { Platform, requireNativeComponent, StyleSheet, View, ViewProps } from "react-native";
+import { NativeSyntheticEvent, Platform, requireNativeComponent } from "react-native";
 import Component from "./component";
 import { LatLng, Point } from "./types";
-
-const style = StyleSheet.create({
-  overlay: {
-    position: "absolute",
-  },
-});
 
 export interface MarkerProps {
   /**
    * 坐标
    */
-  coordinate: LatLng;
-
-  /**
-   * 标题，作为默认的选中弹出显示
-   */
-  title?: string;
-
-  /**
-   * 描述，显示在标题下方
-   */
-  description?: string;
-
-  /**
-   * 默认图标颜色
-   */
-  color?: string;
+  position: LatLng;
 
   /**
    * 自定义图标
    */
   icon?: () => React.ReactElement;
-
-  /**
-   * 自定义图片，对应原生图片名称
-   */
-  image?: string;
 
   /**
    * 透明度 [0, 1]
@@ -77,22 +51,7 @@ export interface MarkerProps {
   centerOffset?: Point;
 
   /**
-   * 是否选中，选中时将显示信息窗体，一个地图只能有一个正在选中的 marker
-   */
-  active?: boolean;
-
-  /**
-   * 是否禁用点击，默认不禁用
-   */
-  clickDisabled?: boolean;
-
-  /**
-   * 是否禁用弹出窗口，默认不禁用
-   */
-  infoWindowDisabled?: boolean;
-
-  /**
-   * 自定义 InfoWindow
+   * 自定义 View
    */
   children?: React.ReactNode;
 
@@ -114,76 +73,27 @@ export interface MarkerProps {
   /**
    * 拖放结束事件，最终坐标将传入参数
    */
-  onDragEnd?: (coordinate: LatLng) => void;
-
-  /**
-   * 信息窗体点击事件
-   *
-   * 注意，对于自定义信息窗体，该事件是无效的
-   */
-  onInfoWindowPress?: () => void;
+  onDragEnd?: (event: NativeSyntheticEvent<LatLng>) => void;
 }
 
-const events = ["onInfoWindowPress", "onPress", "onDrag", "onDragEnd", "onDragStart"];
+export default class extends Component<MarkerProps> {
+  name: string = "AMapMarker";
 
-export default class Marker extends Component<MarkerProps> {
-  nativeComponent: string = "AMapMarker";
-  icon?: React.ReactElement;
-  mounted = false;
-
-  componentDidMount() {
-    this.mounted = true;
-  }
-
-  componentWillUnmount() {
-    this.mounted = false;
-  }
   componentDidUpdate() {
-    if (this.icon && Platform.OS === "android") {
-      setTimeout(() => this.mounted && this.call("update"), 0);
+    if (this.props.children && Platform.OS === "android") {
+      setTimeout(() => this.invoke("update"), 0);
     }
   }
 
-  active() {
-    this.call("active");
-  }
-
-  update() {
-    this.call("update");
-  }
-
-  lockToScreen(x: number, y: number) {
-    this.call("lockToScreen", [x, y]);
-  }
-
-  renderCustomMarker(icon?: () => React.ReactElement) {
-    if (icon) {
-      this.icon = <View style={style.overlay}>{icon()}</View>;
-      return this.icon;
-    }
-    return null;
-  }
-
-  renderInfoWindow(view?: React.ReactNode) {
-    if (view) {
-      return <InfoWindow style={style.overlay}>{view}</InfoWindow>;
-    }
-    return null;
-  }
+  update = () => this.invoke("update");
 
   render() {
-    const props = {
-      ...this.props,
-      ...this.handlers(events),
-    };
-    return (
-      <AMapMarker {...props}>
-        {this.renderCustomMarker(this.props.icon)}
-        {this.renderInfoWindow(this.props.children)}
-      </AMapMarker>
-    );
+    const props = { ...this.props };
+    Reflect.set(props, "latLng", props.position);
+    // @ts-ignore
+    delete props.position;
+    return <AMapMarker {...props} />;
   }
 }
 
 const AMapMarker = requireNativeComponent<MarkerProps>("AMapMarker");
-const InfoWindow = requireNativeComponent<ViewProps>("AMapInfoWindow");

@@ -4,6 +4,8 @@ import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.uimanager.SimpleViewManager
 import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.annotations.ReactProp
+import qiuxiang.amap3d.getEventTypeConstants
+import qiuxiang.amap3d.toLatLngList
 import qiuxiang.amap3d.toPx
 
 @Suppress("unused")
@@ -12,22 +14,22 @@ internal class MapPolylineManager : SimpleViewManager<MapPolyline>() {
     return "AMapPolyline"
   }
 
-  override fun createViewInstance(reactContext: ThemedReactContext): MapPolyline {
-    return MapPolyline(reactContext)
+  override fun createViewInstance(context: ThemedReactContext): MapPolyline {
+    return MapPolyline(context)
   }
 
-  override fun getExportedCustomDirectEventTypeConstants(): Map<String, Any> {
-    return mapOf("onPress" to mapOf("registrationName" to "onPress"))
+  override fun getExportedCustomBubblingEventTypeConstants(): Map<String, Any> {
+    return getEventTypeConstants("onPress")
   }
 
-  @ReactProp(name = "coordinates")
-  fun setCoordinate(polyline: MapPolyline, coordinates: ReadableArray) {
-    polyline.setCoordinates(coordinates)
+  @ReactProp(name = "points")
+  fun setPoints(polyline: MapPolyline, points: ReadableArray) {
+    polyline.points = points.toLatLngList()
   }
 
   @ReactProp(name = "colors")
   fun setColors(polyline: MapPolyline, colors: ReadableArray) {
-    polyline.setColors(colors)
+    polyline.colors = (0 until colors.size()).map { colors.getInt(it) }
   }
 
   @ReactProp(name = "color", customType = "Color")
@@ -41,7 +43,7 @@ internal class MapPolylineManager : SimpleViewManager<MapPolyline>() {
   }
 
   @ReactProp(name = "zIndex")
-  fun setZIndez(polyline: MapPolyline, zIndex: Float) {
+  fun setIndex(polyline: MapPolyline, zIndex: Float) {
     polyline.zIndex = zIndex
   }
 

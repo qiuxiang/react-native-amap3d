@@ -18,7 +18,7 @@ export default {
   手势控制: Gestures,
   动画移动: Animated,
   地图事件: Events,
-  添加标记: Marker,
+  "添加标记，支持拖拽": Marker,
   绘制折线: Polyline,
   绘制多边形: Polygon,
   绘制圆形: Circle,

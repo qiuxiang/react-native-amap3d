@@ -1,19 +1,16 @@
-/**
- * Base component, contains some utils
- */
 import { PureComponent } from "react";
 import { findNodeHandle, UIManager } from "react-native";
 
 export default class Component<P> extends PureComponent<P> {
   /**
-   * Must be defined in subclass if need to call native component method
+   * 原生 View 名称，继承时必须指定
    */
   name = "";
 
   /**
-   * Call native method
+   * 调用原生方法
    */
-  call(name: string, params?: any[]) {
+  invoke(name: string, params?: any[]) {
     const handle = findNodeHandle(this);
     if (handle) {
       const command = UIManager.getViewManagerConfig(this.name).Commands[name];

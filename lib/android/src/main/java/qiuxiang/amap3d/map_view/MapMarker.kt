@@ -3,39 +3,17 @@ package qiuxiang.amap3d.map_view
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
-import android.os.Handler
 import android.view.View
 import com.amap.api.maps.AMap
 import com.amap.api.maps.model.*
-import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.views.view.ReactViewGroup
-import qiuxiang.amap3d.toPx
-import java.util.*
 
 class MapMarker(context: Context) : ReactViewGroup(context), MapOverlay {
-  companion object {
-    private val COLORS = mapOf(
-      "AZURE" to BitmapDescriptorFactory.HUE_AZURE,
-      "BLUE" to BitmapDescriptorFactory.HUE_BLUE,
-      "CYAN" to BitmapDescriptorFactory.HUE_CYAN,
-      "GREEN" to BitmapDescriptorFactory.HUE_GREEN,
-      "MAGENTA" to BitmapDescriptorFactory.HUE_MAGENTA,
-      "ORANGE" to BitmapDescriptorFactory.HUE_ORANGE,
-      "RED" to BitmapDescriptorFactory.HUE_RED,
-      "ROSE" to BitmapDescriptorFactory.HUE_ROSE,
-      "VIOLET" to BitmapDescriptorFactory.HUE_VIOLET,
-      "YELLOW" to BitmapDescriptorFactory.HUE_YELLOW
-    )
-  }
-
-  private var icon: View? = null
-  private var bitmapDescriptor: BitmapDescriptor? = null
-  private var anchorU: Float = 0.5f
-  private var anchorV: Float = 1f
-  var infoWindow: MapInfoWindow? = null
-
+  private var view: View? = null
+  private var icon: BitmapDescriptor? = null
+  private var anchorX: Float = 0.5f
+  private var anchorY: Float = 1f
   var marker: Marker? = null
-    private set
 
   var position: LatLng? = null
     set(value) {
@@ -47,18 +25,6 @@ class MapMarker(context: Context) : ReactViewGroup(context), MapOverlay {
     set(value) {
       field = value
       marker?.zIndex = value
-    }
-
-  var title = ""
-    set(value) {
-      field = value
-      marker?.title = value
-    }
-
-  var snippet = ""
-    set(value) {
-      field = value
-      marker?.snippet = value
     }
 
   var flat: Boolean = false
@@ -79,96 +45,44 @@ class MapMarker(context: Context) : ReactViewGroup(context), MapOverlay {
       marker?.isDraggable = value
     }
 
-  var clickDisabled: Boolean = false
-    set(value) {
-      field = value
-      marker?.isClickable = !value
-    }
-
-  var infoWindowDisabled: Boolean = false
-    set(value) {
-      field = value
-      marker?.isInfoWindowEnable = !value
-    }
-
-  var active: Boolean = false
-    set(value) {
-      field = value
-      if (value) {
-        marker?.showInfoWindow()
-      } else {
-        marker?.hideInfoWindow()
+  fun updateIcon() {
+    view?.let {
+      if (it.width != 0 && it.height != 0) {
+        val bitmap = Bitmap.createBitmap(it.width, it.height, Bitmap.Config.ARGB_8888)
+        it.draw(Canvas(bitmap))
+        icon = BitmapDescriptorFactory.fromBitmap(bitmap)
+        marker?.setIcon(icon)
       }
     }
+  }
+
+  fun setAnchor(x: Double, y: Double) {
+    anchorX = x.toFloat()
+    anchorY = y.toFloat()
+    marker?.setAnchor(anchorX, anchorY)
+  }
 
   override fun addView(child: View, index: Int) {
     super.addView(child, index)
-    icon = child
-    icon?.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ -> updateIcon() }
+    view = child
+    view?.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ -> updateIcon() }
   }
 
   override fun add(map: AMap) {
     marker = map.addMarker(
       MarkerOptions()
         .setFlat(flat)
-        .icon(bitmapDescriptor)
+        .icon(icon)
         .alpha(opacity)
         .draggable(draggable)
         .position(position)
-        .anchor(anchorU, anchorV)
-        .infoWindowEnable(!infoWindowDisabled)
-        .title(title)
-        .snippet(snippet)
+        .anchor(anchorX, anchorY)
         .zIndex(zIndex)
+        .infoWindowEnable(false)
     )
-
-    this.clickDisabled = clickDisabled
-    this.active = active
   }
 
   override fun remove() {
     marker?.destroy()
-  }
-
-  fun setIconColor(icon: String) {
-    bitmapDescriptor = COLORS[icon.uppercase(Locale.getDefault())]?.let {
-      BitmapDescriptorFactory.defaultMarker(it)
-    }
-    marker?.setIcon(bitmapDescriptor)
-  }
-
-  fun updateIcon() {
-    icon?.let {
-      if (it.width != 0 && it.height != 0) {
-        val bitmap = Bitmap.createBitmap(
-          it.width, it.height, Bitmap.Config.ARGB_8888
-        )
-        it.draw(Canvas(bitmap))
-        bitmapDescriptor = BitmapDescriptorFactory.fromBitmap(bitmap)
-        marker?.setIcon(bitmapDescriptor)
-      }
-    }
-  }
-
-  fun setImage(name: String) {
-    Handler().postDelayed({
-      val drawable = context.resources.getIdentifier(name, "drawable", context.packageName)
-      bitmapDescriptor = BitmapDescriptorFactory.fromResource(drawable)
-      marker?.setIcon(bitmapDescriptor)
-    }, 0)
-  }
-
-  fun setAnchor(x: Double, y: Double) {
-    anchorU = x.toFloat()
-    anchorV = y.toFloat()
-    marker?.setAnchor(anchorU, anchorV)
-  }
-
-  fun lockToScreen(args: ReadableArray?) {
-    if (args != null) {
-      val x = args.getDouble(0).toFloat().toPx()
-      val y = args.getDouble(1).toFloat().toPx()
-      marker?.setPositionByPixels(x, y)
-    }
   }
 }

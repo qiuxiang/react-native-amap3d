@@ -4,6 +4,7 @@ import {
   NativeSyntheticEvent,
   Platform,
   requireNativeComponent,
+  StyleSheet,
   ViewProps,
 } from "react-native";
 import Component from "./component";
@@ -120,13 +121,17 @@ export interface MapViewProps extends ViewProps {
   onLoad?: (event: NativeSyntheticEvent<void>) => void;
 }
 
+const name = "AMapView";
+const AMapView = requireNativeComponent<MapViewProps>(name);
+
 export default class extends Component<MapViewProps> {
+  name = name;
   ref?: (React.Component<MapViewProps> & NativeMethods) | null;
   state = { loaded: false };
-  name = name;
+  static defaultProps = { style: StyleSheet.absoluteFill };
 
   moveCamera(cameraPosition: CameraPosition, duration = 0) {
-    this.call("moveCamera", [cameraPosition, duration]);
+    this.invoke("moveCamera", [cameraPosition, duration]);
   }
 
   render() {
@@ -148,6 +153,3 @@ export default class extends Component<MapViewProps> {
     );
   }
 }
-
-const name = "AMapView";
-const AMapView = requireNativeComponent<MapViewProps>(name);

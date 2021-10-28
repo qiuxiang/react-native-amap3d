@@ -6,16 +6,18 @@ import com.amap.api.maps.AMap
 import com.amap.api.maps.model.LatLng
 import com.amap.api.maps.model.Polyline
 import com.amap.api.maps.model.PolylineOptions
-import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.views.view.ReactViewGroup
-import qiuxiang.amap3d.toLatLngList
 
 class MapPolyline(context: Context) : ReactViewGroup(context), MapOverlay {
   var polyline: Polyline? = null
-    private set
+  var gradient: Boolean = false
+  var colors: List<Int> = emptyList()
 
-  private var coordinates: ArrayList<LatLng> = ArrayList()
-  private var colors: ArrayList<Int> = ArrayList()
+  var points: List<LatLng> = emptyList()
+    set(value) {
+      field = value
+      polyline?.points = value
+    }
 
   var width: Float = 1f
     set(value) {
@@ -47,21 +49,10 @@ class MapPolyline(context: Context) : ReactViewGroup(context), MapOverlay {
       polyline?.isDottedLine = value
     }
 
-  var gradient: Boolean = false
-
-  fun setCoordinates(coordinates: ReadableArray) {
-    this.coordinates = coordinates.toLatLngList()
-    polyline?.points = this.coordinates
-  }
-
-  fun setColors(colors: ReadableArray) {
-    this.colors = ArrayList((0 until colors.size()).map { colors.getInt(it) })
-  }
-
   override fun add(map: AMap) {
     polyline = map.addPolyline(
       PolylineOptions()
-        .addAll(coordinates)
+        .addAll(points)
         .color(color)
         .colorValues(colors)
         .width(width)

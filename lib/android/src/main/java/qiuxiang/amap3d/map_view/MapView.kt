@@ -35,10 +35,7 @@ class MapView(context: ThemedReactContext) : TextureMapView(context) {
     map.setOnPolylineClickListener { polyline -> emit(polylineMap[polyline.id]?.id, "onPress") }
 
     map.setOnMarkerClickListener { marker ->
-      markerMap[marker.id]?.let {
-        it.active = true
-        emit(it.id, "onPress")
-      }
+      markerMap[marker.id]?.let { emit(it.id, "onPress") }
       true
     }
 

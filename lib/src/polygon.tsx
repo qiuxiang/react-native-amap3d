@@ -5,7 +5,7 @@ export interface Polygon {
   /**
    * 节点坐标
    */
-  coordinates: LatLng[];
+  points: LatLng[];
 
   /**
    * 边线宽度

@@ -1,12 +1,12 @@
 import * as React from "react";
-import { Platform, processColor, requireNativeComponent } from "react-native";
+import { ColorValue, Platform, processColor, requireNativeComponent } from "react-native";
 import { LatLng } from "./types";
 
 export interface PolylineProps {
   /**
    * 节点坐标
    */
-  coordinates: LatLng[];
+  points: LatLng[];
 
   /**
    * 线段宽度
@@ -16,7 +16,7 @@ export interface PolylineProps {
   /**
    * 线段颜色
    */
-  color?: string;
+  color?: ColorValue;
 
   /**
    * 层级
@@ -26,7 +26,7 @@ export interface PolylineProps {
   /**
    * 多段颜色
    */
-  colors: string[];
+  colors: ColorValue[];
 
   /**
    * 是否使用颜色渐变
@@ -41,7 +41,7 @@ export interface PolylineProps {
   /**
    * 是否绘制虚线
    */
-  dashed?: boolean;
+  dotted?: boolean;
 
   /**
    * 点击事件
@@ -49,17 +49,13 @@ export interface PolylineProps {
   onPress?: () => void;
 }
 
-export default class Polyline extends React.PureComponent<PolylineProps> {
+export default class extends React.PureComponent<PolylineProps> {
   static defaultProps = { colors: [] };
 
   render() {
     const props = {
       ...this.props,
-      ...Platform.select({
-        android: {
-          colors: this.props.colors.map(processColor),
-        },
-      }),
+      ...Platform.select({ android: { colors: this.props.colors.map(processColor) } }),
     };
     // @ts-ignore
     return <AMapPolyline {...props} />;

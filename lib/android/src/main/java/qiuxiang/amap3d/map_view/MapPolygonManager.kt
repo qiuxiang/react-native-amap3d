@@ -4,6 +4,7 @@ import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.uimanager.SimpleViewManager
 import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.annotations.ReactProp
+import qiuxiang.amap3d.toLatLngList
 import qiuxiang.amap3d.toPx
 
 @Suppress("unused")
@@ -16,9 +17,9 @@ internal class MapPolygonManager : SimpleViewManager<MapPolygon>() {
     return MapPolygon(reactContext)
   }
 
-  @ReactProp(name = "coordinates")
-  fun setCoordinate(polygon: MapPolygon, coordinates: ReadableArray) {
-    polygon.setCoordinates(coordinates)
+  @ReactProp(name = "points")
+  fun setPoints(polygon: MapPolygon, points: ReadableArray) {
+    polygon.points = points.toLatLngList()
   }
 
   @ReactProp(name = "fillColor", customType = "Color")
@@ -37,7 +38,7 @@ internal class MapPolygonManager : SimpleViewManager<MapPolygon>() {
   }
 
   @ReactProp(name = "zIndex")
-  fun setZindex(polygon: MapPolygon, zIndex: Float) {
+  fun setIndex(polygon: MapPolygon, zIndex: Float) {
     polygon.zIndex = zIndex
   }
 }

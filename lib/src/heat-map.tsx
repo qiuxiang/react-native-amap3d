@@ -5,7 +5,7 @@ export interface HeatMapProps {
   /**
    * 节点坐标
    */
-  coordinates: LatLng[];
+  data: LatLng[];
 
   /**
    * 半径（米）

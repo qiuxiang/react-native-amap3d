@@ -1,8 +1,7 @@
 import * as React from "react";
-import { StyleSheet } from "react-native";
-import { MapView } from "react-native-amap3d";
+import { MapView, Polygon } from "react-native-amap3d";
 
-const coordinates = [
+const points = [
   {
     latitude: 39.806901,
     longitude: 116.397972,
@@ -18,12 +17,12 @@ const coordinates = [
 ];
 
 export default () => (
-  <MapView style={StyleSheet.absoluteFill}>
-    <MapView.Polygon
+  <MapView initialCameraPosition={{ zoom: 11 }}>
+    <Polygon
       strokeWidth={5}
       strokeColor="rgba(0, 0, 255, 0.5)"
       fillColor="rgba(255, 0, 0, 0.5)"
-      coordinates={coordinates}
+      points={points}
     />
   </MapView>
 );
