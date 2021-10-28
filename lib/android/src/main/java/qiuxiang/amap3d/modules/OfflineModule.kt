@@ -1,4 +1,4 @@
-package qiuxiang.amap3d
+package qiuxiang.amap3d.modules
 
 import com.amap.api.maps.offlinemap.OfflineMapCity
 import com.amap.api.maps.offlinemap.OfflineMapManager

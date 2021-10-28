@@ -7,3 +7,5 @@ export { default as Offline } from "./offline";
 export { default as Polygon } from "./polygon";
 export { default as Polyline } from "./polyline";
 export * from "./types";
+export { AMapSdk };
+import * as AMapSdk from "./sdk";

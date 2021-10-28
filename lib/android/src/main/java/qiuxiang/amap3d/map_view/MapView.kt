@@ -39,7 +39,6 @@ class MapView(context: ThemedReactContext) : TextureMapView(context) {
       true
     }
 
-
     map.setOnMarkerDragListener(object : AMap.OnMarkerDragListener {
       override fun onMarkerDragStart(marker: Marker) {
         emit(markerMap[marker.id]?.id, "onDragStart")

@@ -22,21 +22,6 @@ export interface LatLng {
 }
 
 /**
- * 区域
- */
-export interface Region extends LatLng {
-  /**
-   * 纬度范围
-   */
-  latitudeDelta: number;
-
-  /**
-   * 经度范围
-   */
-  longitudeDelta: number;
-}
-
-/**
  * 地图状态
  */
 export interface CameraPosition {
@@ -59,11 +44,6 @@ export interface CameraPosition {
    * 倾斜角度
    */
   tilt?: number;
-
-  /**
-   * 显示区域
-   */
-  region?: Region;
 }
 
 /**
