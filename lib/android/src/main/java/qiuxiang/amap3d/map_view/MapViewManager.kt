@@ -4,17 +4,16 @@ import android.view.View
 import com.amap.api.maps.CameraUpdateFactory
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.ReadableMap
-import com.facebook.react.common.MapBuilder
 import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.ViewGroupManager
 import com.facebook.react.uimanager.annotations.ReactProp
 import qiuxiang.amap3d.getEventTypeConstants
 import qiuxiang.amap3d.toLatLng
 
-@Suppress("EnumEntryName")
-enum class Commands {
-  moveCamera
-}
+val commands = mapOf(
+  "moveCamera" to { view: MapView, args: ReadableArray? -> view.moveCamera(args) },
+  "call" to { view: MapView, args: ReadableArray? -> view.call(args) },
+)
 
 @Suppress("unused")
 internal class MapViewManager : ViewGroupManager<MapView>() {
@@ -32,13 +31,11 @@ internal class MapViewManager : ViewGroupManager<MapView>() {
   }
 
   override fun getCommandsMap(): Map<String, Int> {
-    return Commands.values().map { it.name to it.ordinal }.toMap()
+    return commands.keys.mapIndexed { index, key -> key to index }.toMap()
   }
 
   override fun receiveCommand(view: MapView, command: Int, args: ReadableArray?) {
-    when (command) {
-      Commands.moveCamera.ordinal -> view.moveCamera(args)
-    }
+    commands.values.toList()[command](view, args)
   }
 
   override fun addView(mapView: MapView, child: View, index: Int) {
@@ -59,6 +56,7 @@ internal class MapViewManager : ViewGroupManager<MapView>() {
       "onLongPress",
       "onCameraMove",
       "onCameraIdle",
+      "callback",
     )
   }
 

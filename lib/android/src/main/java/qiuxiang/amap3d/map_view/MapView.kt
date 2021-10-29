@@ -15,6 +15,7 @@ import com.facebook.react.uimanager.ThemedReactContext
 import qiuxiang.amap3d.getFloat
 import qiuxiang.amap3d.toJson
 import qiuxiang.amap3d.toLatLng
+import qiuxiang.amap3d.toPoint
 
 @SuppressLint("ViewConstructor")
 class MapView(context: ThemedReactContext) : TextureMapView(context) {
@@ -130,5 +131,24 @@ class MapView(context: ThemedReactContext) : TextureMapView(context) {
         pushInt(0)
       })
     }
+  }
+
+  fun call(args: ReadableArray?) {
+    val id = args?.getDouble(0)!!
+    when (args.getString(1)) {
+      "getLatLng" -> callback(
+        id,
+        map.projection.fromScreenLocation(args.getMap(2).toPoint()).toJson()
+      )
+    }
+  }
+
+  private fun callback(id: Double, data: Any) {
+    emit(this.id, "callback", Arguments.createMap().apply {
+      putDouble("id", id)
+      when (data) {
+        is WritableMap -> putMap("data", data)
+      }
+    })
   }
 }

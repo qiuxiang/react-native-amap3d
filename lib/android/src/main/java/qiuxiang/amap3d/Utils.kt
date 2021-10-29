@@ -2,6 +2,7 @@ package qiuxiang.amap3d
 
 import android.content.res.Resources
 import android.graphics.Bitmap
+import android.graphics.Point
 import android.view.View
 import com.amap.api.maps.model.*
 import com.facebook.drawee.backends.pipeline.Fresco
@@ -15,6 +16,10 @@ import com.facebook.react.views.imagehelper.ImageSource
 
 fun Float.toPx(): Int {
   return (this * Resources.getSystem().displayMetrics.density).toInt()
+}
+
+fun ReadableMap.toPoint(): Point {
+  return Point(getDouble("x").toFloat().toPx(), getDouble("y").toFloat().toPx())
 }
 
 fun ReadableMap.toLatLng(): LatLng {

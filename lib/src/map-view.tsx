@@ -8,7 +8,7 @@ import {
   ViewProps,
 } from "react-native";
 import Component from "./component";
-import { CameraPosition, LatLng, MapType } from "./types";
+import { CameraPosition, LatLng, MapType, Point } from "./types";
 
 export interface MapViewProps extends ViewProps {
   /**
@@ -125,13 +125,29 @@ const name = "AMapView";
 const AMapView = requireNativeComponent<MapViewProps>(name);
 
 export default class extends Component<MapViewProps> {
+  static defaultProps = { style: StyleSheet.absoluteFill };
+
   name = name;
   ref?: (React.Component<MapViewProps> & NativeMethods) | null;
   state = { loaded: false };
-  static defaultProps = { style: StyleSheet.absoluteFill };
+  callbackMap: { [key: number]: (data: any) => void } = {};
 
   moveCamera(cameraPosition: CameraPosition, duration = 0) {
     this.invoke("moveCamera", [cameraPosition, duration]);
+  }
+
+  getLatLng(point: Point): Promise<LatLng> {
+    return this.call("getLatLng", point);
+  }
+
+  callback = ({ nativeEvent }: NativeSyntheticEvent<{ id: number; data: any }>) => {
+    this.callbackMap[nativeEvent.id]?.call(this, nativeEvent.data);
+  };
+
+  call(name: string, args: any): Promise<any> {
+    const id = Math.random();
+    this.invoke("call", [id, name, args]);
+    return new Promise((resolve) => (this.callbackMap[id] = resolve));
   }
 
   render() {
@@ -144,6 +160,8 @@ export default class extends Component<MapViewProps> {
         {...this.props}
         ref={(ref) => (this.ref = ref)}
         style={style}
+        // @ts-ignore
+        callback={this.callback}
         onLoad={(event) => {
           // 部分控件不显示的问题在重新 layout 之后会恢复正常。
           this.setState({ loaded: true });
