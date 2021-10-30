@@ -14,8 +14,8 @@ import Polyline from "./polyline";
 
 export default {
   地图模式切换: MapTypes,
-  "图层：3D 建筑、路况、室内地图": Layers,
-  "控件：指南针、比例尺、缩放按钮、定位按钮": Controls,
+  "3D 建筑、路况、室内地图": Layers,
+  "指南针、比例尺、缩放按钮、定位按钮": Controls,
   手势控制: Gestures,
   动画移动: Animated,
   地图事件: Events,

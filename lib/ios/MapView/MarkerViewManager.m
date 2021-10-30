@@ -1,5 +1,4 @@
 #import <React/RCTUIManager.h>
-#import "AMapMarker.h"
 
 #pragma ide diagnostic ignored "OCUnusedClassInspection"
 
@@ -12,7 +11,7 @@
 RCT_EXPORT_MODULE()
 
 - (UIView *)view {
-    return [AMapMarker new];
+    return [UIView new];
 }
 
 RCT_EXPORT_VIEW_PROPERTY(coordinate, CLLocationCoordinate2D)
@@ -35,15 +34,13 @@ RCT_EXPORT_VIEW_PROPERTY(onDragEnd, RCTBubblingEventBlock)
 
 RCT_EXPORT_METHOD(lockToScreen:(nonnull NSNumber *)reactTag x:(int)x y:(int)y) {
     [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, UIView *> *viewRegistry) {
-        AMapMarker *marker = (AMapMarker *) viewRegistry[reactTag];
-        [marker lockToScreen:x y:y];
+
     }];
 }
 
 RCT_EXPORT_METHOD(active:(nonnull NSNumber *)reactTag) {
     [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, UIView *> *viewRegistry) {
-        AMapMarker *marker = (AMapMarker *) viewRegistry[reactTag];
-        marker.active = YES;
+
     }];
 }
 

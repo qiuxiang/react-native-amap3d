@@ -3,7 +3,6 @@ import {
   FlatList,
   ListRenderItemInfo,
   NativeSyntheticEvent,
-  PermissionsAndroid,
   Platform,
   StyleSheet,
   Text,
@@ -13,13 +12,6 @@ import { MapView } from "react-native-amap3d";
 
 export default class extends React.Component {
   state = { logs: [] };
-
-  async componentDidMount() {
-    await PermissionsAndroid.requestMultiple([
-      PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-      PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION,
-    ]);
-  }
 
   log(event: string, data: any) {
     console.log(data);

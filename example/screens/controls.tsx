@@ -11,10 +11,6 @@ export default class extends React.Component {
     myLocationButtonEnabled: false,
   };
 
-  componentDidMount() {
-    PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION);
-  }
-
   render() {
     return (
       <View style={StyleSheet.absoluteFill}>

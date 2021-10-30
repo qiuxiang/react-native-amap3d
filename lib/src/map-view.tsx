@@ -152,7 +152,7 @@ export default class extends Component<MapViewProps> {
 
   render() {
     let { style, onLoad } = this.props;
-    if (Platform.OS === "android" && !this.state.loaded) {
+    if (!this.state.loaded) {
       style = [style, { width: 1, height: 1 }];
     }
     return (
@@ -163,7 +163,8 @@ export default class extends Component<MapViewProps> {
         // @ts-ignore
         callback={this.callback}
         onLoad={(event) => {
-          // 部分控件不显示的问题在重新 layout 之后会恢复正常。
+          // android 地图部分控件不显示的问题在重新 layout 之后会恢复正常。
+          // 同时也能修复 ios 地图偶尔出现的 layout 异常
           this.setState({ loaded: true });
           onLoad?.call(this, event);
         }}

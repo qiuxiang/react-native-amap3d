@@ -8,10 +8,8 @@ export default StyleSheet.create({
   controls: {
     height: 72,
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "space-evenly",
     elevation: 8,
-    paddingLeft: 20,
-    paddingRight: 20,
     ...Platform.select({
       ios: {
         position: "absolute",

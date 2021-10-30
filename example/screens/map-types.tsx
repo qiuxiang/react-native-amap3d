@@ -2,7 +2,6 @@ import { Picker } from "@react-native-picker/picker";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import * as React from "react";
 import { useEffect } from "react";
-import { StyleSheet } from "react-native";
 import { MapType, MapView } from "react-native-amap3d";
 import { NavigationProps } from "../types";
 
@@ -25,5 +24,5 @@ export default () => {
     </Picker>
   );
   useEffect(() => navigation.setOptions({ headerRight }));
-  return <MapView mapType={mapType} style={StyleSheet.absoluteFill} />;
+  return <MapView mapType={mapType} />;
 };

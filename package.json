@@ -18,6 +18,7 @@
     "lib/ios",
     "react-native.config.js"
   ],
+  "homepage": "https://github.com/qiuxiang/react-native-amap3d",
   "repository": {
     "type": "git",
     "url": "https://github.com/qiuxiang/react-native-amap3d"

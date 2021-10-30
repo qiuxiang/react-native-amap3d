@@ -8,7 +8,7 @@ export enum OfflineState {
   Downloading = "downloading",
   Downloaded = "downloaded",
   Expired = "expired",
-  Unzip = "unzip"
+  Unzip = "unzip",
 }
 
 export interface City {

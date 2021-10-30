@@ -1,20 +1,20 @@
-require 'json'
+require "json"
 
-package = JSON.parse(File.read(File.join(__dir__, '../../package.json')))
+package = JSON.parse(File.read(File.join(__dir__, "../../package.json")))
 
 Pod::Spec.new do |s|
-  s.name         = package['name']
-  s.version      = package['version']
-  s.summary      = package['description']
+  s.name         = "react-native-amap3d"
+  s.version      = package["version"]
+  s.summary      = package["description"]
+  s.homepage     = package["homepage"]
+  s.license      = package["license"]
+  s.authors      = package["author"]
 
-  s.authors      = { "Qiu Xiang" => "i@7c00.cc" }
-  s.homepage     = package['repository']['url']
-  s.license      = package['license']
-  s.platform     = :ios, "9.0"
+  s.platforms    = { :ios => "10.0" }
+  s.source       = { :git => "https://github.com/qiuxiang/react-native-amap3d.git", :tag => "#{s.version}" }
 
-  s.source       = { :git => package['repository']['url'] }
-  s.source_files = '**/*.{h,m}'
+  s.source_files = "**/*.{h,m,mm,swift}"
 
-  s.dependency 'React'
+  s.dependency "React-Core"
   s.dependency 'AMap3DMap', "~> 8.0.1"
 end
