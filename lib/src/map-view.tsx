@@ -2,13 +2,12 @@ import * as React from "react";
 import {
   NativeMethods,
   NativeSyntheticEvent,
-  Platform,
   requireNativeComponent,
   StyleSheet,
   ViewProps,
 } from "react-native";
 import Component from "./component";
-import { CameraPosition, LatLng, MapType, Point } from "./types";
+import { CameraPosition, LatLng, MapPoi, MapType, Point } from "./types";
 
 export interface MapViewProps extends ViewProps {
   /**
@@ -103,17 +102,22 @@ export interface MapViewProps extends ViewProps {
   /**
    * 点击事件
    */
-  onPress?: (latLng: LatLng) => void;
+  onPress?: (event: NativeSyntheticEvent<LatLng>) => void;
+
+  /**
+   * 标注点击事件
+   */
+  onPressPoi?: (event: NativeSyntheticEvent<MapPoi>) => void;
 
   /**
    * 长按事件
    */
-  onLongPress?: (latLng: LatLng) => void;
+  onLongPress?: (event: NativeSyntheticEvent<LatLng>) => void;
 
   /**
    * 地图状态改变事件，在动画结束后触发
    */
-  onCameraIdle?: (position: CameraPosition) => void;
+  onCameraIdle?: (event: NativeSyntheticEvent<{ cameraPosition: CameraPosition }>) => void;
 
   /**
    * 地图初始化完成事件
@@ -132,16 +136,23 @@ export default class extends Component<MapViewProps> {
   state = { loaded: false };
   callbackMap: { [key: number]: (data: any) => void } = {};
 
+  /**
+   * 移动视角
+   */
   moveCamera(cameraPosition: CameraPosition, duration = 0) {
     this.invoke("moveCamera", [cameraPosition, duration]);
   }
 
+  /**
+   * 点坐标转地理坐标，主要用于地图选点
+   */
   getLatLng(point: Point): Promise<LatLng> {
     return this.call("getLatLng", point);
   }
 
   callback = ({ nativeEvent }: NativeSyntheticEvent<{ id: number; data: any }>) => {
     this.callbackMap[nativeEvent.id]?.call(this, nativeEvent.data);
+    delete this.callbackMap[nativeEvent.id];
   };
 
   call(name: string, args: any): Promise<any> {

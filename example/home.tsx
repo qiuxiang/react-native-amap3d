@@ -6,15 +6,15 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  TouchableHighlight,
   TouchableNativeFeedback,
+  TouchableOpacity,
   View,
 } from "react-native";
 import { AMapSdk } from "react-native-amap3d";
 import screens from "./screens";
 import { NavigationProps, ScreenName } from "./types";
 
-let Touchable: Constructor<any> = TouchableHighlight;
+let Touchable: Constructor<any> = TouchableOpacity;
 if (Platform.OS === "android") {
   Touchable = TouchableNativeFeedback;
 }

@@ -1,12 +1,10 @@
-import UIKit
-
 @objc(AMapViewManager)
 class AMapViewManager: RCTViewManager {
   override class func requiresMainQueueSetup() -> Bool {
     false
   }
 
-  override func view() -> MapView {
+  override func view() -> UIView {
     let view = MapView()
     view.delegate = view
     return view
@@ -27,6 +25,7 @@ class AMapViewManager: RCTViewManager {
 
 class MapView: MAMapView, MAMapViewDelegate {
   var initialized = false
+  var overlayMap: [MABaseOverlay: Overlay] = [:]
 
   @objc var onLoad: RCTDirectEventBlock = { _ in
   }
@@ -99,6 +98,27 @@ class MapView: MAMapView, MAMapViewDelegate {
     setMapStatus(status, animated: true, duration: Double(duration) / 1000)
   }
 
+  override func didAddSubview(_ subview: UIView) {
+    if let overlay = (subview as? Overlay)?.overlay {
+      overlayMap[overlay] = subview as? Overlay
+      add(overlay)
+    }
+  }
+
+  override func removeReactSubview(_ subview: UIView!) {
+    if let overlay = (subview as? Overlay)?.overlay {
+      overlayMap.removeValue(forKey: overlay)
+      remove(overlay)
+    }
+  }
+
+  func mapView(_ mapView: MAMapView, rendererFor overlay: MAOverlay) -> MAOverlayRenderer? {
+    if let key = overlay as? MABaseOverlay {
+      return overlayMap[key]?.renderer()
+    }
+    return nil
+  }
+
   func mapInitComplete(_ mapView: MAMapView!) {
     onLoad(nil)
   }
@@ -109,7 +129,7 @@ class MapView: MAMapView, MAMapViewDelegate {
 
   func mapView(_ mapView: MAMapView!, didTouchPois pois: [Any]!) {
     let poi = pois[0] as! MATouchPoi
-    onPressPoi(["name": poi.name!, "id": poi.uid!])
+    onPressPoi(["name": poi.name!, "id": poi.uid!, "position": poi.coordinate.json])
   }
 
   func mapView(_ mapView: MAMapView!, didLongPressedAt coordinate: CLLocationCoordinate2D) {

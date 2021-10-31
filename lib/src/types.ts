@@ -22,6 +22,26 @@ export interface LatLng {
 }
 
 /**
+ * 地图标注点
+ */
+export interface MapPoi {
+  /**
+   * 标注点 ID
+   */
+  id: string;
+
+  /**
+   * 标注点名称
+   */
+  name: string;
+
+  /**
+   * 标注点坐标
+   */
+  position: LatLng;
+}
+
+/**
  * 地图状态
  */
 export interface CameraPosition {
