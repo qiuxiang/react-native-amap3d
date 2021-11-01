@@ -16,6 +16,8 @@ class HeatMap: UIView, Overlay {
     return renderer!
   }
 
+  @objc func setRadius(_ radius: Int) { overlay.radius = radius }
+  @objc func setOpacity(_ opacity: Double) { overlay.opacity = opacity }
   @objc func setData(_ data: NSArray) {
     overlay.data = data.map { it -> MAHeatMapNode in
       let item = MAHeatMapNode()
@@ -23,13 +25,5 @@ class HeatMap: UIView, Overlay {
       item.intensity = 1
       return item
     }
-  }
-
-  @objc func setRadius(_ radius: Int) {
-    overlay.radius = radius
-  }
-
-  @objc func setOpacity(_ opacity: Double) {
-    overlay.opacity = opacity
   }
 }
