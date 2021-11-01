@@ -12,19 +12,12 @@ class AMapMultiPointManager: RCTViewManager {
 }
 
 class MultiPoint: UIView, Overlay, MAMultiPointOverlayRendererDelegate {
-  var imageLoader: RCTImageLoader? = nil
-  var overlay: MABaseOverlay? = nil
+  var imageLoader: RCTImageLoader?
+  var overlay: MAMultiPointOverlay?
   var renderer: MAMultiPointOverlayRenderer?
-  var icon: UIImage? = nil
+  var icon: UIImage?
 
-  func getRenderer() -> MAOverlayRenderer {
-    if (renderer == nil) {
-      renderer = MAMultiPointOverlayRenderer(multiPointOverlay: (overlay as! MAMultiPointOverlay))
-      renderer?.icon = icon
-      renderer?.delegate = self
-    }
-    return renderer!
-  }
+  @objc var onPress: RCTDirectEventBlock = { _ in }
 
   @objc func setIcon(_ icon: NSDictionary) {
     imageLoader?.loadImage(with: RCTConvert.nsurlRequest(icon), callback: { _, image in
@@ -40,10 +33,20 @@ class MultiPoint: UIView, Overlay, MAMultiPointOverlayRendererDelegate {
     })
   }
 
-  func multiPointOverlayRenderer(_ renderer: MAMultiPointOverlayRenderer!, didItemTapped item: MAMultiPointItem!) {
-    onPress(["index": (overlay as! MAMultiPointOverlay).items.firstIndex(of: item)!])
+  func getOverlay() -> MABaseOverlay {
+    overlay!
   }
 
-  @objc var onPress: RCTDirectEventBlock = { _ in
+  func getRenderer() -> MAOverlayRenderer {
+    if renderer == nil {
+      renderer = MAMultiPointOverlayRenderer(multiPointOverlay: overlay)
+      renderer?.icon = icon
+      renderer?.delegate = self
+    }
+    return renderer!
+  }
+
+  func multiPointOverlayRenderer(_: MAMultiPointOverlayRenderer!, didItemTapped item: MAMultiPointItem!) {
+    onPress(["index": (overlay?.items.firstIndex(of: item))!])
   }
 }

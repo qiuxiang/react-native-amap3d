@@ -4,12 +4,7 @@ class Offline: NSObject {
     false
   }
 
-  @objc func removeListeners(_ name: Int) {
-  }
-
-  @objc func addListener(_ eventType: String) {
-  }
-
-  @objc func download(_ name: String) {
-  }
+  @objc func removeListeners(_: Int) {}
+  @objc func addListener(_: String) {}
+  @objc func download(_: String) {}
 }

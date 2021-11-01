@@ -27,16 +27,11 @@ class MapView: MAMapView, MAMapViewDelegate {
   var initialized = false
   var overlayMap: [MABaseOverlay: Overlay] = [:]
 
-  @objc var onLoad: RCTDirectEventBlock = { _ in
-  }
-  @objc var onCameraIdle: RCTDirectEventBlock = { _ in
-  }
-  @objc var onPress: RCTDirectEventBlock = { _ in
-  }
-  @objc var onPressPoi: RCTDirectEventBlock = { _ in
-  }
-  @objc var onLongPress: RCTDirectEventBlock = { _ in
-  }
+  @objc var onLoad: RCTDirectEventBlock = { _ in }
+  @objc var onCameraIdle: RCTDirectEventBlock = { _ in }
+  @objc var onPress: RCTDirectEventBlock = { _ in }
+  @objc var onPressPoi: RCTDirectEventBlock = { _ in }
+  @objc var onLongPress: RCTDirectEventBlock = { _ in }
 
   @objc func setBuildingsEnabled(_ enabled: Bool) {
     isShowsBuildings = enabled
@@ -75,7 +70,7 @@ class MapView: MAMapView, MAMapViewDelegate {
   }
 
   @objc func setInitialCameraPosition(_ json: NSDictionary) {
-    if (!initialized) {
+    if !initialized {
       initialized = true
       moveCamera(position: json)
     }
@@ -83,60 +78,52 @@ class MapView: MAMapView, MAMapViewDelegate {
 
   func moveCamera(position: NSDictionary, duration: Int = 0) {
     let status = MAMapStatus()
-    if let it = position["zoom"] as? Float {
-      status.zoomLevel = CGFloat(it)
-    }
-    if let it = position["tilt"] as? Float {
-      status.cameraDegree = CGFloat(it)
-    }
-    if let it = position["bearing"] as? Float {
-      status.rotationDegree = CGFloat(it)
-    }
-    if let it = position["target"] as? NSDictionary {
-      status.centerCoordinate = it.coordinate
-    }
+    if let it = position["zoom"] as? Float { status.zoomLevel = CGFloat(it) }
+    if let it = position["tilt"] as? Float { status.cameraDegree = CGFloat(it) }
+    if let it = position["bearing"] as? Float { status.rotationDegree = CGFloat(it) }
+    if let it = position["target"] as? NSDictionary { status.centerCoordinate = it.coordinate }
     setMapStatus(status, animated: true, duration: Double(duration) / 1000)
   }
 
   override func didAddSubview(_ subview: UIView) {
-    if let overlay = (subview as? Overlay)?.overlay {
+    if let overlay = (subview as? Overlay)?.getOverlay() {
       overlayMap[overlay] = subview as? Overlay
       add(overlay)
     }
   }
 
   override func removeReactSubview(_ subview: UIView!) {
-    if let overlay = (subview as? Overlay)?.overlay {
+    if let overlay = (subview as? Overlay)?.getOverlay() {
       overlayMap.removeValue(forKey: overlay)
       remove(overlay)
     }
   }
 
-  func mapView(_ mapView: MAMapView, rendererFor overlay: MAOverlay) -> MAOverlayRenderer? {
+  func mapView(_: MAMapView, rendererFor overlay: MAOverlay) -> MAOverlayRenderer? {
     if let key = overlay as? MABaseOverlay {
       return overlayMap[key]?.getRenderer()
     }
     return nil
   }
 
-  func mapInitComplete(_ mapView: MAMapView!) {
+  func mapInitComplete(_: MAMapView!) {
     onLoad(nil)
   }
 
-  func mapView(_ mapView: MAMapView!, didSingleTappedAt coordinate: CLLocationCoordinate2D) {
+  func mapView(_: MAMapView!, didSingleTappedAt coordinate: CLLocationCoordinate2D) {
     onPress(coordinate.json)
   }
 
-  func mapView(_ mapView: MAMapView!, didTouchPois pois: [Any]!) {
+  func mapView(_: MAMapView!, didTouchPois pois: [Any]!) {
     let poi = pois[0] as! MATouchPoi
     onPressPoi(["name": poi.name!, "id": poi.uid!, "position": poi.coordinate.json])
   }
 
-  func mapView(_ mapView: MAMapView!, didLongPressedAt coordinate: CLLocationCoordinate2D) {
+  func mapView(_: MAMapView!, didLongPressedAt coordinate: CLLocationCoordinate2D) {
     onLongPress(coordinate.json)
   }
 
-  func mapView(_ mapView: MAMapView!, regionDidChangeAnimated animated: Bool) {
+  func mapView(_: MAMapView!, regionDidChangeAnimated _: Bool) {
     onCameraIdle([
       "cameraPosition": [
         "target": centerCoordinate.json,

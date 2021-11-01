@@ -1,4 +1,4 @@
 protocol Overlay: UIView {
-  var overlay: MABaseOverlay? { get }
+  func getOverlay() -> MABaseOverlay
   func getRenderer() -> MAOverlayRenderer
 }
