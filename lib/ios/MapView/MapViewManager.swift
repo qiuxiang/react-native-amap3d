@@ -114,7 +114,7 @@ class MapView: MAMapView, MAMapViewDelegate {
 
   func mapView(_ mapView: MAMapView, rendererFor overlay: MAOverlay) -> MAOverlayRenderer? {
     if let key = overlay as? MABaseOverlay {
-      return overlayMap[key]?.renderer()
+      return overlayMap[key]?.getRenderer()
     }
     return nil
   }

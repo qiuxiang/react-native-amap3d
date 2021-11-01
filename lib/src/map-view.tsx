@@ -126,7 +126,7 @@ export interface MapViewProps extends ViewProps {
 }
 
 const name = "AMapView";
-const AMapView = requireNativeComponent<MapViewProps>(name);
+const NativeMapView = requireNativeComponent<MapViewProps>(name);
 
 export default class extends Component<MapViewProps> {
   static defaultProps = { style: StyleSheet.absoluteFill };
@@ -167,7 +167,7 @@ export default class extends Component<MapViewProps> {
       style = [style, { width: 1, height: 1 }];
     }
     return (
-      <AMapView
+      <NativeMapView
         {...this.props}
         ref={(ref) => (this.ref = ref)}
         style={style}

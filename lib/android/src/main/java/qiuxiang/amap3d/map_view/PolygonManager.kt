@@ -8,37 +8,37 @@ import qiuxiang.amap3d.toLatLngList
 import qiuxiang.amap3d.toPx
 
 @Suppress("unused")
-internal class MapPolygonManager : SimpleViewManager<MapPolygon>() {
+internal class PolygonManager : SimpleViewManager<Polygon>() {
   override fun getName(): String {
     return "AMapPolygon"
   }
 
-  override fun createViewInstance(reactContext: ThemedReactContext): MapPolygon {
-    return MapPolygon(reactContext)
+  override fun createViewInstance(reactContext: ThemedReactContext): Polygon {
+    return Polygon(reactContext)
   }
 
   @ReactProp(name = "points")
-  fun setPoints(polygon: MapPolygon, points: ReadableArray) {
+  fun setPoints(polygon: Polygon, points: ReadableArray) {
     polygon.points = points.toLatLngList()
   }
 
   @ReactProp(name = "fillColor", customType = "Color")
-  fun setFillColor(polygon: MapPolygon, fillColor: Int) {
+  fun setFillColor(polygon: Polygon, fillColor: Int) {
     polygon.fillColor = fillColor
   }
 
   @ReactProp(name = "strokeColor", customType = "Color")
-  fun setStrokeColor(polygon: MapPolygon, strokeColor: Int) {
+  fun setStrokeColor(polygon: Polygon, strokeColor: Int) {
     polygon.strokeColor = strokeColor
   }
 
   @ReactProp(name = "strokeWidth")
-  fun setStrokeWidth(polygon: MapPolygon, strokeWidth: Float) {
+  fun setStrokeWidth(polygon: Polygon, strokeWidth: Float) {
     polygon.strokeWidth = strokeWidth.toPx().toFloat()
   }
 
   @ReactProp(name = "zIndex")
-  fun setIndex(polygon: MapPolygon, zIndex: Float) {
+  fun setIndex(polygon: Polygon, zIndex: Float) {
     polygon.zIndex = zIndex
   }
 }

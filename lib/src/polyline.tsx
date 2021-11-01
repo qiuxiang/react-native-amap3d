@@ -58,8 +58,8 @@ export default class extends React.PureComponent<PolylineProps> {
       ...Platform.select({ android: { colors: this.props.colors.map(processColor) } }),
     };
     // @ts-ignore
-    return <AMapPolyline {...props} />;
+    return <NativePolyline {...props} />;
   }
 }
 
-const AMapPolyline = requireNativeComponent<PolylineProps>("AMapPolyline");
+const NativePolyline = requireNativeComponent<PolylineProps>("AMapPolyline");

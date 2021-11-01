@@ -14,29 +14,28 @@ class AMapMultiPointManager: RCTViewManager {
 class MultiPoint: UIView, Overlay, MAMultiPointOverlayRendererDelegate {
   var imageLoader: RCTImageLoader? = nil
   var overlay: MABaseOverlay? = nil
-  var multiPointRenderer: MAMultiPointOverlayRenderer?
+  var renderer: MAMultiPointOverlayRenderer?
   var icon: UIImage? = nil
 
-  func renderer() -> MAOverlayRenderer {
-    if (multiPointRenderer == nil) {
-      multiPointRenderer = MAMultiPointOverlayRenderer(multiPointOverlay: (overlay as! MAMultiPointOverlay))
-      multiPointRenderer?.icon = icon
-      multiPointRenderer?.delegate = self
+  func getRenderer() -> MAOverlayRenderer {
+    if (renderer == nil) {
+      renderer = MAMultiPointOverlayRenderer(multiPointOverlay: (overlay as! MAMultiPointOverlay))
+      renderer?.icon = icon
+      renderer?.delegate = self
     }
-    return multiPointRenderer!
+    return renderer!
   }
 
   @objc func setIcon(_ icon: NSDictionary) {
     imageLoader?.loadImage(with: RCTConvert.nsurlRequest(icon), callback: { _, image in
-      self.multiPointRenderer?.icon = image
+      self.renderer?.icon = image
     })
   }
 
   @objc func setItems(_ items: NSArray) {
-    overlay = MAMultiPointOverlay(multiPointItems: items.map { i -> MAMultiPointItem in
-      let data = i as! NSDictionary
+    overlay = MAMultiPointOverlay(multiPointItems: items.map { it -> MAMultiPointItem in
       let item = MAMultiPointItem()
-      item.coordinate = data.coordinate
+      item.coordinate = (it as! NSDictionary).coordinate
       return item
     })
   }

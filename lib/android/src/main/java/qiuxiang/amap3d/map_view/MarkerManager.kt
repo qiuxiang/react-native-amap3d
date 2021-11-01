@@ -10,16 +10,16 @@ import qiuxiang.amap3d.getEventTypeConstants
 import qiuxiang.amap3d.toLatLng
 
 @Suppress("unused")
-internal class MapMarkerManager : ViewGroupManager<MapMarker>() {
+internal class MarkerManager : ViewGroupManager<Marker>() {
   override fun getName(): String {
     return "AMapMarker"
   }
 
-  override fun createViewInstance(reactContext: ThemedReactContext): MapMarker {
-    return MapMarker(reactContext)
+  override fun createViewInstance(reactContext: ThemedReactContext): Marker {
+    return Marker(reactContext)
   }
 
-  override fun addView(marker: MapMarker, view: View, index: Int) {
+  override fun addView(marker: Marker, view: View, index: Int) {
     super.addView(marker, view, index)
   }
 
@@ -35,44 +35,44 @@ internal class MapMarkerManager : ViewGroupManager<MapMarker>() {
     return mapOf("update" to update)
   }
 
-  override fun receiveCommand(marker: MapMarker, commandId: Int, args: ReadableArray?) {
+  override fun receiveCommand(marker: Marker, commandId: Int, args: ReadableArray?) {
     when (commandId) {
       update -> marker.updateIcon()
     }
   }
 
   @ReactProp(name = "latLng")
-  fun setLatLng(view: MapMarker, position: ReadableMap) {
+  fun setLatLng(view: Marker, position: ReadableMap) {
     view.position = position.toLatLng()
   }
 
   @ReactProp(name = "flat")
-  fun setFlat(marker: MapMarker, flat: Boolean) {
+  fun setFlat(marker: Marker, flat: Boolean) {
     marker.flat = flat
   }
 
   @ReactProp(name = "opacity")
-  override fun setOpacity(marker: MapMarker, opacity: Float) {
+  override fun setOpacity(marker: Marker, opacity: Float) {
     marker.opacity = opacity
   }
 
   @ReactProp(name = "draggable")
-  fun setDraggable(marker: MapMarker, draggable: Boolean) {
+  fun setDraggable(marker: Marker, draggable: Boolean) {
     marker.draggable = draggable
   }
 
   @ReactProp(name = "zIndex")
-  fun setIndex(marker: MapMarker, zIndex: Float) {
+  fun setIndex(marker: Marker, zIndex: Float) {
     marker.zIndex = zIndex
   }
 
   @ReactProp(name = "anchor")
-  fun setAnchor(view: MapMarker, anchor: ReadableMap) {
+  fun setAnchor(view: Marker, anchor: ReadableMap) {
     view.setAnchor(anchor.getDouble("x"), anchor.getDouble("y"))
   }
 
   @ReactProp(name = "icon")
-  fun setIcon(view: MapMarker, icon: ReadableMap?) {
+  fun setIcon(view: Marker, icon: ReadableMap?) {
     icon?.let { view.setIcon(it) }
   }
 }

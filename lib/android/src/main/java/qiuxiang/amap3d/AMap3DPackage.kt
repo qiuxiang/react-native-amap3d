@@ -19,12 +19,12 @@ class AMap3DPackage : ReactPackage {
   override fun createViewManagers(reactContext: ReactApplicationContext): List<ViewManager<*, *>> {
     return listOf(
       MapViewManager(),
-      MapMarkerManager(),
-      MapPolylineManager(),
-      MapPolygonManager(),
-      MapCircleManager(),
-      MapHeatMapManager(),
-      MapMultiPointManager()
+      MarkerManager(),
+      PolylineManager(),
+      PolygonManager(),
+      CircleManager(),
+      HeatMapManager(),
+      MultiPointManager()
     )
   }
 }

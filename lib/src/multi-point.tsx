@@ -4,7 +4,7 @@ import { ImageSourcePropType, NativeSyntheticEvent, requireNativeComponent } fro
 import resolveAssetSource from "react-native/Libraries/Image/resolveAssetSource";
 import { LatLng } from "./types";
 
-const AMapMultiPoint = requireNativeComponent<MultiPointProps>("AMapMultiPoint");
+const NativeMultiPoint = requireNativeComponent<MultiPointProps>("AMapMultiPoint");
 
 export interface MultiPointProps {
   /**
@@ -24,5 +24,5 @@ export interface MultiPointProps {
 }
 
 export default (props: MultiPointProps) => {
-  return <AMapMultiPoint {...props} icon={resolveAssetSource(props.icon)} />;
+  return <NativeMultiPoint {...props} icon={resolveAssetSource(props.icon)} />;
 };

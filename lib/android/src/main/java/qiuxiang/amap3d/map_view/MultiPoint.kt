@@ -12,7 +12,7 @@ import com.facebook.react.views.view.ReactViewGroup
 import qiuxiang.amap3d.fetchImage
 import qiuxiang.amap3d.toLatLng
 
-class MapMultiPoint(context: Context) : ReactViewGroup(context), MapOverlay {
+class MultiPoint(context: Context) : ReactViewGroup(context), Overlay {
   private lateinit var map: AMap
   private var overlay: MultiPointOverlay? = null
   private var items: List<MultiPointItem> = emptyList()

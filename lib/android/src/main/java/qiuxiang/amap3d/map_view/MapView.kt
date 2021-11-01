@@ -22,8 +22,8 @@ class MapView(context: ThemedReactContext) : TextureMapView(context) {
   @Suppress("Deprecation")
   private val eventEmitter =
     context.getJSModule(com.facebook.react.uimanager.events.RCTEventEmitter::class.java)
-  private val markerMap = HashMap<String, MapMarker>()
-  private val polylineMap = HashMap<String, MapPolyline>()
+  private val markerMap = HashMap<String, qiuxiang.amap3d.map_view.Marker>()
+  private val polylineMap = HashMap<String, Polyline>()
   private var initialCameraPosition: ReadableMap? = null
 
   init {
@@ -56,11 +56,15 @@ class MapView(context: ThemedReactContext) : TextureMapView(context) {
 
     map.setOnCameraChangeListener(object : AMap.OnCameraChangeListener {
       override fun onCameraChangeFinish(position: CameraPosition) {
-        emit(id, "onCameraIdle", position.toJson())
+        emit(id, "onCameraIdle", Arguments.createMap().apply {
+          putMap("cameraPosition", position.toJson())
+        })
       }
 
       override fun onCameraChange(position: CameraPosition) {
-        emit(id, "onCameraMove", position.toJson())
+        emit(id, "onCameraMove", Arguments.createMap().apply {
+          putMap("cameraPosition", position.toJson())
+        })
       }
     })
 
@@ -82,24 +86,24 @@ class MapView(context: ThemedReactContext) : TextureMapView(context) {
   }
 
   fun add(child: View) {
-    if (child is MapOverlay) {
+    if (child is Overlay) {
       child.add(map)
-      if (child is MapMarker) {
+      if (child is qiuxiang.amap3d.map_view.Marker) {
         markerMap[child.marker?.id!!] = child
       }
-      if (child is MapPolyline) {
+      if (child is Polyline) {
         polylineMap[child.polyline?.id!!] = child
       }
     }
   }
 
   fun remove(child: View) {
-    if (child is MapOverlay) {
+    if (child is Overlay) {
       child.remove()
-      if (child is MapMarker) {
+      if (child is qiuxiang.amap3d.map_view.Marker) {
         markerMap.remove(child.marker?.id)
       }
-      if (child is MapPolyline) {
+      if (child is Polyline) {
         polylineMap.remove(child.polyline?.id)
       }
     }

@@ -9,3 +9,9 @@ extension CLLocationCoordinate2D {
     ["latitude": latitude, "longitude": longitude]
   }
 }
+
+extension RCTConvert {
+  @objc static func MAMapType(_ json: Any) -> MAMapType {
+    MAMapKit.MAMapType(rawValue: json as! NSInteger)!
+  }
+}

@@ -8,13 +8,13 @@ import com.facebook.react.uimanager.annotations.ReactProp
 import qiuxiang.amap3d.getEventTypeConstants
 
 @Suppress("unused")
-internal class MapMultiPointManager : SimpleViewManager<MapMultiPoint>() {
+internal class MultiPointManager : SimpleViewManager<MultiPoint>() {
   override fun getName(): String {
     return "AMapMultiPoint"
   }
 
-  override fun createViewInstance(reactContext: ThemedReactContext): MapMultiPoint {
-    return MapMultiPoint(reactContext)
+  override fun createViewInstance(reactContext: ThemedReactContext): MultiPoint {
+    return MultiPoint(reactContext)
   }
 
   override fun getExportedCustomBubblingEventTypeConstants(): Map<String, Any> {
@@ -22,12 +22,12 @@ internal class MapMultiPointManager : SimpleViewManager<MapMultiPoint>() {
   }
 
   @ReactProp(name = "items")
-  fun setPoints(multiPoint: MapMultiPoint, items: ReadableArray) {
+  fun setPoints(multiPoint: MultiPoint, items: ReadableArray) {
     multiPoint.setItems(items)
   }
 
   @ReactProp(name = "icon")
-  fun setIcon(multiPoint: MapMultiPoint, icon: ReadableMap?) {
+  fun setIcon(multiPoint: MultiPoint, icon: ReadableMap?) {
     icon?.let { multiPoint.setIcon(it) }
   }
 }

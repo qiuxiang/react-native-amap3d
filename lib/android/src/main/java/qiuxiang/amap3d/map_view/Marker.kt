@@ -6,11 +6,12 @@ import android.graphics.Canvas
 import android.view.View
 import com.amap.api.maps.AMap
 import com.amap.api.maps.model.*
+import com.amap.api.maps.model.Marker
 import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.views.view.ReactViewGroup
 import qiuxiang.amap3d.fetchImage
 
-class MapMarker(context: Context) : ReactViewGroup(context), MapOverlay {
+class Marker(context: Context) : ReactViewGroup(context), Overlay {
   private var view: View? = null
   private var icon: BitmapDescriptor? = null
   private var anchorX: Float = 0.5f

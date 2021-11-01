@@ -8,7 +8,7 @@ import com.amap.api.maps.model.TileOverlay
 import com.amap.api.maps.model.TileOverlayOptions
 import com.facebook.react.views.view.ReactViewGroup
 
-class MapHeatMap(context: Context) : ReactViewGroup(context), MapOverlay {
+class HeatMap(context: Context) : ReactViewGroup(context), Overlay {
   private var overlay: TileOverlay? = null
   var data: List<LatLng> = emptyList()
   var opacity: Double = 0.6

@@ -7,27 +7,27 @@ import com.facebook.react.uimanager.annotations.ReactProp
 import qiuxiang.amap3d.toLatLngList
 
 @Suppress("unused")
-internal class MapHeatMapManager : SimpleViewManager<MapHeatMap>() {
+internal class HeatMapManager : SimpleViewManager<HeatMap>() {
   override fun getName(): String {
     return "AMapHeatMap"
   }
 
-  override fun createViewInstance(reactContext: ThemedReactContext): MapHeatMap {
-    return MapHeatMap(reactContext)
+  override fun createViewInstance(reactContext: ThemedReactContext): HeatMap {
+    return HeatMap(reactContext)
   }
 
   @ReactProp(name = "data")
-  fun setData(heatMap: MapHeatMap, data: ReadableArray) {
+  fun setData(heatMap: HeatMap, data: ReadableArray) {
     heatMap.data = data.toLatLngList()
   }
 
   @ReactProp(name = "radius")
-  fun setRadius(heatMap: MapHeatMap, radius: Int) {
+  fun setRadius(heatMap: HeatMap, radius: Int) {
     heatMap.radius = radius
   }
 
   @ReactProp(name = "opacity")
-  fun setOpacity(heatMap: MapHeatMap, opacity: Double) {
+  fun setOpacity(heatMap: HeatMap, opacity: Double) {
     heatMap.opacity = opacity
   }
 }

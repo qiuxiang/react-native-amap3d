@@ -8,7 +8,7 @@ import com.amap.api.maps.model.Polyline
 import com.amap.api.maps.model.PolylineOptions
 import com.facebook.react.views.view.ReactViewGroup
 
-class MapPolyline(context: Context) : ReactViewGroup(context), MapOverlay {
+class Polyline(context: Context) : ReactViewGroup(context), Overlay {
   var polyline: Polyline? = null
   var gradient: Boolean = false
   var colors: List<Int> = emptyList()

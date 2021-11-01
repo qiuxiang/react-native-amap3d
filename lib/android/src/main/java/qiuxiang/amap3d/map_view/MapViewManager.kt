@@ -10,13 +10,13 @@ import com.facebook.react.uimanager.annotations.ReactProp
 import qiuxiang.amap3d.getEventTypeConstants
 import qiuxiang.amap3d.toLatLng
 
-val commands = mapOf(
-  "moveCamera" to { view: MapView, args: ReadableArray? -> view.moveCamera(args) },
-  "call" to { view: MapView, args: ReadableArray? -> view.call(args) },
-)
-
 @Suppress("unused")
 internal class MapViewManager : ViewGroupManager<MapView>() {
+  private val commands = mapOf(
+    "moveCamera" to { view: MapView, args: ReadableArray? -> view.moveCamera(args) },
+    "call" to { view: MapView, args: ReadableArray? -> view.call(args) },
+  )
+
   override fun getName(): String {
     return "AMapView"
   }

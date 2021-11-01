@@ -83,8 +83,10 @@ export interface MarkerProps {
   onDragEnd?: (event: NativeSyntheticEvent<LatLng>) => void;
 }
 
+const name = "AMapMarker";
+
 export default class extends Component<MarkerProps> {
-  name: string = "AMapMarker";
+  name = name;
 
   /**
    * 触发自定义 View 更新
@@ -102,8 +104,8 @@ export default class extends Component<MarkerProps> {
     Reflect.set(props, "latLng", props.position);
     // @ts-ignore
     delete props.position;
-    return <AMapMarker {...props} icon={resolveAssetSource(props.icon)} />;
+    return <NativeMarker {...props} icon={resolveAssetSource(props.icon)} />;
   }
 }
 
-const AMapMarker = requireNativeComponent<MarkerProps>("AMapMarker");
+const NativeMarker = requireNativeComponent<MarkerProps>(name);
