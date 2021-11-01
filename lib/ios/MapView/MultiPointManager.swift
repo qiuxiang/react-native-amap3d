@@ -1,8 +1,6 @@
 @objc(AMapMultiPointManager)
 class AMapMultiPointManager: RCTViewManager {
-  override class func requiresMainQueueSetup() -> Bool {
-    false
-  }
+  override class func requiresMainQueueSetup() -> Bool { false }
 
   override func view() -> UIView {
     let view = MultiPoint()
@@ -33,10 +31,7 @@ class MultiPoint: UIView, Overlay, MAMultiPointOverlayRendererDelegate {
     })
   }
 
-  func getOverlay() -> MABaseOverlay {
-    overlay!
-  }
-
+  func getOverlay() -> MABaseOverlay { overlay! }
   func getRenderer() -> MAOverlayRenderer {
     if renderer == nil {
       renderer = MAMultiPointOverlayRenderer(multiPointOverlay: overlay)

@@ -1,8 +1,6 @@
 @objc(AMapViewManager)
 class AMapViewManager: RCTViewManager {
-  override class func requiresMainQueueSetup() -> Bool {
-    false
-  }
+  override class func requiresMainQueueSetup() -> Bool { false }
 
   override func view() -> UIView {
     let view = MapView()
