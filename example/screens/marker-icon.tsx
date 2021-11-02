@@ -20,9 +20,16 @@ export default () => {
       />
       <Marker
         position={{ latitude: 39.806901, longitude: 116.297972 }}
-        icon={{ uri: "https://reactnative.dev/img/pwa/manifest-icon-512.png" }}
+        icon={{
+          uri: "https://reactnative.dev/img/pwa/manifest-icon-512.png",
+          width: 64,
+          height: 64,
+        }}
       />
-      <Marker position={{ latitude: 39.906901, longitude: 116.397972 }}>
+      <Marker
+        position={{ latitude: 39.906901, longitude: 116.397972 }}
+        onPress={() => alert("onPress")}
+      >
         <Text style={style.customView}>{time.toLocaleString()}</Text>
       </Marker>
     </MapView>
@@ -33,7 +40,6 @@ const style = StyleSheet.create({
   customView: {
     color: "#fff",
     backgroundColor: "#009688",
-    position: "absolute",
     alignItems: "center",
     borderRadius: 5,
     padding: 5,

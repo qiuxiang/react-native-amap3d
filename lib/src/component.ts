@@ -1,7 +1,7 @@
 import { PureComponent } from "react";
 import { findNodeHandle, UIManager } from "react-native";
 
-export default class Component<P> extends PureComponent<P> {
+export default class Component<P, S = {}> extends PureComponent<P, S> {
   /**
    * 原生 View 名称，继承时必须指定
    */

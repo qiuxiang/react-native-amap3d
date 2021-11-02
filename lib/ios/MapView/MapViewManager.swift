@@ -24,6 +24,7 @@ class AMapViewManager: RCTViewManager {
 class MapView: MAMapView, MAMapViewDelegate {
   var initialized = false
   var overlayMap: [MABaseOverlay: Overlay] = [:]
+  var markerMap: [MAPointAnnotation: Marker] = [:]
 
   @objc var onLoad: RCTDirectEventBlock = { _ in }
   @objc var onCameraIdle: RCTDirectEventBlock = { _ in }
@@ -76,9 +77,9 @@ class MapView: MAMapView, MAMapViewDelegate {
 
   func moveCamera(position: NSDictionary, duration: Int = 0) {
     let status = MAMapStatus()
-    if let it = position["zoom"] as? Float { status.zoomLevel = CGFloat(it) }
-    if let it = position["tilt"] as? Float { status.cameraDegree = CGFloat(it) }
-    if let it = position["bearing"] as? Float { status.rotationDegree = CGFloat(it) }
+    if let it = position["zoom"] as? Double { status.zoomLevel = CGFloat(it) }
+    if let it = position["tilt"] as? Double { status.cameraDegree = CGFloat(it) }
+    if let it = position["bearing"] as? Double { status.rotationDegree = CGFloat(it) }
     if let it = position["target"] as? NSDictionary { status.centerCoordinate = it.coordinate }
     setMapStatus(status, animated: true, duration: Double(duration) / 1000)
   }
@@ -88,12 +89,20 @@ class MapView: MAMapView, MAMapViewDelegate {
       overlayMap[overlay] = subview as? Overlay
       add(overlay)
     }
+    if let annotation = (subview as? Marker)?.annotation {
+      markerMap[annotation] = subview as? Marker
+      addAnnotation(annotation)
+    }
   }
 
   override func removeReactSubview(_ subview: UIView!) {
     if let overlay = (subview as? Overlay)?.getOverlay() {
       overlayMap.removeValue(forKey: overlay)
       remove(overlay)
+    }
+    if let annotation = (subview as? Marker)?.annotation {
+      markerMap.removeValue(forKey: annotation)
+      removeAnnotation(annotation)
     }
   }
 
@@ -102,6 +111,34 @@ class MapView: MAMapView, MAMapViewDelegate {
       return overlayMap[key]?.getRenderer()
     }
     return nil
+  }
+  
+  func mapView(_ mapView: MAMapView!, viewFor annotation: MAAnnotation) -> MAAnnotationView? {
+    if let key = annotation as? MAPointAnnotation {
+      return markerMap[key]?.getView()
+    }
+    return nil
+  }
+  
+  func mapView(_ mapView: MAMapView!, annotationView view: MAAnnotationView!, didChange newState: MAAnnotationViewDragState, fromOldState oldState: MAAnnotationViewDragState) {
+    if let key = view.annotation as? MAPointAnnotation {
+      let market = markerMap[key]!
+      if (newState == MAAnnotationViewDragState.starting) {
+        market.onDragStart(nil)
+      }
+      if (newState == MAAnnotationViewDragState.dragging) {
+        market.onDrag(nil)
+      }
+      if (newState == MAAnnotationViewDragState.ending) {
+        market.onDragEnd(view.annotation.coordinate.json)
+      }
+    }
+  }
+  
+  func mapView(_ mapView: MAMapView!, didAnnotationViewTapped view: MAAnnotationView!) {
+    if let key = view.annotation as? MAPointAnnotation {
+      markerMap[key]?.onPress(nil)
+    }
   }
 
   func mapInitComplete(_: MAMapView!) {

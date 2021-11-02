@@ -1,9 +1,13 @@
 import * as React from "react";
 import {
   ImageSourcePropType,
+  LayoutChangeEvent,
+  LayoutRectangle,
   NativeSyntheticEvent,
   Platform,
   requireNativeComponent,
+  View,
+  ViewStyle,
 } from "react-native";
 // @ts-ignore
 import resolveAssetSource from "react-native/Libraries/Image/resolveAssetSource";
@@ -85,8 +89,13 @@ export interface MarkerProps {
 
 const name = "AMapMarker";
 
+interface State {
+  layout?: LayoutRectangle;
+}
+
 export default class extends Component<MarkerProps> {
   name = name;
+  state: State = {};
 
   /**
    * 触发自定义 View 更新
@@ -99,13 +108,29 @@ export default class extends Component<MarkerProps> {
     }
   }
 
+  onLayout = ({ nativeEvent }: LayoutChangeEvent) => {
+    this.setState({ layout: nativeEvent.layout });
+  };
+
   render() {
     const props = { ...this.props };
     Reflect.set(props, "latLng", props.position);
     // @ts-ignore
     delete props.position;
+    if (props.children) {
+      props.children = (
+        <View style={style} onLayout={this.onLayout}>
+          {props.children}
+        </View>
+      );
+      const { layout } = this.state;
+      if (!props.centerOffset && layout) {
+        props.centerOffset = { x: -layout.width / 2, y: -layout.height };
+      }
+    }
     return <NativeMarker {...props} icon={resolveAssetSource(props.icon)} />;
   }
 }
 
+const style: ViewStyle = { position: "absolute" };
 const NativeMarker = requireNativeComponent<MarkerProps>(name);
