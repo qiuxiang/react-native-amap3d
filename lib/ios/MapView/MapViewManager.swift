@@ -27,10 +27,15 @@ class MapView: MAMapView, MAMapViewDelegate {
   var markerMap: [MAPointAnnotation: Marker] = [:]
 
   @objc var onLoad: RCTDirectEventBlock = { _ in }
+  @objc var onCameraMove: RCTDirectEventBlock = { _ in }
   @objc var onCameraIdle: RCTDirectEventBlock = { _ in }
   @objc var onPress: RCTDirectEventBlock = { _ in }
   @objc var onPressPoi: RCTDirectEventBlock = { _ in }
   @objc var onLongPress: RCTDirectEventBlock = { _ in }
+
+  @objc func setMyLocationEnabled(_ enabled: Bool) {
+    showsUserLocation = enabled
+  }
 
   @objc func setBuildingsEnabled(_ enabled: Bool) {
     isShowsBuildings = enabled
@@ -66,6 +71,14 @@ class MapView: MAMapView, MAMapViewDelegate {
 
   @objc func setTiltGesturesEnabled(_ enabled: Bool) {
     isRotateCameraEnabled = enabled
+  }
+  
+  @objc func setMinZoom(_ value: Double) {
+    minZoomLevel = value
+  }
+  
+  @objc func setMaxZoom(_ value: Double) {
+    maxZoomLevel = value
   }
 
   @objc func setInitialCameraPosition(_ json: NSDictionary) {
@@ -156,6 +169,17 @@ class MapView: MAMapView, MAMapViewDelegate {
 
   func mapView(_: MAMapView!, didLongPressedAt coordinate: CLLocationCoordinate2D) {
     onLongPress(coordinate.json)
+  }
+  
+  func mapViewRegionChanged(_ mapView: MAMapView!) {
+    onCameraMove([
+      "cameraPosition": [
+        "target": centerCoordinate.json,
+        "zoom": zoomLevel,
+        "bearing": rotationDegree,
+        "tilt": cameraDegree,
+      ],
+    ])
   }
 
   func mapView(_: MAMapView!, regionDidChangeAnimated _: Bool) {

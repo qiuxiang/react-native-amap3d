@@ -115,7 +115,12 @@ export interface MapViewProps extends ViewProps {
   onLongPress?: (event: NativeSyntheticEvent<LatLng>) => void;
 
   /**
-   * 地图状态改变事件，在动画结束后触发
+   * 地图状态改变事件，随地图状态变化不停地触发
+   */
+  onCameraMove?: (event: NativeSyntheticEvent<{ cameraPosition: CameraPosition }>) => void;
+
+  /**
+   * 地图状态改变事件，在停止变化后触发
    */
   onCameraIdle?: (event: NativeSyntheticEvent<{ cameraPosition: CameraPosition }>) => void;
 
