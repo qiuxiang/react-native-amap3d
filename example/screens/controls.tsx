@@ -1,5 +1,5 @@
 import * as React from "react";
-import { PermissionsAndroid, StyleSheet, Switch, Text, View } from "react-native";
+import { StyleSheet, Switch, Text, View } from "react-native";
 import { MapView } from "react-native-amap3d";
 import styles from "../styles";
 

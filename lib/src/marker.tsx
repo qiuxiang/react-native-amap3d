@@ -1,8 +1,6 @@
 import * as React from "react";
 import {
   ImageSourcePropType,
-  LayoutChangeEvent,
-  LayoutRectangle,
   NativeSyntheticEvent,
   Platform,
   requireNativeComponent,
@@ -27,6 +25,8 @@ export interface MarkerProps {
 
   /**
    * 透明度 [0, 1]
+   *
+   * @platform android
    */
   opacity?: number;
 
@@ -37,6 +37,8 @@ export interface MarkerProps {
 
   /**
    * 是否平贴地图
+   *
+   * @platform android
    */
   flat?: boolean;
 
@@ -87,18 +89,15 @@ export interface MarkerProps {
   onDragEnd?: (event: NativeSyntheticEvent<LatLng>) => void;
 }
 
-const name = "AMapMarker";
-
-interface State {
-  layout?: LayoutRectangle;
-}
-
 export default class extends Component<MarkerProps> {
   name = name;
-  state: State = {};
 
   /**
-   * 触发自定义 View 更新
+   * 触发自定义 view 更新
+   *
+   * 通常来说，不需要主动调用该方法，对于 android，如果自定义 view 存在异步更新，
+   * 例如，包含一个引用了网络图片的 <Image />，则需要在 view 更新后主动调用该方法触发
+   * icon 更新。
    */
   update = () => this.invoke("update");
 
@@ -108,10 +107,6 @@ export default class extends Component<MarkerProps> {
     }
   }
 
-  onLayout = ({ nativeEvent }: LayoutChangeEvent) => {
-    this.setState({ layout: nativeEvent.layout });
-  };
-
   render() {
     const props = { ...this.props };
     Reflect.set(props, "latLng", props.position);
@@ -119,18 +114,15 @@ export default class extends Component<MarkerProps> {
     delete props.position;
     if (props.children) {
       props.children = (
-        <View style={style} onLayout={this.onLayout}>
+        <View style={style} onLayout={this.update}>
           {props.children}
         </View>
       );
-      const { layout } = this.state;
-      if (!props.centerOffset && layout) {
-        props.centerOffset = { x: -layout.width / 2, y: -layout.height };
-      }
     }
     return <NativeMarker {...props} icon={resolveAssetSource(props.icon)} />;
   }
 }
 
+const name = "AMapMarker";
 const style: ViewStyle = { position: "absolute" };
 const NativeMarker = requireNativeComponent<MarkerProps>(name);

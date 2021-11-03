@@ -25,10 +25,10 @@ class Marker: UIView {
   var annotation = MAPointAnnotation()
   var icon: UIImage?
   var iconView: UIView?
+  var centerOffset: CGPoint?
 
   @objc var draggable = false { didSet { view?.isDraggable = draggable } }
   @objc var zIndex = 1 { didSet { view?.zIndex = zIndex } }
-  @objc var centerOffset = CGPoint() { didSet { view?.centerOffset = centerOffset } }
 
   @objc var onPress: RCTDirectEventBlock = { _ in }
   @objc var onDragStart: RCTDirectEventBlock = { _ in }
@@ -50,9 +50,13 @@ class Marker: UIView {
       progressBlock: { _, _ in },
       partialLoad: { _ in },
       completionBlock: { _, image in
+        if image == nil {
+          return
+        }
         DispatchQueue.main.async {
           self.icon = image
           self.view?.image = image
+          self.updateCenterOffset()
         }
       }
     )
@@ -61,31 +65,52 @@ class Marker: UIView {
   @objc func setLatLng(_ coordinate: CLLocationCoordinate2D) {
     annotation.coordinate = coordinate
   }
-  
-  @objc func gaction(_ recognizer: UITapGestureRecognizer) {
-    onPress(nil)
+
+  @objc func setCenterOffset(_ centerOffset: CGPoint) {
+    self.centerOffset = centerOffset
+    view?.centerOffset = centerOffset
   }
-  
+
   override func didAddSubview(_ subview: UIView) {
     iconView = subview
   }
 
-  func update() {}
+  func update() {
+    if centerOffset == nil, view != nil {
+      let size: CGSize = (view?.bounds.size)!
+      view?.bounds = (iconView?.bounds)!
+      view?.centerOffset = CGPoint(x: 0, y: -size.height / 2)
+    }
+  }
+
+  func updateCenterOffset() {
+    if centerOffset == nil, view != nil {
+      let size: CGSize = (view?.image.size)!
+      view?.centerOffset = CGPoint(x: 0, y: -size.height / 2)
+    }
+  }
 
   func getView() -> MAAnnotationView {
     if view == nil {
-      view = MAPinAnnotationView(annotation: annotation, reuseIdentifier: nil)
+      view = MAAnnotationView(annotation: annotation, reuseIdentifier: nil)
+      if icon == nil && iconView == nil {
+        view?.image = MAPinAnnotationView(annotation: annotation, reuseIdentifier: nil).image
+      }
       view?.isDraggable = draggable
       view?.zIndex = zIndex
-      view?.centerOffset = centerOffset
+      if centerOffset != nil {
+        view?.centerOffset = centerOffset!
+      }
       if icon != nil {
         view?.image = icon
+        updateCenterOffset()
       }
       if iconView != nil {
-        view?.addSubview(iconView!)
-        view?.image = nil
+        let button = UIButton()
+        button.addSubview(iconView!)
+        view?.addSubview(button)
+        update()
       }
-      view?.addGestureRecognizer(UIGestureRecognizer(target: self, action: #selector(gaction)))
     }
     return view!
   }

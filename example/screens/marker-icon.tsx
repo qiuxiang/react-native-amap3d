@@ -19,6 +19,7 @@ export default () => {
         icon={require("../images/flag.png")}
       />
       <Marker
+        onPress={() => alert("onPress")}
         position={{ latitude: 39.806901, longitude: 116.297972 }}
         icon={{
           uri: "https://reactnative.dev/img/pwa/manifest-icon-512.png",
