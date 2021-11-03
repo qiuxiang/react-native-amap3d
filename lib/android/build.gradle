@@ -31,4 +31,5 @@ dependencies {
     api 'com.facebook.react:react-native:+'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.amap.api:3dmap:8.0.1'
+    implementation 'com.amap.api:location:5.6.0'
 }

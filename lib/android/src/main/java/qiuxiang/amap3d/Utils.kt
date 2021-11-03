@@ -3,6 +3,7 @@ package qiuxiang.amap3d
 import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.Point
+import android.location.Location
 import android.view.View
 import com.amap.api.maps.model.*
 import com.facebook.drawee.backends.pipeline.Fresco
@@ -56,6 +57,20 @@ fun CameraPosition.toJson(): WritableMap {
     putDouble("zoom", zoom.toDouble())
     putDouble("tilt", tilt.toDouble())
     putDouble("bearing", bearing.toDouble())
+  }
+}
+
+fun Location.toJson(): WritableMap {
+  return Arguments.createMap().apply {
+    putInt("timestamp", (time / 1000).toInt())
+    putMap("coords", Arguments.createMap().apply {
+      putDouble("latitude", latitude)
+      putDouble("longitude", longitude)
+      putDouble("latitude", latitude)
+      putDouble("accuracy", accuracy.toDouble())
+      putDouble("heading", bearing.toDouble())
+      putDouble("speed", speed.toDouble())
+    })
   }
 }
 

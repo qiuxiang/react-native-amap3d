@@ -128,13 +128,22 @@ export interface MapViewProps extends ViewProps {
    * 地图初始化完成事件
    */
   onLoad?: (event: NativeSyntheticEvent<void>) => void;
+
+  /**
+   * 地图定位更新事件
+   */
+  onLocation?: (event: NativeSyntheticEvent<GeolocationPosition>) => void;
 }
 
 const name = "AMapView";
 const NativeMapView = requireNativeComponent<MapViewProps>(name);
 
 export default class extends Component<MapViewProps> {
-  static defaultProps = { style: StyleSheet.absoluteFill };
+  static defaultProps = {
+    style: StyleSheet.absoluteFill,
+    compassEnabled: true,
+    scaleControlsEnabled: true,
+  };
 
   name = name;
   ref?: (React.Component<MapViewProps> & NativeMethods) | null;

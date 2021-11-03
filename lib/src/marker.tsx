@@ -84,7 +84,7 @@ export interface MarkerProps {
   onDrag?: () => void;
 
   /**
-   * 拖放结束事件，最终坐标将传入参数
+   * 拖放结束事件
    */
   onDragEnd?: (event: NativeSyntheticEvent<LatLng>) => void;
 }

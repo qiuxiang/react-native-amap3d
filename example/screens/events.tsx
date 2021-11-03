@@ -3,6 +3,7 @@ import {
   FlatList,
   ListRenderItemInfo,
   NativeSyntheticEvent,
+  PermissionsAndroid,
   Platform,
   StyleSheet,
   Text,
@@ -12,6 +13,14 @@ import { MapView } from "react-native-amap3d";
 
 export default class extends React.Component {
   state = { logs: [] };
+
+  async componentDidMount() {
+    console.log(
+      await PermissionsAndroid.requestMultiple([
+        PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION,
+      ])
+    );
+  }
 
   log(event: string, data: any) {
     console.log(data);
@@ -46,13 +55,15 @@ export default class extends React.Component {
       "onLongPress",
       "onCameraIdle",
       "onCameraMove",
+      "onLocation",
     ];
     return (
       <View style={style.body}>
         <MapView
+          style={style.body}
           {...Object.fromEntries(events.map((i) => [i, this.logger(i)]))}
           myLocationEnabled
-          style={style.body}
+          myLocationButtonEnabled
         />
         <FlatList style={style.logs} data={this.state.logs} renderItem={this.renderItem} />
       </View>

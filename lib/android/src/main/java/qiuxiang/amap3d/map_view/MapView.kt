@@ -7,6 +7,7 @@ import com.amap.api.maps.CameraUpdateFactory
 import com.amap.api.maps.TextureMapView
 import com.amap.api.maps.model.CameraPosition
 import com.amap.api.maps.model.Marker
+import com.amap.api.maps.model.MyLocationStyle
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.ReadableMap
@@ -25,9 +26,14 @@ class MapView(context: ThemedReactContext) : TextureMapView(context) {
   private val markerMap = HashMap<String, qiuxiang.amap3d.map_view.Marker>()
   private val polylineMap = HashMap<String, Polyline>()
   private var initialCameraPosition: ReadableMap? = null
+  private var locationStyle: MyLocationStyle
 
   init {
     super.onCreate(null)
+
+    locationStyle = MyLocationStyle()
+    locationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATION_ROTATE_NO_CENTER)
+    map.myLocationStyle = locationStyle
 
     map.setOnMapLoadedListener { emit(id, "onLoad") }
     map.setOnMapClickListener { latLng -> emit(id, "onPress", latLng.toJson()) }
@@ -77,6 +83,10 @@ class MapView(context: ThemedReactContext) : TextureMapView(context) {
         )
       }
       false
+    }
+
+    map.setOnMyLocationChangeListener {
+      emit(id, "onLocation", it.toJson())
     }
   }
 

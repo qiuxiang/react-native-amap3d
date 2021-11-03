@@ -24,7 +24,7 @@ export default () => {
   React.useEffect(() => {
     AMapSdk.setApiKey(
       Platform.select({
-        android: "3bb9e200c9ec35643b217957c593c214",
+        android: "c52c7169e6df23490e3114330098aaac",
         ios: "3bb9e200c9ec35643b217957c593c214",
       })
     );
