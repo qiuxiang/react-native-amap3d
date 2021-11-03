@@ -6,6 +6,7 @@ import android.graphics.Point
 import android.view.View
 import com.amap.api.maps.model.*
 import com.facebook.drawee.backends.pipeline.Fresco
+import com.facebook.imagepipeline.common.ResizeOptions
 import com.facebook.imagepipeline.request.BasePostprocessor
 import com.facebook.imagepipeline.request.ImageRequestBuilder
 import com.facebook.react.bridge.Arguments
@@ -15,6 +16,10 @@ import com.facebook.react.bridge.WritableMap
 import com.facebook.react.views.imagehelper.ImageSource
 
 fun Float.toPx(): Int {
+  return (this * Resources.getSystem().displayMetrics.density).toInt()
+}
+
+fun Int.toPx(): Int {
   return (this * Resources.getSystem().displayMetrics.density).toInt()
 }
 
@@ -81,6 +86,12 @@ fun View.fetchImage(source: ReadableMap, callback: (BitmapDescriptor) -> Unit) {
       override fun process(bitmap: Bitmap) {
         callback(BitmapDescriptorFactory.fromBitmap(bitmap))
       }
+    }
+    if (source.hasKey("width") && source.hasKey("height")) {
+      it.resizeOptions = ResizeOptions.forDimensions(
+        source.getInt("width").toPx(),
+        source.getInt("height").toPx()
+      )
     }
     it.build()
   }
