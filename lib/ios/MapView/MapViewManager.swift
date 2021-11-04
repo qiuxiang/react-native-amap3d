@@ -90,12 +90,7 @@ class MapView: MAMapView, MAMapViewDelegate {
   }
 
   func moveCamera(position: NSDictionary, duration: Int = 0) {
-    let status = MAMapStatus()
-    if let it = position["zoom"] as? Double { status.zoomLevel = CGFloat(it) }
-    if let it = position["tilt"] as? Double { status.cameraDegree = CGFloat(it) }
-    if let it = position["bearing"] as? Double { status.rotationDegree = CGFloat(it) }
-    if let it = position["target"] as? NSDictionary { status.centerCoordinate = it.coordinate }
-    setMapStatus(status, animated: true, duration: Double(duration) / 1000)
+    setMapStatus(position.mapStatus, animated: true, duration: Double(duration) / 1000)
   }
 
   override func didAddSubview(_ subview: UIView) {
@@ -173,38 +168,14 @@ class MapView: MAMapView, MAMapViewDelegate {
   }
 
   func mapViewRegionChanged(_: MAMapView!) {
-    onCameraMove([
-      "cameraPosition": [
-        "target": centerCoordinate.json,
-        "zoom": zoomLevel,
-        "bearing": rotationDegree,
-        "tilt": cameraDegree,
-      ],
-    ])
+    onCameraMove(cameraPositionJson)
   }
 
   func mapView(_: MAMapView!, regionDidChangeAnimated _: Bool) {
-    onCameraIdle([
-      "cameraPosition": [
-        "target": centerCoordinate.json,
-        "zoom": zoomLevel,
-        "bearing": rotationDegree,
-        "tilt": cameraDegree,
-      ],
-    ])
+    onCameraIdle(cameraPositionJson)
   }
 
   func mapView(_: MAMapView!, didUpdate userLocation: MAUserLocation!, updatingLocation _: Bool) {
-    onLocation([
-      "coords": [
-        "latitude": userLocation.coordinate.latitude,
-        "longitude": userLocation.coordinate.longitude,
-        "altitude": userLocation.location?.altitude ?? 0,
-        "heading": userLocation.heading?.trueHeading,
-        "accuracy": userLocation.location?.horizontalAccuracy ?? 0,
-        "speed": userLocation.location?.speed ?? 0,
-      ],
-      "timestamp": NSDate().timeIntervalSince1970 * 1000,
-    ])
+    onLocation(userLocation.json)
   }
 }
