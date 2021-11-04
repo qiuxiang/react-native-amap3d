@@ -77,6 +77,7 @@ class MapView(context: ThemedReactContext) : TextureMapView(context) {
       override fun onCameraChange(position: CameraPosition) {
         emit(id, "onCameraMove", Arguments.createMap().apply {
           putMap("cameraPosition", position.toJson())
+          putMap("latLngBounds", map.projection.visibleRegion.latLngBounds.toJson())
         })
       }
     })

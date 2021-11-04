@@ -3,28 +3,22 @@ import { StyleSheet, Text, View, ViewStyle } from "react-native";
 import { ClusterParams } from ".";
 import Marker from "../marker";
 
-type Props = {
+interface Props {
   cluster: ClusterParams;
   style?: ViewStyle;
   textStyle?: ViewStyle;
   onPress?: (params: ClusterParams) => void;
-};
+}
 
 export default class ClusterView extends React.PureComponent<Props> {
   onPress = () => {
-    if (this.props.onPress) {
-      this.props.onPress(this.props.cluster);
-    }
+    this.props.onPress?.call(this, this.props.cluster);
   };
 
   renderClusterView = () => {
     const { count } = this.props.cluster;
     const size = 36 + Math.log2(count);
-    const clusterStyle = {
-      width: size,
-      height: size,
-      borderRadius: size / 2,
-    };
+    const clusterStyle = { width: size, height: size, borderRadius: size / 2 };
     return (
       <View style={[style.cluster, clusterStyle, this.props.style]}>
         <Text style={[style.text, this.props.textStyle]}>{count}</Text>
@@ -33,7 +27,6 @@ export default class ClusterView extends React.PureComponent<Props> {
   };
 
   render() {
-    console.log(this.props.cluster);
     return (
       <Marker onPress={this.onPress} position={this.props.cluster.position}>
         {this.renderClusterView()}
@@ -50,8 +43,5 @@ const style = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  text: {
-    color: "#fff",
-    fontWeight: "600",
-  },
+  text: { color: "#fff", fontWeight: "600" },
 });

@@ -1,7 +1,6 @@
 import * as React from "react";
 import { ViewStyle } from "react-native";
-import Supercluster from "supercluster";
-import { ClusterFeature, ClusterProperties, PointFeature } from "supercluster";
+import Supercluster, { ClusterFeature, ClusterProperties } from "supercluster";
 import { CameraEvent } from "../map-view";
 import { LatLng } from "../types";
 import ClusterView from "./cluster-view";
@@ -14,7 +13,7 @@ export interface ClusterParams {
 
 interface MarkerItem {
   position: LatLng;
-  extra?: any;
+  properties?: any;
 }
 
 interface Props {
@@ -28,13 +27,13 @@ interface Props {
 }
 
 interface State {
-  clusters: (ClusterFeature<ClusterProperties> | PointFeature<{}>)[];
+  clusters: ClusterFeature<ClusterProperties>[];
 }
 
 export default class Cluster extends React.PureComponent<Props, State> {
-  static defaultProps = { radius: 600 };
-
+  static defaultProps = { radius: 200 };
   state: State = { clusters: [] };
+  cluster?: Supercluster<any, ClusterProperties>;
 
   componentDidMount() {
     this.init(this.props);
@@ -44,35 +43,25 @@ export default class Cluster extends React.PureComponent<Props, State> {
     this.init(props);
   }
 
-  cluster?: Supercluster<{}, ClusterProperties>;
-
   init(props: Props) {
     const { radius } = props;
-    this.cluster = new Supercluster<{}, ClusterProperties>({
-      radius,
-      minZoom: 3,
-      maxZoom: 21,
-    }).load(
+    const options = { radius, minZoom: 3, maxZoom: 21 };
+    this.cluster = new Supercluster<any, ClusterProperties>(options).load(
       props.points.map((marker) => ({
         type: "Feature",
         geometry: {
           type: "Point",
           coordinates: [marker.position.longitude, marker.position.latitude],
-          extra: marker.extra,
         },
-        properties: {},
+        properties: marker.properties,
       }))
     );
   }
 
   update({ cameraPosition, latLngBounds }: CameraEvent) {
+    const { southwest, northeast } = latLngBounds;
     const clusters = this.cluster!.getClusters(
-      [
-        latLngBounds.southwest.longitude,
-        latLngBounds.southwest.latitude,
-        latLngBounds.northeast.longitude,
-        latLngBounds.northeast.latitude,
-      ],
+      [southwest.longitude, southwest.latitude, northeast.longitude, northeast.latitude],
       Math.round(cameraPosition.zoom!)
     );
     this.setState({ clusters });
@@ -89,21 +78,20 @@ export default class Cluster extends React.PureComponent<Props, State> {
   );
 
   render() {
-    return this.state.clusters.map((cluster) => {
-      const { geometry, properties } = cluster;
-      const { renderCluster, renderMarker } = this.props;
+    const { renderCluster, renderMarker } = this.props;
+    const render = renderCluster || this.renderCluster;
+    return this.state.clusters.map(({ geometry, properties }) => {
       const position = {
         latitude: geometry.coordinates[1],
         longitude: geometry.coordinates[0],
       };
 
-      if (!properties) {
-        const { cluster_id, point_count } = cluster.properties;
-        const render = renderCluster || this.renderCluster;
+      if (properties.point_count > 0) {
+        const { cluster_id, point_count } = properties;
         return render({ position, id: cluster_id, count: point_count });
       }
 
-      return renderMarker({ position, extra: geometry.extra });
+      return renderMarker({ position, properties });
     });
   }
 }
