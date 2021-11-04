@@ -30,11 +30,15 @@
     "reload": "adb reverse tcp:8081 tcp:8081 && adb shell input text rr",
     "ios": "react-native run-ios"
   },
+  "dependencies": {
+    "supercluster": "^7.1.4"
+  },
   "devDependencies": {
     "@react-native-picker/picker": "^2.1.0",
     "@react-navigation/native": "^6.0.6",
     "@react-navigation/native-stack": "^6.0.11",
     "@types/react-native": "^0.65.8",
+    "@types/supercluster": "^5.0.3",
     "react": "17.0.2",
     "react-native": "^0.66.1",
     "react-native-safe-area-context": "^3.3.2",

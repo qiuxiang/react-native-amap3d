@@ -7,7 +7,12 @@ import {
   ViewProps,
 } from "react-native";
 import Component from "./component";
-import { CameraPosition, LatLng, MapPoi, MapType, Point } from "./types";
+import { CameraPosition, LatLng, LatLngBounds, MapPoi, MapType, Point } from "./types";
+
+export interface CameraEvent {
+  cameraPosition: CameraPosition;
+  latLngBounds: LatLngBounds;
+}
 
 export interface MapViewProps extends ViewProps {
   /**
@@ -131,12 +136,12 @@ export interface MapViewProps extends ViewProps {
   /**
    * 地图状态改变事件，随地图状态变化不停地触发
    */
-  onCameraMove?: (event: NativeSyntheticEvent<{ cameraPosition: CameraPosition }>) => void;
+  onCameraMove?: (event: NativeSyntheticEvent<CameraEvent>) => void;
 
   /**
    * 地图状态改变事件，在停止变化后触发
    */
-  onCameraIdle?: (event: NativeSyntheticEvent<{ cameraPosition: CameraPosition }>) => void;
+  onCameraIdle?: (event: NativeSyntheticEvent<CameraEvent>) => void;
 
   /**
    * 地图初始化完成事件
@@ -202,6 +207,11 @@ export default class extends Component<MapViewProps> {
         style={style}
         // @ts-ignore: 内部接口
         onCallback={this.callback}
+        onPress={(event) => {
+          if (event.nativeEvent.latitude) {
+            this.props.onPress?.call(this, event);
+          }
+        }}
         onLoad={(event) => {
           // android 地图部分控件不显示的问题在重新 layout 之后会恢复正常。
           // 同时也能修复 ios 地图偶尔出现的 layout 异常

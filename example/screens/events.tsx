@@ -56,6 +56,8 @@ export default class extends React.Component {
         <MapView
           style={style.body}
           {...Object.fromEntries(events.map((i) => [i, this.logger(i)]))}
+          distanceFilter={10}
+          headingFilter={90}
           myLocationEnabled
           myLocationButtonEnabled
         />

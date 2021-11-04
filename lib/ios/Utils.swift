@@ -2,7 +2,7 @@ extension NSDictionary {
   var coordinate: CLLocationCoordinate2D {
     CLLocationCoordinate2DMake(self["latitude"] as! Double, self["longitude"] as! Double)
   }
-  
+
   var mapStatus: MAMapStatus {
     let status = MAMapStatus()
     if let it = self["zoom"] as? Double { status.zoomLevel = CGFloat(it) }
@@ -11,7 +11,7 @@ extension NSDictionary {
     if let it = self["target"] as? NSDictionary { status.centerCoordinate = it.coordinate }
     return status
   }
-  
+
   var point: CGPoint {
     CGPoint(x: self["x"] as! Double, y: self["y"] as! Double)
   }
@@ -39,15 +39,37 @@ extension MAUserLocation {
   }
 }
 
-extension MAMapView {
-  var cameraPositionJson: [String: Any] {
+extension MACoordinateRegion {
+  var json: [String: Any] {
     [
-      "cameraPosition": [
-        "target": centerCoordinate.json,
-        "zoom": zoomLevel,
-        "bearing": rotationDegree,
-        "tilt": cameraDegree,
+      "southwest": [
+        "latitude": center.latitude - span.latitudeDelta / 2,
+        "longitude": center.longitude - span.longitudeDelta / 2,
       ],
+      "northeast": [
+        "latitude": center.latitude + span.latitudeDelta / 2,
+        "longitude": center.longitude + span.longitudeDelta / 2,
+      ],
+    ]
+  }
+}
+
+extension MAMapStatus {
+  var json: [String: Any] {
+    [
+      "target": centerCoordinate.json,
+      "zoom": zoomLevel,
+      "bearing": rotationDegree,
+      "tilt": cameraDegree,
+    ]
+  }
+}
+
+extension MAMapView {
+  var cameraEvent: [String: Any] {
+    [
+      "cameraPosition": getMapStatus().json,
+      "latLngBounds": region.json,
     ]
   }
 }

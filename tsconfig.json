@@ -2,6 +2,7 @@
   "compilerOptions": {
     "strict": true,
     "jsx": "react-native",
+    "esModuleInterop": true,
     "baseUrl": ".",
     "paths": {
       "react-native-amap3d": ["lib/src"]

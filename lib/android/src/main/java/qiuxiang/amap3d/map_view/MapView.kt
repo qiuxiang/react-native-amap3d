@@ -35,7 +35,13 @@ class MapView(context: ThemedReactContext) : TextureMapView(context) {
     locationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATION_ROTATE_NO_CENTER)
     map.myLocationStyle = locationStyle
 
-    map.setOnMapLoadedListener { emit(id, "onLoad") }
+    map.setOnMapLoadedListener {
+      emit(id, "onLoad")
+      emit(id, "onCameraIdle", Arguments.createMap().apply {
+        putMap("cameraPosition", map.cameraPosition.toJson())
+        putMap("latLngBounds", map.projection.visibleRegion.latLngBounds.toJson())
+      })
+    }
     map.setOnMapClickListener { latLng -> emit(id, "onPress", latLng.toJson()) }
     map.setOnPOIClickListener { poi -> emit(id, "onPressPoi", poi.toJson()) }
     map.setOnMapLongClickListener { latLng -> emit(id, "onLongPress", latLng.toJson()) }
@@ -64,6 +70,7 @@ class MapView(context: ThemedReactContext) : TextureMapView(context) {
       override fun onCameraChangeFinish(position: CameraPosition) {
         emit(id, "onCameraIdle", Arguments.createMap().apply {
           putMap("cameraPosition", position.toJson())
+          putMap("latLngBounds", map.projection.visibleRegion.latLngBounds.toJson())
         })
       }
 

@@ -42,6 +42,21 @@ export interface MapPoi {
 }
 
 /**
+ * 矩形坐标边界
+ */
+export interface LatLngBounds {
+  /**
+   * 西南坐标
+   */
+  southwest: LatLng;
+
+  /**
+   * 东北坐标
+   */
+  northeast: LatLng;
+}
+
+/**
  * 地图状态
  */
 export interface CameraPosition {

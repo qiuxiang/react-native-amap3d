@@ -125,6 +125,7 @@ class MapView: MAMapView, MAMapViewDelegate {
   }
 
   override func removeReactSubview(_ subview: UIView!) {
+    super.removeReactSubview(subview)
     if let overlay = (subview as? Overlay)?.getOverlay() {
       overlayMap.removeValue(forKey: overlay)
       remove(overlay)
@@ -172,6 +173,7 @@ class MapView: MAMapView, MAMapViewDelegate {
 
   func mapInitComplete(_: MAMapView!) {
     onLoad(nil)
+    onCameraIdle(cameraEvent)
   }
 
   func mapView(_: MAMapView!, didSingleTappedAt coordinate: CLLocationCoordinate2D) {
@@ -188,11 +190,11 @@ class MapView: MAMapView, MAMapViewDelegate {
   }
 
   func mapViewRegionChanged(_: MAMapView!) {
-    onCameraMove(cameraPositionJson)
+    onCameraMove(cameraEvent)
   }
 
   func mapView(_: MAMapView!, regionDidChangeAnimated _: Bool) {
-    onCameraIdle(cameraPositionJson)
+    onCameraIdle(cameraEvent)
   }
 
   func mapView(_: MAMapView!, didUpdate userLocation: MAUserLocation!, updatingLocation _: Bool) {
