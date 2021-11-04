@@ -15,11 +15,13 @@ export default class extends React.Component {
   state = { logs: [] };
 
   async componentDidMount() {
-    console.log(
-      await PermissionsAndroid.requestMultiple([
-        PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION,
-      ])
-    );
+    if (Platform.OS == "android") {
+      console.log(
+        await PermissionsAndroid.requestMultiple([
+          PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION,
+        ])
+      );
+    }
   }
 
   log(event: string, data: any) {
@@ -48,15 +50,7 @@ export default class extends React.Component {
   );
 
   render() {
-    const events = [
-      "onLoad",
-      "onPress",
-      "onPressPoi",
-      "onLongPress",
-      "onCameraIdle",
-      "onCameraMove",
-      "onLocation",
-    ];
+    const events = ["onLoad", "onPress", "onPressPoi", "onLongPress", "onCameraIdle", "onLocation"];
     return (
       <View style={style.body}>
         <MapView

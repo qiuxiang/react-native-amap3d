@@ -32,6 +32,7 @@ class MapView: MAMapView, MAMapViewDelegate {
   @objc var onPress: RCTDirectEventBlock = { _ in }
   @objc var onPressPoi: RCTDirectEventBlock = { _ in }
   @objc var onLongPress: RCTDirectEventBlock = { _ in }
+  @objc var onLocation: RCTDirectEventBlock = { _ in }
 
   @objc func setMyLocationEnabled(_ enabled: Bool) {
     showsUserLocation = enabled
@@ -72,11 +73,11 @@ class MapView: MAMapView, MAMapViewDelegate {
   @objc func setTiltGesturesEnabled(_ enabled: Bool) {
     isRotateCameraEnabled = enabled
   }
-  
+
   @objc func setMinZoom(_ value: Double) {
     minZoomLevel = value
   }
-  
+
   @objc func setMaxZoom(_ value: Double) {
     maxZoomLevel = value
   }
@@ -125,30 +126,30 @@ class MapView: MAMapView, MAMapViewDelegate {
     }
     return nil
   }
-  
-  func mapView(_ mapView: MAMapView!, viewFor annotation: MAAnnotation) -> MAAnnotationView? {
+
+  func mapView(_: MAMapView!, viewFor annotation: MAAnnotation) -> MAAnnotationView? {
     if let key = annotation as? MAPointAnnotation {
       return markerMap[key]?.getView()
     }
     return nil
   }
-  
-  func mapView(_ mapView: MAMapView!, annotationView view: MAAnnotationView!, didChange newState: MAAnnotationViewDragState, fromOldState oldState: MAAnnotationViewDragState) {
+
+  func mapView(_: MAMapView!, annotationView view: MAAnnotationView!, didChange newState: MAAnnotationViewDragState, fromOldState _: MAAnnotationViewDragState) {
     if let key = view.annotation as? MAPointAnnotation {
       let market = markerMap[key]!
-      if (newState == MAAnnotationViewDragState.starting) {
+      if newState == MAAnnotationViewDragState.starting {
         market.onDragStart(nil)
       }
-      if (newState == MAAnnotationViewDragState.dragging) {
+      if newState == MAAnnotationViewDragState.dragging {
         market.onDrag(nil)
       }
-      if (newState == MAAnnotationViewDragState.ending) {
+      if newState == MAAnnotationViewDragState.ending {
         market.onDragEnd(view.annotation.coordinate.json)
       }
     }
   }
-  
-  func mapView(_ mapView: MAMapView!, didAnnotationViewTapped view: MAAnnotationView!) {
+
+  func mapView(_: MAMapView!, didAnnotationViewTapped view: MAAnnotationView!) {
     if let key = view.annotation as? MAPointAnnotation {
       markerMap[key]?.onPress(nil)
     }
@@ -170,8 +171,8 @@ class MapView: MAMapView, MAMapViewDelegate {
   func mapView(_: MAMapView!, didLongPressedAt coordinate: CLLocationCoordinate2D) {
     onLongPress(coordinate.json)
   }
-  
-  func mapViewRegionChanged(_ mapView: MAMapView!) {
+
+  func mapViewRegionChanged(_: MAMapView!) {
     onCameraMove([
       "cameraPosition": [
         "target": centerCoordinate.json,
@@ -190,6 +191,20 @@ class MapView: MAMapView, MAMapViewDelegate {
         "bearing": rotationDegree,
         "tilt": cameraDegree,
       ],
+    ])
+  }
+
+  func mapView(_: MAMapView!, didUpdate userLocation: MAUserLocation!, updatingLocation _: Bool) {
+    onLocation([
+      "coords": [
+        "latitude": userLocation.coordinate.latitude,
+        "longitude": userLocation.coordinate.longitude,
+        "altitude": userLocation.location?.altitude ?? 0,
+        "heading": userLocation.heading?.trueHeading,
+        "accuracy": userLocation.location?.horizontalAccuracy ?? 0,
+        "speed": userLocation.location?.speed ?? 0,
+      ],
+      "timestamp": NSDate().timeIntervalSince1970 * 1000,
     ])
   }
 }

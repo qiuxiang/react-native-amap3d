@@ -25,7 +25,7 @@ export default () => {
     AMapSdk.setApiKey(
       Platform.select({
         android: "c52c7169e6df23490e3114330098aaac",
-        ios: "3bb9e200c9ec35643b217957c593c214",
+        ios: "186d3464209b74effa4d8391f441f14d",
       })
     );
     AMapSdk.getVersion().then((version) => {

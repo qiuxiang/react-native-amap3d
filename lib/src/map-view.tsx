@@ -100,6 +100,20 @@ export interface MapViewProps extends ViewProps {
   tiltGesturesEnabled?: boolean;
 
   /**
+   * 设定定位的最小更新距离
+   *
+   * @platform android
+   */
+  distanceFilter?: number;
+
+  /**
+   * 设定最小更新角度，默认为 1 度
+   *
+   * @platform android
+   */
+  headingFilter?: number;
+
+  /**
    * 点击事件
    */
   onPress?: (event: NativeSyntheticEvent<LatLng>) => void;
@@ -143,6 +157,7 @@ export default class extends Component<MapViewProps> {
     style: StyleSheet.absoluteFill,
     compassEnabled: true,
     scaleControlsEnabled: true,
+    distanceFilter: 1,
   };
 
   name = name;

@@ -16,6 +16,8 @@ RCT_EXPORT_VIEW_PROPERTY(rotateGesturesEnabled, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(tiltGesturesEnabled, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(minZoom, double)
 RCT_EXPORT_VIEW_PROPERTY(maxZoom, double)
+RCT_EXPORT_VIEW_PROPERTY(distanceFilter, double)
+RCT_EXPORT_VIEW_PROPERTY(headingFilter, double)
 
 RCT_EXPORT_VIEW_PROPERTY(onPress, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onPressPoi, RCTBubblingEventBlock)
@@ -23,6 +25,7 @@ RCT_EXPORT_VIEW_PROPERTY(onLongPress, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onCameraIdle, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onCameraMove, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onLoad, RCTDirectEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onLocation, RCTDirectEventBlock)
 
 RCT_EXTERN_METHOD(moveCamera:(nonnull NSNumber *)reactTag position:(NSDictionary *)_ duration:(NSInteger)_)
 
