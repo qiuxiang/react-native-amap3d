@@ -11,6 +11,10 @@ extension NSDictionary {
     if let it = self["target"] as? NSDictionary { status.centerCoordinate = it.coordinate }
     return status
   }
+  
+  var point: CGPoint {
+    CGPoint(x: self["x"] as! Double, y: self["y"] as! Double)
+  }
 }
 
 extension CLLocationCoordinate2D {

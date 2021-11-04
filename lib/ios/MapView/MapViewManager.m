@@ -25,8 +25,10 @@ RCT_EXPORT_VIEW_PROPERTY(onLongPress, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onCameraIdle, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onCameraMove, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onLoad, RCTDirectEventBlock)
-RCT_EXPORT_VIEW_PROPERTY(onLocation, RCTDirectEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onLocation, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onCallback, RCTBubblingEventBlock)
 
-RCT_EXTERN_METHOD(call:(nonnull NSNumber *)reactTag position:(NSDictionary *)_ duration:(NSInteger)_)
+RCT_EXTERN_METHOD(moveCamera:(nonnull NSNumber *)reactTag position:(NSDictionary *)_ duration:(int)_)
+RCT_EXTERN_METHOD(call:(nonnull NSNumber *)reactTag callerId:(double)_ name:(NSString *)_ args:(NSDictionary *)_)
 
 @end

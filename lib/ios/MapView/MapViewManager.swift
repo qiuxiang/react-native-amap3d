@@ -13,6 +13,12 @@ class AMapViewManager: RCTViewManager {
       view.moveCamera(position: position, duration: duration)
     }
   }
+  
+  @objc func call(_ reactTag: NSNumber, callerId: Double, name: String, args: NSDictionary) {
+    getView(reactTag: reactTag) { view in
+      view.call(id: callerId, name: name, args: args)
+    }
+  }
 
   func getView(reactTag: NSNumber, callback: @escaping (MapView) -> Void) {
     bridge.uiManager.addUIBlock { _, viewRegistry in
@@ -26,13 +32,14 @@ class MapView: MAMapView, MAMapViewDelegate {
   var overlayMap: [MABaseOverlay: Overlay] = [:]
   var markerMap: [MAPointAnnotation: Marker] = [:]
 
-  @objc var onLoad: RCTDirectEventBlock = { _ in }
-  @objc var onCameraMove: RCTDirectEventBlock = { _ in }
-  @objc var onCameraIdle: RCTDirectEventBlock = { _ in }
-  @objc var onPress: RCTDirectEventBlock = { _ in }
-  @objc var onPressPoi: RCTDirectEventBlock = { _ in }
-  @objc var onLongPress: RCTDirectEventBlock = { _ in }
-  @objc var onLocation: RCTDirectEventBlock = { _ in }
+  @objc var onLoad: RCTBubblingEventBlock = { _ in }
+  @objc var onCameraMove: RCTBubblingEventBlock = { _ in }
+  @objc var onCameraIdle: RCTBubblingEventBlock = { _ in }
+  @objc var onPress: RCTBubblingEventBlock = { _ in }
+  @objc var onPressPoi: RCTBubblingEventBlock = { _ in }
+  @objc var onLongPress: RCTBubblingEventBlock = { _ in }
+  @objc var onLocation: RCTBubblingEventBlock = { _ in }
+  @objc var onCallback: RCTBubblingEventBlock = { _ in }
 
   @objc func setMyLocationEnabled(_ enabled: Bool) {
     showsUserLocation = enabled
@@ -91,6 +98,19 @@ class MapView: MAMapView, MAMapViewDelegate {
 
   func moveCamera(position: NSDictionary, duration: Int = 0) {
     setMapStatus(position.mapStatus, animated: true, duration: Double(duration) / 1000)
+  }
+
+  func call(id: Double, name: String, args: NSDictionary) {
+    switch (name) {
+    case "getLatLng":
+      response(id: id, data: convert(args.point, toCoordinateFrom: self).json)
+    default:
+      break
+    }
+  }
+
+  func response(id: Double, data: [String: Any]) {
+    onCallback([ "id": id, "data": data])
   }
 
   override func didAddSubview(_ subview: UIView) {

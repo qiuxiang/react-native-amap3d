@@ -200,8 +200,8 @@ export default class extends Component<MapViewProps> {
         {...this.props}
         ref={(ref) => (this.ref = ref)}
         style={style}
-        // @ts-ignore
-        callback={this.callback}
+        // @ts-ignore: 内部接口
+        onCallback={this.callback}
         onLoad={(event) => {
           // android 地图部分控件不显示的问题在重新 layout 之后会恢复正常。
           // 同时也能修复 ios 地图偶尔出现的 layout 异常

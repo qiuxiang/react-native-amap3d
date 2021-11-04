@@ -57,7 +57,7 @@ internal class MapViewManager : ViewGroupManager<MapView>() {
       "onCameraMove",
       "onCameraIdle",
       "onLocation",
-      "callback",
+      "onCallback",
     )
   }
 

@@ -158,7 +158,7 @@ class MapView(context: ThemedReactContext) : TextureMapView(context) {
   }
 
   private fun callback(id: Double, data: Any) {
-    emit(this.id, "callback", Arguments.createMap().apply {
+    emit(this.id, "onCallback", Arguments.createMap().apply {
       putDouble("id", id)
       when (data) {
         is WritableMap -> putMap("data", data)
