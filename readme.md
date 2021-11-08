@@ -35,8 +35,8 @@ npm i react-native-amap3d
 
 首先你需要获取高德地图 API Key：
 
-- [获取高德 Key（android）](http://lbs.amap.com/api/android-sdk/guide/create-project/get-key)。
-- [获取高德 Key（ios）](https://lbs.amap.com/api/ios-sdk/guide/create-project/get-key)。
+- [获取高德 Key（android）](http://lbs.amap.com/api/android-sdk/guide/create-project/get-key)
+- [获取高德 Key（ios）](https://lbs.amap.com/api/ios-sdk/guide/create-project/get-key)
 
 然后你需要在显示地图前调用接口设置 API key：
 
@@ -70,7 +70,7 @@ import { MapView, MapType } from "react-native-amap3d";
 />;
 ```
 
-<img src=https://user-images.githubusercontent.com/1709072/140698774-bdbfee64-d403-4e49-9a85-716d44783cfd.png width=300>
+<img src=https://user-images.githubusercontent.com/1709072/140698774-bdbfee64-d403-4e49-9a85-716d44783cfd.png height=500>
 
 ### 监听地图事件
 
@@ -88,7 +88,7 @@ render() {
 }
 ```
 
-<img src=https://user-images.githubusercontent.com/1709072/140705501-9ed3e038-e52a-48c2-a98a-235c5c890549.png width=300>
+<img src=https://user-images.githubusercontent.com/1709072/140705501-9ed3e038-e52a-48c2-a98a-235c5c890549.png height=500>
 
 ### 添加标记
 
@@ -129,7 +129,7 @@ import { MapView, Marker } from "react-native-baidumap-sdk";
 </MapView>;
 ```
 
-<img src=https://user-images.githubusercontent.com/1709072/140707579-4abe070a-3fc1-481d-8a2e-91ac2ad8bdc7.png width=300>
+<img src=https://user-images.githubusercontent.com/1709072/140707579-4abe070a-3fc1-481d-8a2e-91ac2ad8bdc7.png height=500>
 
 ### 点聚合
 
@@ -176,8 +176,7 @@ const markers = Array(1000)
 </MapView>
 ```
 
-<img src=https://user-images.githubusercontent.com/1709072/140710764-40f767cd-74fd-47ca-8310-897bbf58fbbd.png width=300>
-<img src=https://user-images.githubusercontent.com/1709072/140710758-63e81ade-2635-4412-a5fa-b6948605fe75.png width=300>
+<img src=https://user-images.githubusercontent.com/1709072/140710764-40f767cd-74fd-47ca-8310-897bbf58fbbd.png height=500><img src=https://user-images.githubusercontent.com/1709072/140710758-63e81ade-2635-4412-a5fa-b6948605fe75.png height=500>
 
 ### 更多示例
 
