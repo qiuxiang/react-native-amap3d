@@ -56,9 +56,10 @@ AMapSdk.setApiKey(
 ### 显示地图
 
 ```jsx
-import { MapView } from "react-native-amap3d";
+import { MapView, MapType } from "react-native-amap3d";
 
 <MapView
+  mapType={MapType.Satellite}
   initialCameraPosition={{
     target: {
       latitude: 39.91095,
