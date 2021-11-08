@@ -13,7 +13,7 @@ class AMapViewManager: RCTViewManager {
       view.moveCamera(position: position, duration: duration)
     }
   }
-  
+
   @objc func call(_ reactTag: NSNumber, callerId: Double, name: String, args: NSDictionary) {
     getView(reactTag: reactTag) { view in
       view.call(id: callerId, name: name, args: args)
@@ -97,11 +97,16 @@ class MapView: MAMapView, MAMapViewDelegate {
   }
 
   func moveCamera(position: NSDictionary, duration: Int = 0) {
-    setMapStatus(position.mapStatus, animated: true, duration: Double(duration) / 1000)
+    let status = MAMapStatus()
+    status.zoomLevel = (position["zoom"] as? Double)?.cgFloat ?? zoomLevel
+    status.cameraDegree = (position["tilt"] as? Double)?.cgFloat ?? cameraDegree
+    status.rotationDegree = (position["bearing"] as? Double)?.cgFloat ?? rotationDegree
+    status.centerCoordinate = (position["target"] as? NSDictionary)?.coordinate ?? centerCoordinate
+    setMapStatus(status, animated: true, duration: Double(duration) / 1000)
   }
 
   func call(id: Double, name: String, args: NSDictionary) {
-    switch (name) {
+    switch name {
     case "getLatLng":
       response(id: id, data: convert(args.point, toCoordinateFrom: self).json)
     default:
@@ -110,7 +115,7 @@ class MapView: MAMapView, MAMapViewDelegate {
   }
 
   func response(id: Double, data: [String: Any]) {
-    onCallback([ "id": id, "data": data])
+    onCallback(["id": id, "data": data])
   }
 
   override func didAddSubview(_ subview: UIView) {

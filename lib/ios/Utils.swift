@@ -74,6 +74,12 @@ extension MAMapView {
   }
 }
 
+extension Double {
+  var cgFloat: CGFloat {
+    CGFloat(self)
+  }
+}
+
 extension RCTConvert {
   @objc static func MAMapType(_ json: Any) -> MAMapType {
     MAMapKit.MAMapType(rawValue: json as! NSInteger)!

@@ -76,6 +76,11 @@ class Marker: UIView {
     iconView = subview
   }
 
+  /**
+   * subview 不能直接用，因为在实现点聚合的时候发现，subview 一定概率无法正常 layout，会堆在右上角。
+   * 于是索性把 subview 渲染成 image，原来 subview 的 offset、点击问题也都不用处理了。
+   * 于是正常情况下就把 subview 的 opacity 设成 0，需要渲染的时候才设成 1，渲染然后马上设回 0
+   */
   func update() {
     if centerOffset == nil, view != nil {
       iconView?.layer.opacity = 1
