@@ -72,14 +72,17 @@ class Marker: UIView {
   }
 
   override func didAddSubview(_ subview: UIView) {
+    subview.layer.opacity = 0
     iconView = subview
   }
 
   func update() {
     if centerOffset == nil, view != nil {
-      let size: CGSize = (view?.bounds.size)!
-      view?.bounds = (iconView?.bounds)!
-      view?.centerOffset = CGPoint(x: 0, y: -size.height / 2)
+      iconView?.layer.opacity = 1
+      let renderer = UIGraphicsImageRenderer(bounds: iconView!.bounds)
+      view?.image = renderer.image { context in layer.render(in: context.cgContext) }
+      iconView?.layer.opacity = 0
+      updateCenterOffset()
     }
   }
 
@@ -93,7 +96,7 @@ class Marker: UIView {
   func getView() -> MAAnnotationView {
     if view == nil {
       view = MAAnnotationView(annotation: annotation, reuseIdentifier: nil)
-      if icon == nil && iconView == nil {
+      if icon == nil, iconView == nil {
         view?.image = MAPinAnnotationView(annotation: annotation, reuseIdentifier: nil).image
       }
       view?.isDraggable = draggable
@@ -104,12 +107,6 @@ class Marker: UIView {
       if icon != nil {
         view?.image = icon
         updateCenterOffset()
-      }
-      if iconView != nil {
-        let button = UIButton()
-        button.addSubview(iconView!)
-        view?.addSubview(button)
-        update()
       }
     }
     return view!

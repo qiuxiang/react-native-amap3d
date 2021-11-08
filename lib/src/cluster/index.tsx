@@ -40,31 +40,39 @@ export default class Cluster extends React.PureComponent<Props, State> {
   }
 
   componentDidUpdate(props: Props) {
-    this.init(props);
+    if (props.points != this.props.points) {
+      this.init(props);
+    }
   }
 
   init(props: Props) {
-    const { radius } = props;
-    const options = { radius, minZoom: 3, maxZoom: 21 };
-    this.cluster = new Supercluster<any, ClusterProperties>(options).load(
-      props.points.map((marker) => ({
-        type: "Feature",
-        geometry: {
-          type: "Point",
-          coordinates: [marker.position.longitude, marker.position.latitude],
-        },
-        properties: marker.properties,
-      }))
-    );
+    // 如果主线程占用太多计算资源，会导致 ios onLoad 事件无法触发，非常蛋疼
+    // 暂时想到的解决办法是丢到下一个事件循环，但这可能会导致 update 失败
+    setTimeout(() => {
+      const { radius } = props;
+      const options = { radius, minZoom: 3, maxZoom: 21 };
+      this.cluster = new Supercluster<any, ClusterProperties>(options).load(
+        props.points.map((marker) => ({
+          type: "Feature",
+          geometry: {
+            type: "Point",
+            coordinates: [marker.position.longitude, marker.position.latitude],
+          },
+          properties: marker.properties,
+        }))
+      );
+    }, 0);
   }
 
   update({ cameraPosition, latLngBounds }: CameraEvent) {
-    const { southwest, northeast } = latLngBounds;
-    const clusters = this.cluster!.getClusters(
-      [southwest.longitude, southwest.latitude, northeast.longitude, northeast.latitude],
-      Math.round(cameraPosition.zoom!)
-    );
-    this.setState({ clusters });
+    setTimeout(() => {
+      const { southwest, northeast } = latLngBounds;
+      const clusters = this.cluster!.getClusters(
+        [southwest.longitude, southwest.latitude, northeast.longitude, northeast.latitude],
+        Math.round(cameraPosition.zoom!)
+      );
+      this.setState({ clusters });
+    }, 0);
   }
 
   renderCluster = (cluster: ClusterParams) => (

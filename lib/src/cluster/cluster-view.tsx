@@ -38,7 +38,7 @@ export default class ClusterView extends React.PureComponent<Props> {
 const style = StyleSheet.create({
   cluster: {
     borderWidth: 4,
-    borderColor: "rgba(245,83,61,0.5)",
+    borderColor: "#fff",
     backgroundColor: "rgba(245,83,61,0.9)",
     alignItems: "center",
     justifyContent: "center",

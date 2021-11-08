@@ -18,7 +18,7 @@ export default class extends React.Component {
     if (Platform.OS == "android") {
       console.log(
         await PermissionsAndroid.requestMultiple([
-          PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION,
+          PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
         ])
       );
     }
@@ -72,7 +72,6 @@ const style = StyleSheet.create({
   logs: {
     elevation: 8,
     flex: 1,
-    backgroundColor: "#fff",
   },
   logText: {
     fontFamily: Platform.OS === "ios" ? "menlo" : "monospace",

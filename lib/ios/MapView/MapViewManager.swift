@@ -173,7 +173,6 @@ class MapView: MAMapView, MAMapViewDelegate {
 
   func mapInitComplete(_: MAMapView!) {
     onLoad(nil)
-    onCameraIdle(cameraEvent)
   }
 
   func mapView(_: MAMapView!, didSingleTappedAt coordinate: CLLocationCoordinate2D) {

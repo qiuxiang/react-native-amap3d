@@ -15,8 +15,7 @@ import { LatLng, Point } from "./types";
 export interface MarkerProps {
   /**
    * 坐标
-   */
-  position: LatLng;
+   */ position: LatLng;
 
   /**
    * 图标
@@ -99,11 +98,13 @@ export default class extends Component<MarkerProps> {
    * 例如，包含一个引用了网络图片的 <Image />，则需要在 view 更新后主动调用该方法触发
    * icon 更新。
    */
-  update = () => this.invoke("update");
+  update = () => {
+    setTimeout(() => this.invoke("update"), 0);
+  };
 
   componentDidUpdate() {
-    if (this.props.children && Platform.OS === "android") {
-      setTimeout(() => this.invoke("update"), 0);
+    if (this.props.children) {
+      this.update();
     }
   }
 
@@ -124,5 +125,5 @@ export default class extends Component<MarkerProps> {
 }
 
 const name = "AMapMarker";
-const style: ViewStyle = { position: "absolute" };
+const style: ViewStyle = { position: "absolute", zIndex: -1 };
 const NativeMarker = requireNativeComponent<MarkerProps>(name);
