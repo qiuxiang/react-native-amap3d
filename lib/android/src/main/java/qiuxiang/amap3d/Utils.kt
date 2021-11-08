@@ -62,7 +62,7 @@ fun CameraPosition.toJson(): WritableMap {
 
 fun Location.toJson(): WritableMap {
   return Arguments.createMap().apply {
-    putInt("timestamp", (time / 1000).toInt())
+    putDouble("timestamp", time.toDouble())
     putMap("coords", Arguments.createMap().apply {
       putDouble("latitude", latitude)
       putDouble("longitude", longitude)
