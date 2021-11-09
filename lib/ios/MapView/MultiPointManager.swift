@@ -18,9 +18,9 @@ class MultiPoint: UIView, Overlay, MAMultiPointOverlayRendererDelegate {
   @objc var onPress: RCTDirectEventBlock = { _ in }
 
   @objc func setIcon(_ icon: NSDictionary) {
-    imageLoader?.loadImage(with: RCTConvert.nsurlRequest(icon), callback: { _, image in
+    imageLoader?.loadImage(icon) { image in
       self.renderer?.icon = image
-    })
+    }
   }
 
   @objc func setItems(_ items: NSArray) {

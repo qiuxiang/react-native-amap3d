@@ -36,30 +36,11 @@ class Marker: UIView {
   @objc var onDragEnd: RCTDirectEventBlock = { _ in }
 
   @objc func setIcon(_ icon: NSDictionary?) {
-    if icon == nil {
-      return
+    imageLoader?.loadImage(icon) { image in
+      self.icon = image
+      self.view?.image = image
+      self.updateCenterOffset()
     }
-    let width = icon?["width"] as? Double ?? 0
-    let height = icon?["height"] as? Double ?? 0
-    imageLoader?.loadImage(
-      with: RCTConvert.nsurlRequest(icon),
-      size: CGSize(width: width, height: height),
-      scale: RCTScreenScale(),
-      clipped: false,
-      resizeMode: RCTResizeMode.cover,
-      progressBlock: { _, _ in },
-      partialLoad: { _ in },
-      completionBlock: { _, image in
-        if image == nil {
-          return
-        }
-        DispatchQueue.main.async {
-          self.icon = image
-          self.view?.image = image
-          self.updateCenterOffset()
-        }
-      }
-    )
   }
 
   @objc func setLatLng(_ coordinate: CLLocationCoordinate2D) {

@@ -3,15 +3,6 @@ extension NSDictionary {
     CLLocationCoordinate2DMake(self["latitude"] as! Double, self["longitude"] as! Double)
   }
 
-  var mapStatus: MAMapStatus {
-    let status = MAMapStatus()
-    if let it = self["zoom"] as? Double { status.zoomLevel = CGFloat(it) }
-    if let it = self["tilt"] as? Double { status.cameraDegree = CGFloat(it) }
-    if let it = self["bearing"] as? Double { status.rotationDegree = CGFloat(it) }
-    if let it = self["target"] as? NSDictionary { status.centerCoordinate = it.coordinate }
-    return status
-  }
-
   var point: CGPoint {
     CGPoint(x: self["x"] as! Double, y: self["y"] as! Double)
   }
@@ -83,5 +74,29 @@ extension Double {
 extension RCTConvert {
   @objc static func MAMapType(_ json: Any) -> MAMapType {
     MAMapKit.MAMapType(rawValue: json as! NSInteger)!
+  }
+}
+
+extension RCTImageLoader {
+  func loadImage(_ icon: NSDictionary?, callback: @escaping (UIImage) -> Void) {
+    if icon == nil {
+      return
+    }
+    let width = icon?["width"] as? Double ?? 0
+    let height = icon?["height"] as? Double ?? 0
+    loadImage(
+      with: RCTConvert.nsurlRequest(icon),
+      size: CGSize(width: width, height: height),
+      scale: RCTScreenScale(),
+      clipped: false,
+      resizeMode: RCTResizeMode.cover,
+      progressBlock: { _, _ in },
+      partialLoad: { _ in },
+      completionBlock: { _, image in
+        if image != nil {
+          callback(image!)
+        }
+      }
+    )
   }
 }

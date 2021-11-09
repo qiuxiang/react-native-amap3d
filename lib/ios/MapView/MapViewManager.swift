@@ -108,13 +108,13 @@ class MapView: MAMapView, MAMapViewDelegate {
   func call(id: Double, name: String, args: NSDictionary) {
     switch name {
     case "getLatLng":
-      response(id: id, data: convert(args.point, toCoordinateFrom: self).json)
+      callback(id: id, data: convert(args.point, toCoordinateFrom: self).json)
     default:
       break
     }
   }
 
-  func response(id: Double, data: [String: Any]) {
+  func callback(id: Double, data: [String: Any]) {
     onCallback(["id": id, "data": data])
   }
 

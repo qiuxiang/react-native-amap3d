@@ -21,6 +21,7 @@ export default class Component<P, S = {}> extends PureComponent<P, S> {
    */
   invoke(name: string, params?: any[]) {
     if (!this.mounted) return;
+
     const handle = findNodeHandle(this);
     if (handle) {
       const command = UIManager.getViewManagerConfig(this.name).Commands[name];
