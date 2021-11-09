@@ -70,7 +70,7 @@ import { MapView, MapType } from "react-native-amap3d";
 />;
 ```
 
-<img src=https://user-images.githubusercontent.com/1709072/140698774-bdbfee64-d403-4e49-9a85-716d44783cfd.png height=500>
+<img src=https://user-images.githubusercontent.com/1709072/140698774-bdbfee64-d403-4e49-9a85-716d44783cfd.png height=500> <img src=https://user-images.githubusercontent.com/1709072/140849895-dada3f51-74c0-4685-b5d6-c1b69a4d06bb.PNG height=500>
 
 ### 监听地图事件
 
@@ -88,7 +88,7 @@ render() {
 }
 ```
 
-<img src=https://user-images.githubusercontent.com/1709072/140705501-9ed3e038-e52a-48c2-a98a-235c5c890549.png height=500>
+<img src=https://user-images.githubusercontent.com/1709072/140705501-9ed3e038-e52a-48c2-a98a-235c5c890549.png height=500> <img src=https://user-images.githubusercontent.com/1709072/140849894-3add3858-fc7f-47cd-9786-94aeef399ebc.PNG height=500>
 
 ### 添加标记
 
@@ -129,7 +129,7 @@ import { MapView, Marker } from "react-native-baidumap-sdk";
 </MapView>;
 ```
 
-<img src=https://user-images.githubusercontent.com/1709072/140707579-4abe070a-3fc1-481d-8a2e-91ac2ad8bdc7.png height=500>
+<img src=https://user-images.githubusercontent.com/1709072/140707579-4abe070a-3fc1-481d-8a2e-91ac2ad8bdc7.png height=500> <img src=https://user-images.githubusercontent.com/1709072/140849886-7eb9322b-8fa8-4049-a7b0-3eb36d006992.PNG height=500>
 
 ### 点聚合
 
@@ -176,23 +176,25 @@ const markers = Array(1000)
 </MapView>
 ```
 
-<img src=https://user-images.githubusercontent.com/1709072/140710764-40f767cd-74fd-47ca-8310-897bbf58fbbd.png height=500><img src=https://user-images.githubusercontent.com/1709072/140710758-63e81ade-2635-4412-a5fa-b6948605fe75.png height=500>
+<img src=https://user-images.githubusercontent.com/1709072/140710764-40f767cd-74fd-47ca-8310-897bbf58fbbd.png height=500> <img src=https://user-images.githubusercontent.com/1709072/140849888-6b6609c1-2e55-41c2-bdc3-f9d3fcc7a112.PNG height=500>
+
+<img src=https://user-images.githubusercontent.com/1709072/140710758-63e81ade-2635-4412-a5fa-b6948605fe75.png height=500> <img src=https://user-images.githubusercontent.com/1709072/140849880-9eb7609d-55a7-43be-8b6a-bac725fb0a82.PNG height=500>
 
 ### 更多示例
 
-参考 [examples](https://github.com/qiuxiang/react-native-amap3d/tree/master/example/examples)，或直接下载安装[示例 app](https://github.com/qiuxiang/react-native-amap3d/releases/download/v2.0.1/app-release.apk)。
+参考 [examples](https://github.com/qiuxiang/react-native-amap3d/tree/master/example/examples)。
 
 #### Android
 
 ```bash
-yarn run-android
+npm run android
 ```
 
 #### iOS
 
 ```bash
 cd ios && pod install && cd ..
-yarn run-ios
+npm run ios
 ```
 
 ## 常见问题
