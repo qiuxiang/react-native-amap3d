@@ -31,12 +31,12 @@ react-native 高德地图组件，使用最新 3D SDK，支持 Android + iOS，�
 npm i react-native-amap3d
 ```
 
-### 添加高德 Key
+### 添加高德 API Key
 
 首先你需要获取高德地图 API Key：
 
-- [获取高德 Key（android）](http://lbs.amap.com/api/android-sdk/guide/create-project/get-key)
-- [获取高德 Key（ios）](https://lbs.amap.com/api/ios-sdk/guide/create-project/get-key)
+- [Aandroid](http://lbs.amap.com/api/android-sdk/guide/create-project/get-key)
+- [iOS](https://lbs.amap.com/api/ios-sdk/guide/create-project/get-key)
 
 然后你需要在显示地图前调用接口设置 API key：
 
