@@ -77,15 +77,11 @@ import { MapView, MapType } from "react-native-amap3d";
 ```jsx
 import { MapView } from 'react-native-baidumap-sdk'
 
-render() {
-  return (
-    <MapView
-      onLoad={() => console.log('onLoad')}
-      onPress={({ nativeEvent }) => console.log(nativeEvent)}
-      onCameraIdle={({ nativeEvent }) => console.log(nativeEvent)}
-    />
-  )
-}
+<MapView
+  onLoad={() => console.log('onLoad')}
+  onPress={({ nativeEvent }) => console.log(nativeEvent)}
+  onCameraIdle={({ nativeEvent }) => console.log(nativeEvent)}
+/>
 ```
 
 <img src=https://user-images.githubusercontent.com/1709072/140705501-9ed3e038-e52a-48c2-a98a-235c5c890549.png height=500> <img src=https://user-images.githubusercontent.com/1709072/140849894-3add3858-fc7f-47cd-9786-94aeef399ebc.PNG height=500>
@@ -154,15 +150,6 @@ const markers = Array(1000)
   }}
 >
   <Cluster
-    onPress={({ position }) => {
-      this.mapView?.moveCamera(
-        {
-          target: position,
-          zoom: this.status!.cameraPosition.zoom! + 1,
-        },
-        200
-      );
-    }}
     ref={(ref) => (this.cluster = ref)}
     points={markers}
     renderMarker={(item) => (
@@ -182,7 +169,7 @@ const markers = Array(1000)
 
 ### 更多示例
 
-参考 [examples](https://github.com/qiuxiang/react-native-amap3d/tree/master/example/examples)。
+参考 [example](https://github.com/qiuxiang/react-native-amap3d/tree/master/example)。
 
 #### Android
 
