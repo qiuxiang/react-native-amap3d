@@ -1,9 +1,5 @@
 name: build
-on:
-  push:
-    paths:
-      - lib/android
-      - example
+on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
