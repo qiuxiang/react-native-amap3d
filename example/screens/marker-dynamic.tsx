@@ -15,6 +15,7 @@ export default () => {
       {markers.map((position) => (
         <Marker
           key={`${position.latitude},${position.longitude}`}
+          icon={require("../images/flag.png")}
           position={position}
           onPress={() => {
             markers.splice(markers.indexOf(position), 1);

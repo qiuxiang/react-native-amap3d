@@ -23,7 +23,7 @@ export default {
   地图事件: Events,
   "添加标记，支持拖拽": Marker,
   动态添加移除标记: MarkerDynamic,
-  自定义标记图标: MarkerIcon,
+  更多自定义标记图标: MarkerIcon,
   点聚合: Cluster,
   绘制折线: Polyline,
   绘制多边形: Polygon,
