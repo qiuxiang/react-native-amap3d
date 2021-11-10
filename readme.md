@@ -1,4 +1,4 @@
-# react-native-amap3d [![npm version][version-badge]][npm] [![build status][build-badge]][build]
+# react-native-amap3d [![][version-badge]][npm] [![](https://github.com/qiuxiang/react-native-amap3d/actions/workflows/build.yml/badge.svg)](https://github.com/qiuxiang/react-native-amap3d/actions/workflows/build.yml)
 
 **注意：该项目现在正在进行新版（v3）重构，接口重新设计且部分重新实现。**
 
@@ -75,13 +75,13 @@ import { MapView, MapType } from "react-native-amap3d";
 ### 监听地图事件
 
 ```jsx
-import { MapView } from 'react-native-baidumap-sdk'
+import { MapView } from "react-native-baidumap-sdk";
 
 <MapView
-  onLoad={() => console.log('onLoad')}
+  onLoad={() => console.log("onLoad")}
   onPress={({ nativeEvent }) => console.log(nativeEvent)}
   onCameraIdle={({ nativeEvent }) => console.log(nativeEvent)}
-/>
+/>;
 ```
 
 <img src=https://user-images.githubusercontent.com/1709072/140705501-9ed3e038-e52a-48c2-a98a-235c5c890549.png height=500> <img src=https://user-images.githubusercontent.com/1709072/140849894-3add3858-fc7f-47cd-9786-94aeef399ebc.PNG height=500>
@@ -160,7 +160,7 @@ const markers = Array(1000)
       />
     )}
   />
-</MapView>
+</MapView>;
 ```
 
 <img src=https://user-images.githubusercontent.com/1709072/140710764-40f767cd-74fd-47ca-8310-897bbf58fbbd.png height=500> <img src=https://user-images.githubusercontent.com/1709072/140849888-6b6609c1-2e55-41c2-bdc3-f9d3fcc7a112.PNG height=500>
@@ -190,6 +190,4 @@ npm run ios
 - onLocation 没有返回定位数据通常是因为 key 不正确，或没有申请 PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION 权限
 
 [npm]: https://www.npmjs.com/package/react-native-amap3d
-[version-badge]: https://badge.fury.io/js/react-native-amap3d.svg
-[build-badge]: https://travis-ci.org/qiuxiang/react-native-amap3d.svg?branch=master
-[build]: https://travis-ci.org/qiuxiang/react-native-amap3d
+[version-badge]: https://img.shields.io/npm/v/react-native-amap3d.svg
