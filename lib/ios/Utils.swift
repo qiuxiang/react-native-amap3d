@@ -94,7 +94,9 @@ extension RCTImageLoader {
       partialLoad: { _ in },
       completionBlock: { _, image in
         if image != nil {
-          callback(image!)
+          DispatchQueue.main.async {
+            callback(image!)
+          }
         }
       }
     )
