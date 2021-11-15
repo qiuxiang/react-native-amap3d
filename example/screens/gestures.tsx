@@ -1,61 +1,46 @@
+import { useTheme } from "@react-navigation/native";
 import * as React from "react";
-import { StyleSheet, Switch, Text, View } from "react-native";
+import { View } from "react-native";
 import { MapView } from "react-native-amap3d";
-import styles from "../styles";
+import SwitchWithLabel from "../components/switch-with-label";
 
-export default class extends React.Component {
-  state = {
-    zoomGesturesEnabled: false,
-    scrollGesturesEnabled: false,
-    rotateGesturesEnabled: false,
-    tiltGesturesEnabled: false,
+export default () => {
+  const { colors } = useTheme();
+  const [zoomGesturesEnabled, setZoomGesturesEnabled] = React.useState(false);
+  const [scrollGesturesEnabled, setScrollGesturesEnabled] = React.useState(false);
+  const [rotateGesturesEnabled, setRotateGesturesEnabled] = React.useState(false);
+  const [tiltGesturesEnabled, setTiltGesturesEnabled] = React.useState(false);
+  const props = {
+    zoomGesturesEnabled,
+    scrollGesturesEnabled,
+    rotateGesturesEnabled,
+    tiltGesturesEnabled,
   };
-
-  render() {
-    return (
-      <View style={StyleSheet.absoluteFill}>
-        <MapView
-          zoomGesturesEnabled={this.state.zoomGesturesEnabled}
-          scrollGesturesEnabled={this.state.scrollGesturesEnabled}
-          rotateGesturesEnabled={this.state.rotateGesturesEnabled}
-          tiltGesturesEnabled={this.state.tiltGesturesEnabled}
-          style={styles.map}
+  return (
+    <>
+      <MapView {...props} />
+      <View style={{ flexDirection: "row", backgroundColor: colors.background }}>
+        <SwitchWithLabel
+          label="缩放"
+          value={zoomGesturesEnabled}
+          onChange={setZoomGesturesEnabled}
         />
-        <View style={styles.controls}>
-          <View style={styles.control}>
-            <Switch
-              style={styles.switch}
-              onValueChange={(rotateGesturesEnabled) => this.setState({ rotateGesturesEnabled })}
-              value={this.state.rotateGesturesEnabled}
-            />
-            <Text>旋转</Text>
-          </View>
-          <View style={styles.control}>
-            <Switch
-              style={styles.switch}
-              onValueChange={(scrollGesturesEnabled) => this.setState({ scrollGesturesEnabled })}
-              value={this.state.scrollGesturesEnabled}
-            />
-            <Text>滑动</Text>
-          </View>
-          <View style={styles.control}>
-            <Switch
-              style={styles.switch}
-              onValueChange={(zoomGesturesEnabled) => this.setState({ zoomGesturesEnabled })}
-              value={this.state.zoomGesturesEnabled}
-            />
-            <Text>缩放</Text>
-          </View>
-          <View style={styles.control}>
-            <Switch
-              style={styles.switch}
-              onValueChange={(tiltGesturesEnabled) => this.setState({ tiltGesturesEnabled })}
-              value={this.state.tiltGesturesEnabled}
-            />
-            <Text>倾斜</Text>
-          </View>
-        </View>
+        <SwitchWithLabel
+          label="滑动"
+          value={scrollGesturesEnabled}
+          onChange={setScrollGesturesEnabled}
+        />
+        <SwitchWithLabel
+          label="旋转"
+          value={rotateGesturesEnabled}
+          onChange={setRotateGesturesEnabled}
+        />
+        <SwitchWithLabel
+          label="倾斜"
+          value={tiltGesturesEnabled}
+          onChange={setTiltGesturesEnabled}
+        />
       </View>
-    );
-  }
-}
+    </>
+  );
+};

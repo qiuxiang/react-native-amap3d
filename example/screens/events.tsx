@@ -69,10 +69,7 @@ export default class extends React.Component {
 
 const style = StyleSheet.create({
   body: { flex: 1 },
-  logs: {
-    elevation: 8,
-    flex: 1,
-  },
+  logs: { elevation: 8, flex: 1 },
   logText: {
     fontFamily: Platform.OS === "ios" ? "menlo" : "monospace",
     fontSize: 12,

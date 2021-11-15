@@ -159,7 +159,7 @@ const NativeMapView = requireNativeComponent<MapViewProps>(name);
 
 export default class extends Component<MapViewProps> {
   static defaultProps = {
-    style: StyleSheet.absoluteFill,
+    style: { flex: 1 },
     compassEnabled: true,
     scaleControlsEnabled: true,
     distanceFilter: 1,

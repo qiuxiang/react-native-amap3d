@@ -1,64 +1,42 @@
+import { useTheme } from "@react-navigation/native";
 import * as React from "react";
-import { StyleSheet, Switch, Text, View } from "react-native";
+import { View } from "react-native";
 import { MapView } from "react-native-amap3d";
-import styles from "../styles";
+import SwitchWithLabel from "../components/switch-with-label";
 
-export default class extends React.Component {
-  state = {
-    compassEnabled: false,
-    scaleControlsEnabled: true,
-    zoomControlsEnabled: true,
-    myLocationButtonEnabled: false,
+export default () => {
+  const { colors } = useTheme();
+  const [compassEnabled, setCompassEnabled] = React.useState(false);
+  const [scaleControlsEnabled, setScaleControlsEnabled] = React.useState(true);
+  const [zoomControlsEnabled, setZoomControlsEnabled] = React.useState(true);
+  const [myLocationButtonEnabled, setMyLocationButtonEnabled] = React.useState(false);
+  const props = {
+    compassEnabled,
+    scaleControlsEnabled,
+    zoomControlsEnabled,
+    myLocationButtonEnabled,
   };
-
-  render() {
-    return (
-      <View style={StyleSheet.absoluteFill}>
-        <MapView
-          compassEnabled={this.state.compassEnabled}
-          scaleControlsEnabled={this.state.scaleControlsEnabled}
-          myLocationEnabled={this.state.myLocationButtonEnabled}
-          myLocationButtonEnabled={this.state.myLocationButtonEnabled}
-          zoomControlsEnabled={this.state.zoomControlsEnabled}
-          style={styles.map}
+  return (
+    <>
+      <MapView {...props} />
+      <View style={{ flexDirection: "row", backgroundColor: colors.background }}>
+        <SwitchWithLabel label="指南针" value={compassEnabled} onChange={setCompassEnabled} />
+        <SwitchWithLabel
+          label="比例尺"
+          value={scaleControlsEnabled}
+          onChange={setScaleControlsEnabled}
         />
-        <View style={styles.controls}>
-          <View style={styles.control}>
-            <Switch
-              style={styles.switch}
-              onValueChange={(compassEnabled) => this.setState({ compassEnabled })}
-              value={this.state.compassEnabled}
-            />
-            <Text>指南针</Text>
-          </View>
-          <View style={styles.control}>
-            <Switch
-              style={styles.switch}
-              onValueChange={(scaleControlsEnabled) => this.setState({ scaleControlsEnabled })}
-              value={this.state.scaleControlsEnabled}
-            />
-            <Text>比例尺</Text>
-          </View>
-          <View style={styles.control}>
-            <Switch
-              style={styles.switch}
-              onValueChange={(myLocationButtonEnabled) =>
-                this.setState({ myLocationButtonEnabled })
-              }
-              value={this.state.myLocationButtonEnabled}
-            />
-            <Text>定位按钮</Text>
-          </View>
-          <View style={styles.control}>
-            <Switch
-              style={styles.switch}
-              onValueChange={(zoomControlsEnabled) => this.setState({ zoomControlsEnabled })}
-              value={this.state.zoomControlsEnabled}
-            />
-            <Text>缩放按钮</Text>
-          </View>
-        </View>
+        <SwitchWithLabel
+          label="缩放控件"
+          value={zoomControlsEnabled}
+          onChange={setZoomControlsEnabled}
+        />
+        <SwitchWithLabel
+          label="定位按钮"
+          value={myLocationButtonEnabled}
+          onChange={setMyLocationButtonEnabled}
+        />
       </View>
-    );
-  }
-}
+    </>
+  );
+};
