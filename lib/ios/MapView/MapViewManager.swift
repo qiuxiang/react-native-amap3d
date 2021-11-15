@@ -41,54 +41,6 @@ class MapView: MAMapView, MAMapViewDelegate {
   @objc var onLocation: RCTBubblingEventBlock = { _ in }
   @objc var onCallback: RCTBubblingEventBlock = { _ in }
 
-  @objc func setMyLocationEnabled(_ enabled: Bool) {
-    showsUserLocation = enabled
-  }
-
-  @objc func setBuildingsEnabled(_ enabled: Bool) {
-    isShowsBuildings = enabled
-  }
-
-  @objc func setTrafficEnabled(_ enabled: Bool) {
-    isShowTraffic = enabled
-  }
-
-  @objc func setIndoorViewEnabled(_ enabled: Bool) {
-    isShowsIndoorMap = enabled
-  }
-
-  @objc func setCompassEnabled(_ enabled: Bool) {
-    showsCompass = enabled
-  }
-
-  @objc func setScaleControlsEnabled(_ enabled: Bool) {
-    showsScale = enabled
-  }
-
-  @objc func setScrollGesturesEnabled(_ enabled: Bool) {
-    isScrollEnabled = enabled
-  }
-
-  @objc func setZoomGesturesEnabled(_ enabled: Bool) {
-    isZoomEnabled = enabled
-  }
-
-  @objc func setRotateGesturesEnabled(_ enabled: Bool) {
-    isRotateEnabled = enabled
-  }
-
-  @objc func setTiltGesturesEnabled(_ enabled: Bool) {
-    isRotateCameraEnabled = enabled
-  }
-
-  @objc func setMinZoom(_ value: Double) {
-    minZoomLevel = value
-  }
-
-  @objc func setMaxZoom(_ value: Double) {
-    maxZoomLevel = value
-  }
-
   @objc func setInitialCameraPosition(_ json: NSDictionary) {
     if !initialized {
       initialized = true
