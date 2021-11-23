@@ -195,6 +195,7 @@ export default class extends Component<MapViewProps> {
   }
 
   componentDidMount() {
+    super.componentDidMount();
     // 无论如何也要在 1 秒后 setLoaded(true) ，防止 onLoad 事件不触发的情况下显示不正常
     // 目前只在 iOS 上低概率出现
     setTimeout(() => this.setState({ loaded: true }), 1000);

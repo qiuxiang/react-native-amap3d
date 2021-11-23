@@ -40,7 +40,7 @@
     "@types/react-native": "^0.65.8",
     "@types/supercluster": "^5.0.3",
     "react": "17.0.2",
-    "react-native": "^0.66.1",
+    "react-native": "^0.66.3",
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.8.0"
   },
