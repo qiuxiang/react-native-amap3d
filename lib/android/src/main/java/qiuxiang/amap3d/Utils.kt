@@ -33,7 +33,10 @@ fun ReadableMap.toLatLng(): LatLng {
 }
 
 fun ReadableArray.toLatLngList(): List<LatLng> {
-  return (0 until size()).map { getMap(it).toLatLng() }
+  return (0 until size()).map {
+    // 兼容 0.63
+    getMap(it)!!.toLatLng()
+  }
 }
 
 fun LatLng.toJson(): WritableMap {
@@ -91,7 +94,7 @@ fun ReadableMap.getFloat(key: String): Float? {
 }
 
 fun getEventTypeConstants(vararg list: String): Map<String, Any> {
-  return list.map { it to mapOf("phasedRegistrationNames" to mapOf("bubbled" to it)) }.toMap()
+  return list.associateWith { mapOf("phasedRegistrationNames" to mapOf("bubbled" to it)) }
 }
 
 fun View.fetchImage(source: ReadableMap, callback: (BitmapDescriptor) -> Unit) {

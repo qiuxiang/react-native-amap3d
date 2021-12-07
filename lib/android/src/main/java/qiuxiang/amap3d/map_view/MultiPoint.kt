@@ -38,7 +38,8 @@ class MultiPoint(context: Context) : ReactViewGroup(context), Overlay {
   fun setItems(points: ReadableArray) {
     items = (0 until points.size())
       .map { item ->
-        MultiPointItem(points.getMap(item).toLatLng()).apply { customerId = "${id}_$item" }
+        // 兼容 0.63
+        MultiPointItem(points.getMap(item)!!.toLatLng()).apply { customerId = "${id}_$item" }
       }
     overlay?.items = items
   }

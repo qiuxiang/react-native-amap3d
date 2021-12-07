@@ -154,7 +154,8 @@ class MapView(context: ThemedReactContext) : TextureMapView(context) {
     when (args.getString(1)) {
       "getLatLng" -> callback(
         id,
-        map.projection.fromScreenLocation(args.getMap(2).toPoint()).toJson()
+        // 兼容 0.63
+        map.projection.fromScreenLocation(args.getMap(2)!!.toPoint()).toJson()
       )
     }
   }
