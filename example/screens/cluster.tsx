@@ -19,10 +19,7 @@ export default class Clustering extends Component {
           this.status = nativeEvent;
           this.cluster?.update(nativeEvent);
         }}
-        onLongPress={() => {
-          this.setState({ markers: generateMarkers() });
-          setTimeout(() => this.cluster?.update(this.status!), 0);
-        }}
+        onLongPress={() => this.setState({ markers: generateMarkers() })}
       >
         <Cluster
           onPress={({ position }) => {
@@ -49,8 +46,8 @@ export default class Clustering extends Component {
   }
 }
 
-function generateMarkers() {
-  return Array(1000)
+function generateMarkers(count = 1000) {
+  return Array(count)
     .fill(0)
     .map((_, i) => ({
       position: { latitude: 39.5 + Math.random(), longitude: 116 + Math.random() },
