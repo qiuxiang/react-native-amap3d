@@ -106,14 +106,14 @@ export interface MapViewProps extends ViewProps {
   /**
    * 设定定位的最小更新距离
    *
-   * @platform android
+   * @platform ios
    */
   distanceFilter?: number;
 
   /**
    * 设定最小更新角度，默认为 1 度
    *
-   * @platform android
+   * @platform ios
    */
   headingFilter?: number;
 
