@@ -3,6 +3,8 @@ package qiuxiang.amap3d.map_view
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import com.amap.api.maps.AMap
 import com.amap.api.maps.model.*
@@ -74,7 +76,9 @@ class Marker(context: Context) : ReactViewGroup(context), Overlay {
   fun setIcon(source: ReadableMap) {
     fetchImage(source) {
       icon = it
-      marker?.setIcon(it)
+      Handler(Looper.getMainLooper()).post {
+        marker?.setIcon(it)
+      }
     }
   }
 

@@ -8,7 +8,6 @@ export default () => {
   return (
     <MapView
       onPress={({ nativeEvent }) => {
-        console.log(nativeEvent);
         setMarkers([...markers, nativeEvent]);
       }}
     >
@@ -19,7 +18,6 @@ export default () => {
           position={position}
           onPress={() => {
             markers.splice(markers.indexOf(position), 1);
-            console.log(markers);
             setMarkers([...markers]);
           }}
         />
