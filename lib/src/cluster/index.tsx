@@ -22,7 +22,7 @@ export interface ClusterParams {
   position: LatLng;
 }
 
-interface MarkerItem {
+interface ClusterPoint {
   /**
    * 坐标
    */
@@ -35,6 +35,9 @@ interface MarkerItem {
 }
 
 interface Props {
+  /**
+   * 聚合半径
+   */
   radius?: number;
 
   /**
@@ -50,12 +53,12 @@ interface Props {
   /**
    * 坐标点列表
    */
-  points: MarkerItem[];
+  points: ClusterPoint[];
 
   /**
    * 渲染 Marker
    */
-  renderMarker: (item: MarkerItem) => React.ReactNode;
+  renderMarker: (item: ClusterPoint) => React.ReactNode;
 
   /**
    * 渲染聚合点
