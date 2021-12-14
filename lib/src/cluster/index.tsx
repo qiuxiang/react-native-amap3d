@@ -64,6 +64,9 @@ export default class Cluster extends React.PureComponent<Props, State> {
     }, 0);
   }
 
+  /**
+   * 需要在 MapView.onCameraIdle({ nativeEvent }) 回调里调用，参数为 nativeEvent
+   */
   update({ cameraPosition, latLngBounds }: CameraEvent) {
     setTimeout(() => {
       const { southwest, northeast } = latLngBounds;

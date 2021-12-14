@@ -8,12 +8,7 @@ export default class Clustering extends Component {
   status?: CameraEvent;
   cluster?: Cluster | null;
   mapView?: MapView | null;
-  markers = Array(1000)
-    .fill(0)
-    .map((_, i) => ({
-      position: { latitude: 39.5 + Math.random(), longitude: 116 + Math.random() },
-      properties: { key: `Marker${i}` },
-    }));
+  state = { markers: generateMarkers() };
 
   render() {
     return (
@@ -23,6 +18,10 @@ export default class Clustering extends Component {
         onCameraIdle={({ nativeEvent }) => {
           this.status = nativeEvent;
           this.cluster?.update(nativeEvent);
+        }}
+        onLongPress={() => {
+          this.setState({ markers: generateMarkers() });
+          setTimeout(() => this.cluster?.update(this.status!), 0);
         }}
       >
         <Cluster
@@ -36,7 +35,7 @@ export default class Clustering extends Component {
             );
           }}
           ref={(ref) => (this.cluster = ref)}
-          points={this.markers}
+          points={this.state.markers}
           renderMarker={(item) => (
             <Marker
               key={item.properties.key}
@@ -48,4 +47,13 @@ export default class Clustering extends Component {
       </MapView>
     );
   }
+}
+
+function generateMarkers() {
+  return Array(1000)
+    .fill(0)
+    .map((_, i) => ({
+      position: { latitude: 39.5 + Math.random(), longitude: 116 + Math.random() },
+      properties: { key: `Marker${i}` },
+    }));
 }
