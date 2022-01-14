@@ -4,12 +4,19 @@ import com.amap.api.maps.offlinemap.OfflineMapCity
 import com.amap.api.maps.offlinemap.OfflineMapManager
 import com.amap.api.maps.offlinemap.OfflineMapProvince
 import com.amap.api.maps.offlinemap.OfflineMapStatus
+import com.amap.api.maps.MapsInitializer
 import com.facebook.react.bridge.*
 import com.facebook.react.modules.core.DeviceEventManagerModule
 
 @Suppress("unused")
 class OfflineModule(private val reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext), OfflineMapManager.OfflineMapDownloadListener {
-  private val manager = OfflineMapManager(reactContext, this)
+  private var manager: OfflineMapManager;
+
+  init {
+    MapsInitializer.updatePrivacyShow(reactContext,true,true);
+    MapsInitializer.updatePrivacyAgree(reactContext,true);
+    manager = OfflineMapManager(reactContext, this)
+  }
 
   override fun getName(): String {
     return "AMapOffline"
