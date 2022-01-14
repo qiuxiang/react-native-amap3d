@@ -34,7 +34,8 @@ fun ReadableMap.toLatLng(): LatLng {
 
 fun ReadableArray.toLatLngList(): List<LatLng> {
   return (0 until size()).map {
-    // 兼容 0.63
+    // @todo 暂时兼容 0.63
+    @Suppress("UNNECESSARY_NOT_NULL_ASSERTION")
     getMap(it)!!.toLatLng()
   }
 }
@@ -82,10 +83,6 @@ fun LatLngBounds.toJson(): WritableMap {
     putMap("southwest", southwest.toJson())
     putMap("northeast", northeast.toJson())
   }
-}
-
-fun ReadableMap.toLatLngBounds(): LatLngBounds {
-  return LatLngBounds(getMap("southwest")?.toLatLng(), getMap("northeast")?.toLatLng())
 }
 
 fun ReadableMap.getFloat(key: String): Float? {

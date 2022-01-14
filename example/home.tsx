@@ -22,7 +22,7 @@ if (Platform.OS === "android") {
 export default () => {
   const navigation = useNavigation<NavigationProps>();
   React.useEffect(() => {
-    AMapSdk.setApiKey(
+    AMapSdk.init(
       Platform.select({
         android: "c52c7169e6df23490e3114330098aaac",
         ios: "186d3464209b74effa4d8391f441f14d",
