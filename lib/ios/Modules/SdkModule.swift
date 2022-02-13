@@ -4,7 +4,7 @@ class AMapSdk: NSObject {
     false
   }
 
-  @objc func setApiKey(_ apiKey: String) {
+  @objc func initSDK(_ apiKey: String) {
     AMapServices.shared().apiKey = apiKey
   }
 

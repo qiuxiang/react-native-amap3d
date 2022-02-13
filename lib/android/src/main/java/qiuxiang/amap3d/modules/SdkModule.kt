@@ -14,7 +14,7 @@ class SdkModule(val context: ReactApplicationContext) : ReactContextBaseJavaModu
   }
 
   @ReactMethod
-  fun init(apiKey: String?) {
+  fun initSDK(apiKey: String?) {
     apiKey?.let {
       MapsInitializer.setApiKey(it)
       MapsInitializer.updatePrivacyAgree(context, true)
