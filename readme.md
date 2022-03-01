@@ -42,8 +42,9 @@ npm i react-native-amap3d
 
 ```js
 import { AMapSdk } from "react-native-amap3d";
+import { Platform } from 'react-native';
 
-AMapSdk.setApiKey(
+AMapSdk.init(
   Platform.select({
     android: "c52c7169e6df23490e3114330098aaac",
     ios: "186d3464209b74effa4d8391f441f14d",
