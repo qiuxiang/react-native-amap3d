@@ -1,6 +1,6 @@
 # react-native-amap3d [![][version-badge]][npm] [![](https://github.com/qiuxiang/react-native-amap3d/actions/workflows/build.yml/badge.svg)](https://github.com/qiuxiang/react-native-amap3d/actions/workflows/build.yml)
 
-**注意：该项目现在正在进行新版（v3）重构，接口重新设计且部分重新实现。**
+**注意：该项目处于消极维护状态，随缘更新。**
 
 react-native 高德地图组件，使用最新 3D SDK，支持 Android + iOS，受 [react-native-maps](https://github.com/airbnb/react-native-maps) 启发，提供功能丰富且易用的接口。
 
