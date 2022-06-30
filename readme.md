@@ -76,7 +76,7 @@ import { MapView, MapType } from "react-native-amap3d";
 ### 监听地图事件
 
 ```jsx
-import { MapView } from "react-native-baidumap-sdk";
+import { MapView } from "react-native-amap3d";
 
 <MapView
   onLoad={() => console.log("onLoad")}
@@ -94,7 +94,7 @@ import { MapView } from "react-native-baidumap-sdk";
 同时支持 `children` 作为标记图标。
 
 ```jsx
-import { MapView, Marker } from "react-native-baidumap-sdk";
+import { MapView, Marker } from "react-native-amap3d";
 
 <MapView>
   <Marker
