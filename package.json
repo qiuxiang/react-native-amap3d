@@ -16,7 +16,8 @@
     "lib/android/src",
     "lib/android/build.gradle",
     "lib/ios",
-    "react-native.config.js"
+    "react-native.config.js",
+    "react-native-amap3d.podspec"
   ],
   "homepage": "https://github.com/qiuxiang/react-native-amap3d",
   "repository": {
