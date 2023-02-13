@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: npm i typescript typedoc
-      - run: npx typedoc --out docs/api --skipErrorChecking src
+      - run: npx typedoc --out docs/api --skipErrorChecking lib/src
       - uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: docs
