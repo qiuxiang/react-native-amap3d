@@ -6,7 +6,7 @@ def getExt(prop, fallback) {
 }
 
 buildscript {
-    ext.kotlin_version = '1.5.31'
+    ext.kotlin_version = '1.7.21'
 
     repositories {
         mavenCentral()
@@ -18,27 +18,17 @@ buildscript {
 }
 
 android {
-    compileSdkVersion getExt('compileSdkVersion', 30)
-    buildToolsVersion getExt('buildToolsVersion', '30.0.2')
+    compileSdkVersion getExt('compileSdkVersion', 33)
+    buildToolsVersion getExt('buildToolsVersion', '33.0.0')
 
     defaultConfig {
         minSdkVersion getExt('minSdkVersion', 21)
-        targetSdkVersion getExt('targetSdkVersion', 30)
-    }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-
-    kotlinOptions {
-        jvmTarget = '1.8'
+        targetSdkVersion getExt('targetSdkVersion', 33)
     }
 }
 
 dependencies {
-    api 'com.facebook.react:react-native:+'
+    compileOnly 'com.facebook.react:react-native:+'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.amap.api:3dmap:9.6.0'
-    implementation 'com.amap.api:location:6.1.0'
 }

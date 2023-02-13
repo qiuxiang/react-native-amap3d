@@ -1,7 +1,6 @@
 import { useNavigation, useTheme } from "@react-navigation/native";
 import * as React from "react";
 import {
-  Constructor,
   Platform,
   ScrollView,
   StyleSheet,
@@ -11,6 +10,7 @@ import {
   View,
 } from "react-native";
 import { AMapSdk } from "react-native-amap3d";
+import { Constructor } from "react-native/private/Utilities";
 import screens from "./screens";
 import { NavigationProps, ScreenName } from "./types";
 

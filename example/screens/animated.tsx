@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Dimensions, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Dimensions, PixelRatio, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { MapView } from "react-native-amap3d";
 
 let mapView: MapView;
@@ -11,6 +11,7 @@ export default () => (
       <View style={style.button}>
         <TouchableOpacity
           onPress={() => {
+            console.log(Dimensions.get("window").width);
             mapView?.moveCamera(
               {
                 tilt: 45,
@@ -49,7 +50,7 @@ export default () => (
 const style = StyleSheet.create({
   body: { flex: 1 },
   buttons: {
-    width: Dimensions.get("window").width,
+    width: "100%",
     position: "absolute",
     flexDirection: "row",
     justifyContent: "center",
