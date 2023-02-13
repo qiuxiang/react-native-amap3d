@@ -5,6 +5,8 @@ build/
 xcuserdata/
 Pods/
 lib/js/
+/android/
+/ios/
 
 *.iml
 *.xcworkspace

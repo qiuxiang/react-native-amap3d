@@ -1,6 +1,6 @@
 # react-native-amap3d [![][version-badge]][npm] [![](https://github.com/qiuxiang/react-native-amap3d/actions/workflows/build.yml/badge.svg)](https://github.com/qiuxiang/react-native-amap3d/actions/workflows/build.yml)
 
-**注意：该项目处于消极维护状态，随缘更新。**
+**注意：该项目目前只维护，不加新功能。**
 
 react-native 高德地图组件，使用最新 3D SDK，支持 Android + iOS，受 [react-native-maps](https://github.com/airbnb/react-native-maps) 启发，提供功能丰富且易用的接口。
 
@@ -42,7 +42,7 @@ npm i react-native-amap3d
 
 ```js
 import { AMapSdk } from "react-native-amap3d";
-import { Platform } from 'react-native';
+import { Platform } from "react-native";
 
 AMapSdk.init(
   Platform.select({
@@ -170,7 +170,7 @@ const markers = Array(1000)
 
 ### 更多示例
 
-参考 [example](https://github.com/qiuxiang/react-native-amap3d/tree/master/example)。
+参考 [example](https://github.com/qiuxiang/react-native-amap3d/tree/master/example-app)。
 
 #### Android
 
