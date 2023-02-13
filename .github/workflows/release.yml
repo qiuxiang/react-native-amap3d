@@ -10,7 +10,7 @@ jobs:
       - run: npm pack
       - run: npx react-native init example
       - run: cp index.js example/
-      - run: cp -r example example/
+      - run: cp -r example-app example/
       - run: npm i ../react-native-amap3d-0.0.0.tgz
         working-directory: example
       - run: npm i @react-native-picker/picker @react-navigation/native @react-navigation/native-stack react-native-safe-area-context react-native-screens
