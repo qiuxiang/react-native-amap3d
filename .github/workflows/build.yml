@@ -25,6 +25,9 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '2.7'
       - run: npm pack
       - run: npx react-native init example
       - run: cp index.js example/
