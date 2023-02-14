@@ -3,7 +3,21 @@ on:
   release:
     types: [published]
 jobs:
-  release:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: bruceadams/get-release@v1.3.2
+        id: release
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+      - uses: actions/setup-node@v3
+        with:
+          registry-url: "https://registry.npmjs.org"
+      - run: npm version ${{ steps.release.outputs.tag_name }} --no-git-tag-version
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+  build-example:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -19,18 +33,7 @@ jobs:
         working-directory: example/android/app
       - run: ./gradlew assembleRelease
         working-directory: example/android
-      - uses: bruceadams/get-release@v1.3.2
-        id: release
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
       - uses: svenstaro/upload-release-action@v2
         with:
-          file: example/android/app/build/outputs/apk/release/app-arm64-v8a-release.apk
-          asset_name: example.apk
-      - uses: actions/setup-node@v3
-        with:
-          registry-url: "https://registry.npmjs.org"
-      - run: npm version ${{ steps.release.outputs.tag_name }} --no-git-tag-version
-      - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          file: example/android/app/build/outputs/apk/release/app-*-release.apk
+          file_glob: true
