@@ -27,7 +27,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '2.7'
+          ruby-version: '2.7.6'
       - run: npm pack
       - run: npx react-native init example
       - run: cp index.js example/
@@ -38,5 +38,5 @@ jobs:
         working-directory: example
       - run: pod install
         working-directory: example/ios
-      - run: npm run ios
+      - run: npx react-native build-ios
         working-directory: example
